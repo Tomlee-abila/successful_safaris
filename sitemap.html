@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Successful Safaris — Sitemap</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-pale: #F5E9C8;
+    --green-dark: #1A3A2A;
+    --green-mid: #2D5A3D;
+    --green-light: #4A8C5C;
+    --black: #0A0A0A;
+    --charcoal: #1A1A1A;
+    --gray-dark: #2A2A2A;
+    --gray-mid: #555555;
+    --gray-light: #AAAAAA;
+    --cream: #FAF7F0;
+    --cream-mid: #F0EAD6;
+    --white: #FFFFFF;
+    --red: #C0392B;
+    --blue: #2980B9;
+    --purple: #8E44AD;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    min-height: 100vh;
+  }
+  header {
+    background: var(--green-dark);
+    padding: 24px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--gold);
+  }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-mark {
+    width: 44px; height: 44px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; color: var(--green-dark); font-weight: 700;
+  }
+  .logo-text { font-family: 'Playfair Display', serif; color: var(--white); }
+  .logo-text h1 { font-size: 20px; font-weight: 600; letter-spacing: 0.5px; }
+  .logo-text p { font-size: 11px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; }
+  .doc-title {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--gold-light);
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  nav { display: flex; gap: 24px; }
+  nav a {
+    color: var(--cream-mid);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    padding: 6px 14px;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  nav a:hover { background: rgba(201,168,76,0.15); color: var(--gold-light); }
+  nav a.active { background: var(--gold); color: var(--green-dark); font-weight: 600; }
+
+  .page-hero {
+    background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
+    padding: 56px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A84C' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.6;
+  }
+  .page-hero h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    color: var(--white);
+    position: relative;
+    margin-bottom: 12px;
+  }
+  .page-hero p {
+    color: var(--gold-light);
+    font-size: 15px;
+    letter-spacing: 1px;
+    position: relative;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+  }
+  .gold-line {
+    width: 80px; height: 2px;
+    background: var(--gold);
+    margin: 16px auto;
+    position: relative;
+  }
+
+  .container { max-width: 1400px; margin: 0 auto; padding: 48px; }
+
+  /* Legend */
+  .legend {
+    display: flex; gap: 24px; flex-wrap: wrap;
+    background: var(--white);
+    border: 1px solid var(--cream-mid);
+    border-radius: 12px;
+    padding: 20px 28px;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .legend h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gray-mid); width: 100%; margin-bottom: 4px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--gray-dark); }
+  .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+  .dot-public { background: var(--green-mid); }
+  .dot-user { background: var(--blue); }
+  .dot-subadmin { background: var(--purple); }
+  .dot-superadmin { background: var(--gold); }
+  .dot-ecommerce { background: var(--red); }
+  .dot-shared { background: var(--gray-mid); }
+
+  /* Sitemap Layout */
+  .sitemap-root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  .tier-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--gray-mid);
+    margin: 32px 0 12px;
+    font-weight: 600;
+  }
+  .site-root-node {
+    background: var(--green-dark);
+    color: var(--white);
+    padding: 18px 40px;
+    border-radius: 8px;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    border: 2px solid var(--gold);
+    position: relative;
+    text-align: center;
+  }
+  .site-root-node::after {
+    content: '';
+    position: absolute;
+    bottom: -24px; left: 50%;
+    transform: translateX(-50%);
+    width: 2px; height: 24px;
+    background: var(--gold);
+  }
+  .connector-h {
+    width: 100%;
+    height: 2px;
+    background: var(--gold);
+    position: relative;
+    margin: 0;
+  }
+
+  /* Tier rows */
+  .tier-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    padding-top: 24px;
+  }
+  .tier-row::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 2px; height: 24px;
+    background: var(--gold);
+  }
+
+  .section-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    min-width: 160px;
+    position: relative;
+  }
+  .section-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 2px; height: 20px;
+    background: var(--gold-light);
+    opacity: 0.5;
+  }
+  .section-node {
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    border: 1.5px solid;
+    position: relative;
+    margin-top: 20px;
+    min-width: 150px;
+    cursor: default;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .section-node:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
+  .section-node.public { background: #EAF5EE; border-color: var(--green-mid); color: var(--green-dark); }
+  .section-node.user { background: #EAF3FB; border-color: var(--blue); color: #1A5C8A; }
+  .section-node.subadmin { background: #F5EAF8; border-color: var(--purple); color: #5C1A7A; }
+  .section-node.superadmin { background: var(--gold-pale); border-color: var(--gold); color: #7A5C0A; }
+  .section-node.ecommerce { background: #FDECEA; border-color: var(--red); color: #8A1A1A; }
+
+  .role-badge {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-top: 4px;
+    font-weight: 600;
+  }
+  .rb-public { background: var(--green-mid); color: white; }
+  .rb-user { background: var(--blue); color: white; }
+  .rb-subadmin { background: var(--purple); color: white; }
+  .rb-superadmin { background: var(--gold); color: var(--green-dark); }
+  .rb-all { background: var(--charcoal); color: white; }
+
+  /* Sub-pages */
+  .sub-pages {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 8px;
+    width: 100%;
+  }
+  .sub-page {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    background: var(--white);
+    border: 1px solid var(--cream-mid);
+    color: var(--gray-dark);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .sub-page .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+  /* Full sitemap table */
+  .sitemap-table-section {
+    margin-top: 64px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--green-dark);
+    margin-bottom: 8px;
+  }
+  .section-subtitle {
+    font-size: 14px;
+    color: var(--gray-mid);
+    margin-bottom: 28px;
+  }
+  .smt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+  }
+  .smt-card {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid var(--cream-mid);
+  }
+  .smt-card-header {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .smt-card-header.public { background: #EAF5EE; }
+  .smt-card-header.user { background: #EAF3FB; }
+  .smt-card-header.subadmin { background: #F5EAF8; }
+  .smt-card-header.superadmin { background: var(--gold-pale); }
+  .smt-card-header.ecommerce { background: #FDECEA; }
+  .smt-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .smt-card-header h4 { font-size: 15px; font-weight: 600; }
+  .smt-card-body { padding: 16px 20px; }
+  .smt-page-list { list-style: none; }
+  .smt-page-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--cream-mid);
+    font-size: 13px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .smt-page-list li:last-child { border-bottom: none; }
+  .smt-page-num {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--gray-light);
+    min-width: 24px;
+    margin-top: 1px;
+  }
+  .smt-page-info { flex: 1; }
+  .smt-page-name { font-weight: 500; color: var(--charcoal); }
+  .smt-page-desc { font-size: 11px; color: var(--gray-mid); margin-top: 2px; }
+  .smt-perms {
+    display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px;
+  }
+  .smt-perm {
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .perm-view { background: #d5f5e3; color: #1e8449; }
+  .perm-create { background: #d6eaf8; color: #1a5276; }
+  .perm-edit { background: #fdebd0; color: #9c4a00; }
+  .perm-delete { background: #fadbd8; color: #922b21; }
+  .perm-manage { background: #e8daef; color: #6c3483; }
+
+  /* Permission matrix */
+  .perm-matrix {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid var(--cream-mid);
+    margin-top: 28px;
+  }
+  .perm-matrix table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .perm-matrix th {
+    padding: 14px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .perm-matrix thead th { background: var(--green-dark); color: var(--white); }
+  .perm-matrix thead th:first-child { color: var(--gold-light); }
+  .perm-matrix tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--cream-mid);
+    vertical-align: middle;
+  }
+  .perm-matrix tbody tr:last-child td { border-bottom: none; }
+  .perm-matrix tbody tr:hover td { background: var(--cream); }
+  .check { color: var(--green-mid); font-size: 16px; }
+  .cross { color: #ccc; font-size: 16px; }
+  .partial { color: var(--gold); font-size: 16px; }
+
+  /* User flow */
+  .flow-section { margin-top: 64px; }
+  .flow-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .flow-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid var(--cream-mid);
+    border-top: 3px solid;
+  }
+  .flow-card.fc-public { border-top-color: var(--green-mid); }
+  .flow-card.fc-user { border-top-color: var(--blue); }
+  .flow-card.fc-subadmin { border-top-color: var(--purple); }
+  .flow-card.fc-superadmin { border-top-color: var(--gold); }
+  .flow-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .flow-card .role-tag {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+    font-weight: 600; margin-bottom: 16px; display: block;
+  }
+  .flow-step {
+    display: flex; align-items: flex-start; gap: 10px;
+    margin-bottom: 12px; font-size: 13px; color: var(--gray-dark);
+  }
+  .flow-num {
+    width: 20px; height: 20px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .fc-public .flow-num { background: var(--green-mid); color: white; }
+  .fc-user .flow-num { background: var(--blue); color: white; }
+  .fc-subadmin .flow-num { background: var(--purple); color: white; }
+  .fc-superadmin .flow-num { background: var(--gold); color: var(--green-dark); }
+
+  footer {
+    background: var(--green-dark);
+    padding: 24px 48px;
+    text-align: center;
+    color: var(--gray-light);
+    font-size: 12px;
+    margin-top: 80px;
+    border-top: 1px solid rgba(201,168,76,0.3);
+  }
+  footer span { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-mark">SS</div>
+    <div class="logo-text">
+      <h1>Successful Safaris</h1>
+      <p>Luxury African Experiences</p>
+    </div>
+  </div>
+  <div class="doc-title">Design Package — Sitemap</div>
+  <nav>
+    <a href="index.html">Overview</a>
+    <a href="sitemap.html" class="active">Sitemap</a>
+    <a href="style-guide.html">Style Guide</a>
+    <a href="wireframes.html">Wireframes</a>
+    <a href="home.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="booking.html">Booking</a>
+    <a href="checkout.html">Checkout</a>
+    <a href="admin-dashboard.html">Admin</a>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <h2>Site Architecture & Information Architecture</h2>
+  <div class="gold-line"></div>
+  <p>Multi-tier user system — Public visitors, Authenticated users, Sub-admins & Super admins</p>
+</div>
+
+<div class="container">
+
+  <!-- Legend -->
+  <div class="legend">
+    <h3>Access Legend</h3>
+    <div class="legend-item"><div class="legend-dot dot-public"></div> Public / All visitors</div>
+    <div class="legend-item"><div class="legend-dot dot-user"></div> Registered users (tourists)</div>
+    <div class="legend-item"><div class="legend-dot dot-ecommerce"></div> E-commerce flows</div>
+    <div class="legend-item"><div class="legend-dot dot-subadmin"></div> Sub-admin (content + packages)</div>
+    <div class="legend-item"><div class="legend-dot dot-superadmin"></div> Super admin (full system access)</div>
+    <div class="legend-item"><div class="legend-dot dot-shared"></div> Shared / Contextual</div>
+  </div>
+
+  <!-- Visual Sitemap Tree -->
+  <div class="section-title">Visual Sitemap</div>
+  <div class="section-subtitle">Top-level architecture showing all portals and entry points</div>
+
+  <div class="sitemap-root">
+    <div class="site-root-node">successfulsafaris.com</div>
+
+    <div class="tier-row" style="gap: 12px; margin-top: 24px;">
+
+      <!-- PUBLIC PORTAL -->
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <div class="section-node public" style="min-width: 140px;">
+          🌍 Public Website
+          <div><span class="role-badge rb-public">All Visitors</span></div>
+        </div>
+        <div class="sub-pages" style="max-width: 160px;">
+          <div class="sub-page"><div class="dot" style="background:var(--green-mid)"></div> Home</div>
+          <div class="sub-page"><div class="dot" style="background:var(--green-mid)"></div> About Us</div>
+          <div class="sub-page"><div class="dot" style="background:var(--green-mid)"></div> Destinations</div>
+          <div class="sub-page"><div class="dot" style="background:var(--green-mid)"></div> Packages</div>
+          <div class="sub-page"><div class="dot" style="background:var(--green-mid)"></div> Contact</div>
+          <div class="sub-page"><div class="dot" style="background:var(--green-mid)"></div> Blog</div>
+          <div class="sub-page"><div class="dot" style="background:var(--green-mid)"></div> Sign In / Register</div>
+        </div>
+      </div>
+
+      <!-- SHOP PORTAL -->
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <div class="section-node ecommerce" style="min-width: 140px;">
+          🛒 Safari Shop
+          <div><span class="role-badge rb-all">All + Auth</span></div>
+        </div>
+        <div class="sub-pages" style="max-width: 160px;">
+          <div class="sub-page"><div class="dot" style="background:var(--red)"></div> Shop Home</div>
+          <div class="sub-page"><div class="dot" style="background:var(--red)"></div> Gear & Clothing</div>
+          <div class="sub-page"><div class="dot" style="background:var(--red)"></div> Luxury Add-ons</div>
+          <div class="sub-page"><div class="dot" style="background:var(--red)"></div> Seasonal Promos</div>
+          <div class="sub-page"><div class="dot" style="background:var(--red)"></div> Bundle Packages</div>
+          <div class="sub-page"><div class="dot" style="background:var(--red)"></div> Product Detail</div>
+          <div class="sub-page"><div class="dot" style="background:var(--red)"></div> Cart / Checkout</div>
+          <div class="sub-page"><div class="dot" style="background:var(--red)"></div> Order Confirmation</div>
+        </div>
+      </div>
+
+      <!-- BOOKING PORTAL -->
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <div class="section-node user" style="min-width: 140px;">
+          📋 Booking
+          <div><span class="role-badge rb-user">Registered Users</span></div>
+        </div>
+        <div class="sub-pages" style="max-width: 160px;">
+          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Browse Packages</div>
+          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Trip Customizer</div>
+          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Add Gear Bundle</div>
+          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Guest Details</div>
+          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Payment (Multi-FX)</div>
+          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Confirmation</div>
+          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Trip Documents</div>
+        </div>
+      </div>
+
+      <!-- USER DASHBOARD -->
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <div class="section-node user" style="min-width: 140px;">
+          👤 My Dashboard
+          <div><span class="role-badge rb-user">Registered Users</span></div>
+        </div>
+        <div class="sub-pages" style="max-width: 160px;">
+          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> My Bookings</div>
+          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Order History</div>
+          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Saved Packages</div>
+          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Loyalty Points</div>
+          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Profile & Prefs</div>
+          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Notifications</div>
+          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Reviews & Gallery</div>
+        </div>
+      </div>
+
+      <!-- SUB-ADMIN PORTAL -->
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <div class="section-node subadmin" style="min-width: 140px;">
+          ⚙️ Sub-Admin Portal
+          <div><span class="role-badge rb-subadmin">Sub-Admins</span></div>
+        </div>
+        <div class="sub-pages" style="max-width: 160px;">
+          <div class="sub-page"><div class="dot" style="background:var(--purple)"></div> Admin Dashboard</div>
+          <div class="sub-page"><div class="dot" style="background:var(--purple)"></div> Manage Destinations</div>
+          <div class="sub-page"><div class="dot" style="background:var(--purple)"></div> Manage Packages</div>
+          <div class="sub-page"><div class="dot" style="background:var(--purple)"></div> Bookings Manager</div>
+          <div class="sub-page"><div class="dot" style="background:var(--purple)"></div> Product Manager</div>
+          <div class="sub-page"><div class="dot" style="background:var(--purple)"></div> Inventory Alerts</div>
+          <div class="sub-page"><div class="dot" style="background:var(--purple)"></div> Content / Blog</div>
+          <div class="sub-page"><div class="dot" style="background:var(--purple)"></div> Reports (Limited)</div>
+        </div>
+      </div>
+
+      <!-- SUPER ADMIN PORTAL -->
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <div class="section-node superadmin" style="min-width: 140px;">
+          👑 Super Admin
+          <div><span class="role-badge rb-superadmin">Super Admin</span></div>
+        </div>
+        <div class="sub-pages" style="max-width: 160px;">
+          <div class="sub-page"><div class="dot" style="background:var(--gold)"></div> Master Dashboard</div>
+          <div class="sub-page"><div class="dot" style="background:var(--gold)"></div> User Management</div>
+          <div class="sub-page"><div class="dot" style="background:var(--gold)"></div> Role & Permissions</div>
+          <div class="sub-page"><div class="dot" style="background:var(--gold)"></div> All Bookings</div>
+          <div class="sub-page"><div class="dot" style="background:var(--gold)"></div> All Orders</div>
+          <div class="sub-page"><div class="dot" style="background:var(--gold)"></div> Analytics & Sales</div>
+          <div class="sub-page"><div class="dot" style="background:var(--gold)"></div> Promotions & Codes</div>
+          <div class="sub-page"><div class="dot" style="background:var(--gold)"></div> System Settings</div>
+          <div class="sub-page"><div class="dot" style="background:var(--gold)"></div> Audit Logs</div>
+          <div class="sub-page"><div class="dot" style="background:var(--gold)"></div> Multi-Currency Setup</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Detailed Page Inventory -->
+  <div class="sitemap-table-section">
+    <div class="section-title">Full Page Inventory</div>
+    <div class="section-subtitle">Every page, its purpose, and access control</div>
+
+    <div class="smt-grid">
+
+      <!-- Public Pages -->
+      <div class="smt-card">
+        <div class="smt-card-header public">
+          <div class="smt-icon" style="background: #c3e6cb; font-size:20px;">🌍</div>
+          <div>
+            <h4 style="color: var(--green-dark);">Public Pages</h4>
+            <div><span class="role-badge rb-public">All Visitors</span></div>
+          </div>
+        </div>
+        <div class="smt-card-body">
+          <ul class="smt-page-list">
+            <li>
+              <div class="smt-page-num">P01</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Home</div>
+                <div class="smt-page-desc">Hero, featured destinations, testimonials, luxury CTAs</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">P02</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">About Us</div>
+                <div class="smt-page-desc">Story, team, certifications, awards, sustainability pledge</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">P03</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Destinations</div>
+                <div class="smt-page-desc">Kenya, Tanzania, Rwanda, Uganda, Zanzibar — filterable grid</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">P04</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Destination Detail</div>
+                <div class="smt-page-desc">Wildlife, seasons, packages, gallery, related gear</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">P05</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Packages</div>
+                <div class="smt-page-desc">Browse all tour packages with filters (duration, budget, style)</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">P06</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Package Detail</div>
+                <div class="smt-page-desc">Itinerary, inclusions, pricing, reviews, gear cross-sell</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">P07</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Contact</div>
+                <div class="smt-page-desc">Form, live chat, WhatsApp, office locations, FAQ</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">P08</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Blog / Journal</div>
+                <div class="smt-page-desc">Safari tips, wildlife news, seasonal guides</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">P09</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Sign In / Register</div>
+                <div class="smt-page-desc">Auth portal — social login, email, forgot password</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View</span></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- E-commerce Pages -->
+      <div class="smt-card">
+        <div class="smt-card-header ecommerce">
+          <div class="smt-icon" style="background: #f5c6cb; font-size:20px;">🛒</div>
+          <div>
+            <h4 style="color: var(--red);">E-Commerce / Shop</h4>
+            <div><span class="role-badge rb-all">All + Auth for Checkout</span></div>
+          </div>
+        </div>
+        <div class="smt-card-body">
+          <ul class="smt-page-list">
+            <li>
+              <div class="smt-page-num">E01</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Shop Home</div>
+                <div class="smt-page-desc">Featured products, categories, seasonal promos, bundles</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">E02</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Product Listing</div>
+                <div class="smt-page-desc">Filterable grid — gear, clothing, luxury add-ons, bundles</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">E03</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Product Detail</div>
+                <div class="smt-page-desc">Gallery, specs, size guide, related tours, reviews</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">E04</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Shopping Cart</div>
+                <div class="smt-page-desc">Review items, apply promo codes, currency toggle, upsell</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View</span><span class="smt-perm perm-edit">Edit</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">E05</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Checkout — Details</div>
+                <div class="smt-page-desc">Shipping address, currency selector (USD/EUR/KES/GBP)</div>
+                <div class="smt-perms"><span class="smt-perm perm-create">Auth Required</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">E06</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Checkout — Payment</div>
+                <div class="smt-page-desc">Credit card, M-Pesa, PayPal, bank transfer, 3D Secure</div>
+                <div class="smt-perms"><span class="smt-perm perm-create">Auth Required</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">E07</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Order Confirmation</div>
+                <div class="smt-page-desc">Summary, tracking, related package suggestion</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">E08</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Bundle Builder</div>
+                <div class="smt-page-desc">Tour + gear bundles, dynamic pricing, savings calculator</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View</span></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- User Dashboard -->
+      <div class="smt-card">
+        <div class="smt-card-header user">
+          <div class="smt-icon" style="background: #bee5eb; font-size:20px;">👤</div>
+          <div>
+            <h4 style="color: #1a5c8a;">User Dashboard</h4>
+            <div><span class="role-badge rb-user">Registered Users</span></div>
+          </div>
+        </div>
+        <div class="smt-card-body">
+          <ul class="smt-page-list">
+            <li>
+              <div class="smt-page-num">U01</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">My Dashboard</div>
+                <div class="smt-page-desc">Overview: upcoming trips, orders, loyalty points, notifications</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">U02</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">My Bookings</div>
+                <div class="smt-page-desc">Active, upcoming, past bookings; cancel/modify; documents</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View</span><span class="smt-perm perm-edit">Modify</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">U03</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Order History</div>
+                <div class="smt-page-desc">Shop orders, invoices, returns, tracking</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">U04</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Saved / Wishlist</div>
+                <div class="smt-page-desc">Saved packages, products, and custom itineraries</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View</span><span class="smt-perm perm-delete">Remove</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">U05</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Loyalty & Rewards</div>
+                <div class="smt-page-desc">Points balance, tier status, redemption history</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">U06</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Profile & Preferences</div>
+                <div class="smt-page-desc">Personal info, currency, language, notification prefs</div>
+                <div class="smt-perms"><span class="smt-perm perm-edit">Edit</span></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Sub-Admin Pages -->
+      <div class="smt-card">
+        <div class="smt-card-header subadmin">
+          <div class="smt-icon" style="background: #e2d4f0; font-size:20px;">⚙️</div>
+          <div>
+            <h4 style="color: #5c1a7a;">Sub-Admin Portal</h4>
+            <div><span class="role-badge rb-subadmin">Sub-Admins</span></div>
+          </div>
+        </div>
+        <div class="smt-card-body">
+          <ul class="smt-page-list">
+            <li>
+              <div class="smt-page-num">A01</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Admin Dashboard</div>
+                <div class="smt-page-desc">KPIs: bookings today, revenue, inventory alerts, new orders</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">A02</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Destinations Manager</div>
+                <div class="smt-page-desc">Add/edit/delete destinations, upload media, set seasons</div>
+                <div class="smt-perms"><span class="smt-perm perm-create">Create</span><span class="smt-perm perm-edit">Edit</span><span class="smt-perm perm-delete">Delete</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">A03</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Packages Manager</div>
+                <div class="smt-page-desc">Create/edit packages, itineraries, pricing tiers, availability</div>
+                <div class="smt-perms"><span class="smt-perm perm-create">Create</span><span class="smt-perm perm-edit">Edit</span><span class="smt-perm perm-delete">Delete</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">A04</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Bookings Manager</div>
+                <div class="smt-page-desc">View/process bookings, assign guides, send documents</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View</span><span class="smt-perm perm-edit">Process</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">A05</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Products Manager</div>
+                <div class="smt-page-desc">Add/edit/delete shop products, set prices, manage variants</div>
+                <div class="smt-perms"><span class="smt-perm perm-create">Create</span><span class="smt-perm perm-edit">Edit</span><span class="smt-perm perm-delete">Delete</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">A06</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Inventory Manager</div>
+                <div class="smt-page-desc">Stock levels, low-stock alerts, restock requests</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View</span><span class="smt-perm perm-edit">Update</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">A07</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Content / Blog</div>
+                <div class="smt-page-desc">Write/publish/schedule blog posts and travel guides</div>
+                <div class="smt-perms"><span class="smt-perm perm-create">Create</span><span class="smt-perm perm-edit">Edit</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">A08</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Sales Reports</div>
+                <div class="smt-page-desc">View assigned region reports — no full system access</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View (Limited)</span></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Super Admin Pages -->
+      <div class="smt-card">
+        <div class="smt-card-header superadmin">
+          <div class="smt-icon" style="background: #ffe680; font-size:20px;">👑</div>
+          <div>
+            <h4 style="color: #7a5c0a;">Super Admin</h4>
+            <div><span class="role-badge rb-superadmin">Super Admin Only</span></div>
+          </div>
+        </div>
+        <div class="smt-card-body">
+          <ul class="smt-page-list">
+            <li>
+              <div class="smt-page-num">S01</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Master Dashboard</div>
+                <div class="smt-page-desc">Full KPI overview: revenue, bookings, orders, users, alerts</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">Full View</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">S02</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">User Management</div>
+                <div class="smt-page-desc">Create/edit/delete all users; assign/revoke roles</div>
+                <div class="smt-perms"><span class="smt-perm perm-manage">Full Manage</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">S03</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Roles & Permissions</div>
+                <div class="smt-page-desc">Define custom roles, assign permission sets per module</div>
+                <div class="smt-perms"><span class="smt-perm perm-manage">Full Manage</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">S04</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Analytics & Reporting</div>
+                <div class="smt-page-desc">Revenue, conversion, geographic, seasonal analytics</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">Full View</span><span class="smt-perm perm-create">Export</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">S05</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Promotions Engine</div>
+                <div class="smt-page-desc">Create promo codes, flash sales, seasonal campaigns</div>
+                <div class="smt-perms"><span class="smt-perm perm-manage">Full Manage</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">S06</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Multi-Currency Settings</div>
+                <div class="smt-page-desc">FX rates, payment gateway config, tax rules per region</div>
+                <div class="smt-perms"><span class="smt-perm perm-manage">Full Manage</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">S07</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">System Settings</div>
+                <div class="smt-page-desc">Site config, email templates, integrations, API keys</div>
+                <div class="smt-perms"><span class="smt-perm perm-manage">Full Manage</span></div>
+              </div>
+            </li>
+            <li>
+              <div class="smt-page-num">S08</div>
+              <div class="smt-page-info">
+                <div class="smt-page-name">Audit Logs</div>
+                <div class="smt-page-desc">Full audit trail: who did what, when, with IP logging</div>
+                <div class="smt-perms"><span class="smt-perm perm-view">View Only</span></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Permission Matrix -->
+  <div class="sitemap-table-section">
+    <div class="section-title">Role Permission Matrix</div>
+    <div class="section-subtitle">Detailed access rights per module for each user role</div>
+
+    <div class="perm-matrix">
+      <table>
+        <thead>
+          <tr>
+            <th>Module / Action</th>
+            <th>🌍 Visitor</th>
+            <th>👤 User</th>
+            <th>⚙️ Sub-Admin</th>
+            <th>👑 Super Admin</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Browse Destinations & Packages</strong></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td><strong>Browse Shop / Products</strong></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td><strong>Checkout / Purchase</strong></td>
+            <td><span class="partial">→ Auth</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td><strong>Book a Safari Package</strong></td>
+            <td><span class="partial">→ Auth</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td><strong>View My Bookings</strong></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td><strong>Manage Destinations</strong></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td><strong>Manage Packages</strong></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td><strong>Manage Products (Shop)</strong></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td><strong>View All Bookings</strong></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td><strong>View All Orders</strong></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td><strong>Manage Inventory</strong></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td><strong>View Analytics (Limited)</strong></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="partial">◑ Region only</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td><strong>Full Analytics & Revenue Reports</strong></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td><strong>Create / Manage Promotions</strong></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td><strong>User Management (All Users)</strong></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td><strong>Assign Roles & Permissions</strong></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td><strong>Multi-Currency Configuration</strong></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td><strong>System Settings</strong></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td><strong>Audit Logs</strong></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- User Journey Flows -->
+  <div class="flow-section">
+    <div class="section-title">Key User Journey Flows</div>
+    <div class="section-subtitle">Critical paths through the platform for each user type</div>
+
+    <div class="flow-cards">
+      <div class="flow-card fc-public">
+        <h4>New Visitor → Booking</h4>
+        <span class="role-tag" style="color: var(--green-mid);">Public → Registered User</span>
+        <div class="flow-step"><div class="flow-num">1</div> Land on luxury homepage, watch hero video</div>
+        <div class="flow-step"><div class="flow-num">2</div> Browse Destinations (Kenya / Tanzania)</div>
+        <div class="flow-step"><div class="flow-num">3</div> View Destination Detail + related packages</div>
+        <div class="flow-step"><div class="flow-num">4</div> Select Package → view itinerary, pricing</div>
+        <div class="flow-step"><div class="flow-num">5</div> Click "Book Now" → prompted to register/sign in</div>
+        <div class="flow-step"><div class="flow-num">6</div> Complete booking + add gear bundle at checkout</div>
+        <div class="flow-step"><div class="flow-num">7</div> Receive confirmation + account created</div>
+      </div>
+
+      <div class="flow-card fc-user">
+        <h4>Returning User → Shop Purchase</h4>
+        <span class="role-tag" style="color: var(--blue);">Registered User Flow</span>
+        <div class="flow-step"><div class="flow-num">1</div> Sign in → redirected to personal dashboard</div>
+        <div class="flow-step"><div class="flow-num">2</div> See notification: "Gear for your Kenya trip"</div>
+        <div class="flow-step"><div class="flow-num">3</div> Click through to Shop → pre-filtered by trip</div>
+        <div class="flow-step"><div class="flow-num">4</div> Add safari jacket + binoculars to cart</div>
+        <div class="flow-step"><div class="flow-num">5</div> Apply loyalty points discount at cart</div>
+        <div class="flow-step"><div class="flow-num">6</div> Select currency (EUR) → pay via card</div>
+        <div class="flow-step"><div class="flow-num">7</div> Order ships, tracking email sent</div>
+      </div>
+
+      <div class="flow-card fc-subadmin">
+        <h4>Sub-Admin → Add New Package</h4>
+        <span class="role-tag" style="color: var(--purple);">Sub-Admin Workflow</span>
+        <div class="flow-step"><div class="flow-num">1</div> Log into admin portal → view dashboard KPIs</div>
+        <div class="flow-step"><div class="flow-num">2</div> Navigate to Packages Manager</div>
+        <div class="flow-step"><div class="flow-num">3</div> Click "Create New Package"</div>
+        <div class="flow-step"><div class="flow-num">4</div> Fill itinerary, pricing, inclusions, gallery</div>
+        <div class="flow-step"><div class="flow-num">5</div> Assign related gear products (cross-sell)</div>
+        <div class="flow-step"><div class="flow-num">6</div> Set availability calendar + seasonal pricing</div>
+        <div class="flow-step"><div class="flow-num">7</div> Publish → live on customer-facing site</div>
+      </div>
+
+      <div class="flow-card fc-superadmin">
+        <h4>Super Admin → Create Sub-Admin</h4>
+        <span class="role-tag" style="color: var(--gold);">Super Admin Workflow</span>
+        <div class="flow-step"><div class="flow-num">1</div> Log in → Master Dashboard overview</div>
+        <div class="flow-step"><div class="flow-num">2</div> Navigate to User Management</div>
+        <div class="flow-step"><div class="flow-num">3</div> Click "Invite New User"</div>
+        <div class="flow-step"><div class="flow-num">4</div> Enter email → assign role: Sub-Admin</div>
+        <div class="flow-step"><div class="flow-num">5</div> Select permission modules (e.g., Kenya only)</div>
+        <div class="flow-step"><div class="flow-num">6</div> Send invite → new admin sets password</div>
+        <div class="flow-step"><div class="flow-num">7</div> Action logged in Audit Trail</div>
+      </div>
+
+      <div class="flow-card fc-user" style="border-top-color: var(--red);">
+        <h4>Bundle Purchase Flow</h4>
+        <span class="role-tag" style="color: var(--red);">Cross-sell: Tour + Gear</span>
+        <div class="flow-step"><div class="flow-num">1</div> User views package detail page</div>
+        <div class="flow-step"><div class="flow-num">2</div> "Complete Your Safari" section shows gear</div>
+        <div class="flow-step"><div class="flow-num">3</div> Add bundle to cart with one click</div>
+        <div class="flow-step"><div class="flow-num">4</div> Cart shows tour + gear with bundle saving</div>
+        <div class="flow-step"><div class="flow-num">5</div> Checkout: select delivery to home or camp</div>
+        <div class="flow-step"><div class="flow-num">6</div> Multi-currency payment processed</div>
+        <div class="flow-step"><div class="flow-num">7</div> Single confirmation for both bookings</div>
+      </div>
+
+      <div class="flow-card fc-subadmin" style="border-top-color: var(--red);">
+        <h4>Sub-Admin → Manage Inventory</h4>
+        <span class="role-tag" style="color: var(--red);">Inventory Alert Response</span>
+        <div class="flow-step"><div class="flow-num">1</div> Dashboard shows low-stock alert badge</div>
+        <div class="flow-step"><div class="flow-num">2</div> Navigate to Inventory Manager</div>
+        <div class="flow-step"><div class="flow-num">3</div> View items below threshold (red indicators)</div>
+        <div class="flow-step"><div class="flow-num">4</div> Click item → update stock quantity</div>
+        <div class="flow-step"><div class="flow-num">5</div> Or raise restock request → notify supplier</div>
+        <div class="flow-step"><div class="flow-num">6</div> Set alert threshold per product</div>
+        <div class="flow-step"><div class="flow-num">7</div> Inventory report exported for review</div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Successful Safaris — Design Package &nbsp;|&nbsp; <span>Sitemap v1.0</span> &nbsp;|&nbsp; Confidential &nbsp;|&nbsp; 2026</p>
+</footer>
+
+</body>
+</html>
