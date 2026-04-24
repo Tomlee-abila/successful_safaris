@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Successful Safaris — Style Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-pale: #F5E9C8;
+    --gold-dark: #A07830;
+    --green-dark: #1A3A2A;
+    --green-mid: #2D5A3D;
+    --green-light: #4A8C5C;
+    --green-pale: #EAF5EE;
+    --black: #0A0A0A;
+    --charcoal: #1A1A1A;
+    --gray-dark: #2A2A2A;
+    --gray-mid: #555555;
+    --gray-light: #AAAAAA;
+    --gray-pale: #EEEEEE;
+    --cream: #FAF7F0;
+    --cream-mid: #F0EAD6;
+    --white: #FFFFFF;
+    --error: #C0392B;
+    --success: #27AE60;
+    --warning: #F39C12;
+    --info: #2980B9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); }
+
+  header {
+    background: var(--green-dark);
+    padding: 24px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 2px solid var(--gold);
+  }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-mark {
+    width: 44px; height: 44px; background: var(--gold); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 18px;
+    color: var(--green-dark); font-weight: 700;
+  }
+  .logo-text h1 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 20px; }
+  .logo-text p { font-size: 11px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; }
+  .doc-title { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); font-size: 14px; letter-spacing: 3px; text-transform: uppercase; }
+  nav { display: flex; gap: 16px; flex-wrap: wrap; }
+  nav a { color: var(--cream-mid); text-decoration: none; font-size: 12px; padding: 6px 12px; border-radius: 4px; transition: all 0.2s; }
+  nav a:hover { background: rgba(201,168,76,0.15); color: var(--gold-light); }
+  nav a.active { background: var(--gold); color: var(--green-dark); font-weight: 600; }
+
+  .page-hero {
+    background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
+    padding: 56px 48px; text-align: center; position: relative; overflow: hidden;
+  }
+  .page-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A84C' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .page-hero h2 { font-family: 'Playfair Display', serif; font-size: 42px; color: var(--white); position: relative; margin-bottom: 12px; }
+  .page-hero p { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--gold-light); font-size: 18px; position: relative; }
+  .gold-line { width: 80px; height: 2px; background: var(--gold); margin: 16px auto; position: relative; }
+
+  .container { max-width: 1300px; margin: 0 auto; padding: 64px 48px; }
+  .sg-section { margin-bottom: 80px; }
+  .sg-section-title {
+    font-family: 'Playfair Display', serif; font-size: 32px; color: var(--green-dark);
+    margin-bottom: 6px; padding-bottom: 16px; border-bottom: 1px solid var(--cream-mid);
+  }
+  .sg-section-sub { font-size: 14px; color: var(--gray-mid); margin-bottom: 36px; margin-top: 8px; }
+  .sg-label { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gray-mid); font-weight: 600; margin-bottom: 12px; display: block; }
+
+  /* COLOR SYSTEM */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; }
+  .color-swatch {
+    border-radius: 10px; overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .swatch-preview { height: 80px; }
+  .swatch-info { background: white; padding: 10px 12px; }
+  .swatch-name { font-size: 12px; font-weight: 600; color: var(--charcoal); }
+  .swatch-hex { font-size: 10px; color: var(--gray-mid); font-family: 'Courier New', monospace; margin-top: 2px; }
+  .swatch-use { font-size: 10px; color: var(--gray-light); margin-top: 2px; }
+
+  .color-group-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px; color: var(--green-dark);
+    margin: 28px 0 12px;
+    padding-left: 12px;
+    border-left: 3px solid var(--gold);
+  }
+
+  /* TYPOGRAPHY */
+  .type-sample {
+    background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 16px;
+    border: 1px solid var(--cream-mid);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .type-meta { display: flex; gap: 16px; margin-bottom: 12px; flex-wrap: wrap; }
+  .type-tag {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;
+    padding: 3px 8px; border-radius: 4px; background: var(--green-pale); color: var(--green-dark);
+  }
+  .type-tag.gold { background: var(--gold-pale); color: var(--gold-dark); }
+  .type-spec { font-size: 11px; color: var(--gray-mid); font-family: 'Courier New', monospace; }
+
+  .t-display { font-family: 'Playfair Display', serif; font-size: 64px; font-weight: 700; line-height: 1.1; color: var(--green-dark); }
+  .t-h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 600; line-height: 1.15; color: var(--green-dark); }
+  .t-h2 { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 600; line-height: 1.2; color: var(--green-dark); }
+  .t-h3 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; line-height: 1.25; color: var(--green-dark); }
+  .t-h4 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: var(--charcoal); }
+  .t-h5 { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 0.3px; color: var(--charcoal); text-transform: uppercase; letter-spacing: 2px; }
+  .t-subheading { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-style: italic; color: var(--gold-dark); }
+  .t-body-lg { font-family: 'Inter', sans-serif; font-size: 18px; line-height: 1.7; color: var(--gray-dark); }
+  .t-body { font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.65; color: var(--gray-dark); }
+  .t-body-sm { font-family: 'Inter', sans-serif; font-size: 13px; line-height: 1.6; color: var(--gray-mid); }
+  .t-caption { font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-light); }
+  .t-price { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: var(--green-dark); }
+  .t-price-currency { font-size: 20px; color: var(--gold-dark); vertical-align: super; }
+  .t-quote { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-style: italic; line-height: 1.5; color: var(--green-dark); }
+
+  /* BUTTONS */
+  .button-showcase { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-bottom: 24px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 28px; border-radius: 4px; border: none; cursor: pointer;
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px;
+    letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+    transition: all 0.25s; white-space: nowrap;
+  }
+  .btn-primary {
+    background: var(--gold); color: var(--green-dark);
+    box-shadow: 0 4px 20px rgba(201,168,76,0.35);
+  }
+  .btn-primary:hover { background: var(--gold-light); box-shadow: 0 6px 28px rgba(201,168,76,0.5); transform: translateY(-1px); }
+  .btn-secondary {
+    background: transparent; color: var(--white);
+    border: 1.5px solid var(--white);
+  }
+  .btn-secondary:hover { background: var(--white); color: var(--green-dark); }
+  .btn-outline {
+    background: transparent; color: var(--green-dark);
+    border: 1.5px solid var(--green-dark);
+  }
+  .btn-outline:hover { background: var(--green-dark); color: var(--white); }
+  .btn-ghost {
+    background: transparent; color: var(--gold-dark);
+    border: 1.5px solid var(--gold);
+  }
+  .btn-ghost:hover { background: var(--gold); color: var(--green-dark); }
+  .btn-dark {
+    background: var(--green-dark); color: var(--white);
+    box-shadow: 0 4px 20px rgba(26,58,42,0.3);
+  }
+  .btn-dark:hover { background: var(--green-mid); transform: translateY(-1px); }
+  .btn-danger { background: var(--error); color: var(--white); }
+  .btn-danger:hover { background: #a93226; }
+  .btn-sm { padding: 8px 18px; font-size: 11px; }
+  .btn-lg { padding: 18px 40px; font-size: 14px; }
+  .btn-icon { padding: 12px; border-radius: 8px; }
+
+  .btn-on-dark { background: rgba(201,168,76,0.15); padding: 16px 24px; border-radius: 8px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+
+  /* FORM ELEMENTS */
+  .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-label { font-size: 12px; font-weight: 600; color: var(--charcoal); text-transform: uppercase; letter-spacing: 1px; }
+  .form-input {
+    padding: 12px 16px; border: 1.5px solid var(--cream-mid);
+    border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 14px;
+    color: var(--charcoal); background: var(--white); outline: none; transition: border-color 0.2s;
+    width: 100%;
+  }
+  .form-input:focus { border-color: var(--gold); }
+  .form-input.error { border-color: var(--error); }
+  .form-input.success { border-color: var(--success); }
+  .form-input::placeholder { color: var(--gray-light); }
+  .form-select {
+    padding: 12px 16px; border: 1.5px solid var(--cream-mid);
+    border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 14px;
+    color: var(--charcoal); background: var(--white); outline: none;
+    appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23555' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 14px center; cursor: pointer; width: 100%;
+  }
+  .form-helper { font-size: 11px; color: var(--gray-mid); }
+  .form-error { font-size: 11px; color: var(--error); }
+  .form-success { font-size: 11px; color: var(--success); }
+
+  /* CARDS */
+  .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .card {
+    background: var(--white); border-radius: 12px;
+    overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    border: 1px solid var(--cream-mid); transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+  .card-img {
+    height: 200px; display: flex; align-items: center; justify-content: center;
+    font-size: 48px; position: relative; overflow: hidden;
+  }
+  .card-img-overlay {
+    position: absolute; bottom: 12px; left: 12px;
+    background: rgba(26,58,42,0.8); color: white;
+    padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+  .card-body { padding: 20px; }
+  .card-tag { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold-dark); font-weight: 700; margin-bottom: 6px; }
+  .card-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; color: var(--green-dark); margin-bottom: 8px; }
+  .card-text { font-size: 13px; color: var(--gray-mid); line-height: 1.55; margin-bottom: 16px; }
+  .card-footer { padding: 14px 20px; background: var(--cream); border-top: 1px solid var(--cream-mid); display: flex; align-items: center; justify-content: space-between; }
+  .card-price { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--green-dark); }
+  .card-price-note { font-size: 11px; color: var(--gray-mid); }
+  .card-rating { display: flex; gap: 2px; color: var(--gold); font-size: 13px; }
+
+  /* BADGES & TAGS */
+  .badge-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+  .badge {
+    padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.5px; text-transform: uppercase; display: inline-flex; align-items: center; gap: 4px;
+  }
+  .badge-gold { background: var(--gold-pale); color: var(--gold-dark); border: 1px solid var(--gold); }
+  .badge-green { background: var(--green-pale); color: var(--green-dark); }
+  .badge-red { background: #fdecea; color: var(--error); }
+  .badge-blue { background: #eaf3fb; color: #1a5c8a; }
+  .badge-gray { background: var(--gray-pale); color: var(--gray-mid); }
+  .badge-dark { background: var(--charcoal); color: var(--white); }
+  .badge-luxury { background: linear-gradient(135deg, var(--gold-dark), var(--gold-light)); color: var(--white); }
+
+  /* ICONS / VISUAL ELEMENTS */
+  .icon-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 12px; }
+  .icon-item {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    padding: 16px 8px; background: white; border-radius: 8px; border: 1px solid var(--cream-mid);
+  }
+  .icon-emoji { font-size: 24px; }
+  .icon-label { font-size: 10px; color: var(--gray-mid); text-align: center; }
+
+  /* ALERTS & NOTIFICATIONS */
+  .alert {
+    padding: 14px 18px; border-radius: 8px; font-size: 13px;
+    display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px;
+    border-left: 4px solid;
+  }
+  .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .alert-success { background: #eafaf1; border-color: var(--success); color: #1e7e34; }
+  .alert-error { background: #fdecea; border-color: var(--error); color: #922b21; }
+  .alert-warning { background: #fef9e7; border-color: var(--warning); color: #9a6700; }
+  .alert-info { background: #eaf3fb; border-color: var(--info); color: #1a5276; }
+
+  /* TABLES */
+  .data-table { width: 100%; border-collapse: collapse; font-size: 13px; background: white; border-radius: 10px; overflow: hidden; }
+  .data-table th { background: var(--green-dark); color: var(--white); padding: 13px 16px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+  .data-table td { padding: 13px 16px; border-bottom: 1px solid var(--cream-mid); color: var(--charcoal); }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: var(--cream); }
+
+  /* SPACING */
+  .spacing-row { display: flex; gap: 12px; align-items: flex-end; margin-bottom: 12px; }
+  .space-block { background: var(--gold-pale); border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--gold-dark); font-weight: 600; }
+
+  /* NAV COMPONENTS */
+  .nav-demo {
+    background: var(--green-dark); padding: 20px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-radius: 10px; margin-bottom: 16px;
+    border: 1px solid rgba(201,168,76,0.3);
+  }
+  .nav-demo-logo { font-family: 'Playfair Display', serif; color: white; font-size: 18px; }
+  .nav-demo-links { display: flex; gap: 24px; }
+  .nav-demo-links a { color: var(--cream-mid); font-size: 13px; text-decoration: none; }
+  .nav-demo-links a:hover { color: var(--gold); }
+  .nav-demo-links a.active { color: var(--gold); border-bottom: 1px solid var(--gold); }
+  .nav-demo-actions { display: flex; gap: 12px; align-items: center; }
+  .nav-currency { font-size: 12px; color: var(--gold-light); border: 1px solid rgba(201,168,76,0.4); padding: 4px 10px; border-radius: 4px; cursor: pointer; }
+
+  /* LOADING / SKELETON */
+  .skeleton { background: linear-gradient(90deg, var(--cream-mid) 25%, var(--cream) 50%, var(--cream-mid) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px; }
+  @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+  /* GRIDS */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+  .box { background: white; border-radius: 10px; padding: 24px; border: 1px solid var(--cream-mid); box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+  .inner-label { font-size: 11px; color: var(--gray-light); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 4px; }
+
+  footer {
+    background: var(--green-dark); padding: 24px 48px; text-align: center;
+    color: var(--gray-light); font-size: 12px; margin-top: 80px;
+    border-top: 1px solid rgba(201,168,76,0.3);
+  }
+  footer span { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-mark">SS</div>
+    <div class="logo-text">
+      <h1>Successful Safaris</h1>
+      <p>Luxury African Experiences</p>
+    </div>
+  </div>
+  <div class="doc-title">Design Package — Style Guide</div>
+  <nav>
+    <a href="index.html">Overview</a>
+    <a href="sitemap.html">Sitemap</a>
+    <a href="style-guide.html" class="active">Style Guide</a>
+    <a href="wireframes.html">Wireframes</a>
+    <a href="home.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="booking.html">Booking</a>
+    <a href="checkout.html">Checkout</a>
+    <a href="admin-dashboard.html">Admin</a>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <h2>Brand & Design System</h2>
+  <div class="gold-line"></div>
+  <p>Colors, typography, components, and patterns for a premium luxury safari brand</p>
+</div>
+
+<div class="container">
+
+  <!-- ── 1. COLOR SYSTEM ── -->
+  <div class="sg-section">
+    <div class="sg-section-title">01 — Color System</div>
+    <div class="sg-section-sub">Three-pillar palette: Prestige Gold, Safari Green, and Sleek Black. Every tint and shade is purposeful.</div>
+
+    <div class="color-group-label">Primary: Prestige Gold</div>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background: var(--gold-dark);"></div>
+        <div class="swatch-info"><div class="swatch-name">Gold Dark</div><div class="swatch-hex">#A07830</div><div class="swatch-use">Hover, text on light</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background: var(--gold);"></div>
+        <div class="swatch-info"><div class="swatch-name">Gold Primary</div><div class="swatch-hex">#C9A84C</div><div class="swatch-use">CTAs, accents, borders</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background: var(--gold-light);"></div>
+        <div class="swatch-info"><div class="swatch-name">Gold Light</div><div class="swatch-hex">#E8C96A</div><div class="swatch-use">Hover states, highlights</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background: var(--gold-pale);"></div>
+        <div class="swatch-info"><div class="swatch-name">Gold Pale</div><div class="swatch-hex">#F5E9C8</div><div class="swatch-use">Backgrounds, cards</div></div>
+      </div>
+    </div>
+
+    <div class="color-group-label">Secondary: Safari Green</div>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background: var(--green-dark);"></div>
+        <div class="swatch-info"><div class="swatch-name">Green Dark</div><div class="swatch-hex">#1A3A2A</div><div class="swatch-use">Header, hero, primary bg</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background: var(--green-mid);"></div>
+        <div class="swatch-info"><div class="swatch-name">Green Mid</div><div class="swatch-hex">#2D5A3D</div><div class="swatch-use">Buttons, nav, accents</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background: var(--green-light);"></div>
+        <div class="swatch-info"><div class="swatch-name">Green Light</div><div class="swatch-hex">#4A8C5C</div><div class="swatch-use">Icons, tags, badges</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background: var(--green-pale);"></div>
+        <div class="swatch-info"><div class="swatch-name">Green Pale</div><div class="swatch-hex">#EAF5EE</div><div class="swatch-use">Success states, chips</div></div>
+      </div>
+    </div>
+
+    <div class="color-group-label">Neutral: Charcoal & Cream</div>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background: var(--black);"></div>
+        <div class="swatch-info"><div class="swatch-name">Black</div><div class="swatch-hex">#0A0A0A</div><div class="swatch-use">Overlays, deep contrast</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background: var(--charcoal);"></div>
+        <div class="swatch-info"><div class="swatch-name">Charcoal</div><div class="swatch-hex">#1A1A1A</div><div class="swatch-use">Body text, dark UI</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background: var(--gray-mid); border: 1px solid #eee;"></div>
+        <div class="swatch-info"><div class="swatch-name">Gray Mid</div><div class="swatch-hex">#555555</div><div class="swatch-use">Secondary text</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background: var(--gray-light); border: 1px solid #eee;"></div>
+        <div class="swatch-info"><div class="swatch-name">Gray Light</div><div class="swatch-hex">#AAAAAA</div><div class="swatch-use">Placeholders, disabled</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background: var(--cream-mid); border: 1px solid #ddd;"></div>
+        <div class="swatch-info"><div class="swatch-name">Cream Mid</div><div class="swatch-hex">#F0EAD6</div><div class="swatch-use">Card borders, dividers</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background: var(--cream); border: 1px solid #ddd;"></div>
+        <div class="swatch-info"><div class="swatch-name">Cream</div><div class="swatch-hex">#FAF7F0</div><div class="swatch-use">Page background</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background: var(--white); border: 1px solid #ddd;"></div>
+        <div class="swatch-info"><div class="swatch-name">White</div><div class="swatch-hex">#FFFFFF</div><div class="swatch-use">Cards, inputs, panels</div></div>
+      </div>
+    </div>
+
+    <div class="color-group-label">Semantic: Status Colors</div>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background: var(--success);"></div>
+        <div class="swatch-info"><div class="swatch-name">Success</div><div class="swatch-hex">#27AE60</div><div class="swatch-use">Confirmations, stock</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background: var(--error);"></div>
+        <div class="swatch-info"><div class="swatch-name">Error</div><div class="swatch-hex">#C0392B</div><div class="swatch-use">Errors, alerts, danger</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background: var(--warning);"></div>
+        <div class="swatch-info"><div class="swatch-name">Warning</div><div class="swatch-hex">#F39C12</div><div class="swatch-use">Low stock, caution</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-preview" style="background: var(--info);"></div>
+        <div class="swatch-info"><div class="swatch-name">Info</div><div class="swatch-hex">#2980B9</div><div class="swatch-use">Info states, links</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 2. TYPOGRAPHY ── -->
+  <div class="sg-section">
+    <div class="sg-section-title">02 — Typography</div>
+    <div class="sg-section-sub">Three typeface families: Playfair Display (prestige), Cormorant Garamond (editorial), Inter (functional).</div>
+
+    <div class="type-sample">
+      <div class="type-meta">
+        <span class="type-tag">Display</span>
+        <span class="type-spec">Playfair Display 700 / 64px / lh 1.1</span>
+      </div>
+      <div class="t-display">Wild Luxury. Untamed Beauty.</div>
+    </div>
+
+    <div class="type-sample">
+      <div class="type-meta">
+        <span class="type-tag">Heading 1</span>
+        <span class="type-spec">Playfair Display 600 / 48px / lh 1.15</span>
+      </div>
+      <div class="t-h1">Discover the Serengeti</div>
+    </div>
+
+    <div class="type-sample">
+      <div class="type-meta">
+        <span class="type-tag">Heading 2</span>
+        <span class="type-spec">Playfair Display 600 / 36px / lh 1.2</span>
+      </div>
+      <div class="t-h2">Signature Safari Packages</div>
+    </div>
+
+    <div class="type-sample">
+      <div class="type-meta">
+        <span class="type-tag">Heading 3</span>
+        <span class="type-spec">Playfair Display 600 / 28px / lh 1.25</span>
+      </div>
+      <div class="t-h3">Kenya — The Great Migration</div>
+    </div>
+
+    <div class="type-sample">
+      <div class="type-meta">
+        <span class="type-tag gold">Subheading / Editorial</span>
+        <span class="type-spec">Cormorant Garamond Italic 400 / 22px</span>
+      </div>
+      <div class="t-subheading">Where the savanna meets the sky, adventure begins</div>
+    </div>
+
+    <div class="two-col" style="gap: 16px; margin-top: 16px;">
+      <div class="type-sample">
+        <div class="type-meta"><span class="type-tag">Body Large</span><span class="type-spec">Inter 400 / 18px / lh 1.7</span></div>
+        <div class="t-body-lg">Experience the raw beauty of East Africa through the eyes of an expert guide. Our curated packages offer the perfect blend of adventure and luxury.</div>
+      </div>
+      <div class="type-sample">
+        <div class="type-meta"><span class="type-tag">Body</span><span class="type-spec">Inter 400 / 15px / lh 1.65</span></div>
+        <div class="t-body">Each safari is thoughtfully crafted to ensure you experience the very best of wildlife, culture, and landscape. From the Masai Mara to the Ngorongoro Crater.</div>
+      </div>
+    </div>
+
+    <div class="two-col" style="gap: 16px; margin-top: 16px;">
+      <div class="type-sample">
+        <div class="type-meta"><span class="type-tag">Price Display</span><span class="type-spec">Playfair Display 700 / 36px</span></div>
+        <div class="t-price"><span class="t-price-currency">$</span>4,850 <span style="font-size:16px; color:var(--gray-mid); font-family:'Inter',sans-serif; font-weight:400;">per person</span></div>
+      </div>
+      <div class="type-sample">
+        <div class="type-meta"><span class="type-tag gold">Quote / Testimonial</span><span class="type-spec">Cormorant Garamond Italic 400 / 26px</span></div>
+        <div class="t-quote">"The most extraordinary experience of our lives."</div>
+      </div>
+    </div>
+
+    <div class="type-sample" style="margin-top: 16px;">
+      <div class="type-meta"><span class="type-tag">Overline / Caption</span><span class="type-spec">Inter 600 / 11px / Uppercase / Letter-spacing 2px</span></div>
+      <div class="t-caption">Premium Safari Experiences · Est. 2008 · Kenya · Tanzania · Rwanda</div>
+    </div>
+  </div>
+
+  <!-- ── 3. BUTTONS ── -->
+  <div class="sg-section">
+    <div class="sg-section-title">03 — Buttons & CTAs</div>
+    <div class="sg-section-sub">All states: default, hover (transform -1px), active, disabled. Icon variants available.</div>
+
+    <span class="sg-label">Primary Actions (on light backgrounds)</span>
+    <div class="button-showcase">
+      <button class="btn btn-primary">Book Your Safari</button>
+      <button class="btn btn-dark">Explore Packages</button>
+      <button class="btn btn-outline">View Destinations</button>
+      <button class="btn btn-ghost">Learn More →</button>
+      <button class="btn btn-danger">Cancel Booking</button>
+    </div>
+
+    <span class="sg-label">Size Variants</span>
+    <div class="button-showcase">
+      <button class="btn btn-primary btn-sm">Small CTA</button>
+      <button class="btn btn-primary">Regular CTA</button>
+      <button class="btn btn-primary btn-lg">Large CTA — Book Now</button>
+    </div>
+
+    <span class="sg-label">On Dark Backgrounds</span>
+    <div class="btn-on-dark" style="background: var(--green-dark);">
+      <button class="btn btn-primary">Book Your Safari</button>
+      <button class="btn btn-secondary">View All Packages</button>
+      <button class="btn" style="background: transparent; color: var(--gold-light); border: 1.5px solid rgba(201,168,76,0.5); padding: 14px 28px; font-family:'Inter',sans-serif; font-weight:600; font-size:13px; letter-spacing:1px; text-transform:uppercase; border-radius:4px; cursor:pointer;">Explore Destinations</button>
+    </div>
+
+    <span class="sg-label" style="margin-top: 20px;">Icon Buttons & State Indicators</span>
+    <div class="button-showcase" style="margin-top: 12px;">
+      <button class="btn btn-primary" style="gap: 10px;">🗓️ Select Dates</button>
+      <button class="btn btn-dark" style="gap: 10px;">🗺️ View Map</button>
+      <button class="btn btn-outline" style="gap: 10px;">💬 Live Chat</button>
+      <button class="btn btn-ghost" style="gap: 10px;">❤️ Save Package</button>
+      <button class="btn btn-primary" style="opacity: 0.45; cursor: not-allowed;">Unavailable</button>
+    </div>
+  </div>
+
+  <!-- ── 4. FORM ELEMENTS ── -->
+  <div class="sg-section">
+    <div class="sg-section-title">04 — Form Elements</div>
+    <div class="sg-section-sub">Clean, accessible inputs with clear focus states and validation feedback.</div>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input class="form-input" type="text" placeholder="Enter your full name">
+        <span class="form-helper">As it appears on your passport</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input class="form-input" type="email" value="jane@example.com" style="border-color: var(--gold);">
+        <span class="form-helper">Focused state — gold border</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Departure Date</label>
+        <input class="form-input" type="date" value="2026-08-15">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Number of Guests</label>
+        <select class="form-select">
+          <option>1 Guest</option>
+          <option selected>2 Guests</option>
+          <option>3 Guests</option>
+          <option>4+ Guests — Private</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Invalid Field</label>
+        <input class="form-input error" type="text" value="abc123" placeholder="">
+        <span class="form-error">⚠ Please enter a valid entry</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Confirmed Field</label>
+        <input class="form-input success" type="email" value="confirmed@email.com">
+        <span class="form-success">✓ Email verified successfully</span>
+      </div>
+      <div class="form-group" style="grid-column: 1/-1;">
+        <label class="form-label">Special Requests</label>
+        <textarea class="form-input" rows="3" placeholder="Dietary requirements, anniversary setup, accessibility needs..." style="resize: vertical;"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 5. CARDS ── -->
+  <div class="sg-section">
+    <div class="sg-section-title">05 — Card Components</div>
+    <div class="sg-section-sub">Destination, package, and product cards. Hover elevation + consistent structure.</div>
+
+    <div class="cards-grid">
+      <!-- Destination card -->
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(160deg, #1A3A2A, #2D5A3D);">
+          🦁
+          <div class="card-img-overlay">Kenya · Masai Mara</div>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Destination</div>
+          <div class="card-title">Masai Mara National Reserve</div>
+          <div class="card-text">Home of the Great Migration — witness one million wildebeest crossing the Mara River in dramatic fashion.</div>
+        </div>
+        <div class="card-footer">
+          <div>
+            <div class="card-price">From $3,200</div>
+            <div class="card-price-note">per person · 7 nights</div>
+          </div>
+          <button class="btn btn-primary btn-sm">Explore</button>
+        </div>
+      </div>
+
+      <!-- Package card -->
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(160deg, #2D3A1A, #4A5C2D);">
+          🦒
+          <div class="card-img-overlay">Tanzania · Serengeti</div>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Luxury Package · 10 Days</div>
+          <div class="card-title">Serengeti Grand Safari</div>
+          <div class="card-text">Private game drives, luxury tented camp, hot air balloon at sunrise, and expert Swahili naturalist guides.</div>
+          <div class="badge-row">
+            <span class="badge badge-gold">Private Guide</span>
+            <span class="badge badge-green">All Inclusive</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div>
+            <div class="card-price">$7,400</div>
+            <div class="card-price-note">per person · all inclusive</div>
+          </div>
+          <button class="btn btn-primary btn-sm">Book Now</button>
+        </div>
+      </div>
+
+      <!-- Product card -->
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(160deg, #3A2A1A, #5C4A2D);">
+          🎒
+          <div class="card-img-overlay">Safari Gear</div>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Safari Essential</div>
+          <div class="card-title">Premium Safari Field Jacket</div>
+          <div class="card-text">Lightweight, UPF 50+, moisture-wicking. Multiple pockets. Available in khaki, olive, and sand.</div>
+          <div class="card-rating">★★★★★ <span style="font-size:11px; color:var(--gray-mid); margin-left:4px;">(47 reviews)</span></div>
+        </div>
+        <div class="card-footer">
+          <div>
+            <div class="card-price" style="font-size:22px;">$189</div>
+            <div class="card-price-note">Free shipping · In stock</div>
+          </div>
+          <button class="btn btn-primary btn-sm">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 6. BADGES & TAGS ── -->
+  <div class="sg-section">
+    <div class="sg-section-title">06 — Badges & Tags</div>
+    <div class="sg-section-sub">Used for status indicators, filters, product labels, and role identifiers.</div>
+
+    <span class="sg-label">Product & Package Badges</span>
+    <div class="badge-row">
+      <span class="badge badge-luxury">✦ Luxury</span>
+      <span class="badge badge-gold">Private Guide</span>
+      <span class="badge badge-green">Available</span>
+      <span class="badge badge-red">Last 2 Spots</span>
+      <span class="badge badge-blue">Bestseller</span>
+      <span class="badge badge-dark">New Season</span>
+      <span class="badge badge-gray">Sold Out</span>
+    </div>
+
+    <span class="sg-label" style="margin-top: 20px;">Admin Role Badges</span>
+    <div class="badge-row">
+      <span class="badge" style="background: var(--gold-pale); color: var(--gold-dark); border: 1px solid var(--gold);">👑 Super Admin</span>
+      <span class="badge" style="background: #F5EAF8; color: #5C1A7A; border: 1px solid #8E44AD;">⚙️ Sub-Admin</span>
+      <span class="badge" style="background: #EAF3FB; color: #1A5C8A; border: 1px solid #2980B9;">👤 User</span>
+      <span class="badge" style="background: var(--green-pale); color: var(--green-dark);">🌍 Visitor</span>
+    </div>
+
+    <span class="sg-label" style="margin-top: 20px;">Booking Status</span>
+    <div class="badge-row">
+      <span class="badge badge-green">✓ Confirmed</span>
+      <span class="badge badge-blue">⏳ Pending</span>
+      <span class="badge badge-gold">✈ In Progress</span>
+      <span class="badge badge-red">✗ Cancelled</span>
+      <span class="badge badge-gray">◷ Completed</span>
+    </div>
+
+    <span class="sg-label" style="margin-top: 20px;">Inventory Status</span>
+    <div class="badge-row">
+      <span class="badge badge-green">In Stock (48)</span>
+      <span class="badge badge-gold">Low Stock (5)</span>
+      <span class="badge badge-red">Out of Stock</span>
+      <span class="badge badge-blue">Pre-Order</span>
+    </div>
+  </div>
+
+  <!-- ── 7. ALERTS ── -->
+  <div class="sg-section">
+    <div class="sg-section-title">07 — Alerts & Notifications</div>
+    <div class="sg-section-sub">Inline feedback messages for system states, validation, and user actions.</div>
+
+    <div class="alert alert-success"><div class="alert-icon">✅</div><div><strong>Booking Confirmed!</strong> Your Kenya safari package has been reserved for 15 Aug 2026. Confirmation sent to your email.</div></div>
+    <div class="alert alert-error"><div class="alert-icon">❌</div><div><strong>Payment Failed:</strong> Your card was declined. Please check your details or try a different payment method.</div></div>
+    <div class="alert alert-warning"><div class="alert-icon">⚠️</div><div><strong>Low Stock Alert:</strong> Only 3 units of "Safari Field Jacket (Size M)" remaining. Restock recommended.</div></div>
+    <div class="alert alert-info"><div class="alert-icon">ℹ️</div><div><strong>Seasonal Note:</strong> The Great Migration peaks in July–October. Book early to secure prime viewing spots.</div></div>
+  </div>
+
+  <!-- ── 8. NAVIGATION ── -->
+  <div class="sg-section">
+    <div class="sg-section-title">08 — Navigation Components</div>
+    <div class="sg-section-sub">Main nav, admin sidebar, and breadcrumb patterns.</div>
+
+    <span class="sg-label">Primary Navigation (Customer-Facing)</span>
+    <div class="nav-demo">
+      <div class="nav-demo-logo">Successful Safaris</div>
+      <div class="nav-demo-links">
+        <a href="#">Home</a>
+        <a href="#">Destinations</a>
+        <a href="#">Packages</a>
+        <a href="#">Shop</a>
+        <a href="#" class="active">Booking</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="nav-demo-actions">
+        <div class="nav-currency">USD $</div>
+        <button class="btn btn-primary btn-sm">Book Now</button>
+        <div style="color: var(--gold-light); font-size: 13px; cursor: pointer;">👤 Sign In</div>
+      </div>
+    </div>
+
+    <span class="sg-label" style="margin-top: 24px;">Breadcrumb</span>
+    <div style="background: white; padding: 14px 20px; border-radius: 8px; font-size: 13px; border: 1px solid var(--cream-mid);">
+      <span style="color: var(--gray-mid);">Home</span>
+      <span style="margin: 0 10px; color: var(--gold);">›</span>
+      <span style="color: var(--gray-mid);">Destinations</span>
+      <span style="margin: 0 10px; color: var(--gold);">›</span>
+      <span style="color: var(--gray-mid);">Kenya</span>
+      <span style="margin: 0 10px; color: var(--gold);">›</span>
+      <span style="color: var(--green-dark); font-weight: 600;">Masai Mara — 7-Day Luxury Safari</span>
+    </div>
+  </div>
+
+  <!-- ── 9. DATA TABLE ── -->
+  <div class="sg-section">
+    <div class="sg-section-title">09 — Data Tables</div>
+    <div class="sg-section-sub">Admin tables for bookings, orders, products, and users. Sortable columns, row actions.</div>
+
+    <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid var(--cream-mid);">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Booking ID</th>
+            <th>Guest Name</th>
+            <th>Package</th>
+            <th>Departure</th>
+            <th>Guests</th>
+            <th>Total (USD)</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-family: monospace; color: var(--gold-dark);">#SS-2026-0417</td>
+            <td><strong>James & Sarah Wilson</strong></td>
+            <td>Kenya — Masai Mara 7D</td>
+            <td>15 Aug 2026</td>
+            <td>2</td>
+            <td><strong>$9,700</strong></td>
+            <td><span class="badge badge-green" style="font-size:10px;">✓ Confirmed</span></td>
+            <td style="display:flex; gap:6px;"><button class="btn btn-sm btn-outline" style="padding:4px 10px; font-size:10px;">View</button><button class="btn btn-sm btn-ghost" style="padding:4px 10px; font-size:10px;">Edit</button></td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace; color: var(--gold-dark);">#SS-2026-0418</td>
+            <td><strong>Marie Dubois</strong></td>
+            <td>Tanzania — Serengeti 10D</td>
+            <td>22 Aug 2026</td>
+            <td>1</td>
+            <td><strong>$7,400</strong></td>
+            <td><span class="badge badge-blue" style="font-size:10px;">⏳ Pending</span></td>
+            <td style="display:flex; gap:6px;"><button class="btn btn-sm btn-outline" style="padding:4px 10px; font-size:10px;">View</button><button class="btn btn-sm btn-ghost" style="padding:4px 10px; font-size:10px;">Edit</button></td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace; color: var(--gold-dark);">#SS-2026-0419</td>
+            <td><strong>Chen Family</strong></td>
+            <td>Rwanda — Gorilla Trek 5D</td>
+            <td>01 Sep 2026</td>
+            <td>4</td>
+            <td><strong>$24,800</strong></td>
+            <td><span class="badge badge-gold" style="font-size:10px;">✈ In Progress</span></td>
+            <td style="display:flex; gap:6px;"><button class="btn btn-sm btn-outline" style="padding:4px 10px; font-size:10px;">View</button><button class="btn btn-sm btn-ghost" style="padding:4px 10px; font-size:10px;">Edit</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── 10. ICONS ── -->
+  <div class="sg-section">
+    <div class="sg-section-title">10 — Icons & Visual Language</div>
+    <div class="sg-section-sub">Safari-inspired icon set for navigation, categories, and features.</div>
+
+    <span class="sg-label">Destinations & Nature</span>
+    <div class="icon-grid" style="margin-bottom: 16px;">
+      <div class="icon-item"><div class="icon-emoji">🦁</div><div class="icon-label">Big Cats</div></div>
+      <div class="icon-item"><div class="icon-emoji">🦒</div><div class="icon-label">Plains</div></div>
+      <div class="icon-item"><div class="icon-emoji">🐘</div><div class="icon-label">Savanna</div></div>
+      <div class="icon-item"><div class="icon-emoji">🦏</div><div class="icon-label">Rhino</div></div>
+      <div class="icon-item"><div class="icon-emoji">🦍</div><div class="icon-label">Gorillas</div></div>
+      <div class="icon-item"><div class="icon-emoji">🐆</div><div class="icon-label">Leopard</div></div>
+      <div class="icon-item"><div class="icon-emoji">🌅</div><div class="icon-label">Sunrise</div></div>
+      <div class="icon-item"><div class="icon-emoji">🏔</div><div class="icon-label">Mountains</div></div>
+    </div>
+
+    <span class="sg-label">Services & Features</span>
+    <div class="icon-grid" style="margin-bottom: 16px;">
+      <div class="icon-item"><div class="icon-emoji">✈️</div><div class="icon-label">Flights</div></div>
+      <div class="icon-item"><div class="icon-emoji">🏕</div><div class="icon-label">Tented Camp</div></div>
+      <div class="icon-item"><div class="icon-emoji">🚁</div><div class="icon-label">Helicopter</div></div>
+      <div class="icon-item"><div class="icon-emoji">🎈</div><div class="icon-label">Balloon</div></div>
+      <div class="icon-item"><div class="icon-emoji">📸</div><div class="icon-label">Photo Pack</div></div>
+      <div class="icon-item"><div class="icon-emoji">🍽</div><div class="icon-label">Fine Dining</div></div>
+      <div class="icon-item"><div class="icon-emoji">💆</div><div class="icon-label">Spa</div></div>
+      <div class="icon-item"><div class="icon-emoji">🔭</div><div class="icon-label">Stargazing</div></div>
+    </div>
+
+    <span class="sg-label">Shop & E-commerce</span>
+    <div class="icon-grid">
+      <div class="icon-item"><div class="icon-emoji">🎒</div><div class="icon-label">Backpack</div></div>
+      <div class="icon-item"><div class="icon-emoji">👕</div><div class="icon-label">Clothing</div></div>
+      <div class="icon-item"><div class="icon-emoji">🧢</div><div class="icon-label">Headwear</div></div>
+      <div class="icon-item"><div class="icon-emoji">🥾</div><div class="icon-label">Footwear</div></div>
+      <div class="icon-item"><div class="icon-emoji">🔭</div><div class="icon-label">Binoculars</div></div>
+      <div class="icon-item"><div class="icon-emoji">🛒</div><div class="icon-label">Cart</div></div>
+      <div class="icon-item"><div class="icon-emoji">💳</div><div class="icon-label">Payment</div></div>
+      <div class="icon-item"><div class="icon-emoji">📦</div><div class="icon-label">Delivery</div></div>
+    </div>
+  </div>
+
+  <!-- ── 11. SPACING ── -->
+  <div class="sg-section">
+    <div class="sg-section-title">11 — Spacing & Grid</div>
+    <div class="sg-section-sub">8px base unit. Consistent rhythm across all components.</div>
+
+    <div class="spacing-row">
+      <div><div class="space-block" style="width:8px; height:8px;"></div><div style="font-size:10px;color:var(--gray-mid); margin-top:4px;">4</div></div>
+      <div><div class="space-block" style="width:16px; height:16px;"></div><div style="font-size:10px;color:var(--gray-mid); margin-top:4px;">8</div></div>
+      <div><div class="space-block" style="width:24px; height:24px;"></div><div style="font-size:10px;color:var(--gray-mid); margin-top:4px;">12</div></div>
+      <div><div class="space-block" style="width:32px; height:32px;"></div><div style="font-size:10px;color:var(--gray-mid); margin-top:4px;">16</div></div>
+      <div><div class="space-block" style="width:48px; height:48px;"></div><div style="font-size:10px;color:var(--gray-mid); margin-top:4px;">24</div></div>
+      <div><div class="space-block" style="width:64px; height:64px;"></div><div style="font-size:10px;color:var(--gray-mid); margin-top:4px;">32</div></div>
+      <div><div class="space-block" style="width:96px; height:96px;"></div><div style="font-size:10px;color:var(--gray-mid); margin-top:4px;">48</div></div>
+      <div><div class="space-block" style="width:128px; height:128px;"></div><div style="font-size:10px;color:var(--gray-mid); margin-top:4px;">64</div></div>
+    </div>
+
+    <div style="margin-top: 24px; font-size: 13px; color: var(--gray-mid); line-height: 1.8;">
+      <strong style="color: var(--charcoal);">Grid System:</strong> 12-column grid · 24px gutters · 48px horizontal page padding (desktop) · 20px (mobile)<br>
+      <strong style="color: var(--charcoal);">Max Width:</strong> 1300px content · 1440px full bleed sections<br>
+      <strong style="color: var(--charcoal);">Breakpoints:</strong> Mobile ≤ 767px · Tablet 768–1023px · Desktop ≥ 1024px
+    </div>
+  </div>
+
+  <!-- ── 12. ELEVATION ── -->
+  <div class="sg-section">
+    <div class="sg-section-title">12 — Elevation & Shadow</div>
+    <div class="sg-section-sub">Layered depth system. Shadows use brand colors for warm, premium feel.</div>
+
+    <div class="three-col">
+      <div class="box" style="box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+        <div class="inner-label">Level 1 — Subtle</div>
+        <div style="font-size:13px; color:var(--gray-mid); margin-top:4px; font-family:monospace;">0 1px 4px rgba(0,0,0,0.06)</div>
+        <div style="font-size:12px; color:var(--gray-mid); margin-top:6px;">Cards, form inputs</div>
+      </div>
+      <div class="box" style="box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+        <div class="inner-label">Level 2 — Medium</div>
+        <div style="font-size:13px; color:var(--gray-mid); margin-top:4px; font-family:monospace;">0 4px 20px rgba(0,0,0,0.08)</div>
+        <div style="font-size:12px; color:var(--gray-mid); margin-top:6px;">Hover cards, dropdowns</div>
+      </div>
+      <div class="box" style="box-shadow: 0 12px 48px rgba(0,0,0,0.14);">
+        <div class="inner-label">Level 3 — High</div>
+        <div style="font-size:13px; color:var(--gray-mid); margin-top:4px; font-family:monospace;">0 12px 48px rgba(0,0,0,0.14)</div>
+        <div style="font-size:12px; color:var(--gray-mid); margin-top:6px;">Modals, side panels</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Successful Safaris — Design Package &nbsp;|&nbsp; <span>Style Guide v1.0</span> &nbsp;|&nbsp; Confidential &nbsp;|&nbsp; 2026</p>
+</footer>
+
+</body>
+</html>
