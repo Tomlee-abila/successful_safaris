@@ -68,7 +68,7 @@
   /* ── HERO ── */
   .hero {
     position: relative; height: 100vh; min-height: 700px;
-    background: linear-gradient(160deg, #0A1A0F 0%, #1A3A2A 40%, #2D5A3D 100%);
+    background: linear-gradient(160deg, rgba(10,26,15,0.72) 0%, rgba(26,58,42,0.58) 40%, rgba(45,90,61,0.42) 100%), url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1920&q=90') center/cover no-repeat;
     display: flex; align-items: center; overflow: hidden;
   }
   .hero-bg {
@@ -599,7 +599,7 @@
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-pattern"></div>
-  <div class="hero-silhouette">🦁</div>
+  <div class="hero-silhouette" style="opacity:0;"></div>
   <div class="hero-content">
     <div class="hero-overline">Est. 2008 · Luxury Safari Specialists</div>
     <h1 class="hero-title">
@@ -657,8 +657,7 @@
   </div>
   <div class="destinations-row">
     <div class="dest-pill">
-      <div class="dest-pill-img" style="background: linear-gradient(135deg, #1A3A2A, #2D5A3D);">
-        🦁
+      <div class="dest-pill-img" style="background: url('https://images.unsplash.com/photo-1535941339077-2dd1c7963098?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
         <div class="dest-pill-flag">🇰🇪</div>
       </div>
       <div class="dest-pill-body">
@@ -668,8 +667,7 @@
       </div>
     </div>
     <div class="dest-pill">
-      <div class="dest-pill-img" style="background: linear-gradient(135deg, #2A3A1A, #4A5C2D);">
-        🦒
+      <div class="dest-pill-img" style="background: url('https://images.unsplash.com/photo-1547970810-dc1eac37d174?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
         <div class="dest-pill-flag">🇹🇿</div>
       </div>
       <div class="dest-pill-body">
@@ -679,8 +677,7 @@
       </div>
     </div>
     <div class="dest-pill">
-      <div class="dest-pill-img" style="background: linear-gradient(135deg, #1A2A3A, #2D3D5A);">
-        🦍
+      <div class="dest-pill-img" style="background: url('https://images.unsplash.com/photo-1530126483408-aa533e55bdb2?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
         <div class="dest-pill-flag">🇷🇼</div>
       </div>
       <div class="dest-pill-body">
@@ -690,8 +687,7 @@
       </div>
     </div>
     <div class="dest-pill">
-      <div class="dest-pill-img" style="background: linear-gradient(135deg, #2A1A3A, #3D2D5A);">
-        🐘
+      <div class="dest-pill-img" style="background: url('https://images.unsplash.com/photo-1564760055775-d63b17a55c44?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
         <div class="dest-pill-flag">🇺🇬</div>
       </div>
       <div class="dest-pill-body">
@@ -701,8 +697,7 @@
       </div>
     </div>
     <div class="dest-pill">
-      <div class="dest-pill-img" style="background: linear-gradient(135deg, #1A3A3A, #2D5A5A);">
-        🏝
+      <div class="dest-pill-img" style="background: url('https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
         <div class="dest-pill-flag">🇹🇿</div>
       </div>
       <div class="dest-pill-body">
@@ -725,8 +720,7 @@
   <div class="packages-grid">
 
     <div class="package-card">
-      <div class="package-img" style="background: linear-gradient(160deg, #1A3A2A, #4A8C5C);">
-        🦁
+      <div class="package-img" style="background: url('https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;">
         <div class="package-img-overlay"></div>
         <div class="package-duration">7 Nights</div>
         <div class="package-badge">✦ Bestseller</div>
@@ -753,8 +747,7 @@
     </div>
 
     <div class="package-card">
-      <div class="package-img" style="background: linear-gradient(160deg, #2A3A1A, #5C8C4A);">
-        🦒
+      <div class="package-img" style="background: url('https://images.unsplash.com/photo-1543874049-af2a0bbe3b1a?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;">
         <div class="package-img-overlay"></div>
         <div class="package-duration">10 Nights</div>
         <div class="package-badge">✦ Luxury</div>
@@ -780,8 +773,7 @@
     </div>
 
     <div class="package-card">
-      <div class="package-img" style="background: linear-gradient(160deg, #1A2A3A, #3D5A8C);">
-        🦍
+      <div class="package-img" style="background: url('https://images.unsplash.com/photo-1530126483408-aa533e55bdb2?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;">
         <div class="package-img-overlay"></div>
         <div class="package-duration">5 Nights</div>
         <div class="package-badge">✦ Exclusive</div>
@@ -815,9 +807,8 @@
 <!-- WHY US -->
 <section class="why-section">
   <div class="why-grid">
-    <div class="why-visual">
+    <div class="why-visual" style="background: url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80') center/cover no-repeat; font-size:0;">
       <div class="why-visual-overlay"></div>
-      🌅
       <div class="why-badge">
         <div class="why-badge-quote">"The guides' knowledge of the land and wildlife was extraordinary. Every sunrise felt like a private performance."</div>
         <div class="why-badge-author">— Sarah & James Wilson, Kenya Trip · September 2025 · ★★★★★</div>
@@ -862,8 +853,7 @@
   </div>
   <div class="shop-products">
     <div class="shop-card">
-      <div class="shop-card-img" style="background: linear-gradient(135deg, #2a2a2a, #3a3a3a);">
-        🎒
+      <div class="shop-card-img" style="background: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=400&q=80') center/cover no-repeat;">
         <span class="shop-card-label">Bestseller</span>
         <span class="shop-card-wish">♡</span>
       </div>
@@ -878,8 +868,7 @@
       </div>
     </div>
     <div class="shop-card">
-      <div class="shop-card-img" style="background: linear-gradient(135deg, #1a2a3a, #2a3a4a);">
-        🔭
+      <div class="shop-card-img" style="background: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80') center/cover no-repeat;">
         <span class="shop-card-label">New</span>
         <span class="shop-card-wish">♡</span>
       </div>
@@ -894,8 +883,7 @@
       </div>
     </div>
     <div class="shop-card">
-      <div class="shop-card-img" style="background: linear-gradient(135deg, #2a1a1a, #3a2a2a);">
-        📸
+      <div class="shop-card-img" style="background: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=400&q=80') center/cover no-repeat;">
         <span class="shop-card-label">Popular</span>
         <span class="shop-card-wish">♡</span>
       </div>
@@ -910,8 +898,7 @@
       </div>
     </div>
     <div class="shop-card">
-      <div class="shop-card-img" style="background: linear-gradient(135deg, #1a1a2a, #2a2a3a);">
-        🎈
+      <div class="shop-card-img" style="background: url('https://images.unsplash.com/photo-1543874049-af2a0bbe3b1a?auto=format&fit=crop&w=400&q=80') center/cover no-repeat;">
         <span class="shop-card-label" style="background:var(--gold-dark);">Bundle</span>
         <span class="shop-card-wish">♡</span>
       </div>
@@ -940,7 +927,7 @@
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-text">"Witnessing the wildebeest crossing the Mara River at dawn, with our guide's hushed commentary and a flask of coffee — that moment is permanently etched in our hearts. Truly flawless from first email to farewell."</p>
       <div class="testimonial-author">
-        <div class="testimonial-avatar" style="background:rgba(201,168,76,0.2);">👫</div>
+        <div class="testimonial-avatar" style="overflow:hidden; padding:0;"><img src="https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?auto=format&fit=crop&w=88&h=88&q=80" alt="James & Sarah Wilson" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
         <div>
           <div class="testimonial-name">James & Sarah Wilson</div>
           <div class="testimonial-trip">Kenya — Masai Mara · Sept 2025</div>
@@ -951,7 +938,7 @@
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-text">"We asked for something unforgettable. We got a private tented camp with candlelit dinners, a cheetah hunt at sunset, and a family of elephants walking past our lodge at breakfast. Extraordinary."</p>
       <div class="testimonial-author">
-        <div class="testimonial-avatar" style="background:rgba(201,168,76,0.2);">👩</div>
+        <div class="testimonial-avatar" style="overflow:hidden; padding:0;"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=88&h=88&q=80" alt="Marie Dubois" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
         <div>
           <div class="testimonial-name">Marie Dubois</div>
           <div class="testimonial-trip">Tanzania — Serengeti · July 2025</div>
@@ -962,7 +949,7 @@
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-text">"The gorilla trek was worth every penny. Being 5 metres from a silverback in his natural habitat changed something in all of us. The whole Chen family still talks about it at every gathering."</p>
       <div class="testimonial-author">
-        <div class="testimonial-avatar" style="background:rgba(201,168,76,0.2);">👨‍👩‍👧‍👦</div>
+        <div class="testimonial-avatar" style="overflow:hidden; padding:0;"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=88&h=88&q=80" alt="Chen Family" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
         <div>
           <div class="testimonial-name">Chen Family</div>
           <div class="testimonial-trip">Rwanda — Gorillas · August 2025</div>
