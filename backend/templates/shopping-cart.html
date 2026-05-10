@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopping Cart — Successful Safaris Shop</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C; --gold-light: #E8C96A; --gold-pale: #F5E9C8; --gold-dark: #A07830;
+    --green-dark: #1A3A2A; --green-mid: #2D5A3D; --green-light: #4A8C5C;
+    --charcoal: #1A1A1A; --gray-mid: #555; --gray-light: #AAA;
+    --cream: #FAF7F0; --cream-mid: #F0EAD6; --white: #FFF;
+    --success: #27AE60;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); }
+  a { text-decoration: none; color: inherit; }
+
+  nav {
+    background: var(--green-dark); padding: 0 48px;
+    display: flex; align-items: center; height: 72px;
+    border-bottom: 1px solid var(--gold);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; margin-right: auto; }
+  .nav-logo-mark { width: 40px; height: 40px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 16px; color: var(--green-dark); font-weight: 700; }
+  .nav-logo-text h2 { font-family: 'Playfair Display', serif; color: white; font-size: 18px; }
+
+  /* ── CART CONTENT ── */
+  .cart-container { max-width: 1200px; margin: 60px auto; padding: 0 48px; display: grid; grid-template-columns: 1fr 380px; gap: 48px; }
+  .cart-header { grid-column: 1/-1; margin-bottom: 32px; }
+  .cart-header h1 { font-family: 'Playfair Display', serif; font-size: 40px; color: var(--green-dark); }
+  .cart-header p { color: var(--gray-mid); margin-top: 4px; }
+
+  .cart-table { background: white; border-radius: 12px; border: 1px solid var(--cream-mid); overflow: hidden; }
+  .cart-item { display: flex; align-items: center; padding: 24px; border-bottom: 1px solid var(--cream-mid); }
+  .cart-item:last-child { border-bottom: none; }
+  .item-img { width: 100px; height: 100px; border-radius: 8px; overflow: hidden; background: var(--cream); flex-shrink: 0; }
+  .item-img img { width: 100%; height: 100%; object-fit: cover; }
+  .item-info { flex: 1; padding: 0 24px; }
+  .item-cat { font-size: 10px; font-weight: 700; color: var(--gold-dark); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px; }
+  .item-name { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--green-dark); }
+  .item-variant { font-size: 12px; color: var(--gray-mid); margin-top: 4px; }
+  
+  .item-qty { display: flex; align-items: center; gap: 12px; border: 1.5px solid var(--cream-mid); border-radius: 6px; padding: 6px 12px; }
+  .qty-btn { background: none; border: none; font-size: 18px; color: var(--gray-mid); cursor: pointer; }
+  .qty-num { font-weight: 600; font-size: 14px; min-width: 20px; text-align: center; }
+  
+  .item-price { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; width: 120px; text-align: right; }
+  .item-remove { font-size: 20px; color: var(--gray-light); cursor: pointer; margin-left: 24px; }
+  .item-remove:hover { color: #e74c3c; }
+
+  /* SUMMARY SIDEBAR */
+  .cart-sidebar { position: sticky; top: 112px; height: fit-content; }
+  .summary-card { background: white; border-radius: 16px; padding: 32px; border: 1px solid var(--cream-mid); box-shadow: 0 4px 20px rgba(0,0,0,0.04); }
+  .summary-title { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--green-dark); margin-bottom: 24px; border-bottom: 1px solid var(--cream-mid); padding-bottom: 16px; }
+  
+  .summary-row { display: flex; justify-content: space-between; margin-bottom: 14px; font-size: 14px; }
+  .summary-row.total { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--cream-mid); font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--green-dark); }
+  .label { color: var(--gray-mid); }
+  .val { font-weight: 600; }
+
+  .promo-box { margin-top: 24px; display: flex; gap: 8px; }
+  .promo-input { flex: 1; padding: 12px; border: 1.5px solid var(--cream-mid); border-radius: 6px; font-size: 13px; outline: none; }
+  .promo-btn { background: var(--green-dark); color: white; padding: 12px 18px; border-radius: 6px; font-size: 12px; font-weight: 600; }
+
+  .checkout-btn { width: 100%; background: var(--gold); color: var(--green-dark); padding: 18px; border-radius: 8px; font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-top: 32px; box-shadow: 0 4px 12px rgba(201,168,76,0.25); }
+  .checkout-btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .continue-link { display: block; text-align: center; margin-top: 20px; font-size: 13px; color: var(--gold-dark); font-weight: 600; }
+
+  footer { background: var(--charcoal); color: white; padding: 48px; text-align: center; font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 80px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-mark">SS</div>
+    <div class="nav-logo-text">
+      <h2>Successful Safaris</h2>
+      <p>Luxury African Experiences</p>
+    </div>
+  </div>
+</nav>
+
+<div class="cart-container">
+  <div class="cart-header">
+    <h1>Your Safari Cart</h1>
+    <p>3 items selected for your African journey.</p>
+  </div>
+
+  <div class="cart-main">
+    <div class="cart-table">
+      <!-- Item 1 -->
+      <div class="cart-item">
+        <div class="item-img"><img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=200&q=80" alt="Safari"></div>
+        <div class="item-info">
+          <div class="item-cat">Tour Booking</div>
+          <h3 class="item-name">Masai Mara 7-Day Luxury Safari</h3>
+          <div class="item-variant">15 Aug 2026 – 22 Aug 2026 · 2 Adults</div>
+        </div>
+        <div class="item-qty">
+          <button class="qty-btn">−</button>
+          <span class="qty-num">1</span>
+          <button class="qty-btn">+</button>
+        </div>
+        <div class="item-price">$9,700</div>
+        <div class="item-remove">×</div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="cart-item">
+        <div class="item-img"><img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=200&q=80" alt="Jacket"></div>
+        <div class="item-info">
+          <div class="item-cat">Safari Gear</div>
+          <h3 class="item-name">Premium Safari Field Jacket</h3>
+          <div class="item-variant">Size: Medium · Color: Khaki</div>
+        </div>
+        <div class="item-qty">
+          <button class="qty-btn">−</button>
+          <span class="qty-num">1</span>
+          <button class="qty-btn">+</button>
+        </div>
+        <div class="item-price">$189</div>
+        <div class="item-remove">×</div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="cart-item">
+        <div class="item-img"><img src="https://images.unsplash.com/photo-1543874049-af2a0bbe3b1a?auto=format&fit=crop&w=200&q=80" alt="Balloon"></div>
+        <div class="item-info">
+          <div class="item-cat">Luxury Add-on</div>
+          <h3 class="item-name">Serengeti Sunrise Balloon Flight</h3>
+          <div class="item-variant">Day 3 · 2 Persons</div>
+        </div>
+        <div class="item-qty">
+          <button class="qty-btn">−</button>
+          <span class="qty-num">1</span>
+          <button class="qty-btn">+</button>
+        </div>
+        <div class="item-price">$960</div>
+        <div class="item-remove">×</div>
+      </div>
+    </div>
+  </div>
+
+  <aside class="cart-sidebar">
+    <div class="summary-card">
+      <h3 class="summary-title">Summary</h3>
+      <div class="summary-row">
+        <span class="label">Subtotal</span>
+        <span class="val">$10,849</span>
+      </div>
+      <div class="summary-row">
+        <span class="label" style="color:var(--success);">Gear Bundle Saving</span>
+        <span class="val" style="color:var(--success);">−$36</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">Shipping</span>
+        <span class="val">Free</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">Estimated Taxes</span>
+        <span class="val">$0.00</span>
+      </div>
+
+      <div class="promo-box">
+        <input type="text" class="promo-input" placeholder="Promo Code">
+        <button class="promo-btn">Apply</button>
+      </div>
+
+      <div class="summary-row total">
+        <span class="label">Total</span>
+        <span class="val">$10,813</span>
+      </div>
+
+      <a href="/checkout/"><button class="checkout-btn">Proceed to Checkout →</button></a>
+      <a href="/shop/" class="continue-link">Continue Shopping</a>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  <p>© 2026 Successful Safaris Ltd. · Luxury E-Commerce Portal</p>
+</footer>
+
+</body>
+</html>

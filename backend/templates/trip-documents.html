@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Trip Documents — Successful Safaris</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C; --gold-light: #E8C96A; --gold-pale: #F5E9C8; --gold-dark: #A07830;
+    --green-dark: #1A3A2A; --green-mid: #2D5A3D; --green-light: #4A8C5C;
+    --charcoal: #1A1A1A; --gray-mid: #555; --gray-light: #AAA;
+    --cream: #FAF7F0; --cream-mid: #F0EAD6; --white: #FFF;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); }
+  a { text-decoration: none; color: inherit; }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--green-dark); padding: 0 48px;
+    display: flex; align-items: center; height: 72px;
+    border-bottom: 1px solid var(--gold);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; margin-right: auto; }
+  .nav-logo-mark { width: 40px; height: 40px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 16px; color: var(--green-dark); font-weight: 700; }
+  .nav-logo-text h2 { font-family: 'Playfair Display', serif; color: white; font-size: 18px; }
+  .nav-logo-text p { font-size: 9px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
+
+  /* ── CONTENT ── */
+  .doc-container { max-width: 1000px; margin: 60px auto; padding: 0 24px; }
+  .doc-header { margin-bottom: 48px; border-bottom: 1px solid var(--cream-mid); padding-bottom: 24px; }
+  .doc-header h1 { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--green-dark); }
+  .doc-header p { color: var(--gray-mid); margin-top: 8px; }
+
+  .doc-section { margin-bottom: 40px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--green-dark); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  
+  .doc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+  .doc-card {
+    background: white; border-radius: 12px; border: 1px solid var(--cream-mid);
+    padding: 24px; display: flex; align-items: center; gap: 20px;
+    transition: 0.3s; cursor: pointer;
+  }
+  .doc-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.05); border-color: var(--gold); }
+  .doc-icon { width: 50px; height: 50px; background: var(--gold-pale); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--gold-dark); }
+  .doc-info { flex: 1; }
+  .doc-name { font-weight: 600; color: var(--charcoal); font-size: 15px; }
+  .doc-meta { font-size: 12px; color: var(--gray-light); margin-top: 2px; }
+  .doc-download { font-size: 18px; color: var(--gray-mid); }
+
+  .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--gold-dark); font-weight: 600; font-size: 14px; margin-bottom: 24px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-mark">SS</div>
+    <div class="nav-logo-text">
+      <h2>Successful Safaris</h2>
+      <p>Luxury African Experiences</p>
+    </div>
+  </div>
+</nav>
+
+<div class="doc-container">
+  <a href="/dashboard/" class="back-link">← Back to Dashboard</a>
+  
+  <div class="doc-header">
+    <h1>Your Safari Documents</h1>
+    <p>Everything you need for your upcoming adventure in the Masai Mara.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="section-title">🎫 Essential Vouchers</h2>
+    <div class="doc-grid">
+      <div class="doc-card">
+        <div class="doc-icon">✈️</div>
+        <div class="doc-info">
+          <div class="doc-name">Flight Itinerary & E-Tickets</div>
+          <div class="doc-meta">PDF · 2.4 MB · Updated 2 days ago</div>
+        </div>
+        <div class="doc-download">📥</div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">🏕️</div>
+        <div class="doc-info">
+          <div class="doc-name">Lodge & Camp Vouchers</div>
+          <div class="doc-meta">PDF · 1.1 MB · Valid for 15-22 Aug</div>
+        </div>
+        <div class="doc-download">📥</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="section-title">📖 Preparation Guides</h2>
+    <div class="doc-grid">
+      <div class="doc-card">
+        <div class="doc-icon">🎒</div>
+        <div class="doc-info">
+          <div class="doc-name">Ultimate Safari Packing List</div>
+          <div class="doc-name">Masai Mara Edition</div>
+          <div class="doc-meta">PDF · 850 KB</div>
+        </div>
+        <div class="doc-download">📥</div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">🏥</div>
+        <div class="doc-info">
+          <div class="doc-name">Health & Vaccination Guide</div>
+          <div class="doc-meta">PDF · 1.5 MB</div>
+        </div>
+        <div class="doc-download">📥</div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">📸</div>
+        <div class="doc-info">
+          <div class="doc-name">Wildlife Photography Tips</div>
+          <div class="doc-meta">PDF · 4.2 MB</div>
+        </div>
+        <div class="doc-download">📥</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="section-title">📋 Legal & Insurance</h2>
+    <div class="doc-grid">
+      <div class="doc-card">
+        <div class="doc-icon">🛡️</div>
+        <div class="doc-info">
+          <div class="doc-name">Travel Insurance Certificate</div>
+          <div class="doc-meta">PDF · 900 KB</div>
+        </div>
+        <div class="doc-download">📥</div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">📝</div>
+        <div class="doc-info">
+          <div class="doc-name">Signed Liability Waiver</div>
+          <div class="doc-meta">PDF · 400 KB</div>
+        </div>
+        <div class="doc-download">📥</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div style="background: var(--charcoal); color: white; padding: 48px; text-align: center; font-size: 12px; color: rgba(255,255,255,0.4);">
+    © 2026 Successful Safaris Ltd. · Private Documents Portal
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — Successful Safaris</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C; --gold-light: #E8C96A; --gold-pale: #F5E9C8; --gold-dark: #A07830;
+    --green-dark: #1A3A2A; --green-mid: #2D5A3D; --green-light: #4A8C5C;
+    --charcoal: #1A1A1A; --gray-dark: #2A2A2A; --gray-mid: #555; --gray-light: #AAA;
+    --cream: #FAF7F0; --cream-mid: #F0EAD6; --white: #FFF;
+    --error: #C0392B; --success: #27AE60;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+    --shadow-md: 0 8px 32px rgba(0,0,0,0.12);
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-editorial: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --transition: all 0.3s ease;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font-body); background: var(--cream); color: var(--charcoal); }
+  a { text-decoration: none; color: inherit; }
+
+  /* ── NAV ── */
+  .nav-wrapper { position: sticky; top: 0; z-index: 100; }
+  nav { background: rgba(26,58,42,0.97); backdrop-filter: blur(12px); padding: 0 48px; display: flex; align-items: center; height: 72px; border-bottom: 1px solid rgba(201,168,76,0.25); }
+  .nav-logo { display: flex; align-items: center; gap: 12px; margin-right: auto; }
+  .nav-logo-mark { width: 40px; height: 40px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 16px; color: var(--green-dark); font-weight: 700; }
+  .nav-logo-text h2 { font-family: var(--font-display); color: white; font-size: 18px; font-weight: 600; }
+  .nav-logo-text p { font-size: 9px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.85); font-size: 13px; letter-spacing: 0.5px; padding: 4px 0; border-bottom: 1.5px solid transparent; transition: all 0.2s; }
+  .nav-links a:hover { color: var(--gold-light); border-bottom-color: var(--gold-light); }
+  .nav-links a.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .nav-right { display: flex; align-items: center; gap: 16px; margin-left: 40px; }
+  .nav-currency { font-size: 12px; color: var(--gold-light); border: 1px solid rgba(201,168,76,0.35); padding: 5px 12px; border-radius: 4px; cursor: pointer; background: transparent; display: flex; align-items: center; gap: 5px; transition: all 0.2s; }
+  .nav-currency:hover { background: rgba(201,168,76,0.1); }
+  .nav-cart { position: relative; color: rgba(255,255,255,0.85); cursor: pointer; padding: 6px; font-size: 18px; transition: color 0.2s; }
+  .nav-cart:hover { color: var(--gold-light); }
+  .cart-badge { position: absolute; top: 0; right: 0; background: var(--gold); color: var(--green-dark); width: 16px; height: 16px; border-radius: 50%; font-size: 9px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .nav-cta { background: var(--gold); color: var(--green-dark); padding: 10px 22px; border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; transition: all 0.25s; }
+  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(201,168,76,0.4); }
+  .nav-user { color: rgba(255,255,255,0.85); font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+  .nav-user:hover { color: var(--gold-light); }
+
+  /* ── PROMO ── */
+  .promo-banner { background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%); padding: 14px 80px; display: flex; align-items: center; justify-content: center; gap: 16px; border-bottom: 1px solid rgba(201,168,76,0.2); }
+  .promo-tag { background: var(--gold); color: var(--green-dark); padding: 3px 10px; border-radius: 2px; font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+  .promo-text { font-size: 13px; color: rgba(255,255,255,0.9); }
+  .promo-text strong { color: var(--gold-light); }
+  .promo-cta { font-size: 11px; color: var(--gold); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; text-decoration: underline; cursor: pointer; }
+  .promo-close { color: rgba(255,255,255,0.4); cursor: pointer; margin-left: auto; font-size: 18px; }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; height: 62vh; min-height: 480px;
+    background: linear-gradient(160deg, rgba(10,26,15,0.85) 0%, rgba(26,58,42,0.68) 50%, rgba(45,90,61,0.48) 100%),
+      url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1920&q=90') center/cover no-repeat;
+    display: flex; align-items: center; overflow: hidden;
+  }
+  .hero-pattern { position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(201,168,76,0.03) 1px, transparent 1px); background-size: 40px 40px; }
+  .hero-content { position: relative; z-index: 2; max-width: 700px; padding: 0 48px 0 80px; }
+  .hero-overline { font-size: 11px; color: var(--gold); letter-spacing: 4px; text-transform: uppercase; font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .hero-overline::before { content: ''; width: 32px; height: 1px; background: var(--gold); }
+  .hero-title { font-family: var(--font-display); font-size: clamp(44px, 5vw, 72px); font-weight: 700; line-height: 1.06; color: white; margin-bottom: 22px; }
+  .hero-title .gold-text { color: var(--gold-light); font-style: italic; }
+  .hero-subtitle { font-family: var(--font-editorial); font-size: 21px; font-style: italic; color: rgba(255,255,255,0.75); line-height: 1.6; max-width: 520px; }
+
+  /* ── BREADCRUMB ── */
+  .breadcrumb-bar { padding: 14px 80px; background: white; border-bottom: 1px solid var(--cream-mid); display: flex; align-items: center; gap: 8px; }
+  .breadcrumb-bar a { font-size: 12px; color: var(--gray-mid); transition: color 0.2s; }
+  .breadcrumb-bar a:hover { color: var(--gold-dark); }
+  .breadcrumb-sep { font-size: 12px; color: var(--gray-light); }
+  .breadcrumb-current { font-size: 12px; color: var(--green-dark); font-weight: 600; }
+
+  /* ── CONTACT LAYOUT ── */
+  .contact-section { padding: 80px 80px 96px; }
+  .contact-layout { display: grid; grid-template-columns: 1fr 420px; gap: 56px; align-items: start; }
+
+  /* ── FORM ── */
+  .form-panel { background: white; border: 1px solid var(--cream-mid); border-radius: 16px; padding: 48px; box-shadow: var(--shadow-sm); }
+  .form-header { margin-bottom: 36px; }
+  .form-overline { font-size: 11px; color: var(--gold); letter-spacing: 4px; text-transform: uppercase; font-weight: 600; margin-bottom: 10px; display: block; }
+  .form-title { font-family: var(--font-display); font-size: 34px; font-weight: 600; color: var(--green-dark); line-height: 1.2; margin-bottom: 10px; }
+  .form-subtitle { font-family: var(--font-editorial); font-style: italic; font-size: 17px; color: var(--gray-mid); line-height: 1.55; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+  .form-group { margin-bottom: 18px; }
+  .form-label { display: block; font-size: 11px; color: var(--gray-mid); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; margin-bottom: 7px; }
+  .form-input, .form-select, .form-textarea {
+    width: 100%; background: var(--cream); border: 1.5px solid var(--cream-mid);
+    border-radius: 6px; padding: 12px 14px; font-size: 14px; color: var(--charcoal);
+    outline: none; transition: border-color 0.2s; font-family: var(--font-body);
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--gold); background: white; }
+  .form-input::placeholder, .form-textarea::placeholder { color: var(--gray-light); }
+  .form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23AAA' d='M6 8L0 0h12z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; cursor: pointer; }
+  .form-textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
+  .form-hint { font-size: 11px; color: var(--gray-light); margin-top: 5px; }
+  .dest-checkboxes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .dest-checkbox { display: flex; align-items: center; gap: 9px; cursor: pointer; padding: 8px 12px; border-radius: 6px; border: 1.5px solid var(--cream-mid); transition: all 0.15s; }
+  .dest-checkbox:hover { border-color: var(--gold); background: var(--gold-pale); }
+  .dest-checkbox input { display: none; }
+  .dest-cb-box { width: 16px; height: 16px; border: 1.5px solid var(--cream-mid); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: transparent; transition: all 0.15s; flex-shrink: 0; }
+  .dest-checkbox input:checked ~ .dest-cb-box { background: var(--green-dark); border-color: var(--green-dark); color: white; }
+  .dest-checkbox input:checked ~ .dest-cb-label { color: var(--green-dark); font-weight: 600; }
+  .dest-cb-label { font-size: 13px; color: var(--charcoal); display: flex; align-items: center; gap: 6px; }
+  .budget-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .budget-pill { padding: 8px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; border: 1.5px solid var(--cream-mid); cursor: pointer; transition: all 0.15s; color: var(--gray-mid); }
+  .budget-pill:hover { border-color: var(--gold); color: var(--gold-dark); }
+  .budget-pill.active { background: var(--green-dark); border-color: var(--green-dark); color: white; }
+  .consent-check { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; }
+  .consent-check input { display: none; }
+  .consent-box { width: 18px; height: 18px; border: 1.5px solid var(--cream-mid); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: transparent; transition: all 0.15s; flex-shrink: 0; margin-top: 1px; }
+  .consent-check input:checked ~ .consent-box { background: var(--green-dark); border-color: var(--green-dark); color: white; }
+  .consent-text { font-size: 12px; color: var(--gray-mid); line-height: 1.55; }
+  .consent-text a { color: var(--gold-dark); text-decoration: underline; }
+  .btn-submit {
+    width: 100%; margin-top: 28px; background: var(--green-dark); color: white;
+    padding: 16px; border-radius: 6px; border: none; font-size: 13px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.25s;
+    font-family: var(--font-body); display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .btn-submit:hover { background: var(--green-mid); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,58,42,0.3); }
+  .form-trust { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 16px; }
+  .form-trust-item { font-size: 11px; color: var(--gray-light); display: flex; align-items: center; gap: 5px; }
+
+  /* ── SIDEBAR CONTACT INFO ── */
+  .contact-sidebar {}
+  .contact-card {
+    background: white; border: 1px solid var(--cream-mid); border-radius: 12px;
+    padding: 28px; margin-bottom: 16px; box-shadow: var(--shadow-sm); transition: var(--transition);
+  }
+  .contact-card:hover { border-color: var(--gold); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .contact-card-icon { font-size: 28px; margin-bottom: 12px; }
+  .contact-card-label { font-size: 10px; color: var(--gold-dark); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 6px; }
+  .contact-card-value { font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--green-dark); margin-bottom: 4px; }
+  .contact-card-meta { font-size: 12px; color: var(--gray-mid); line-height: 1.55; }
+  .contact-card-meta a { color: var(--gold-dark); }
+  .contact-card.whatsapp { background: linear-gradient(135deg, #e8f8f0, #f0faf5); border-color: rgba(39,174,96,0.25); }
+  .contact-card.whatsapp .contact-card-value { color: #1a7a40; }
+  .contact-card.whatsapp:hover { border-color: rgba(39,174,96,0.5); }
+  .wa-btn {
+    display: inline-flex; align-items: center; gap: 8px; margin-top: 12px;
+    background: #25D366; color: white; padding: 10px 18px; border-radius: 6px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.5px; cursor: pointer; transition: all 0.2s;
+  }
+  .wa-btn:hover { background: #20bb5a; transform: translateY(-1px); }
+
+  /* ── OFFICES ── */
+  .offices-section { padding: 80px 80px 96px; background: var(--green-dark); }
+  .offices-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+  .office-card {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.18);
+    border-radius: 12px; overflow: hidden; transition: var(--transition);
+  }
+  .office-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(201,168,76,0.4); transform: translateY(-4px); }
+  .office-img { height: 180px; background-size: cover !important; background-position: center !important; position: relative; }
+  .office-img-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, rgba(10,20,14,0.7)); }
+  .office-country-badge { position: absolute; bottom: 14px; left: 14px; font-size: 22px; }
+  .office-body { padding: 22px; }
+  .office-city { font-family: var(--font-display); font-size: 20px; font-weight: 600; color: white; margin-bottom: 4px; }
+  .office-role { font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 14px; }
+  .office-detail { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+  .office-detail-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; opacity: 0.7; }
+  .office-detail-text { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.5; }
+
+  /* ── FAQ ── */
+  .faq-section { padding: 96px 80px; background: var(--cream); }
+  .faq-layout { display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px; align-items: start; }
+  .faq-intro {}
+  .faq-intro p { font-size: 15px; color: var(--gray-mid); line-height: 1.75; margin-top: 20px; }
+  .faq-intro-contact { margin-top: 32px; padding: 22px; background: var(--gold-pale); border: 1px solid rgba(201,168,76,0.3); border-radius: 10px; }
+  .faq-intro-contact p { font-size: 13px; color: var(--gray-mid); margin-top: 0; }
+  .faq-intro-contact strong { color: var(--green-dark); }
+  .faq-list { display: flex; flex-direction: column; gap: 0; }
+  .faq-item { border-bottom: 1px solid var(--cream-mid); }
+  .faq-item:first-child { border-top: 1px solid var(--cream-mid); }
+  .faq-question {
+    width: 100%; display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 0; font-size: 15px; font-weight: 600; color: var(--green-dark);
+    background: none; border: none; cursor: pointer; text-align: left;
+    font-family: var(--font-body); transition: color 0.2s; gap: 16px;
+  }
+  .faq-question:hover { color: var(--gold-dark); }
+  .faq-icon { font-size: 20px; color: var(--gold); flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+  .faq-answer { font-size: 14px; color: var(--gray-mid); line-height: 1.75; padding-bottom: 20px; display: none; }
+  .faq-item.open .faq-answer { display: block; }
+
+  /* ── RESPONSE GUARANTEE ── */
+  .guarantee-strip {
+    background: var(--charcoal); padding: 56px 80px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+  }
+  .guarantee-item { text-align: center; padding: 0 40px; border-right: 1px solid rgba(255,255,255,0.08); }
+  .guarantee-item:last-child { border-right: none; }
+  .guarantee-icon { font-size: 36px; margin-bottom: 14px; }
+  .guarantee-title { font-family: var(--font-display); font-size: 20px; font-weight: 600; color: white; margin-bottom: 8px; }
+  .guarantee-text { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; }
+  .guarantee-highlight { font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--gold-light); margin-bottom: 6px; }
+
+  /* ── SECTION HEADER ── */
+  .section-overline { font-size: 11px; color: var(--gold); letter-spacing: 4px; text-transform: uppercase; font-weight: 600; margin-bottom: 12px; display: block; }
+  .section-title { font-family: var(--font-display); font-size: 42px; font-weight: 600; color: var(--green-dark); line-height: 1.15; margin-bottom: 16px; }
+  .section-title.white { color: white; }
+  .section-subtitle { font-family: var(--font-editorial); font-style: italic; font-size: 20px; color: var(--gray-mid); max-width: 560px; margin: 0 auto; }
+  .section-subtitle.white { color: rgba(255,255,255,0.65); }
+  .section-header { text-align: center; }
+  .gold-divider { width: 60px; height: 2px; background: var(--gold); margin: 20px auto 0; }
+
+  /* ── SUCCESS STATE ── */
+  .form-success {
+    display: none; text-align: center; padding: 48px 32px;
+  }
+  .form-success-icon { font-size: 56px; margin-bottom: 16px; }
+  .form-success-title { font-family: var(--font-display); font-size: 28px; font-weight: 600; color: var(--green-dark); margin-bottom: 10px; }
+  .form-success-text { font-size: 15px; color: var(--gray-mid); line-height: 1.7; max-width: 380px; margin: 0 auto; }
+
+  /* ── CTA ── */
+  .cta-strip { background: var(--gold); padding: 64px 80px; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+  .cta-strip-overline { font-size: 11px; color: rgba(26,58,42,0.7); letter-spacing: 3px; text-transform: uppercase; font-weight: 600; margin-bottom: 8px; }
+  .cta-strip-title { font-family: var(--font-display); font-size: 38px; font-weight: 700; color: var(--green-dark); line-height: 1.15; }
+  .cta-strip-sub { font-size: 15px; color: rgba(26,58,42,0.7); margin-top: 8px; }
+  .cta-strip-actions { display: flex; gap: 14px; flex-shrink: 0; }
+  .cta-btn-dark { background: var(--green-dark); color: white; padding: 16px 32px; border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; transition: all 0.2s; }
+  .cta-btn-dark:hover { background: var(--green-mid); }
+  .cta-btn-outline { background: transparent; color: var(--green-dark); padding: 16px 32px; border-radius: 4px; border: 2px solid var(--green-dark); font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; transition: all 0.2s; }
+  .cta-btn-outline:hover { background: var(--green-dark); color: white; }
+
+  /* ── FOOTER ── */
+  footer { background: var(--charcoal); color: white; padding: 64px 80px 32px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr; gap: 48px; margin-bottom: 48px; }
+  .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .footer-logo-mark { width: 36px; height: 36px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 14px; color: var(--green-dark); font-weight: 700; }
+  .footer-logo-text h3 { font-family: var(--font-display); font-size: 16px; color: white; }
+  .footer-logo-text p { font-size: 9px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; }
+  .footer-brand-text { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 20px; }
+  .footer-social { display: flex; gap: 10px; }
+  .footer-social-btn { width: 32px; height: 32px; background: rgba(255,255,255,0.07); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; transition: background 0.2s; cursor: pointer; }
+  .footer-social-btn:hover { background: var(--gold); }
+  .footer-col h4 { font-size: 12px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 700; margin-bottom: 16px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 8px; }
+  .footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--gold-light); }
+  .footer-newsletter p { font-size: 13px; color: rgba(255,255,255,0.55); margin-bottom: 12px; line-height: 1.6; }
+  .newsletter-form { display: flex; }
+  .newsletter-input { flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-right: none; padding: 10px 14px; color: white; font-size: 13px; border-radius: 4px 0 0 4px; outline: none; }
+  .newsletter-input::placeholder { color: rgba(255,255,255,0.3); }
+  .newsletter-btn { background: var(--gold); color: var(--green-dark); border: none; padding: 10px 16px; font-size: 12px; font-weight: 700; letter-spacing: 1px; cursor: pointer; border-radius: 0 4px 4px 0; transition: background 0.2s; }
+  .newsletter-btn:hover { background: var(--gold-light); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.35); }
+  .footer-bottom-links { display: flex; gap: 24px; }
+  .footer-bottom-links a { font-size: 12px; color: rgba(255,255,255,0.35); }
+  .footer-bottom-links a:hover { color: var(--gold-light); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1100px) {
+    .contact-layout { grid-template-columns: 1fr; }
+    .contact-sidebar { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .contact-sidebar .contact-card { margin-bottom: 0; }
+  }
+  @media (max-width: 1024px) {
+    nav { padding: 0 24px; }
+    .promo-banner, .breadcrumb-bar { padding-left: 24px; padding-right: 24px; }
+    .contact-section { padding: 48px 24px 64px; }
+    .offices-section, .faq-section { padding: 64px 24px; }
+    .guarantee-strip { padding: 48px 24px; grid-template-columns: 1fr; gap: 32px; }
+    .guarantee-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 0 0 32px; }
+    .guarantee-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .faq-layout { grid-template-columns: 1fr; gap: 40px; }
+    .offices-grid { grid-template-columns: 1fr 1fr; }
+    .cta-strip { padding: 48px 24px; flex-direction: column; text-align: center; }
+    .cta-strip-actions { justify-content: center; }
+    footer { padding: 48px 24px 24px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .hero-content { padding: 0 24px 0 40px; }
+  }
+  @media (max-width: 767px) {
+    .nav-links { display: none; }
+    .hero-title { font-size: 38px; }
+    .hero-content { padding: 0 20px; }
+    .form-row { grid-template-columns: 1fr; }
+    .dest-checkboxes { grid-template-columns: 1fr 1fr; }
+    .contact-sidebar { grid-template-columns: 1fr; }
+    .offices-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .cta-strip-actions { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PROMO BANNER -->
+<div class="promo-banner" id="promoBanner">
+  <span class="promo-tag">Limited Offer</span>
+  <span class="promo-text">Save <strong>15%</strong> on all Kenya packages when you book before 30 June 2026 — The Great Migration awaits</span>
+  <span class="promo-cta">Claim Offer →</span>
+  <span class="promo-close" onclick="document.getElementById('promoBanner').style.display='none'">×</span>
+</div>
+
+<!-- NAVIGATION -->
+<div class="nav-wrapper">
+  <nav>
+    <div class="nav-logo">
+      <div class="nav-logo-mark">SS</div>
+      <div class="nav-logo-text">
+        <h2>Successful Safaris</h2>
+        <p>Luxury African Experiences</p>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/destinations/">Destinations</a></li>
+      <li><a href="/packages/">Packages</a></li>
+      <li><a href="/shop/">Shop</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/contact/" class="active">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-currency">USD $ ▾</div>
+      <div class="nav-cart">🛒 <span class="cart-badge">2</span></div>
+      <a href="/auth/" class="nav-user">👤 Sign In</a>
+      <a href="/booking/" class="nav-cta">Book Now</a>
+    </div>
+  </nav>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-overline">We Reply Within 24 Hours</div>
+    <h1 class="hero-title">
+      Let's Plan Your<br>
+      <span class="gold-text">Safari.</span>
+    </h1>
+    <p class="hero-subtitle">
+      Every great journey begins with a conversation. Tell us your dream — we'll handle everything else.
+    </p>
+  </div>
+</section>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb-bar">
+  <a href="/">Home</a>
+  <span class="breadcrumb-sep">›</span>
+  <span class="breadcrumb-current">Contact Us</span>
+</div>
+
+<!-- RESPONSE GUARANTEE STRIP -->
+<div class="guarantee-strip">
+  <div class="guarantee-item">
+    <div class="guarantee-icon">⚡</div>
+    <div class="guarantee-highlight">24 hrs</div>
+    <div class="guarantee-title">Guaranteed Response</div>
+    <div class="guarantee-text">Every enquiry is answered by a real safari specialist — not a bot — within 24 hours, seven days a week.</div>
+  </div>
+  <div class="guarantee-item">
+    <div class="guarantee-icon">🌍</div>
+    <div class="guarantee-highlight">No Cost</div>
+    <div class="guarantee-title">Free Consultation</div>
+    <div class="guarantee-text">Our first conversation is always complimentary. We share expertise freely — no pressure to book, ever.</div>
+  </div>
+  <div class="guarantee-item">
+    <div class="guarantee-icon">✦</div>
+    <div class="guarantee-highlight">Bespoke</div>
+    <div class="guarantee-title">Tailored Proposals</div>
+    <div class="guarantee-text">If you want a custom safari, we'll send a fully detailed itinerary and quote within 48 hours of your first contact.</div>
+  </div>
+</div>
+
+<!-- CONTACT FORM + SIDEBAR -->
+<section class="contact-section">
+  <div class="contact-layout">
+
+    <!-- FORM -->
+    <div class="form-panel">
+      <div id="formContent">
+        <div class="form-header">
+          <span class="form-overline">Get in Touch</span>
+          <h2 class="form-title">Tell Us About<br>Your Dream Safari</h2>
+          <p class="form-subtitle">The more you share, the better we can match you with the perfect experience and guide.</p>
+        </div>
+
+        <form id="contactForm" onsubmit="submitForm(event)">
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">First Name *</label>
+              <input class="form-input" type="text" placeholder="Jane" required>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">Last Name *</label>
+              <input class="form-input" type="text" placeholder="Smith" required>
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top:18px;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">Email Address *</label>
+              <input class="form-input" type="email" placeholder="jane@example.com" required>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">Phone / WhatsApp</label>
+              <input class="form-input" type="tel" placeholder="+1 555 000 0000">
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top:18px;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">Nationality</label>
+              <select class="form-select">
+                <option value="">Select country…</option>
+                <option>United States</option>
+                <option>United Kingdom</option>
+                <option>Australia</option>
+                <option>Canada</option>
+                <option>Germany</option>
+                <option>France</option>
+                <option>Netherlands</option>
+                <option>Sweden</option>
+                <option>Switzerland</option>
+                <option>Japan</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">Enquiry Type</label>
+              <select class="form-select">
+                <option value="">Select type…</option>
+                <option>Plan a Safari</option>
+                <option>Existing Booking</option>
+                <option>Custom Itinerary</option>
+                <option>Group Booking (10+)</option>
+                <option>Honeymoon Safari</option>
+                <option>Family Safari</option>
+                <option>Photography Safari</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top:18px;">
+            <label class="form-label">Destinations of Interest</label>
+            <div class="dest-checkboxes">
+              <label class="dest-checkbox">
+                <input type="checkbox"><span class="dest-cb-box">✓</span>
+                <span class="dest-cb-label">🇰🇪 Kenya</span>
+              </label>
+              <label class="dest-checkbox">
+                <input type="checkbox"><span class="dest-cb-box">✓</span>
+                <span class="dest-cb-label">🇹🇿 Tanzania</span>
+              </label>
+              <label class="dest-checkbox">
+                <input type="checkbox"><span class="dest-cb-box">✓</span>
+                <span class="dest-cb-label">🇷🇼 Rwanda</span>
+              </label>
+              <label class="dest-checkbox">
+                <input type="checkbox"><span class="dest-cb-box">✓</span>
+                <span class="dest-cb-label">🇺🇬 Uganda</span>
+              </label>
+              <label class="dest-checkbox">
+                <input type="checkbox"><span class="dest-cb-box">✓</span>
+                <span class="dest-cb-label">🏝️ Zanzibar</span>
+              </label>
+              <label class="dest-checkbox">
+                <input type="checkbox"><span class="dest-cb-box">✓</span>
+                <span class="dest-cb-label">🌍 Not Sure Yet</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top:18px;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">Approximate Travel Dates</label>
+              <input class="form-input" type="text" placeholder="e.g. July 2026, flexible">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">Number of Travellers</label>
+              <select class="form-select">
+                <option value="">Select…</option>
+                <option>Solo (1)</option>
+                <option>Couple (2)</option>
+                <option>Small group (3–6)</option>
+                <option>Family with kids</option>
+                <option>Group (7–15)</option>
+                <option>Large group (15+)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top:18px;">
+            <label class="form-label">Budget per Person (USD)</label>
+            <div class="budget-pills">
+              <div class="budget-pill" onclick="toggleBudget(this)">Under $3,000</div>
+              <div class="budget-pill" onclick="toggleBudget(this)">$3,000 – $5,000</div>
+              <div class="budget-pill" onclick="toggleBudget(this)">$5,000 – $8,000</div>
+              <div class="budget-pill" onclick="toggleBudget(this)">$8,000 – $12,000</div>
+              <div class="budget-pill" onclick="toggleBudget(this)">$12,000+</div>
+              <div class="budget-pill" onclick="toggleBudget(this)">Flexible</div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top:18px;">
+            <label class="form-label">Tell Us More *</label>
+            <textarea class="form-textarea" placeholder="Describe your ideal safari — wildlife priorities, accommodation style, special occasions, any experiences you've always dreamed of…" required></textarea>
+            <div class="form-hint">The more detail you share, the better our proposal will match your vision.</div>
+          </div>
+
+          <div class="form-group" style="margin-top:18px;">
+            <label class="form-label">How Did You Hear About Us?</label>
+            <select class="form-select">
+              <option value="">Select…</option>
+              <option>Google Search</option>
+              <option>Friend / Family Referral</option>
+              <option>Instagram</option>
+              <option>Facebook</option>
+              <option>Travel Magazine</option>
+              <option>Tripadvisor</option>
+              <option>Returning Guest</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="margin-top:20px;">
+            <label class="consent-check">
+              <input type="checkbox" required>
+              <span class="consent-box">✓</span>
+              <span class="consent-text">I agree to the <a href="#">Privacy Policy</a> and consent to Successful Safaris contacting me about my enquiry. I understand I can opt out at any time.</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn-submit">
+            Send My Enquiry ✦
+          </button>
+
+          <div class="form-trust">
+            <div class="form-trust-item">🔒 Secure & Private</div>
+            <div class="form-trust-item">⚡ Reply within 24 hrs</div>
+            <div class="form-trust-item">✦ No obligation</div>
+          </div>
+        </form>
+      </div>
+
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon">✅</div>
+        <div class="form-success-title">Enquiry Received!</div>
+        <p class="form-success-text">Thank you for reaching out. One of our safari specialists will be in touch within 24 hours with a personalised response.<br><br>In the meantime, why not browse our <a href="/packages/" style="color:var(--gold-dark); font-weight:600;">signature packages</a> for inspiration?</p>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="contact-sidebar">
+
+      <div class="contact-card">
+        <div class="contact-card-icon">📞</div>
+        <div class="contact-card-label">Phone · Nairobi HQ</div>
+        <div class="contact-card-value">+254 20 123 4567</div>
+        <div class="contact-card-meta">Mon – Fri · 8am – 6pm EAT<br>Sat · 9am – 1pm EAT</div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-card-icon">✉️</div>
+        <div class="contact-card-label">Email</div>
+        <div class="contact-card-value">info@successfulsafaris.com</div>
+        <div class="contact-card-meta">We reply within 24 hours.<br><a href="#">bookings@successfulsafaris.com</a> for existing reservations.</div>
+      </div>
+
+      <div class="contact-card whatsapp">
+        <div class="contact-card-icon">💬</div>
+        <div class="contact-card-label">WhatsApp · Fastest Response</div>
+        <div class="contact-card-value">+254 712 345 678</div>
+        <div class="contact-card-meta">Our most popular contact method. Message us any time — we reply within a few hours.</div>
+        <div class="wa-btn">💬 Open WhatsApp Chat</div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-card-icon">📍</div>
+        <div class="contact-card-label">Head Office</div>
+        <div class="contact-card-value">Nairobi, Kenya</div>
+        <div class="contact-card-meta">Westlands Business Park<br>Waiyaki Way, Suite 14<br>Nairobi, 00100 · Kenya</div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-card-icon">🇬🇧</div>
+        <div class="contact-card-label">UK Sales Office</div>
+        <div class="contact-card-value">+44 20 7946 0321</div>
+        <div class="contact-card-meta">Mon – Fri · 9am – 5pm GMT<br>14 Kingsway, London WC2B 6NF</div>
+      </div>
+
+      <div class="contact-card" style="background: var(--gold-pale); border-color: rgba(201,168,76,0.3);">
+        <div class="contact-card-icon">⏰</div>
+        <div class="contact-card-label">Response Times</div>
+        <div class="contact-card-value" style="color:var(--gold-dark);">Guaranteed Reply</div>
+        <div class="contact-card-meta" style="margin-top:10px;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px;"><span>WhatsApp</span><strong style="color:var(--green-dark);">2–4 hrs</strong></div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px;"><span>Email</span><strong style="color:var(--green-dark);">&lt; 24 hrs</strong></div>
+          <div style="display:flex; justify-content:space-between;"><span>Phone</span><strong style="color:var(--green-dark);">Immediate</strong></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- OFFICES -->
+<section class="offices-section">
+  <div class="section-header">
+    <span class="section-overline" style="color:var(--gold);">Our Offices</span>
+    <h2 class="section-title white">Where to Find Us</h2>
+    <p class="section-subtitle white">On the ground across East Africa and with sales offices in London and New York</p>
+    <div class="gold-divider"></div>
+  </div>
+  <div class="offices-grid">
+    <div class="office-card">
+      <div class="office-img" style="background: url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
+        <div class="office-img-overlay"></div>
+        <div class="office-country-badge">🇰🇪</div>
+      </div>
+      <div class="office-body">
+        <div class="office-city">Nairobi</div>
+        <div class="office-role">Global Headquarters · Operations Hub</div>
+        <div class="office-detail">
+          <span class="office-detail-icon">📍</span>
+          <span class="office-detail-text">Westlands Business Park, Waiyaki Way, Suite 14, Nairobi 00100, Kenya</span>
+        </div>
+        <div class="office-detail">
+          <span class="office-detail-icon">📞</span>
+          <span class="office-detail-text">+254 20 123 4567</span>
+        </div>
+        <div class="office-detail">
+          <span class="office-detail-icon">🕐</span>
+          <span class="office-detail-text">Mon–Fri 8am–6pm · Sat 9am–1pm (EAT)</span>
+        </div>
+      </div>
+    </div>
+    <div class="office-card">
+      <div class="office-img" style="background: url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
+        <div class="office-img-overlay"></div>
+        <div class="office-country-badge">🇬🇧</div>
+      </div>
+      <div class="office-body">
+        <div class="office-city">London</div>
+        <div class="office-role">UK & Europe Sales Office</div>
+        <div class="office-detail">
+          <span class="office-detail-icon">📍</span>
+          <span class="office-detail-text">14 Kingsway, London WC2B 6NF, United Kingdom</span>
+        </div>
+        <div class="office-detail">
+          <span class="office-detail-icon">📞</span>
+          <span class="office-detail-text">+44 20 7946 0321</span>
+        </div>
+        <div class="office-detail">
+          <span class="office-detail-icon">🕐</span>
+          <span class="office-detail-text">Mon–Fri 9am–5pm (GMT)</span>
+        </div>
+      </div>
+    </div>
+    <div class="office-card">
+      <div class="office-img" style="background: url('https://images.unsplash.com/photo-1485871981521-5b1fd3805571?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
+        <div class="office-img-overlay"></div>
+        <div class="office-country-badge">🇺🇸</div>
+      </div>
+      <div class="office-body">
+        <div class="office-city">New York</div>
+        <div class="office-role">North America Sales Office</div>
+        <div class="office-detail">
+          <span class="office-detail-icon">📍</span>
+          <span class="office-detail-text">350 Fifth Avenue, Suite 4100, New York, NY 10118</span>
+        </div>
+        <div class="office-detail">
+          <span class="office-detail-icon">📞</span>
+          <span class="office-detail-text">+1 212 555 0147</span>
+        </div>
+        <div class="office-detail">
+          <span class="office-detail-icon">🕐</span>
+          <span class="office-detail-text">Mon–Fri 9am–6pm (EST)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-layout">
+    <div class="faq-intro">
+      <span class="section-overline">Common Questions</span>
+      <h2 class="section-title" style="text-align:left; font-size:36px;">Frequently Asked</h2>
+      <p>Everything you need to know before you reach out — and what to expect when you do. If your question isn't here, just ask.</p>
+      <div class="faq-intro-contact">
+        <p>Still have questions? <strong>WhatsApp us at +254 712 345 678</strong> — our team is usually online and happy to answer anything, no matter how specific.</p>
+      </div>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item open">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How far in advance should I book a safari?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">We recommend booking at least 6–12 months in advance for peak season (July–October), especially if gorilla trekking is on your itinerary — permits are limited and sell out fast. Shoulder and low seasons can be arranged in 4–8 weeks, though earlier is always better for the best lodge availability.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Is it safe to travel to East Africa?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">Yes — Kenya, Tanzania, Rwanda, Uganda, and Zanzibar are all well-established safari destinations with excellent tourism infrastructure. National parks and private conservancies are some of the safest environments in Africa. We monitor conditions continuously and our guides are trained in first aid and emergency protocols.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What's included in a typical package price?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">Our packages include all in-country transport, accommodation, meals as specified, park fees, guide fees, and any permit costs. International flights are not included (we can arrange these separately). Each package listing shows exactly what is and isn't included — nothing is hidden.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Can I customise an existing package?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">Absolutely. Every package can be extended, shortened, combined with another destination, or adjusted to match your preferred lodging tier and activities. Just let us know what you'd like to change in your enquiry — we'll send a revised quote within 48 hours.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What is your cancellation and refund policy?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">We offer full refunds for cancellations made more than 60 days before departure, minus a 10% administration fee. Between 30–60 days, a 50% refund applies. Under 30 days is non-refundable, though we strongly recommend travel insurance which covers most circumstances. See our full <a href="#" style="color:var(--gold-dark);">Terms & Conditions</a>.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Do you cater for families with young children?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">Yes — we have dedicated family safari packages with child-friendly guides, age-appropriate activities, and lodges with family accommodation. Most parks recommend a minimum age of 6 for game drives. Gorilla trekking requires a minimum age of 15. We'll flag any age restrictions clearly when designing your itinerary.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What vaccinations and visas do I need?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">Requirements vary by nationality and destination. Generally, yellow fever vaccination is required for Uganda and Rwanda and recommended for all destinations. Most nationalities can get a visa on arrival or e-visa for Kenya, Tanzania, Uganda, and Rwanda. We provide a detailed pre-departure health and visa checklist with every booking.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-strip">
+  <div class="cta-strip-text">
+    <div class="cta-strip-overline">Africa Is Waiting</div>
+    <h2 class="cta-strip-title">Ready to Start Planning?</h2>
+    <p class="cta-strip-sub">Browse our packages or send us an enquiry — we'll take care of the rest.</p>
+  </div>
+  <div class="cta-strip-actions">
+    <a href="/packages/" class="cta-btn-dark">Browse Packages</a>
+    <a href="/booking/" class="cta-btn-outline">Book a Safari</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">
+        <div class="footer-logo-mark">SS</div>
+        <div class="footer-logo-text"><h3>Successful Safaris</h3><p>Luxury African Experiences</p></div>
+      </div>
+      <p class="footer-brand-text">Since 2008, we have been the trusted partner of discerning travellers seeking authentic, luxurious African safari experiences across Kenya, Tanzania, Rwanda, Uganda, and Zanzibar.</p>
+      <div class="footer-social">
+        <div class="footer-social-btn">📘</div>
+        <div class="footer-social-btn">📸</div>
+        <div class="footer-social-btn">🐦</div>
+        <div class="footer-social-btn">▶️</div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Destinations</h4>
+      <ul>
+        <li><a href="/destinations/">Kenya Safaris</a></li>
+        <li><a href="/destinations/">Tanzania Safaris</a></li>
+        <li><a href="/destinations/">Rwanda Gorillas</a></li>
+        <li><a href="/destinations/">Uganda Wildlife</a></li>
+        <li><a href="/destinations/">Zanzibar Island</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Experiences</h4>
+      <ul>
+        <li><a href="/packages/">Private Safaris</a></li>
+        <li><a href="/packages/">Family Safaris</a></li>
+        <li><a href="/packages/">Honeymoon</a></li>
+        <li><a href="/packages/">Photography</a></li>
+        <li><a href="/packages/">Balloon Safaris</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="/about/">About Us</a></li>
+        <li><a href="/about/">Our Guides</a></li>
+        <li><a href="#">Blog & Journal</a></li>
+        <li><a href="/contact/">Contact Us</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div class="footer-newsletter">
+      <h4>Safari Newsletter</h4>
+      <p>Wildlife updates, seasonal tips, and exclusive offers delivered to your inbox.</p>
+      <div class="newsletter-form">
+        <input class="newsletter-input" type="email" placeholder="your@email.com">
+        <button class="newsletter-btn">Join</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Successful Safaris Ltd. All rights reserved. ATOL Protected. IATA Accredited.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+      <a href="#">Cookie Settings</a>
+      <a href="#">Accessibility</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  function toggleBudget(el) {
+    el.classList.toggle('active');
+  }
+
+  function submitForm(e) {
+    e.preventDefault();
+    document.getElementById('formContent').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+    document.getElementById('formSuccess').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+</script>
+
+</body>
+</html>

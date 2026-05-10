@@ -17,11 +17,12 @@ class Command(BaseCommand):
             ('P07', 'Contact', 'Form, live chat, WhatsApp, office locations, FAQ', 'PUBLIC'),
             ('P08', 'Blog / Journal', 'Safari tips, wildlife news, seasonal guides', 'PUBLIC'),
             ('P09', 'Sign In / Register', 'Auth portal — social login, email, forgot password', 'PUBLIC'),
+            ('P10', 'Trip Documents', 'Download vouchers, preparation guides, and legal forms', 'USER'),
             # E-commerce
             ('E01', 'Shop Home', 'Featured products, categories, seasonal promos, bundles', 'PUBLIC'),
             ('E02', 'Product Listing', 'Filterable grid — gear, clothing, luxury add-ons, bundles', 'PUBLIC'),
             ('E03', 'Product Detail', 'Gallery, specs, size guide, related products, reviews', 'PUBLIC'),
-            ('E04', 'Shopping Cart', 'Review items, apply promo codes, currency toggle, upsell', 'PUBLIC'),
+            ('E04', 'Shopping Cart', 'Dedicated cart management, bundle savings, and upsells', 'PUBLIC'),
             ('E05', 'Checkout — Details', 'Shipping address, currency selector (USD/EUR/KES/GBP)', 'USER'),
             ('E06', 'Checkout — Payment', 'Credit card, M-Pesa, PayPal, bank transfer, 3D Secure', 'USER'),
             ('E07', 'Order Confirmation', 'Summary, next steps, trip documents', 'PUBLIC'),

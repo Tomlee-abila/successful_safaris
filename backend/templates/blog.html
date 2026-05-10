@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Safari Journal — Successful Safaris</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C; --gold-light: #E8C96A; --gold-pale: #F5E9C8; --gold-dark: #A07830;
+    --green-dark: #1A3A2A; --green-mid: #2D5A3D; --green-light: #4A8C5C;
+    --charcoal: #1A1A1A; --gray-mid: #555; --gray-light: #AAA;
+    --cream: #FAF7F0; --cream-mid: #F0EAD6; --white: #FFF;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); }
+  a { text-decoration: none; color: inherit; }
+
+  /* ── PROMO BANNER ── */
+  .promo-banner { background: var(--gold); padding: 10px 48px; display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 12px; font-weight: 600; color: var(--green-dark); }
+  .promo-banner a { color: var(--green-dark); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* ── NAV ── */
+  .nav-wrapper { position: sticky; top: 0; z-index: 200; }
+  nav { background: rgba(26,58,42,0.97); backdrop-filter: blur(12px); padding: 0 48px; display: flex; align-items: center; height: 72px; border-bottom: 1px solid rgba(201,168,76,0.25); }
+  .nav-logo { display: flex; align-items: center; gap: 12px; margin-right: auto; }
+  .nav-logo-mark { width: 40px; height: 40px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 16px; color: var(--green-dark); font-weight: 700; }
+  .nav-logo-text h2 { font-family: 'Playfair Display', serif; color: white; font-size: 18px; font-weight: 600; }
+  .nav-logo-text p { font-size: 9px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.85); font-size: 13px; letter-spacing: 0.5px; padding: 4px 0; border-bottom: 1.5px solid transparent; transition: all 0.2s; }
+  .nav-links a:hover { color: var(--gold-light); border-bottom-color: var(--gold-light); }
+  .nav-links a.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .nav-right { display: flex; align-items: center; gap: 16px; margin-left: 40px; }
+  .nav-currency { font-size: 12px; color: var(--gold-light); border: 1px solid rgba(201,168,76,0.35); padding: 5px 12px; border-radius: 4px; cursor: pointer; background: transparent; display: flex; align-items: center; gap: 5px; transition: all 0.2s; }
+  .nav-currency:hover { background: rgba(201,168,76,0.1); }
+  .nav-cart { position: relative; color: rgba(255,255,255,0.85); cursor: pointer; padding: 6px; font-size: 18px; transition: color 0.2s; }
+  .nav-cart:hover { color: var(--gold-light); }
+  .cart-badge { position: absolute; top: 0; right: 0; background: var(--gold); color: var(--green-dark); width: 16px; height: 16px; border-radius: 50%; font-size: 9px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .nav-cta { background: var(--gold); color: var(--green-dark); padding: 10px 22px; border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; transition: all 0.25s; }
+  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .nav-user { color: rgba(255,255,255,0.85); font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+  .nav-user:hover { color: var(--gold-light); }
+
+  /* ─────────────────────────────────────
+     LISTING VIEW
+  ───────────────────────────────────── */
+
+  /* ── HERO FEATURE ── */
+  .hero-feature {
+    position: relative; height: 86vh; min-height: 580px;
+    background: linear-gradient(165deg, rgba(6,18,10,0.78) 0%, rgba(16,42,26,0.55) 45%, rgba(28,68,42,0.35) 100%),
+      url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1920&q=90') center/cover no-repeat;
+    display: flex; align-items: flex-end; overflow: hidden; cursor: pointer;
+  }
+  .hero-feature:hover .hero-feature-img-inner { transform: scale(1.02); }
+  .hero-feature-img-inner { position: absolute; inset: 0; background: inherit; background-size: cover; background-position: center; transition: transform 0.8s ease; }
+  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(6,18,10,0.9) 0%, transparent 65%); }
+  .hero-feature-content { position: relative; z-index: 2; padding: 0 80px 72px; max-width: 820px; }
+  .hero-cat { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: var(--green-dark); padding: 5px 14px; border-radius: 2px; font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 18px; }
+  .hero-feat-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 4.5vw, 66px); font-weight: 700;
+    color: white; line-height: 1.05; margin-bottom: 16px;
+  }
+  .hero-feat-title em { color: var(--gold-light); font-style: italic; }
+  .hero-feat-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 21px; color: rgba(255,255,255,0.72);
+    line-height: 1.6; max-width: 560px; margin-bottom: 28px;
+  }
+  .hero-feat-meta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .feat-author { display: flex; align-items: center; gap: 10px; }
+  .feat-author-avatar { width: 36px; height: 36px; border-radius: 50%; background: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80') center/cover; border: 2px solid var(--gold); }
+  .feat-author-name { font-size: 13px; color: white; font-weight: 600; }
+  .feat-author-role { font-size: 10px; color: rgba(255,255,255,0.5); }
+  .feat-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+  .feat-meta-item { font-size: 12px; color: rgba(255,255,255,0.55); }
+  .hero-read-btn {
+    position: absolute; bottom: 72px; right: 80px;
+    background: rgba(255,255,255,0.1); border: 1.5px solid rgba(255,255,255,0.3);
+    color: white; padding: 12px 28px; border-radius: 4px;
+    font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    transition: all 0.2s; backdrop-filter: blur(8px); z-index: 2;
+  }
+  .hero-read-btn:hover { background: rgba(255,255,255,0.18); border-color: white; }
+
+  /* ── FILTER BAR ── */
+  .filter-bar { background: white; border-bottom: 1px solid var(--cream-mid); padding: 0 80px; position: sticky; top: 72px; z-index: 100; }
+  .filter-inner { display: flex; align-items: center; justify-content: space-between; }
+  .filter-tabs { display: flex; gap: 0; }
+  .filter-tab { padding: 16px 20px; font-size: 12px; font-weight: 600; color: var(--gray-mid); cursor: pointer; border-bottom: 2.5px solid transparent; white-space: nowrap; transition: all 0.2s; }
+  .filter-tab:hover { color: var(--green-dark); }
+  .filter-tab.active { color: var(--green-dark); border-bottom-color: var(--gold); }
+  .filter-search { display: flex; align-items: center; gap: 8px; }
+  .search-input { padding: 8px 14px; border: 1.5px solid var(--cream-mid); border-radius: 4px; font-size: 13px; font-family: 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); width: 200px; transition: all 0.2s; outline: none; }
+  .search-input:focus { border-color: var(--gold); background: white; }
+
+  /* ── ARTICLE GRID ── */
+  .articles-section { padding: 64px 80px; }
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .article-card { background: white; border: 1px solid var(--cream-mid); border-radius: 12px; overflow: hidden; transition: all 0.3s; cursor: pointer; }
+  .article-card:hover { transform: translateY(-5px); border-color: var(--gold); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+  .article-card.featured { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; }
+  .article-card.featured .art-img { height: 100%; min-height: 280px; }
+  .art-img { height: 220px; background-size: cover; background-position: center; position: relative; overflow: hidden; }
+  .art-img-inner { position: absolute; inset: 0; background: inherit; background-size: cover; background-position: center; transition: transform 0.6s ease; }
+  .article-card:hover .art-img-inner { transform: scale(1.05); }
+  .art-cat { position: absolute; top: 14px; left: 14px; background: var(--gold); color: var(--green-dark); padding: 4px 10px; border-radius: 2px; font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; z-index: 1; }
+  .art-read-time { position: absolute; bottom: 12px; right: 12px; background: rgba(10,22,14,0.7); color: rgba(255,255,255,0.8); padding: 3px 10px; border-radius: 20px; font-size: 10px; backdrop-filter: blur(4px); z-index: 1; }
+  .art-body { padding: 22px 24px; }
+  .article-card.featured .art-body { padding: 32px; display: flex; flex-direction: column; justify-content: center; }
+  .art-tag { font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 8px; }
+  .art-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; color: var(--green-dark); margin-bottom: 10px; line-height: 1.3; }
+  .article-card.featured .art-title { font-size: 26px; }
+  .art-excerpt { font-size: 13px; color: var(--gray-mid); line-height: 1.7; margin-bottom: 16px; }
+  .art-footer { display: flex; align-items: center; gap: 10px; padding-top: 14px; border-top: 1px solid var(--cream-mid); }
+  .art-author-avatar { width: 28px; height: 28px; border-radius: 50%; background-size: cover; background-position: center; flex-shrink: 0; }
+  .art-author-name { font-size: 12px; font-weight: 600; color: var(--charcoal); }
+  .art-date { font-size: 11px; color: var(--gray-light); margin-left: auto; }
+
+  /* Load More */
+  .load-more-wrap { text-align: center; margin-top: 48px; }
+  .btn-load-more { background: white; border: 1.5px solid var(--green-dark); color: var(--green-dark); padding: 14px 48px; border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+  .btn-load-more:hover { background: var(--green-dark); color: white; }
+
+  /* ── NEWSLETTER STRIP ── */
+  .newsletter-section { background: var(--green-dark); padding: 72px 80px; }
+  .newsletter-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .nl-overline { font-size: 10px; color: var(--gold); letter-spacing: 4px; text-transform: uppercase; font-weight: 600; margin-bottom: 12px; }
+  .nl-title { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 600; color: white; line-height: 1.2; margin-bottom: 12px; }
+  .nl-title em { color: var(--gold-light); font-style: italic; }
+  .nl-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: rgba(255,255,255,0.6); line-height: 1.65; }
+  .nl-form { display: flex; flex-direction: column; gap: 12px; }
+  .nl-name-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .nl-input { padding: 13px 16px; font-size: 13px; font-family: 'Inter', sans-serif; border: 1.5px solid rgba(255,255,255,0.15); border-radius: 4px; background: rgba(255,255,255,0.06); color: white; outline: none; transition: all 0.2s; }
+  .nl-input::placeholder { color: rgba(255,255,255,0.35); }
+  .nl-input:focus { border-color: var(--gold); background: rgba(255,255,255,0.1); }
+  .nl-submit { background: var(--gold); color: var(--green-dark); padding: 14px 32px; border: none; border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.25s; font-family: 'Inter', sans-serif; }
+  .nl-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .nl-consent { font-size: 11px; color: rgba(255,255,255,0.35); line-height: 1.5; }
+
+  /* ─────────────────────────────────────
+     ARTICLE POST VIEW
+  ───────────────────────────────────── */
+  .post-view { display: none; }
+  .post-view.active { display: block; }
+  .listing-view { display: block; }
+  .listing-view.hidden { display: none; }
+
+  /* Post Hero */
+  .post-hero {
+    position: relative; height: 72vh; min-height: 500px;
+    background: linear-gradient(160deg, rgba(6,18,10,0.72) 0%, rgba(20,52,32,0.48) 50%, rgba(32,80,48,0.28) 100%),
+      url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1920&q=90') center/cover no-repeat;
+    display: flex; align-items: flex-end; overflow: hidden;
+  }
+  .post-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(6,18,10,0.88) 0%, transparent 60%); }
+  .post-hero-content { position: relative; z-index: 2; padding: 0 80px 64px; max-width: 860px; }
+  .post-back { display: inline-flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.6); font-size: 12px; cursor: pointer; margin-bottom: 24px; transition: color 0.2s; }
+  .post-back:hover { color: var(--gold-light); }
+  .post-hero-cat { display: inline-flex; background: var(--gold); color: var(--green-dark); padding: 5px 14px; border-radius: 2px; font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+  .post-hero-title { font-family: 'Playfair Display', serif; font-size: clamp(32px, 4vw, 58px); font-weight: 700; color: white; line-height: 1.05; margin-bottom: 16px; }
+  .post-hero-title em { color: var(--gold-light); font-style: italic; }
+  .post-hero-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 20px; color: rgba(255,255,255,0.7); line-height: 1.65; max-width: 640px; margin-bottom: 24px; }
+  .post-hero-meta { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .post-author-block { display: flex; align-items: center; gap: 10px; }
+  .post-author-avatar { width: 36px; height: 36px; border-radius: 50%; background: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80') center/cover; border: 2px solid var(--gold); }
+  .post-author-name { font-size: 13px; color: white; font-weight: 600; }
+  .post-author-role { font-size: 10px; color: rgba(255,255,255,0.5); }
+  .post-meta-sep { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+  .post-meta-item { font-size: 12px; color: rgba(255,255,255,0.55); }
+
+  /* Post body layout */
+  .post-layout { display: grid; grid-template-columns: 1fr 300px; gap: 56px; padding: 64px 80px; align-items: start; }
+  .post-content {}
+
+  /* Article typography */
+  .post-body { font-size: 17px; color: var(--charcoal); line-height: 1.85; }
+  .post-body p { margin-bottom: 26px; }
+  .post-body h2 { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: var(--green-dark); margin: 44px 0 18px; line-height: 1.2; }
+  .post-body h3 { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 600; color: var(--green-dark); margin: 32px 0 12px; }
+  .post-body em { font-style: italic; color: var(--gray-mid); }
+  .post-body strong { font-weight: 700; color: var(--charcoal); }
+  .post-body ul { padding-left: 0; list-style: none; margin-bottom: 26px; }
+  .post-body ul li { padding: 6px 0 6px 20px; position: relative; color: var(--gray-mid); font-size: 16px; line-height: 1.7; }
+  .post-body ul li::before { content: '✦'; position: absolute; left: 0; color: var(--gold); font-size: 9px; top: 13px; }
+  .post-lead {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 22px; color: var(--gray-mid); line-height: 1.7;
+    border-left: 3px solid var(--gold); padding-left: 24px;
+    margin-bottom: 32px;
+  }
+  .post-img-full { width: 100%; border-radius: 4px; margin: 32px 0; display: block; height: 420px; background-size: cover; background-position: center; }
+  .post-img-caption { font-size: 12px; color: var(--gray-light); text-align: center; margin-top: -24px; margin-bottom: 32px; font-style: italic; }
+  .pull-quote {
+    background: var(--green-dark); border-radius: 12px;
+    padding: 36px 40px; margin: 40px 0;
+  }
+  .pull-quote-text { font-family: 'Playfair Display', serif; font-style: italic; font-size: 24px; color: white; line-height: 1.45; margin-bottom: 12px; }
+  .pull-quote-text em { color: var(--gold-light); }
+  .pull-quote-attr { font-size: 12px; color: var(--gold); letter-spacing: 1px; font-weight: 600; }
+  .post-img-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 32px 0; }
+  .post-img-2col div { height: 240px; background-size: cover; background-position: center; border-radius: 4px; }
+  .info-box { background: var(--gold-pale); border: 1px solid var(--cream-mid); border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; padding: 24px 28px; margin: 32px 0; }
+  .info-box-title { font-size: 12px; font-weight: 700; color: var(--green-dark); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+  .info-box p { font-size: 14px; color: var(--gray-mid); line-height: 1.65; margin-bottom: 8px; }
+  .info-box p:last-child { margin-bottom: 0; }
+
+  /* Post tags & share */
+  .post-tags-row { display: flex; align-items: center; gap: 8px; margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--cream-mid); flex-wrap: wrap; }
+  .post-tag-label { font-size: 11px; color: var(--gray-light); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  .post-tag { padding: 5px 14px; border-radius: 20px; background: var(--cream); border: 1px solid var(--cream-mid); font-size: 12px; color: var(--gray-mid); cursor: pointer; transition: all 0.2s; }
+  .post-tag:hover { border-color: var(--gold); color: var(--green-dark); }
+  .share-row { display: flex; align-items: center; gap: 10px; margin-top: 20px; }
+  .share-label { font-size: 12px; color: var(--gray-light); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-right: 4px; }
+  .share-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--cream); border: 1px solid var(--cream-mid); display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; transition: all 0.2s; }
+  .share-btn:hover { background: var(--green-dark); color: white; border-color: var(--green-dark); }
+
+  /* Author bio */
+  .author-bio { background: white; border: 1px solid var(--cream-mid); border-radius: 12px; padding: 28px; margin-top: 40px; display: flex; gap: 20px; align-items: flex-start; }
+  .bio-avatar { width: 72px; height: 72px; border-radius: 50%; background: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80') center/cover; border: 2.5px solid var(--gold); flex-shrink: 0; }
+  .bio-role { font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
+  .bio-name { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; color: var(--green-dark); margin-bottom: 8px; }
+  .bio-text { font-size: 13px; color: var(--gray-mid); line-height: 1.7; }
+
+  /* Related articles */
+  .related-articles { margin-top: 56px; }
+  .related-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; color: var(--green-dark); margin-bottom: 24px; }
+  .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .rel-art-card { background: white; border: 1px solid var(--cream-mid); border-radius: 12px; overflow: hidden; cursor: pointer; transition: all 0.3s; }
+  .rel-art-card:hover { transform: translateY(-4px); border-color: var(--gold); box-shadow: 0 8px 28px rgba(0,0,0,0.08); }
+  .rel-art-img { height: 160px; background-size: cover; background-position: center; position: relative; }
+  .rel-art-body { padding: 16px 18px; }
+  .rel-art-tag { font-size: 9px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 5px; }
+  .rel-art-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; color: var(--green-dark); line-height: 1.3; margin-bottom: 8px; }
+  .rel-art-date { font-size: 11px; color: var(--gray-light); }
+
+  /* Sidebar */
+  .post-sidebar { position: sticky; top: 96px; }
+  .sidebar-toc { background: white; border: 1px solid var(--cream-mid); border-radius: 12px; padding: 22px; margin-bottom: 20px; }
+  .toc-title { font-size: 11px; font-weight: 700; color: var(--green-dark); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; }
+  .toc-list { list-style: none; }
+  .toc-list li { padding: 7px 0; border-bottom: 1px solid var(--cream-mid); }
+  .toc-list li:last-child { border-bottom: none; }
+  .toc-list a { font-size: 13px; color: var(--gray-mid); transition: color 0.2s; display: flex; align-items: center; gap: 8px; }
+  .toc-list a::before { content: ''; width: 8px; height: 1px; background: var(--gold); flex-shrink: 0; }
+  .toc-list a:hover { color: var(--green-dark); }
+  .sidebar-pkg-card { background: var(--green-dark); border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+  .spc-img { height: 140px; background: url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=600&q=80') center/cover; }
+  .spc-body { padding: 20px; }
+  .spc-label { font-size: 9px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 6px; }
+  .spc-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; color: white; margin-bottom: 6px; line-height: 1.3; }
+  .spc-sub { font-size: 11px; color: rgba(255,255,255,0.55); margin-bottom: 14px; }
+  .spc-btn { display: block; text-align: center; background: var(--gold); color: var(--green-dark); padding: 11px; border-radius: 4px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s; }
+  .spc-btn:hover { background: var(--gold-light); }
+  .sidebar-nl { background: var(--cream); border: 1px solid var(--cream-mid); border-radius: 12px; padding: 20px; }
+  .snl-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; color: var(--green-dark); margin-bottom: 6px; }
+  .snl-sub { font-size: 12px; color: var(--gray-mid); line-height: 1.55; margin-bottom: 14px; }
+  .snl-input { width: 100%; padding: 10px 14px; font-size: 13px; font-family: 'Inter', sans-serif; border: 1.5px solid var(--cream-mid); border-radius: 4px; background: white; margin-bottom: 8px; outline: none; transition: border-color 0.2s; }
+  .snl-input:focus { border-color: var(--gold); }
+  .snl-btn { width: 100%; background: var(--green-dark); color: white; padding: 11px; border: none; border-radius: 4px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s; }
+  .snl-btn:hover { background: var(--green-mid); }
+
+  /* ── FOOTER ── */
+  footer { background: var(--charcoal); padding: 72px 80px 40px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+  .footer-brand-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .footer-brand-mark { width: 36px; height: 36px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 14px; color: var(--green-dark); font-weight: 700; }
+  .footer-brand-name { font-family: 'Playfair Display', serif; color: white; font-size: 16px; font-weight: 600; }
+  .footer-brand-text { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; margin-bottom: 24px; max-width: 280px; }
+  .footer-social { display: flex; gap: 10px; }
+  .soc-btn { width: 34px; height: 34px; border: 1px solid rgba(255,255,255,0.15); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: rgba(255,255,255,0.5); transition: all 0.2s; cursor: pointer; }
+  .soc-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .footer-col-title { font-size: 11px; color: var(--gold); letter-spacing: 2.5px; text-transform: uppercase; font-weight: 700; margin-bottom: 20px; }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 10px; }
+  .footer-links a { font-size: 13px; color: rgba(255,255,255,0.45); transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold-light); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+  .footer-legal { display: flex; gap: 24px; }
+  .footer-legal a { font-size: 12px; color: rgba(255,255,255,0.3); transition: color 0.2s; }
+  .footer-legal a:hover { color: var(--gold-light); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hero-feature-content, .post-hero-content { padding: 0 24px 56px; }
+    .hero-read-btn { right: 24px; bottom: 56px; }
+    .filter-bar { padding: 0 24px; top: 72px; }
+    .filter-tabs { overflow-x: auto; }
+    .articles-section { padding: 48px 24px; }
+    .articles-grid { grid-template-columns: 1fr 1fr; }
+    .article-card.featured { grid-column: span 2; }
+    .post-layout { grid-template-columns: 1fr; padding: 48px 24px; }
+    .post-sidebar { position: static; }
+    .newsletter-section { padding: 56px 24px; }
+    .newsletter-inner { grid-template-columns: 1fr; gap: 32px; }
+    footer { padding: 56px 24px 32px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+    .related-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 767px) {
+    .articles-grid { grid-template-columns: 1fr; }
+    .article-card.featured { grid-column: span 1; display: block; }
+    .article-card.featured .art-img { height: 220px; }
+    .nl-name-row { grid-template-columns: 1fr; }
+    .post-img-2col { grid-template-columns: 1fr; }
+    .related-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PROMO BANNER -->
+<div class="promo-banner">
+  ✦ &nbsp; Save <strong>15%</strong> on all Kenya packages booked before 30 June 2026 — <a href="/packages/">Browse Packages →</a>
+</div>
+
+<!-- NAV -->
+<div class="nav-wrapper">
+  <nav>
+    <a href="/" class="nav-logo">
+      <div class="nav-logo-mark">S</div>
+      <div class="nav-logo-text">
+        <h2>Successful Safaris</h2>
+        <p>Est. 2008 · Nairobi</p>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/destinations/">Destinations</a></li>
+      <li><a href="/packages/">Packages</a></li>
+      <li><a href="/shop/">Shop</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/blog/" class="active">Journal</a></li>
+      <li><a href="/contact/">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-currency">USD ▾</div>
+      <a href="/shop/" class="nav-cart">🛒<span class="cart-badge">2</span></a>
+      <a href="/auth/" class="nav-user">👤 Sign In</a>
+      <a href="/booking/" class="nav-cta">Book Now</a>
+    </div>
+  </nav>
+</div>
+
+<!-- ═══════════════════════════════════
+     LISTING VIEW
+═══════════════════════════════════ -->
+<div class="listing-view" id="listingView">
+
+  <!-- FEATURED HERO ARTICLE -->
+  <div class="hero-feature" onclick="openPost()">
+    <div class="hero-feature-img-inner"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-feature-content">
+      <div class="hero-cat">✦ Field Notes · Kenya</div>
+      <h1 class="hero-feat-title">Watching a thousand wildebeest<br>cross the <em>Mara River</em> at dawn</h1>
+      <p class="hero-feat-sub">What happens in the two hours before a river crossing is a masterclass in survival instinct, collective hesitation, and the raw mathematics of predation.</p>
+      <div class="hero-feat-meta">
+        <div class="feat-author">
+          <div class="feat-author-avatar"></div>
+          <div>
+            <div class="feat-author-name">James Kimani</div>
+            <div class="feat-author-role">Head Safari Guide · Kenya</div>
+          </div>
+        </div>
+        <div class="feat-dot"></div>
+        <div class="feat-meta-item">12 May 2026</div>
+        <div class="feat-dot"></div>
+        <div class="feat-meta-item">11 min read</div>
+        <div class="feat-dot"></div>
+        <div class="feat-meta-item">847 readers</div>
+      </div>
+    </div>
+    <div class="hero-read-btn" onclick="openPost(); event.stopPropagation()">Read Article →</div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <div class="filter-inner">
+      <div class="filter-tabs" id="filterTabs">
+        <div class="filter-tab active" onclick="filterArticles('all', this)">All Stories</div>
+        <div class="filter-tab" onclick="filterArticles('kenya', this)">Kenya</div>
+        <div class="filter-tab" onclick="filterArticles('tanzania', this)">Tanzania</div>
+        <div class="filter-tab" onclick="filterArticles('gorillas', this)">Gorillas</div>
+        <div class="filter-tab" onclick="filterArticles('wildlife', this)">Wildlife</div>
+        <div class="filter-tab" onclick="filterArticles('photography', this)">Photography</div>
+        <div class="filter-tab" onclick="filterArticles('conservation', this)">Conservation</div>
+        <div class="filter-tab" onclick="filterArticles('tips', this)">Travel Tips</div>
+      </div>
+      <div class="filter-search">
+        <input class="search-input" placeholder="Search articles…" oninput="searchArticles(this.value)">
+      </div>
+    </div>
+  </div>
+
+  <!-- ARTICLE GRID -->
+  <section class="articles-section">
+    <div class="articles-grid" id="articleGrid">
+
+      <!-- Featured (2-col span) -->
+      <div class="article-card featured" data-cat="kenya" onclick="openPost()">
+        <div class="art-img" style="background-image:url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=900&q=85')">
+          <div class="art-img-inner" style="background-image:url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=900&q=85')"></div>
+          <div class="art-cat">Kenya · Field Notes</div>
+          <div class="art-read-time">11 min read</div>
+        </div>
+        <div class="art-body">
+          <div class="art-tag">Featured</div>
+          <div class="art-title">Watching a thousand wildebeest cross the Mara River at dawn</div>
+          <p class="art-excerpt">What happens in the two hours before a river crossing is a masterclass in survival instinct, collective hesitation, and the raw mathematics of predation.</p>
+          <div class="art-footer">
+            <div class="art-author-avatar" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80')"></div>
+            <span class="art-author-name">James Kimani</span>
+            <span class="art-date">12 May 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="article-card" data-cat="gorillas" onclick="openPost()">
+        <div class="art-img" style="background-image:url('https://images.unsplash.com/photo-1549366021-119489353986?auto=format&fit=crop&w=700&q=85')">
+          <div class="art-img-inner" style="background-image:url('https://images.unsplash.com/photo-1549366021-119489353986?auto=format&fit=crop&w=700&q=85')"></div>
+          <div class="art-cat">Rwanda · Gorillas</div>
+          <div class="art-read-time">8 min read</div>
+        </div>
+        <div class="art-body">
+          <div class="art-tag">Rwanda · Gorillas</div>
+          <div class="art-title">Twelve minutes with a silverback: what eye contact in the forest teaches you</div>
+          <p class="art-excerpt">There is no wildlife encounter on Earth quite like it. He was three metres away when he looked directly at me.</p>
+          <div class="art-footer">
+            <div class="art-author-avatar" style="background-image:url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80')"></div>
+            <span class="art-author-name">Sophie Ndegwa</span>
+            <span class="art-date">4 May 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="article-card" data-cat="photography" onclick="openPost()">
+        <div class="art-img" style="background-image:url('https://images.unsplash.com/photo-1523805009345-7448845a9e53?auto=format&fit=crop&w=700&q=85')">
+          <div class="art-img-inner" style="background-image:url('https://images.unsplash.com/photo-1523805009345-7448845a9e53?auto=format&fit=crop&w=700&q=85')"></div>
+          <div class="art-cat">Photography</div>
+          <div class="art-read-time">14 min read</div>
+        </div>
+        <div class="art-body">
+          <div class="art-tag">Photography</div>
+          <div class="art-title">The golden hour lasts four minutes in the Mara — here's how to use every second</div>
+          <p class="art-excerpt">Camera settings, positioning, and the pre-dawn ritual that separates a good safari photograph from a legendary one.</p>
+          <div class="art-footer">
+            <div class="art-author-avatar" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80')"></div>
+            <span class="art-author-name">James Kimani</span>
+            <span class="art-date">28 Apr 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="article-card" data-cat="tanzania" onclick="openPost()">
+        <div class="art-img" style="background-image:url('https://images.unsplash.com/photo-1543874049-af2a0bbe3b1a?auto=format&fit=crop&w=700&q=85')">
+          <div class="art-img-inner" style="background-image:url('https://images.unsplash.com/photo-1543874049-af2a0bbe3b1a?auto=format&fit=crop&w=700&q=85')"></div>
+          <div class="art-cat">Tanzania</div>
+          <div class="art-read-time">9 min read</div>
+        </div>
+        <div class="art-body">
+          <div class="art-tag">Tanzania · Serengeti</div>
+          <div class="art-title">Why the Ngorongoro Crater is one of the most complex ecosystems on the planet</div>
+          <p class="art-excerpt">A collapsed supervolcano that trapped an entire food chain inside its walls. The science of what evolved there is extraordinary.</p>
+          <div class="art-footer">
+            <div class="art-author-avatar" style="background-image:url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80')"></div>
+            <span class="art-author-name">Sophie Ndegwa</span>
+            <span class="art-date">20 Apr 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="article-card" data-cat="conservation" onclick="openPost()">
+        <div class="art-img" style="background-image:url('https://images.unsplash.com/photo-1585249096062-3c19f6e0a6d1?auto=format&fit=crop&w=700&q=85')">
+          <div class="art-img-inner" style="background-image:url('https://images.unsplash.com/photo-1585249096062-3c19f6e0a6d1?auto=format&fit=crop&w=700&q=85')"></div>
+          <div class="art-cat">Conservation</div>
+          <div class="art-read-time">10 min read</div>
+        </div>
+        <div class="art-body">
+          <div class="art-tag">Conservation</div>
+          <div class="art-title">The last two northern white rhinos live on Ol Pejeta — and their story isn't over</div>
+          <p class="art-excerpt">Najin and Fatu are the final survivors of their subspecies. The science team working to preserve their genetics is closer to a breakthrough than the world knows.</p>
+          <div class="art-footer">
+            <div class="art-author-avatar" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80')"></div>
+            <span class="art-author-name">James Kimani</span>
+            <span class="art-date">14 Apr 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="article-card" data-cat="tips" onclick="openPost()">
+        <div class="art-img" style="background-image:url('https://images.unsplash.com/photo-1534177616072-ef7dc120449d?auto=format&fit=crop&w=700&q=85')">
+          <div class="art-img-inner" style="background-image:url('https://images.unsplash.com/photo-1534177616072-ef7dc120449d?auto=format&fit=crop&w=700&q=85')"></div>
+          <div class="art-cat">Travel Tips</div>
+          <div class="art-read-time">7 min read</div>
+        </div>
+        <div class="art-body">
+          <div class="art-tag">Travel Tips</div>
+          <div class="art-title">What to pack for a Kenya safari: the only list you'll ever need</div>
+          <p class="art-excerpt">After 16 years guiding in East Africa, I've seen guests arrive with everything from suitcases full of ballgowns to nothing but a rain jacket. Here's what actually matters.</p>
+          <div class="art-footer">
+            <div class="art-author-avatar" style="background-image:url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80')"></div>
+            <span class="art-author-name">Sophie Ndegwa</span>
+            <span class="art-date">7 Apr 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="article-card" data-cat="kenya" onclick="openPost()">
+        <div class="art-img" style="background-image:url('https://images.unsplash.com/photo-1474440692490-2e83ae13ba29?auto=format&fit=crop&w=700&q=85')">
+          <div class="art-img-inner" style="background-image:url('https://images.unsplash.com/photo-1474440692490-2e83ae13ba29?auto=format&fit=crop&w=700&q=85')"></div>
+          <div class="art-cat">Kenya · Amboseli</div>
+          <div class="art-read-time">6 min read</div>
+        </div>
+        <div class="art-body">
+          <div class="art-tag">Kenya · Amboseli</div>
+          <div class="art-title">Echo's family: fifty years of elephant research and what it reveals about grief</div>
+          <p class="art-excerpt">The Amboseli Elephant Research Project is the longest-running wildlife study in history. Its findings have changed how we understand animal emotion.</p>
+          <div class="art-footer">
+            <div class="art-author-avatar" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80')"></div>
+            <span class="art-author-name">James Kimani</span>
+            <span class="art-date">1 Apr 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="article-card" data-cat="wildlife" onclick="openPost()">
+        <div class="art-img" style="background-image:url('https://images.unsplash.com/photo-1559827291-72ee739d0d9a?auto=format&fit=crop&w=700&q=85')">
+          <div class="art-img-inner" style="background-image:url('https://images.unsplash.com/photo-1559827291-72ee739d0d9a?auto=format&fit=crop&w=700&q=85')"></div>
+          <div class="art-cat">Wildlife</div>
+          <div class="art-read-time">8 min read</div>
+        </div>
+        <div class="art-body">
+          <div class="art-tag">Wildlife · Predators</div>
+          <div class="art-title">The coalition that runs the Mara Triangle: inside the lives of five cheetah brothers</div>
+          <p class="art-excerpt">Five male cheetahs moving as a single hunting unit is almost unheard of. We've tracked this coalition for three consecutive seasons.</p>
+          <div class="art-footer">
+            <div class="art-author-avatar" style="background-image:url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80')"></div>
+            <span class="art-author-name">Sophie Ndegwa</span>
+            <span class="art-date">24 Mar 2026</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="load-more-wrap">
+      <button class="btn-load-more" onclick="loadMore()">Load More Stories</button>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter-section">
+    <div class="newsletter-inner">
+      <div>
+        <div class="nl-overline">Safari Journal</div>
+        <h2 class="nl-title">Stories from the<br>field, every <em>month</em></h2>
+        <p class="nl-sub">Field dispatches, wildlife science, photography guides, and exclusive itinerary reveals — written by our guides, delivered to your inbox.</p>
+      </div>
+      <div>
+        <form class="nl-form" onsubmit="nlSubmit(event)">
+          <div class="nl-name-row">
+            <input class="nl-input" type="text" placeholder="First name" required>
+            <input class="nl-input" type="text" placeholder="Last name">
+          </div>
+          <input class="nl-input" type="email" placeholder="Your email address" required>
+          <button type="submit" class="nl-submit">Subscribe to the Journal</button>
+          <div class="nl-consent">No spam, ever. Unsubscribe in one click. We send one email per month.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</div><!-- end listing-view -->
+
+<!-- ═══════════════════════════════════
+     POST VIEW
+═══════════════════════════════════ -->
+<div class="post-view" id="postView">
+
+  <!-- POST HERO -->
+  <div class="post-hero">
+    <div class="post-hero-overlay"></div>
+    <div class="post-hero-content">
+      <div class="post-back" onclick="closePost()">← Back to Journal</div>
+      <div class="post-hero-cat">Field Notes · Kenya</div>
+      <h1 class="post-hero-title">Watching a thousand wildebeest<br>cross the <em>Mara River</em> at dawn</h1>
+      <p class="post-hero-sub">What happens in the two hours before a river crossing is a masterclass in survival instinct, collective hesitation, and the raw mathematics of predation.</p>
+      <div class="post-hero-meta">
+        <div class="post-author-block">
+          <div class="post-author-avatar"></div>
+          <div>
+            <div class="post-author-name">James Kimani</div>
+            <div class="post-author-role">Head Safari Guide · Kenya</div>
+          </div>
+        </div>
+        <div class="post-meta-sep"></div>
+        <div class="post-meta-item">12 May 2026</div>
+        <div class="post-meta-sep"></div>
+        <div class="post-meta-item">11 min read</div>
+        <div class="post-meta-sep"></div>
+        <div class="post-meta-item">847 readers</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POST LAYOUT -->
+  <div class="post-layout">
+
+    <!-- ARTICLE CONTENT -->
+    <article class="post-content">
+
+      <div class="post-body">
+        <p class="post-lead">It begins with silence. Not the absence of sound — the savanna is never silent — but a particular, charged hush that falls over the riverbank when the first scouts arrive at the edge. In sixteen years of guiding in the Masai Mara, I have learned to read that hush like a barometric pressure drop before a storm.</p>
+
+        <p>We had been parked on the north bank of the Mara River for forty minutes before the wildebeest appeared. My guests — a photographer from London and his partner, who had waited three years for this trip — were patient and quiet. They had listened to my briefing the previous evening: <em>the crossing does not happen on your schedule. It happens when ten thousand individual survival calculations converge into a single, catastrophic decision.</em></p>
+
+        <p>It is worth understanding what a wildebeest is weighing at a river crossing. The water holds Nile crocodiles — mature males up to five metres in length, capable of holding a full-grown wildebeest underwater for twenty minutes. The opposite bank offers grass. The herd has been tracking this grass for three months, covering over 800 kilometres from Tanzania's Serengeti plains. This is the culmination.</p>
+
+        <h2>The mathematics of collective hesitation</h2>
+
+        <p>Animal behaviour researchers call it the <em>quorum threshold</em> — the critical density of individuals in a group that tips collective inertia into collective action. For wildebeest at a river crossing, the quorum is remarkably precise. Studies by Dr. Andrew King at the University of Swansea suggest that as few as 5% of individuals in a herd can initiate directional movement — but at a river crossing, the threshold shifts dramatically upward. The perceived risk of predation creates what researchers call an <em>amplified coordination problem</em>.</p>
+
+        <p>In practical terms: the first animal to enter the water is almost certainly the most vulnerable animal in the herd. Every individual behind it knows this. They push forward. They retreat. They mill in circles of mounting agitation for minutes, sometimes hours, before something — an accidental stumble, a surge from behind, or simply a critical density shift — tips the balance.</p>
+
+        <div class="post-img-full" style="background-image:url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1400&q=90')"></div>
+        <p class="post-img-caption">The north bank of the Mara River, 6:22am. Approximately 1,200 wildebeest are visible from this position alone. — © James Kimani / Successful Safaris</p>
+
+        <h2>What the crocodiles are doing</h2>
+
+        <p>Nile crocodiles at a crossing site are not hiding. They are waiting with a stillness so absolute they are indistinguishable from the river itself. I have watched guests stare at the same metre of water for ten minutes before they finally see the faint ridge of dorsal plates, the barely-there outline of a snout at the surface.</p>
+
+        <p>The crocodiles have been congregating here since June. They follow the crossing calendar with a precision that still astonishes me after all these years. Research conducted in the Mara suggests that individual crocodiles return to the same crossing sites in consecutive years — not because they have migrated to find them, but because they have mapped them and remember.</p>
+
+        <div class="pull-quote">
+          <p class="pull-quote-text">"The first animal to enter the water is almost certainly the most vulnerable. Every individual behind it <em>knows this</em>."</p>
+          <div class="pull-quote-attr">— James Kimani, Head Guide</div>
+        </div>
+
+        <h2>The crossing itself: seven minutes of controlled chaos</h2>
+
+        <p>When it finally broke — at 6:47am — it happened the way all great natural events happen: with very little warning and absolutely no ceremony. A single wildebeest stepped off the bank. Then twenty. Then the entire front of the herd cascaded into the water in a churning, chaotic surge that sent plumes of brown spray catching the early light.</p>
+
+        <p>The noise is the thing you cannot prepare for. A thousand hooves on packed earth, then a thousand hooves in water — the pitch drops completely, replaced by a roar of displaced river and the raw, panicked bellowing of animals who have committed to something they cannot reverse. The photographer next to me was shooting at eight frames per second. I doubt he breathed once in those seven minutes.</p>
+
+        <div class="post-img-2col">
+          <div style="background-image:url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=700&q=85')"></div>
+          <div style="background-image:url('https://images.unsplash.com/photo-1534177616072-ef7dc120449d?auto=format&fit=crop&w=700&q=85')"></div>
+        </div>
+
+        <p>Three crocodiles engaged. One took a wildebeest cleanly — a mid-body strike followed by the death roll that breaks the spine. It was over in less than a minute. The other two attempts failed. The herd did not stop. The herd never stops once the threshold has broken. Individual survival calculations dissolve into the physics of mass movement. The mathematics shifts from <em>should I cross?</em> to <em>I am crossing</em>.</p>
+
+        <h2>After the crossing: what remains</h2>
+
+        <p>Seven minutes after it began, the last stragglers climbed the far bank. The river calmed. The crocodile with its kill moved to shallow water. Two black-backed jackals appeared on the bank from nowhere — they had been waiting too, in their own patient, scavenging calculus.</p>
+
+        <div class="info-box">
+          <div class="info-box-title">Plan your own Migration safari</div>
+          <p>The Mara River crossings occur from approximately mid-July through early October, with peak activity in August and September. No two crossings are alike — some days you will witness five; others, none. Our guides monitor crossing activity in real time and position vehicles at multiple sites.</p>
+          <p>View our <a href="/packages/detail/" style="color:var(--green-dark);font-weight:600;border-bottom:1px solid var(--green-dark)">Great Migration Safari package →</a></p>
+        </div>
+
+        <p>My guests said almost nothing for twenty minutes after the crossing. This is not unusual. A Mara River crossing does something to the human nervous system — it makes the world feel briefly and completely rearranged. There is an old Masai saying that translates roughly as: <em>the river does not remember the names of those who crossed it.</em></p>
+
+        <p>Standing on the north bank that morning, I thought, as I always do after a crossing: I have seen this over three hundred times. I have never once been unmoved by it.</p>
+      </div>
+
+      <!-- Tags & Share -->
+      <div class="post-tags-row">
+        <span class="post-tag-label">Tags:</span>
+        <span class="post-tag" onclick="filterArticles('kenya', null); closePost()">Kenya</span>
+        <span class="post-tag" onclick="filterArticles('wildlife', null); closePost()">Wildlife</span>
+        <span class="post-tag">Migration</span>
+        <span class="post-tag">Masai Mara</span>
+        <span class="post-tag">Crocodiles</span>
+      </div>
+      <div class="share-row">
+        <span class="share-label">Share:</span>
+        <div class="share-btn" title="Facebook">f</div>
+        <div class="share-btn" title="Twitter / X">𝕏</div>
+        <div class="share-btn" title="LinkedIn">in</div>
+        <div class="share-btn" title="Copy link">🔗</div>
+      </div>
+
+      <!-- Author Bio -->
+      <div class="author-bio">
+        <div class="bio-avatar"></div>
+        <div>
+          <div class="bio-role">Head Safari Guide · Kenya</div>
+          <div class="bio-name">James Kimani</div>
+          <p class="bio-text">James has guided across every ecosystem in Kenya for sixteen years. A KPSGA Senior Grade guide with specialist certifications in big cat behaviour and bird identification, he has contributed field notes to the Masai Mara Wildlife Conservancy's annual census since 2015. He leads our Migration and Photography safaris from July through October each year.</p>
+        </div>
+      </div>
+
+      <!-- Related -->
+      <div class="related-articles">
+        <div class="related-title">More from the Journal</div>
+        <div class="related-grid">
+          <div class="rel-art-card" onclick="openPost()">
+            <div class="rel-art-img" style="background-image:url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=600&q=80')">
+              <div class="art-cat" style="font-size:8px;padding:3px 8px">Wildlife</div>
+            </div>
+            <div class="rel-art-body">
+              <div class="rel-art-tag">Wildlife · Predators</div>
+              <div class="rel-art-title">The five cheetah brothers running the Mara Triangle</div>
+              <div class="rel-art-date">24 Mar 2026 · 8 min</div>
+            </div>
+          </div>
+          <div class="rel-art-card" onclick="openPost()">
+            <div class="rel-art-img" style="background-image:url('https://images.unsplash.com/photo-1523805009345-7448845a9e53?auto=format&fit=crop&w=600&q=80')">
+              <div class="art-cat" style="font-size:8px;padding:3px 8px">Photography</div>
+            </div>
+            <div class="rel-art-body">
+              <div class="rel-art-tag">Photography</div>
+              <div class="rel-art-title">Golden hour in the Mara: four minutes, one shot</div>
+              <div class="rel-art-date">28 Apr 2026 · 14 min</div>
+            </div>
+          </div>
+          <div class="rel-art-card" onclick="openPost()">
+            <div class="rel-art-img" style="background-image:url('https://images.unsplash.com/photo-1534177616072-ef7dc120449d?auto=format&fit=crop&w=600&q=80')">
+              <div class="art-cat" style="font-size:8px;padding:3px 8px">Travel Tips</div>
+            </div>
+            <div class="rel-art-body">
+              <div class="rel-art-tag">Travel Tips</div>
+              <div class="rel-art-title">What to pack for a Kenya safari: the only list you need</div>
+              <div class="rel-art-date">7 Apr 2026 · 7 min</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </article>
+
+    <!-- SIDEBAR -->
+    <aside class="post-sidebar">
+      <div class="sidebar-toc">
+        <div class="toc-title">In This Article</div>
+        <ul class="toc-list">
+          <li><a href="#">The mathematics of collective hesitation</a></li>
+          <li><a href="#">What the crocodiles are doing</a></li>
+          <li><a href="#">The crossing itself: seven minutes</a></li>
+          <li><a href="#">After the crossing: what remains</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-pkg-card">
+        <div class="spc-img"></div>
+        <div class="spc-body">
+          <div class="spc-label">Featured Package</div>
+          <div class="spc-title">Great Migration Safari — 7 Nights</div>
+          <div class="spc-sub">From $4,600 pp · Jul – Oct · Masai Mara</div>
+          <a href="/packages/detail/" class="spc-btn">View Package →</a>
+        </div>
+      </div>
+      <div class="sidebar-nl">
+        <div class="snl-title">Field dispatches, monthly</div>
+        <p class="snl-sub">Stories from our guides, delivered once a month. No spam, ever.</p>
+        <input class="snl-input" type="email" placeholder="Your email">
+        <button class="snl-btn">Subscribe</button>
+      </div>
+    </aside>
+
+  </div>
+
+</div><!-- end post-view -->
+
+<!-- FOOTER (shared) -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-logo">
+        <div class="footer-brand-mark">S</div>
+        <span class="footer-brand-name">Successful Safaris</span>
+      </div>
+      <p class="footer-brand-text">Since 2008, we have been the trusted partner of discerning travellers seeking authentic, luxurious African safari experiences.</p>
+      <div class="footer-social">
+        <div class="soc-btn">f</div><div class="soc-btn">in</div><div class="soc-btn">tw</div><div class="soc-btn">ig</div><div class="soc-btn">yt</div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Destinations</div>
+      <ul class="footer-links">
+        <li><a href="/destinations/kenya/">Kenya</a></li>
+        <li><a href="/destinations/">Tanzania</a></li>
+        <li><a href="/destinations/">Rwanda</a></li>
+        <li><a href="/destinations/">Uganda</a></li>
+        <li><a href="/destinations/">Zanzibar</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Journal</div>
+      <ul class="footer-links">
+        <li><a href="/blog/" onclick="filterArticles('kenya',null)">Kenya Stories</a></li>
+        <li><a href="/blog/" onclick="filterArticles('wildlife',null)">Wildlife</a></li>
+        <li><a href="/blog/" onclick="filterArticles('photography',null)">Photography</a></li>
+        <li><a href="/blog/" onclick="filterArticles('conservation',null)">Conservation</a></li>
+        <li><a href="/blog/" onclick="filterArticles('tips',null)">Travel Tips</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="/about/">About Us</a></li>
+        <li><a href="/about/">Our Guides</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href="/packages/">Packages</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Support</div>
+      <ul class="footer-links">
+        <li><a href="#">Trip Planning</a></li>
+        <li><a href="#">Packing Guide</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 Successful Safaris Ltd. All rights reserved.</p>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Cookie Settings</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── VIEW SWITCHING ──
+  function openPost() {
+    document.getElementById('listingView').classList.add('hidden');
+    document.getElementById('postView').classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.title = 'Watching a Thousand Wildebeest Cross the Mara River — Successful Safaris';
+  }
+
+  function closePost() {
+    document.getElementById('postView').classList.remove('active');
+    document.getElementById('listingView').classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.title = 'Safari Journal — Successful Safaris';
+  }
+
+  // ── ARTICLE FILTERING ──
+  function filterArticles(cat, tabEl) {
+    if (tabEl) {
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      tabEl.classList.add('active');
+    }
+    const cards = document.querySelectorAll('#articleGrid .article-card');
+    cards.forEach(card => {
+      const show = cat === 'all' || card.dataset.cat === cat;
+      card.style.display = show ? '' : 'none';
+      // Handle featured card span
+      if (card.classList.contains('featured')) {
+        card.style.gridColumn = (show && cat === 'all') ? 'span 2' : (show ? 'span 1' : 'none');
+        if (show && cat !== 'all') { card.style.display = 'block'; }
+      }
+    });
+  }
+
+  // ── SEARCH ──
+  function searchArticles(val) {
+    const q = val.toLowerCase();
+    document.querySelectorAll('#articleGrid .article-card').forEach(card => {
+      const text = card.querySelector('.art-title').textContent.toLowerCase()
+        + card.querySelector('.art-excerpt').textContent.toLowerCase();
+      card.style.display = (!q || text.includes(q)) ? '' : 'none';
+    });
+  }
+
+  // ── LOAD MORE ──
+  function loadMore() {
+    const btn = event.target;
+    btn.textContent = 'Loading…';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'All stories loaded';
+      btn.style.opacity = '0.4';
+    }, 800);
+  }
+
+  // ── NEWSLETTER ──
+  function nlSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    form.innerHTML = '<div style="text-align:center;padding:24px 0"><div style="font-size:32px;margin-bottom:12px">✉️</div><div style="font-family:\'Playfair Display\',serif;font-size:22px;color:white;margin-bottom:8px">You\'re subscribed</div><div style="font-size:14px;color:rgba(255,255,255,0.6)">Your first dispatch arrives next month. Thank you.</div></div>';
+  }
+
+  // ── URL PARAM ──
+  if (new URLSearchParams(window.location.search).get('post')) openPost();
+</script>
+</body>
+</html>

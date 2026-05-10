@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Successful Safaris — Wireframes</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C; --gold-light: #E8C96A; --gold-pale: #F5E9C8; --gold-dark: #A07830;
+    --green-dark: #1A3A2A; --green-mid: #2D5A3D;
+    --charcoal: #1A1A1A; --gray-dark: #2A2A2A; --gray-mid: #555555; --gray-light: #AAAAAA;
+    --cream: #FAF7F0; --cream-mid: #F0EAD6; --white: #FFFFFF;
+    --wf-bg: #F8F9FA; --wf-box: #E8ECF0; --wf-text: #9EA8B3; --wf-border: #CDD3DA;
+    --wf-accent: #6B7A8D; --wf-img: #D1D8E0; --wf-dark: #4A5568;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); }
+
+  header {
+    background: var(--green-dark); padding: 24px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 2px solid var(--gold);
+  }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-mark { width: 44px; height: 44px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 18px; color: var(--green-dark); font-weight: 700; }
+  .logo-text h1 { font-family: 'Playfair Display', serif; color: white; font-size: 20px; }
+  .logo-text p { font-size: 11px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; }
+  .doc-title { font-family: 'Cormorant Garamond', serif; color: var(--gold-light); font-size: 14px; letter-spacing: 3px; text-transform: uppercase; font-style: italic; }
+  nav { display: flex; gap: 12px; flex-wrap: wrap; }
+  nav a { color: #ccc; text-decoration: none; font-size: 12px; padding: 6px 12px; border-radius: 4px; transition: all 0.2s; }
+  nav a:hover { background: rgba(201,168,76,0.15); color: var(--gold-light); }
+  nav a.active { background: var(--gold); color: var(--green-dark); font-weight: 600; }
+
+  .page-hero { background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%); padding: 48px; text-align: center; }
+  .page-hero h2 { font-family: 'Playfair Display', serif; font-size: 40px; color: white; margin-bottom: 10px; }
+  .page-hero p { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--gold-light); font-size: 18px; }
+  .gold-line { width: 80px; height: 2px; background: var(--gold); margin: 14px auto; }
+
+  .container { max-width: 1400px; margin: 0 auto; padding: 48px; }
+  .section-header { margin-bottom: 40px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 30px; color: var(--green-dark); margin-bottom: 6px; }
+  .section-sub { font-size: 13px; color: var(--gray-mid); }
+
+  /* Wireframe tabs */
+  .wf-tabs { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+  .wf-tab { padding: 10px 20px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; border: 1.5px solid var(--cream-mid); background: white; color: var(--gray-mid); transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; }
+  .wf-tab:hover { border-color: var(--gold); color: var(--gold-dark); }
+  .wf-tab.active { background: var(--green-dark); color: white; border-color: var(--green-dark); }
+
+  .wf-panels { }
+  .wf-panel { display: none; }
+  .wf-panel.active { display: block; }
+
+  /* Wireframe screen container */
+  .wf-screens { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 32px; }
+  .wf-screen-wrap {
+    background: white; border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08); border: 1px solid var(--cream-mid);
+    overflow: hidden;
+  }
+  .wf-screen-label {
+    background: var(--green-dark); padding: 10px 16px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .wf-screen-label span { color: white; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; }
+  .wf-screen-label .wf-badge { font-size: 10px; padding: 2px 8px; border-radius: 10px; background: rgba(201,168,76,0.3); color: var(--gold-light); }
+  .wf-screen { padding: 0; }
+
+  /* ────── WIREFRAME COMPONENTS ────── */
+  .wf { background: var(--wf-bg); }
+
+  /* Nav bar */
+  .wf-nav { background: var(--wf-dark); padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; }
+  .wf-nav-logo { background: var(--wf-accent); height: 14px; width: 120px; border-radius: 2px; }
+  .wf-nav-links { display: flex; gap: 10px; }
+  .wf-nav-links div { background: var(--wf-text); height: 8px; width: 50px; border-radius: 2px; opacity: 0.7; }
+  .wf-nav-btn { background: var(--gold); height: 28px; width: 90px; border-radius: 3px; }
+
+  /* Hero */
+  .wf-hero { background: var(--wf-accent); height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 20px; position: relative; }
+  .wf-hero::after { content: 'HERO IMAGE'; position: absolute; font-size: 10px; color: rgba(255,255,255,0.4); top: 10px; right: 10px; letter-spacing: 2px; }
+  .wf-hero-title { background: rgba(255,255,255,0.9); height: 28px; width: 70%; border-radius: 2px; }
+  .wf-hero-sub { background: rgba(255,255,255,0.5); height: 14px; width: 50%; border-radius: 2px; }
+  .wf-hero-cta { display: flex; gap: 10px; margin-top: 6px; }
+  .wf-hero-btn { background: var(--gold); height: 34px; width: 110px; border-radius: 3px; }
+  .wf-hero-btn2 { background: rgba(255,255,255,0.3); height: 34px; width: 110px; border-radius: 3px; border: 1.5px solid rgba(255,255,255,0.5); }
+
+  /* Section label */
+  .wf-section-label { padding: 14px 16px 6px; }
+  .wf-section-label .wf-label-bar { background: var(--wf-border); height: 20px; width: 140px; border-radius: 2px; }
+  .wf-section-label .wf-label-sub { background: var(--wf-img); height: 10px; width: 200px; border-radius: 2px; margin-top: 5px; }
+
+  /* Card grid */
+  .wf-card-row { display: flex; gap: 10px; padding: 12px 16px; }
+  .wf-card { flex: 1; background: white; border-radius: 6px; border: 1px solid var(--wf-border); overflow: hidden; }
+  .wf-card-img { background: var(--wf-img); height: 80px; }
+  .wf-card-body { padding: 8px; }
+  .wf-card-tag { background: var(--gold-pale); height: 8px; width: 60px; border-radius: 2px; margin-bottom: 5px; }
+  .wf-card-title { background: var(--wf-border); height: 12px; width: 90%; border-radius: 2px; margin-bottom: 4px; }
+  .wf-card-text { background: var(--wf-img); height: 8px; width: 100%; border-radius: 2px; margin-bottom: 3px; }
+  .wf-card-text2 { background: var(--wf-img); height: 8px; width: 80%; border-radius: 2px; }
+  .wf-card-footer { padding: 6px 8px; background: #f8f9fa; border-top: 1px solid var(--wf-border); display: flex; justify-content: space-between; align-items: center; }
+  .wf-price { background: var(--wf-accent); height: 12px; width: 60px; border-radius: 2px; }
+  .wf-btn-sm { background: var(--gold); height: 22px; width: 64px; border-radius: 3px; }
+
+  /* Two-col section */
+  .wf-two-col { display: flex; gap: 12px; padding: 12px 16px; }
+  .wf-col-img { background: var(--wf-img); flex: 1; border-radius: 6px; min-height: 120px; }
+  .wf-col-text { flex: 1; display: flex; flex-direction: column; gap: 8px; justify-content: center; }
+  .wf-text-line { background: var(--wf-border); height: 10px; border-radius: 2px; }
+  .wf-text-line.w80 { width: 80%; }
+  .wf-text-line.w60 { width: 60%; }
+  .wf-text-line.w90 { width: 90%; }
+  .wf-text-line.w40 { width: 40%; }
+  .wf-text-sm { background: var(--wf-img); height: 8px; border-radius: 2px; }
+
+  /* Form */
+  .wf-form { padding: 16px; }
+  .wf-form-row { display: flex; gap: 10px; margin-bottom: 10px; }
+  .wf-input-group { flex: 1; }
+  .wf-input-label { background: var(--wf-border); height: 8px; width: 80px; border-radius: 2px; margin-bottom: 5px; }
+  .wf-input { background: white; border: 1.5px solid var(--wf-border); height: 34px; border-radius: 4px; width: 100%; }
+  .wf-input.gold { border-color: var(--gold); }
+  .wf-textarea { background: white; border: 1.5px solid var(--wf-border); height: 60px; border-radius: 4px; width: 100%; }
+  .wf-form-btn { background: var(--gold); height: 40px; border-radius: 4px; margin-top: 12px; width: 100%; }
+
+  /* Breadcrumb */
+  .wf-breadcrumb { padding: 8px 16px; display: flex; gap: 8px; align-items: center; background: white; border-bottom: 1px solid var(--wf-border); }
+  .wf-bc-item { background: var(--wf-img); height: 8px; border-radius: 2px; }
+  .wf-bc-sep { color: var(--gold); font-size: 10px; }
+
+  /* Progress steps */
+  .wf-steps { display: flex; padding: 12px 16px; gap: 4px; align-items: center; background: white; border-bottom: 1px solid var(--wf-border); }
+  .wf-step { display: flex; align-items: center; gap: 4px; flex: 1; }
+  .wf-step-num { width: 20px; height: 20px; border-radius: 50%; border: 2px solid; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; flex-shrink: 0; }
+  .wf-step-num.done { background: var(--gold); border-color: var(--gold); color: var(--green-dark); }
+  .wf-step-num.active { background: white; border-color: var(--green-dark); color: var(--green-dark); }
+  .wf-step-num.inactive { background: var(--wf-img); border-color: var(--wf-border); color: var(--wf-text); }
+  .wf-step-label { background: var(--wf-border); height: 8px; flex: 1; border-radius: 2px; }
+  .wf-step-line { flex: 0.5; height: 2px; background: var(--wf-border); }
+  .wf-step-line.done { background: var(--gold); }
+
+  /* Sidebar + content layout */
+  .wf-sidebar-layout { display: flex; min-height: 400px; }
+  .wf-sidebar { background: var(--wf-dark); width: 160px; flex-shrink: 0; padding: 16px 12px; }
+  .wf-sidebar-logo { background: rgba(255,255,255,0.3); height: 28px; border-radius: 4px; margin-bottom: 20px; }
+  .wf-sidebar-section { font-size: 9px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; margin-top: 12px; }
+  .wf-sidebar-item { background: rgba(255,255,255,0.1); height: 28px; border-radius: 4px; margin-bottom: 4px; display: flex; align-items: center; padding: 0 8px; gap: 6px; }
+  .wf-sidebar-item.active { background: rgba(201,168,76,0.3); }
+  .wf-sidebar-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); flex-shrink: 0; }
+  .wf-sidebar-dot.active { background: var(--gold); }
+  .wf-sidebar-text { background: rgba(255,255,255,0.3); height: 8px; flex: 1; border-radius: 2px; }
+
+  .wf-main-content { flex: 1; padding: 16px; background: var(--wf-bg); }
+  .wf-topbar { background: white; padding: 10px 12px; border-radius: 6px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border: 1px solid var(--wf-border); }
+  .wf-topbar-title { background: var(--wf-border); height: 14px; width: 120px; border-radius: 2px; }
+  .wf-topbar-actions { display: flex; gap: 6px; }
+  .wf-topbar-btn { background: var(--gold); height: 28px; width: 80px; border-radius: 3px; }
+  .wf-topbar-btn2 { background: var(--wf-img); height: 28px; width: 80px; border-radius: 3px; }
+
+  /* KPI cards */
+  .wf-kpi-row { display: flex; gap: 8px; margin-bottom: 12px; }
+  .wf-kpi { flex: 1; background: white; border-radius: 6px; border: 1px solid var(--wf-border); padding: 10px; }
+  .wf-kpi-label { background: var(--wf-img); height: 8px; width: 80px; border-radius: 2px; margin-bottom: 6px; }
+  .wf-kpi-num { background: var(--wf-accent); height: 18px; width: 70%; border-radius: 2px; margin-bottom: 4px; }
+  .wf-kpi-trend { background: var(--gold-pale); height: 8px; width: 60px; border-radius: 2px; }
+
+  /* Table */
+  .wf-table { background: white; border-radius: 6px; border: 1px solid var(--wf-border); overflow: hidden; margin-bottom: 12px; }
+  .wf-table-header { background: var(--wf-dark); padding: 10px 12px; display: flex; gap: 10px; }
+  .wf-table-header div { background: rgba(255,255,255,0.3); height: 8px; border-radius: 2px; flex: 1; }
+  .wf-table-row { padding: 9px 12px; border-bottom: 1px solid var(--wf-border); display: flex; gap: 10px; align-items: center; }
+  .wf-table-row:last-child { border-bottom: none; }
+  .wf-table-cell { background: var(--wf-img); height: 8px; border-radius: 2px; flex: 1; }
+  .wf-table-cell.bold { background: var(--wf-accent); }
+  .wf-table-badge { background: var(--gold-pale); height: 16px; width: 60px; border-radius: 8px; flex-shrink: 0; }
+  .wf-table-action { background: var(--wf-border); height: 22px; width: 50px; border-radius: 3px; flex-shrink: 0; }
+
+  /* Product grid */
+  .wf-product-layout { display: flex; gap: 12px; padding: 12px 16px; }
+  .wf-filter-col { width: 100px; flex-shrink: 0; }
+  .wf-filter-header { background: var(--wf-border); height: 12px; width: 60px; border-radius: 2px; margin-bottom: 10px; }
+  .wf-filter-section { margin-bottom: 10px; }
+  .wf-filter-section-title { background: var(--wf-border); height: 8px; width: 80px; border-radius: 2px; margin-bottom: 6px; }
+  .wf-filter-item { display: flex; gap: 5px; margin-bottom: 4px; align-items: center; }
+  .wf-checkbox { width: 10px; height: 10px; border: 1.5px solid var(--wf-border); border-radius: 2px; flex-shrink: 0; }
+  .wf-filter-text { background: var(--wf-img); height: 7px; border-radius: 2px; flex: 1; }
+  .wf-products-col { flex: 1; }
+  .wf-sort-bar { background: white; border-radius: 4px; border: 1px solid var(--wf-border); padding: 7px 10px; display: flex; justify-content: space-between; margin-bottom: 10px; }
+  .wf-sort-label { background: var(--wf-img); height: 8px; width: 80px; border-radius: 2px; }
+  .wf-sort-select { background: var(--wf-border); height: 8px; width: 100px; border-radius: 2px; }
+  .wf-product-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+
+  /* Cart */
+  .wf-cart-layout { display: flex; gap: 12px; padding: 12px 16px; }
+  .wf-cart-items { flex: 2; }
+  .wf-cart-summary { flex: 1; }
+  .wf-cart-item { background: white; border: 1px solid var(--wf-border); border-radius: 6px; padding: 10px; display: flex; gap: 8px; margin-bottom: 8px; }
+  .wf-cart-img { background: var(--wf-img); width: 50px; height: 50px; border-radius: 4px; flex-shrink: 0; }
+  .wf-cart-info { flex: 1; }
+  .wf-cart-name { background: var(--wf-border); height: 10px; width: 90%; border-radius: 2px; margin-bottom: 5px; }
+  .wf-cart-variant { background: var(--wf-img); height: 8px; width: 60px; border-radius: 2px; }
+  .wf-cart-price { background: var(--wf-accent); height: 12px; width: 50px; border-radius: 2px; margin-left: auto; }
+  .wf-summary-box { background: white; border: 1px solid var(--wf-border); border-radius: 6px; padding: 12px; }
+  .wf-summary-line { display: flex; justify-content: space-between; margin-bottom: 6px; }
+  .wf-summary-label { background: var(--wf-img); height: 8px; width: 80px; border-radius: 2px; }
+  .wf-summary-value { background: var(--wf-border); height: 8px; width: 60px; border-radius: 2px; }
+  .wf-summary-total { background: var(--wf-dark); height: 14px; width: 80px; border-radius: 2px; }
+  .wf-summary-total-val { background: var(--gold); height: 14px; width: 80px; border-radius: 2px; }
+
+  /* Chart placeholder */
+  .wf-chart { background: white; border: 1px solid var(--wf-border); border-radius: 6px; padding: 12px; margin-bottom: 12px; }
+  .wf-chart-title { background: var(--wf-border); height: 10px; width: 120px; border-radius: 2px; margin-bottom: 12px; }
+  .wf-chart-bars { display: flex; align-items: flex-end; gap: 6px; height: 80px; }
+  .wf-bar { background: var(--wf-accent); border-radius: 2px 2px 0 0; flex: 1; opacity: 0.6; }
+  .wf-bar.gold { background: var(--gold); opacity: 0.8; }
+
+  /* Mobile frame */
+  .mobile-frame { max-width: 240px; }
+  .mobile-screen { background: var(--wf-bg); border-radius: 0; }
+
+  /* Annotations */
+  .annotations { padding: 12px 16px; background: var(--gold-pale); border-top: 2px solid var(--gold); }
+  .annotation { font-size: 11px; color: var(--gold-dark); margin-bottom: 4px; display: flex; gap: 6px; }
+  .ann-num { font-weight: 700; }
+
+  footer { background: var(--green-dark); padding: 24px 48px; text-align: center; color: #aaa; font-size: 12px; margin-top: 80px; border-top: 1px solid rgba(201,168,76,0.3); }
+  footer span { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-mark">SS</div>
+    <div class="logo-text"><h1>Successful Safaris</h1><p>Luxury African Experiences</p></div>
+  </div>
+  <div class="doc-title">Design Package — Wireframes</div>
+  <nav>
+    <a href="index.html">Overview</a>
+    <a href="/sitemap/">Sitemap</a>
+    <a href="/style-guide/">Style Guide</a>
+    <a href="/wireframes/" class="active">Wireframes</a>
+    <a href="/">Home</a>
+    <a href="/shop/">Shop</a>
+    <a href="/booking/">Booking</a>
+    <a href="/checkout/">Checkout</a>
+    <a href="admin-/dashboard/">Admin</a>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <h2>Wireframe Specifications</h2>
+  <div class="gold-line"></div>
+  <p>Low-fidelity layout blueprints for every critical page — customer-facing and admin</p>
+</div>
+
+<div class="container">
+
+  <!-- Tab navigation -->
+  <div class="wf-tabs">
+    <div class="wf-tab active" onclick="showPanel('public')">Public Pages</div>
+    <div class="wf-tab" onclick="showPanel('ecommerce')">E-Commerce</div>
+    <div class="wf-tab" onclick="showPanel('booking')">Booking Flow</div>
+    <div class="wf-tab" onclick="showPanel('user-dash')">User Dashboard</div>
+    <div class="wf-tab" onclick="showPanel('admin')">Admin Portal</div>
+    <div class="wf-tab" onclick="showPanel('mobile')">Mobile Views</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       PANEL 1: PUBLIC PAGES
+  ══════════════════════════════════════════════ -->
+  <div class="wf-panel active" id="panel-public">
+    <div class="section-header">
+      <div class="section-title">Public Pages</div>
+      <div class="section-sub">Home, Destinations listing, Package detail, Contact</div>
+    </div>
+    <div class="wf-screens">
+
+      <!-- Homepage -->
+      <div class="wf-screen-wrap">
+        <div class="wf-screen-label"><span>Homepage (P01)</span><span class="wf-badge">All Visitors</span></div>
+        <div class="wf-screen wf">
+          <div class="wf-nav">
+            <div class="wf-nav-logo"></div>
+            <div class="wf-nav-links"><div></div><div></div><div></div><div></div></div>
+            <div class="wf-nav-btn"></div>
+          </div>
+          <div class="wf-hero">
+            <div class="wf-hero-title"></div>
+            <div class="wf-hero-sub"></div>
+            <div class="wf-hero-cta"><div class="wf-hero-btn"></div><div class="wf-hero-btn2"></div></div>
+          </div>
+          <!-- Stats strip -->
+          <div style="background: var(--green-dark); padding: 12px 16px; display: flex; gap: 20px;">
+            <div style="flex:1; text-align:center;"><div style="background:rgba(255,255,255,0.3); height:18px; border-radius:2px; margin-bottom:4px;"></div><div style="background:rgba(255,255,255,0.15); height:8px; border-radius:2px;"></div></div>
+            <div style="flex:1; text-align:center;"><div style="background:rgba(255,255,255,0.3); height:18px; border-radius:2px; margin-bottom:4px;"></div><div style="background:rgba(255,255,255,0.15); height:8px; border-radius:2px;"></div></div>
+            <div style="flex:1; text-align:center;"><div style="background:rgba(255,255,255,0.3); height:18px; border-radius:2px; margin-bottom:4px;"></div><div style="background:rgba(255,255,255,0.15); height:8px; border-radius:2px;"></div></div>
+            <div style="flex:1; text-align:center;"><div style="background:rgba(255,255,255,0.3); height:18px; border-radius:2px; margin-bottom:4px;"></div><div style="background:rgba(255,255,255,0.15); height:8px; border-radius:2px;"></div></div>
+          </div>
+          <!-- Featured destinations -->
+          <div class="wf-section-label"><div class="wf-label-bar"></div><div class="wf-label-sub"></div></div>
+          <div class="wf-card-row">
+            <div class="wf-card"><div class="wf-card-img"></div><div class="wf-card-body"><div class="wf-card-tag"></div><div class="wf-card-title"></div><div class="wf-card-text"></div></div><div class="wf-card-footer"><div class="wf-price"></div><div class="wf-btn-sm"></div></div></div>
+            <div class="wf-card"><div class="wf-card-img"></div><div class="wf-card-body"><div class="wf-card-tag"></div><div class="wf-card-title"></div><div class="wf-card-text"></div></div><div class="wf-card-footer"><div class="wf-price"></div><div class="wf-btn-sm"></div></div></div>
+            <div class="wf-card"><div class="wf-card-img"></div><div class="wf-card-body"><div class="wf-card-tag"></div><div class="wf-card-title"></div><div class="wf-card-text"></div></div><div class="wf-card-footer"><div class="wf-price"></div><div class="wf-btn-sm"></div></div></div>
+          </div>
+          <!-- Testimonial strip -->
+          <div style="background: var(--wf-accent); padding: 20px 16px; display: flex; gap: 12px;">
+            <div style="flex:1;"><div style="background:rgba(255,255,255,0.4); height:12px; width:80%; border-radius:2px; margin-bottom:6px;"></div><div style="background:rgba(255,255,255,0.25); height:8px; width:90%; border-radius:2px; margin-bottom:4px;"></div><div style="background:rgba(255,255,255,0.25); height:8px; width:70%; border-radius:2px;"></div></div>
+            <div style="flex:1;"><div style="background:rgba(255,255,255,0.4); height:12px; width:80%; border-radius:2px; margin-bottom:6px;"></div><div style="background:rgba(255,255,255,0.25); height:8px; width:90%; border-radius:2px; margin-bottom:4px;"></div><div style="background:rgba(255,255,255,0.25); height:8px; width:70%; border-radius:2px;"></div></div>
+          </div>
+          <!-- Shop promo -->
+          <div class="wf-section-label"><div class="wf-label-bar"></div><div class="wf-label-sub"></div></div>
+          <div class="wf-card-row">
+            <div class="wf-card"><div class="wf-card-img" style="height:60px;"></div><div class="wf-card-body"><div class="wf-card-title"></div></div></div>
+            <div class="wf-card"><div class="wf-card-img" style="height:60px;"></div><div class="wf-card-body"><div class="wf-card-title"></div></div></div>
+            <div class="wf-card"><div class="wf-card-img" style="height:60px;"></div><div class="wf-card-body"><div class="wf-card-title"></div></div></div>
+            <div class="wf-card"><div class="wf-card-img" style="height:60px;"></div><div class="wf-card-body"><div class="wf-card-title"></div></div></div>
+          </div>
+          <!-- Footer -->
+          <div style="background: var(--wf-dark); padding: 20px 16px; display:flex; gap:20px;">
+            <div style="flex:1;"><div style="background:rgba(255,255,255,0.3); height:10px; width:80px; border-radius:2px; margin-bottom:8px;"></div><div style="background:rgba(255,255,255,0.15); height:7px; border-radius:2px; margin-bottom:4px;"></div><div style="background:rgba(255,255,255,0.15); height:7px; border-radius:2px; margin-bottom:4px;"></div><div style="background:rgba(255,255,255,0.15); height:7px; width:70%; border-radius:2px;"></div></div>
+            <div style="flex:1;"><div style="background:rgba(255,255,255,0.3); height:10px; width:80px; border-radius:2px; margin-bottom:8px;"></div><div style="background:rgba(255,255,255,0.15); height:7px; border-radius:2px; margin-bottom:4px;"></div><div style="background:rgba(255,255,255,0.15); height:7px; border-radius:2px; margin-bottom:4px;"></div></div>
+            <div style="flex:1;"><div style="background:rgba(255,255,255,0.3); height:10px; width:80px; border-radius:2px; margin-bottom:8px;"></div><div style="background:rgba(255,255,255,0.15); height:7px; border-radius:2px; margin-bottom:4px;"></div><div style="background:rgba(255,255,255,0.15); height:7px; border-radius:2px; margin-bottom:4px;"></div></div>
+          </div>
+        </div>
+        <div class="annotations">
+          <div class="annotation"><span class="ann-num">①</span> Full-bleed video hero with overlay CTAs</div>
+          <div class="annotation"><span class="ann-num">②</span> Animated stats counter (trips, countries, reviews)</div>
+          <div class="annotation"><span class="ann-num">③</span> Shop promo strip cross-sells safari gear</div>
+        </div>
+      </div>
+
+      <!-- Destinations -->
+      <div class="wf-screen-wrap">
+        <div class="wf-screen-label"><span>Destinations (P03)</span><span class="wf-badge">All Visitors</span></div>
+        <div class="wf-screen wf">
+          <div class="wf-nav"><div class="wf-nav-logo"></div><div class="wf-nav-links"><div></div><div></div><div></div></div><div class="wf-nav-btn"></div></div>
+          <div class="wf-breadcrumb"><div class="wf-bc-item" style="width:40px;"></div><div class="wf-bc-sep">›</div><div class="wf-bc-item" style="width:80px;"></div></div>
+          <!-- Hero banner -->
+          <div style="background: var(--wf-accent); height: 100px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;">
+            <div style="background:rgba(255,255,255,0.8); height:16px; width:200px; border-radius:2px;"></div>
+            <div style="background:rgba(255,255,255,0.4); height:10px; width:150px; border-radius:2px;"></div>
+          </div>
+          <!-- Filter bar -->
+          <div style="background:white; padding:10px 16px; border-bottom:1px solid var(--wf-border); display:flex; gap:8px; align-items:center;">
+            <div style="background:var(--gold); height:28px; width:28px; border-radius:4px;"></div>
+            <div style="background:var(--wf-img); height:28px; width:80px; border-radius:4px;"></div>
+            <div style="background:var(--wf-img); height:28px; width:80px; border-radius:4px;"></div>
+            <div style="background:var(--wf-img); height:28px; width:80px; border-radius:4px;"></div>
+            <div style="background:var(--wf-img); height:28px; width:80px; border-radius:4px;"></div>
+            <div style="flex:1;"></div>
+            <div style="background:var(--wf-border); height:28px; width:100px; border-radius:4px;"></div>
+          </div>
+          <!-- Destination cards 2x3 -->
+          <div style="padding:12px 16px; display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+            <div class="wf-card"><div class="wf-card-img" style="height:100px; position:relative;"><div style="position:absolute; bottom:6px; left:6px; background:rgba(26,58,42,0.8); height:16px; width:60px; border-radius:2px;"></div></div><div class="wf-card-body"><div class="wf-card-tag"></div><div class="wf-card-title"></div><div class="wf-card-text"></div><div class="wf-card-text2"></div></div><div class="wf-card-footer"><div class="wf-price"></div><div class="wf-btn-sm"></div></div></div>
+            <div class="wf-card"><div class="wf-card-img" style="height:100px; position:relative;"><div style="position:absolute; bottom:6px; left:6px; background:rgba(26,58,42,0.8); height:16px; width:60px; border-radius:2px;"></div></div><div class="wf-card-body"><div class="wf-card-tag"></div><div class="wf-card-title"></div><div class="wf-card-text"></div><div class="wf-card-text2"></div></div><div class="wf-card-footer"><div class="wf-price"></div><div class="wf-btn-sm"></div></div></div>
+            <div class="wf-card"><div class="wf-card-img" style="height:100px;"></div><div class="wf-card-body"><div class="wf-card-title"></div><div class="wf-card-text"></div></div><div class="wf-card-footer"><div class="wf-price"></div><div class="wf-btn-sm"></div></div></div>
+            <div class="wf-card"><div class="wf-card-img" style="height:100px;"></div><div class="wf-card-body"><div class="wf-card-title"></div><div class="wf-card-text"></div></div><div class="wf-card-footer"><div class="wf-price"></div><div class="wf-btn-sm"></div></div></div>
+          </div>
+        </div>
+        <div class="annotations">
+          <div class="annotation"><span class="ann-num">①</span> Filter by country, wildlife, duration, price range</div>
+          <div class="annotation"><span class="ann-num">②</span> Toggle: grid / map view</div>
+          <div class="annotation"><span class="ann-num">③</span> Cards show best season indicator</div>
+        </div>
+      </div>
+
+      <!-- Package Detail -->
+      <div class="wf-screen-wrap">
+        <div class="wf-screen-label"><span>Package Detail (P06)</span><span class="wf-badge">All Visitors</span></div>
+        <div class="wf-screen wf">
+          <div class="wf-nav"><div class="wf-nav-logo"></div><div class="wf-nav-links"><div></div><div></div></div><div class="wf-nav-btn"></div></div>
+          <div class="wf-breadcrumb"><div class="wf-bc-item" style="width:30px;"></div><div class="wf-bc-sep">›</div><div class="wf-bc-item" style="width:70px;"></div><div class="wf-bc-sep">›</div><div class="wf-bc-item" style="width:110px;"></div></div>
+          <!-- Hero + sticky booking panel -->
+          <div style="display:flex; gap:0;">
+            <div style="flex:1;">
+              <div style="background:var(--wf-accent); height:180px; display:flex; align-items:center; justify-content:center;"><div style="font-size:10px; color:rgba(255,255,255,0.4); letter-spacing:2px;">GALLERY · 12 PHOTOS</div></div>
+            </div>
+          </div>
+          <!-- Content + sidebar layout -->
+          <div style="display:flex; gap:12px; padding:12px 16px;">
+            <div style="flex:2;">
+              <div style="background:var(--wf-border); height:18px; width:80%; border-radius:2px; margin-bottom:6px;"></div>
+              <div style="display:flex; gap:6px; margin-bottom:10px;">
+                <div style="background:var(--gold-pale); height:16px; width:60px; border-radius:10px;"></div>
+                <div style="background:var(--gold-pale); height:16px; width:70px; border-radius:10px;"></div>
+                <div style="background:var(--gold-pale); height:16px; width:80px; border-radius:10px;"></div>
+              </div>
+              <!-- Tabs -->
+              <div style="display:flex; gap:0; border-bottom:2px solid var(--wf-border); margin-bottom:10px;">
+                <div style="background:var(--wf-border); height:28px; width:80px; margin-right:4px; border-radius:4px 4px 0 0;"></div>
+                <div style="background:var(--gold); height:28px; width:80px; margin-right:4px; border-radius:4px 4px 0 0;"></div>
+                <div style="background:var(--wf-border); height:28px; width:80px; border-radius:4px 4px 0 0;"></div>
+              </div>
+              <!-- Itinerary items -->
+              <div style="display:flex; gap:10px; margin-bottom:8px; align-items:flex-start;">
+                <div style="background:var(--gold); width:24px; height:24px; border-radius:50%; flex-shrink:0;"></div>
+                <div style="flex:1;"><div style="background:var(--wf-border); height:10px; width:60%; border-radius:2px; margin-bottom:4px;"></div><div style="background:var(--wf-img); height:8px; border-radius:2px; margin-bottom:3px;"></div><div style="background:var(--wf-img); height:8px; width:80%; border-radius:2px;"></div></div>
+              </div>
+              <div style="display:flex; gap:10px; margin-bottom:8px; align-items:flex-start;">
+                <div style="background:var(--wf-border); width:24px; height:24px; border-radius:50%; flex-shrink:0;"></div>
+                <div style="flex:1;"><div style="background:var(--wf-border); height:10px; width:60%; border-radius:2px; margin-bottom:4px;"></div><div style="background:var(--wf-img); height:8px; border-radius:2px; margin-bottom:3px;"></div><div style="background:var(--wf-img); height:8px; width:80%; border-radius:2px;"></div></div>
+              </div>
+              <!-- Gear cross-sell -->
+              <div style="background:var(--gold-pale); border:1.5px dashed var(--gold); border-radius:6px; padding:10px; margin-top:8px;">
+                <div style="background:var(--gold-dark); height:10px; width:120px; border-radius:2px; margin-bottom:8px;"></div>
+                <div style="display:flex; gap:6px;">
+                  <div class="wf-card" style="flex:1;"><div class="wf-card-img" style="height:50px;"></div><div class="wf-card-body"><div class="wf-card-title"></div></div></div>
+                  <div class="wf-card" style="flex:1;"><div class="wf-card-img" style="height:50px;"></div><div class="wf-card-body"><div class="wf-card-title"></div></div></div>
+                  <div class="wf-card" style="flex:1;"><div class="wf-card-img" style="height:50px;"></div><div class="wf-card-body"><div class="wf-card-title"></div></div></div>
+                </div>
+              </div>
+            </div>
+            <!-- Sticky booking panel -->
+            <div style="flex:1;">
+              <div style="background:white; border:1.5px solid var(--gold); border-radius:8px; padding:12px; position:sticky; top:0;">
+                <div style="background:var(--wf-accent); height:18px; width:80%; border-radius:2px; margin-bottom:8px;"></div>
+                <div style="background:var(--gold-pale); height:28px; border-radius:4px; margin-bottom:8px;"></div>
+                <div style="background:var(--wf-border); height:28px; border-radius:4px; margin-bottom:8px;"></div>
+                <div style="background:var(--wf-border); height:28px; border-radius:4px; margin-bottom:12px;"></div>
+                <div style="background:var(--gold); height:36px; border-radius:4px; margin-bottom:6px;"></div>
+                <div style="background:var(--wf-img); height:28px; border-radius:4px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="annotations">
+          <div class="annotation"><span class="ann-num">①</span> Sticky right-panel: price, dates, guests, book CTA</div>
+          <div class="annotation"><span class="ann-num">②</span> Tab switch: Itinerary / Inclusions / Reviews</div>
+          <div class="annotation"><span class="ann-num">③</span> "Complete Your Safari" gear cross-sell section</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       PANEL 2: E-COMMERCE
+  ══════════════════════════════════════════════ -->
+  <div class="wf-panel" id="panel-ecommerce">
+    <div class="section-header">
+      <div class="section-title">E-Commerce Pages</div>
+      <div class="section-sub">Shop listing, product detail, cart, checkout flow</div>
+    </div>
+    <div class="wf-screens">
+
+      <!-- Shop Listing -->
+      <div class="wf-screen-wrap">
+        <div class="wf-screen-label"><span>Shop — Product Listing (E02)</span><span class="wf-badge">All Visitors</span></div>
+        <div class="wf-screen wf">
+          <div class="wf-nav"><div class="wf-nav-logo"></div><div class="wf-nav-links"><div></div><div></div><div></div></div><div class="wf-nav-btn"></div></div>
+          <!-- Shop hero -->
+          <div style="background:var(--wf-accent); height:80px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;">
+            <div style="background:rgba(255,255,255,0.8); height:14px; width:150px; border-radius:2px;"></div>
+            <div style="background:rgba(255,255,255,0.4); height:8px; width:120px; border-radius:2px;"></div>
+          </div>
+          <!-- Category tabs -->
+          <div style="background:white; padding:10px 16px; border-bottom:1px solid var(--wf-border); display:flex; gap:6px; overflow:auto;">
+            <div style="background:var(--green-dark); height:28px; width:80px; border-radius:4px;"></div>
+            <div style="background:var(--wf-img); height:28px; width:80px; border-radius:4px;"></div>
+            <div style="background:var(--wf-img); height:28px; width:80px; border-radius:4px;"></div>
+            <div style="background:var(--wf-img); height:28px; width:90px; border-radius:4px;"></div>
+            <div style="background:var(--wf-img); height:28px; width:70px; border-radius:4px;"></div>
+          </div>
+          <div class="wf-product-layout">
+            <!-- Filters -->
+            <div class="wf-filter-col">
+              <div class="wf-filter-header"></div>
+              <div class="wf-filter-section">
+                <div class="wf-filter-section-title"></div>
+                <div class="wf-filter-item"><div class="wf-checkbox"></div><div class="wf-filter-text"></div></div>
+                <div class="wf-filter-item"><div class="wf-checkbox" style="background:var(--gold-pale);"></div><div class="wf-filter-text"></div></div>
+                <div class="wf-filter-item"><div class="wf-checkbox"></div><div class="wf-filter-text"></div></div>
+              </div>
+              <div class="wf-filter-section">
+                <div class="wf-filter-section-title"></div>
+                <div style="background:var(--wf-img); height:4px; border-radius:2px; margin-bottom:4px;"><div style="background:var(--gold); height:4px; width:60%; border-radius:2px;"></div></div>
+                <div style="display:flex; justify-content:space-between; margin-top:4px;"><div style="background:var(--wf-border); height:7px; width:30px; border-radius:2px;"></div><div style="background:var(--wf-border); height:7px; width:30px; border-radius:2px;"></div></div>
+              </div>
+              <div class="wf-filter-section">
+                <div class="wf-filter-section-title"></div>
+                <div class="wf-filter-item"><div class="wf-checkbox"></div><div class="wf-filter-text"></div></div>
+                <div class="wf-filter-item"><div class="wf-checkbox"></div><div class="wf-filter-text"></div></div>
+              </div>
+            </div>
+            <!-- Products -->
+            <div class="wf-products-col">
+              <div class="wf-sort-bar"><div class="wf-sort-label"></div><div class="wf-sort-select"></div></div>
+              <div class="wf-product-grid">
+                <div class="wf-card"><div class="wf-card-img" style="height:100px; position:relative;"><div style="position:absolute; top:6px; right:6px; background:var(--gold); height:16px; width:40px; border-radius:2px;"></div></div><div class="wf-card-body"><div class="wf-card-tag"></div><div class="wf-card-title"></div><div class="wf-card-text"></div></div><div class="wf-card-footer"><div class="wf-price"></div><div class="wf-btn-sm"></div></div></div>
+                <div class="wf-card"><div class="wf-card-img" style="height:100px;"></div><div class="wf-card-body"><div class="wf-card-tag"></div><div class="wf-card-title"></div><div class="wf-card-text"></div></div><div class="wf-card-footer"><div class="wf-price"></div><div class="wf-btn-sm"></div></div></div>
+                <div class="wf-card"><div class="wf-card-img" style="height:100px;"></div><div class="wf-card-body"><div class="wf-card-tag"></div><div class="wf-card-title"></div><div class="wf-card-text"></div></div><div class="wf-card-footer"><div class="wf-price"></div><div class="wf-btn-sm"></div></div></div>
+                <div class="wf-card"><div class="wf-card-img" style="height:100px;"></div><div class="wf-card-body"><div class="wf-card-tag"></div><div class="wf-card-title"></div></div><div class="wf-card-footer"><div class="wf-price"></div><div class="wf-btn-sm"></div></div></div>
+                <div class="wf-card"><div class="wf-card-img" style="height:100px;"></div><div class="wf-card-body"><div class="wf-card-tag"></div><div class="wf-card-title"></div></div><div class="wf-card-footer"><div class="wf-price"></div><div class="wf-btn-sm"></div></div></div>
+                <div class="wf-card"><div class="wf-card-img" style="height:100px;"></div><div class="wf-card-body"><div class="wf-card-tag"></div><div class="wf-card-title"></div></div><div class="wf-card-footer"><div class="wf-price"></div><div class="wf-btn-sm"></div></div></div>
+              </div>
+            </div>
+          </div>
+          <!-- Currency selector strip -->
+          <div style="background:var(--gold-pale); border-top:1px solid var(--gold); padding:8px 16px; display:flex; align-items:center; gap:10px;">
+            <div style="background:var(--gold-dark); height:8px; width:80px; border-radius:2px;"></div>
+            <div style="background:var(--gold); height:22px; width:50px; border-radius:3px;"></div>
+            <div style="background:var(--wf-img); height:22px; width:50px; border-radius:3px;"></div>
+            <div style="background:var(--wf-img); height:22px; width:50px; border-radius:3px;"></div>
+            <div style="background:var(--wf-img); height:22px; width:50px; border-radius:3px;"></div>
+          </div>
+        </div>
+        <div class="annotations">
+          <div class="annotation"><span class="ann-num">①</span> Left: collapsible filter sidebar (type, price, size, brand)</div>
+          <div class="annotation"><span class="ann-num">②</span> Currency selector persists across all pages</div>
+          <div class="annotation"><span class="ann-num">③</span> "Sale" / "New" / "Bundle" badges on product cards</div>
+        </div>
+      </div>
+
+      <!-- Cart -->
+      <div class="wf-screen-wrap">
+        <div class="wf-screen-label"><span>Shopping Cart (E04)</span><span class="wf-badge">Auth required at checkout</span></div>
+        <div class="wf-screen wf">
+          <div class="wf-nav"><div class="wf-nav-logo"></div><div class="wf-nav-links"><div></div><div></div></div><div style="display:flex; gap:8px;"><div style="background:var(--wf-img); height:28px; width:60px; border-radius:3px;"></div><div class="wf-nav-btn"></div></div></div>
+          <div class="wf-breadcrumb"><div class="wf-bc-item" style="width:30px;"></div><div class="wf-bc-sep">›</div><div class="wf-bc-item" style="width:50px;"></div><div class="wf-bc-sep">›</div><div class="wf-bc-item" style="width:40px; background:var(--gold);"></div></div>
+          <div style="padding:12px 16px;">
+            <div style="background:var(--wf-border); height:16px; width:80px; border-radius:2px; margin-bottom:12px;"></div>
+            <div class="wf-cart-layout">
+              <div class="wf-cart-items">
+                <!-- Cart item 1 (tour booking) -->
+                <div class="wf-cart-item" style="border-left:3px solid var(--green-mid);">
+                  <div class="wf-cart-img" style="background:var(--green-pale);"></div>
+                  <div class="wf-cart-info"><div class="wf-cart-name"></div><div class="wf-cart-variant"></div><div style="background:var(--gold-pale); height:14px; width:60px; border-radius:8px; margin-top:5px;"></div></div>
+                  <div class="wf-cart-price"></div>
+                </div>
+                <!-- Cart item 2 (gear) -->
+                <div class="wf-cart-item" style="border-left:3px solid var(--gold);">
+                  <div class="wf-cart-img"></div>
+                  <div class="wf-cart-info"><div class="wf-cart-name"></div><div class="wf-cart-variant"></div><div style="display:flex; gap:4px; margin-top:5px;"><div style="background:var(--wf-border); height:18px; width:18px; border-radius:3px;"></div><div style="background:var(--wf-border); height:18px; width:24px; border-radius:3px;"></div><div style="background:var(--wf-border); height:18px; width:18px; border-radius:3px;"></div></div></div>
+                  <div class="wf-cart-price"></div>
+                </div>
+                <!-- Cart item 3 (add-on) -->
+                <div class="wf-cart-item">
+                  <div class="wf-cart-img"></div>
+                  <div class="wf-cart-info"><div class="wf-cart-name"></div><div class="wf-cart-variant"></div></div>
+                  <div class="wf-cart-price"></div>
+                </div>
+                <!-- Promo code -->
+                <div style="background:white; border:1px solid var(--wf-border); border-radius:6px; padding:10px; display:flex; gap:8px;">
+                  <div style="flex:1; background:var(--wf-img); height:30px; border-radius:4px;"></div>
+                  <div style="background:var(--gold); height:30px; width:80px; border-radius:4px;"></div>
+                </div>
+                <!-- Upsell -->
+                <div style="background:var(--gold-pale); border:1.5px dashed var(--gold); border-radius:6px; padding:10px; margin-top:8px;">
+                  <div style="background:var(--gold-dark); height:10px; width:140px; border-radius:2px; margin-bottom:8px;"></div>
+                  <div style="display:flex; gap:6px;">
+                    <div class="wf-card" style="flex:1;"><div class="wf-card-img" style="height:50px;"></div><div class="wf-card-footer"><div class="wf-price"></div><div class="wf-btn-sm" style="width:50px;"></div></div></div>
+                    <div class="wf-card" style="flex:1;"><div class="wf-card-img" style="height:50px;"></div><div class="wf-card-footer"><div class="wf-price"></div><div class="wf-btn-sm" style="width:50px;"></div></div></div>
+                  </div>
+                </div>
+              </div>
+              <!-- Order summary -->
+              <div class="wf-cart-summary">
+                <div class="wf-summary-box">
+                  <div style="background:var(--wf-border); height:12px; width:90px; border-radius:2px; margin-bottom:12px;"></div>
+                  <div class="wf-summary-line"><div class="wf-summary-label"></div><div class="wf-summary-value"></div></div>
+                  <div class="wf-summary-line"><div class="wf-summary-label"></div><div class="wf-summary-value"></div></div>
+                  <div class="wf-summary-line"><div class="wf-summary-label" style="background:var(--gold-pale);"></div><div class="wf-summary-value" style="background:var(--gold-pale);"></div></div>
+                  <div style="border-top:2px solid var(--wf-border); padding-top:8px; margin-top:4px; display:flex; justify-content:space-between; align-items:center;">
+                    <div class="wf-summary-total"></div><div class="wf-summary-total-val"></div>
+                  </div>
+                  <!-- Currency toggle -->
+                  <div style="display:flex; gap:4px; margin:10px 0; justify-content:center; flex-wrap:wrap;">
+                    <div style="background:var(--gold); height:20px; width:36px; border-radius:3px;"></div>
+                    <div style="background:var(--wf-img); height:20px; width:36px; border-radius:3px;"></div>
+                    <div style="background:var(--wf-img); height:20px; width:36px; border-radius:3px;"></div>
+                    <div style="background:var(--wf-img); height:20px; width:36px; border-radius:3px;"></div>
+                  </div>
+                  <div style="background:var(--gold); height:36px; border-radius:4px; margin-bottom:6px;"></div>
+                  <div style="background:var(--wf-img); height:28px; border-radius:4px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="annotations">
+          <div class="annotation"><span class="ann-num">①</span> Cart distinguishes tour bookings vs. gear items visually</div>
+          <div class="annotation"><span class="ann-num">②</span> Real-time currency conversion toggle in order summary</div>
+          <div class="annotation"><span class="ann-num">③</span> "You might also need" upsell in cart</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       PANEL 3: BOOKING FLOW
+  ══════════════════════════════════════════════ -->
+  <div class="wf-panel" id="panel-booking">
+    <div class="section-header">
+      <div class="section-title">Booking Flow</div>
+      <div class="section-sub">4-step booking: package select → customize → payment → confirmation</div>
+    </div>
+    <div class="wf-screens">
+      <!-- Step 1 -->
+      <div class="wf-screen-wrap">
+        <div class="wf-screen-label"><span>Booking Step 1 — Customize</span><span class="wf-badge">Auth Required</span></div>
+        <div class="wf-screen wf">
+          <div class="wf-nav"><div class="wf-nav-logo"></div><div class="wf-nav-links"><div></div></div><div class="wf-nav-btn"></div></div>
+          <div class="wf-steps">
+            <div class="wf-step"><div class="wf-step-num done">✓</div><div class="wf-step-label" style="background:var(--gold); opacity:0.5;"></div></div>
+            <div class="wf-step-line done"></div>
+            <div class="wf-step"><div class="wf-step-num active">2</div><div class="wf-step-label"></div></div>
+            <div class="wf-step-line"></div>
+            <div class="wf-step"><div class="wf-step-num inactive">3</div><div class="wf-step-label" style="opacity:0.3;"></div></div>
+            <div class="wf-step-line"></div>
+            <div class="wf-step"><div class="wf-step-num inactive">4</div><div class="wf-step-label" style="opacity:0.3;"></div></div>
+          </div>
+          <div style="display:flex; gap:12px; padding:12px 16px;">
+            <div style="flex:2;">
+              <!-- Package summary -->
+              <div style="background:white; border:1px solid var(--wf-border); border-radius:6px; padding:10px; display:flex; gap:10px; margin-bottom:12px;">
+                <div style="background:var(--wf-img); width:60px; height:60px; border-radius:4px; flex-shrink:0;"></div>
+                <div style="flex:1;"><div style="background:var(--wf-border); height:12px; width:80%; border-radius:2px; margin-bottom:5px;"></div><div style="background:var(--wf-img); height:8px; width:60%; border-radius:2px; margin-bottom:5px;"></div><div style="background:var(--gold-pale); height:14px; width:80px; border-radius:2px;"></div></div>
+              </div>
+              <!-- Guests form -->
+              <div class="wf-form" style="padding:0; background:transparent;">
+                <div style="background:var(--wf-border); height:12px; width:80px; border-radius:2px; margin-bottom:10px;"></div>
+                <div class="wf-form-row">
+                  <div class="wf-input-group"><div class="wf-input-label"></div><div class="wf-input"></div></div>
+                  <div class="wf-input-group"><div class="wf-input-label"></div><div class="wf-input"></div></div>
+                </div>
+                <div class="wf-form-row">
+                  <div class="wf-input-group"><div class="wf-input-label"></div><div class="wf-input gold"></div></div>
+                  <div class="wf-input-group"><div class="wf-input-label"></div><div class="wf-input"></div></div>
+                </div>
+              </div>
+              <!-- Add-ons -->
+              <div style="background:white; border:1px solid var(--wf-border); border-radius:6px; padding:12px; margin-top:12px;">
+                <div style="background:var(--wf-border); height:12px; width:100px; border-radius:2px; margin-bottom:10px;"></div>
+                <div style="display:flex; gap:8px; margin-bottom:6px;">
+                  <div style="background:var(--gold-pale); border:1.5px solid var(--gold); border-radius:4px; padding:8px; flex:1; display:flex; gap:6px; align-items:center;"><div style="background:var(--gold); width:14px; height:14px; border-radius:2px;"></div><div style="flex:1;"><div style="background:var(--wf-border); height:8px; width:90%; border-radius:2px; margin-bottom:3px;"></div><div style="background:var(--wf-img); height:7px; width:60%; border-radius:2px;"></div></div></div>
+                  <div style="background:white; border:1px solid var(--wf-border); border-radius:4px; padding:8px; flex:1; display:flex; gap:6px; align-items:center;"><div style="border:1.5px solid var(--wf-border); width:14px; height:14px; border-radius:2px;"></div><div style="flex:1;"><div style="background:var(--wf-border); height:8px; width:90%; border-radius:2px; margin-bottom:3px;"></div><div style="background:var(--wf-img); height:7px; width:60%; border-radius:2px;"></div></div></div>
+                </div>
+                <div style="display:flex; gap:8px;">
+                  <div style="background:white; border:1px solid var(--wf-border); border-radius:4px; padding:8px; flex:1; display:flex; gap:6px; align-items:center;"><div style="border:1.5px solid var(--wf-border); width:14px; height:14px; border-radius:2px;"></div><div style="flex:1;"><div style="background:var(--wf-border); height:8px; width:90%; border-radius:2px; margin-bottom:3px;"></div><div style="background:var(--wf-img); height:7px; width:60%; border-radius:2px;"></div></div></div>
+                  <div style="background:white; border:1px solid var(--wf-border); border-radius:4px; padding:8px; flex:1; display:flex; gap:6px; align-items:center;"><div style="border:1.5px solid var(--wf-border); width:14px; height:14px; border-radius:2px;"></div><div style="flex:1;"><div style="background:var(--wf-border); height:8px; width:90%; border-radius:2px; margin-bottom:3px;"></div><div style="background:var(--wf-img); height:7px; width:60%; border-radius:2px;"></div></div></div>
+                </div>
+              </div>
+              <!-- Gear bundle -->
+              <div style="background:var(--gold-pale); border:1.5px dashed var(--gold); border-radius:6px; padding:10px; margin-top:10px;">
+                <div style="background:var(--gold-dark); height:10px; width:140px; border-radius:2px; margin-bottom:8px;"></div>
+                <div style="display:flex; gap:6px;">
+                  <div class="wf-card" style="flex:1;"><div class="wf-card-img" style="height:50px;"></div><div class="wf-card-footer"><div class="wf-price"></div><div class="wf-btn-sm" style="width:50px;"></div></div></div>
+                  <div class="wf-card" style="flex:1;"><div class="wf-card-img" style="height:50px;"></div><div class="wf-card-footer"><div class="wf-price"></div><div class="wf-btn-sm" style="width:50px;"></div></div></div>
+                  <div class="wf-card" style="flex:1;"><div class="wf-card-img" style="height:50px;"></div><div class="wf-card-footer"><div class="wf-price"></div><div class="wf-btn-sm" style="width:50px;"></div></div></div>
+                </div>
+              </div>
+            </div>
+            <!-- Summary sidebar -->
+            <div style="flex:1;">
+              <div style="background:white; border:1px solid var(--wf-border); border-radius:6px; padding:12px;">
+                <div style="background:var(--wf-border); height:12px; width:90px; border-radius:2px; margin-bottom:12px;"></div>
+                <div class="wf-summary-line"><div class="wf-summary-label"></div><div class="wf-summary-value"></div></div>
+                <div class="wf-summary-line"><div class="wf-summary-label"></div><div class="wf-summary-value"></div></div>
+                <div class="wf-summary-line"><div class="wf-summary-label" style="background:var(--gold-pale);"></div><div class="wf-summary-value" style="background:var(--gold-pale);"></div></div>
+                <div style="border-top:1px solid var(--wf-border); margin-top:6px; padding-top:6px; display:flex; justify-content:space-between;"><div class="wf-summary-total"></div><div class="wf-summary-total-val"></div></div>
+                <div style="background:var(--gold); height:36px; border-radius:4px; margin-top:12px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="annotations">
+          <div class="annotation"><span class="ann-num">①</span> Step 2: customize — guests, dates, add-ons, gear bundle</div>
+          <div class="annotation"><span class="ann-num">②</span> Live price update in right summary panel</div>
+          <div class="annotation"><span class="ann-num">③</span> Gear bundle cross-sell with "save 15% when added" badge</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       PANEL 4: USER DASHBOARD
+  ══════════════════════════════════════════════ -->
+  <div class="wf-panel" id="panel-user-dash">
+    <div class="section-header">
+      <div class="section-title">User Dashboard</div>
+      <div class="section-sub">Registered tourist's personal portal — bookings, orders, loyalty, profile</div>
+    </div>
+    <div class="wf-screens">
+      <div class="wf-screen-wrap">
+        <div class="wf-screen-label"><span>User Dashboard (U01)</span><span class="wf-badge">Registered Users</span></div>
+        <div class="wf-screen wf">
+          <div class="wf-nav"><div class="wf-nav-logo"></div><div style="display:flex; gap:8px;"><div style="background:var(--gold); height:28px; width:80px; border-radius:3px;"></div></div></div>
+          <div class="wf-sidebar-layout">
+            <div class="wf-sidebar">
+              <div class="wf-sidebar-logo"></div>
+              <div class="wf-sidebar-section">MY SAFARIS</div>
+              <div class="wf-sidebar-item active"><div class="wf-sidebar-dot active"></div><div class="wf-sidebar-text"></div></div>
+              <div class="wf-sidebar-item"><div class="wf-sidebar-dot"></div><div class="wf-sidebar-text"></div></div>
+              <div class="wf-sidebar-item"><div class="wf-sidebar-dot"></div><div class="wf-sidebar-text"></div></div>
+              <div class="wf-sidebar-section">SHOP</div>
+              <div class="wf-sidebar-item"><div class="wf-sidebar-dot"></div><div class="wf-sidebar-text"></div></div>
+              <div class="wf-sidebar-item"><div class="wf-sidebar-dot"></div><div class="wf-sidebar-text"></div></div>
+              <div class="wf-sidebar-section">ACCOUNT</div>
+              <div class="wf-sidebar-item"><div class="wf-sidebar-dot"></div><div class="wf-sidebar-text"></div></div>
+              <div class="wf-sidebar-item"><div class="wf-sidebar-dot"></div><div class="wf-sidebar-text"></div></div>
+            </div>
+            <div class="wf-main-content">
+              <!-- Welcome + loyalty -->
+              <div style="display:flex; gap:10px; margin-bottom:12px;">
+                <div style="flex:2; background:var(--green-dark); border-radius:8px; padding:12px; display:flex; gap:10px; align-items:center;">
+                  <div style="width:40px; height:40px; border-radius:50%; background:var(--gold); flex-shrink:0;"></div>
+                  <div><div style="background:rgba(255,255,255,0.8); height:12px; width:100px; border-radius:2px; margin-bottom:5px;"></div><div style="background:rgba(255,255,255,0.4); height:8px; width:80px; border-radius:2px;"></div></div>
+                </div>
+                <div style="flex:1; background:var(--gold-pale); border:1.5px solid var(--gold); border-radius:8px; padding:12px; text-align:center;">
+                  <div style="background:var(--gold); height:18px; width:60px; border-radius:2px; margin:0 auto 5px;"></div>
+                  <div style="background:var(--wf-img); height:8px; width:70px; border-radius:2px; margin:0 auto;"></div>
+                </div>
+              </div>
+              <!-- KPIs -->
+              <div class="wf-kpi-row">
+                <div class="wf-kpi"><div class="wf-kpi-label"></div><div class="wf-kpi-num"></div><div class="wf-kpi-trend"></div></div>
+                <div class="wf-kpi"><div class="wf-kpi-label"></div><div class="wf-kpi-num"></div><div class="wf-kpi-trend"></div></div>
+                <div class="wf-kpi"><div class="wf-kpi-label"></div><div class="wf-kpi-num"></div></div>
+              </div>
+              <!-- Upcoming trip card -->
+              <div style="background:white; border:1px solid var(--wf-border); border-radius:6px; padding:10px; display:flex; gap:10px; margin-bottom:10px; border-left:3px solid var(--gold);">
+                <div style="background:var(--wf-img); width:60px; height:60px; border-radius:4px; flex-shrink:0;"></div>
+                <div style="flex:1;"><div style="background:var(--wf-border); height:10px; width:80%; border-radius:2px; margin-bottom:4px;"></div><div style="background:var(--wf-img); height:8px; width:50%; border-radius:2px; margin-bottom:6px;"></div><div style="display:flex; gap:4px;"><div style="background:var(--gold-pale); height:14px; width:60px; border-radius:8px;"></div><div style="background:var(--green-pale); height:14px; width:60px; border-radius:8px;"></div></div></div>
+                <div style="background:var(--wf-img); height:28px; width:60px; border-radius:3px; align-self:center;"></div>
+              </div>
+              <!-- Recent order -->
+              <div class="wf-table">
+                <div class="wf-table-header"><div></div><div></div><div></div></div>
+                <div class="wf-table-row"><div class="wf-table-cell"></div><div class="wf-table-cell bold"></div><div class="wf-table-cell"></div><div class="wf-table-badge"></div></div>
+                <div class="wf-table-row"><div class="wf-table-cell"></div><div class="wf-table-cell"></div><div class="wf-table-cell"></div><div class="wf-table-badge"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="annotations">
+          <div class="annotation"><span class="ann-num">①</span> Loyalty points balance prominently displayed</div>
+          <div class="annotation"><span class="ann-num">②</span> Next upcoming trip with countdown</div>
+          <div class="annotation"><span class="ann-num">③</span> Quick access: re-book, view docs, add gear</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       PANEL 5: ADMIN PORTAL
+  ══════════════════════════════════════════════ -->
+  <div class="wf-panel" id="panel-admin">
+    <div class="section-header">
+      <div class="section-title">Admin Portal</div>
+      <div class="section-sub">Master dashboard, products manager, inventory, user management</div>
+    </div>
+    <div class="wf-screens">
+
+      <!-- Master Dashboard -->
+      <div class="wf-screen-wrap">
+        <div class="wf-screen-label"><span>Super Admin — Master Dashboard (S01)</span><span class="wf-badge">Super Admin Only</span></div>
+        <div class="wf-screen wf">
+          <div class="wf-sidebar-layout">
+            <div class="wf-sidebar" style="width:140px;">
+              <div class="wf-sidebar-logo"></div>
+              <div class="wf-sidebar-section">OVERVIEW</div>
+              <div class="wf-sidebar-item active"><div class="wf-sidebar-dot active"></div><div class="wf-sidebar-text"></div></div>
+              <div class="wf-sidebar-section">CONTENT</div>
+              <div class="wf-sidebar-item"><div class="wf-sidebar-dot"></div><div class="wf-sidebar-text"></div></div>
+              <div class="wf-sidebar-item"><div class="wf-sidebar-dot"></div><div class="wf-sidebar-text"></div></div>
+              <div class="wf-sidebar-item"><div class="wf-sidebar-dot"></div><div class="wf-sidebar-text"></div></div>
+              <div class="wf-sidebar-section">COMMERCE</div>
+              <div class="wf-sidebar-item"><div class="wf-sidebar-dot"></div><div class="wf-sidebar-text"></div></div>
+              <div class="wf-sidebar-item"><div class="wf-sidebar-dot"></div><div class="wf-sidebar-text"></div></div>
+              <div class="wf-sidebar-item"><div class="wf-sidebar-dot"></div><div class="wf-sidebar-text"></div></div>
+              <div class="wf-sidebar-section">SYSTEM</div>
+              <div class="wf-sidebar-item"><div class="wf-sidebar-dot"></div><div class="wf-sidebar-text"></div></div>
+              <div class="wf-sidebar-item"><div class="wf-sidebar-dot"></div><div class="wf-sidebar-text"></div></div>
+            </div>
+            <div class="wf-main-content">
+              <div class="wf-topbar"><div class="wf-topbar-title"></div><div class="wf-topbar-actions"><div class="wf-topbar-btn2"></div><div class="wf-topbar-btn"></div></div></div>
+              <!-- KPIs -->
+              <div class="wf-kpi-row">
+                <div class="wf-kpi"><div class="wf-kpi-label"></div><div class="wf-kpi-num"></div><div class="wf-kpi-trend"></div></div>
+                <div class="wf-kpi"><div class="wf-kpi-label"></div><div class="wf-kpi-num"></div><div class="wf-kpi-trend"></div></div>
+                <div class="wf-kpi"><div class="wf-kpi-label"></div><div class="wf-kpi-num"></div><div class="wf-kpi-trend"></div></div>
+                <div class="wf-kpi"><div class="wf-kpi-label"></div><div class="wf-kpi-num"></div></div>
+              </div>
+              <!-- Charts -->
+              <div style="display:flex; gap:10px; margin-bottom:10px;">
+                <div class="wf-chart" style="flex:2;">
+                  <div class="wf-chart-title"></div>
+                  <div class="wf-chart-bars">
+                    <div class="wf-bar" style="height:40%;"></div>
+                    <div class="wf-bar" style="height:60%;"></div>
+                    <div class="wf-bar" style="height:50%;"></div>
+                    <div class="wf-bar gold" style="height:80%;"></div>
+                    <div class="wf-bar" style="height:65%;"></div>
+                    <div class="wf-bar" style="height:75%;"></div>
+                    <div class="wf-bar gold" style="height:90%;"></div>
+                  </div>
+                </div>
+                <div class="wf-chart" style="flex:1;">
+                  <div class="wf-chart-title"></div>
+                  <div style="width:80px; height:80px; border-radius:50%; background:conic-gradient(var(--gold) 0% 40%, var(--green-mid) 40% 65%, var(--wf-accent) 65% 85%, var(--wf-img) 85% 100%); margin:0 auto;"></div>
+                </div>
+              </div>
+              <!-- Table: recent bookings -->
+              <div class="wf-table">
+                <div class="wf-table-header"><div></div><div></div><div></div><div></div><div></div></div>
+                <div class="wf-table-row"><div class="wf-table-cell bold"></div><div class="wf-table-cell"></div><div class="wf-table-cell"></div><div class="wf-table-cell bold"></div><div class="wf-table-badge"></div></div>
+                <div class="wf-table-row"><div class="wf-table-cell"></div><div class="wf-table-cell"></div><div class="wf-table-cell"></div><div class="wf-table-cell"></div><div class="wf-table-badge"></div></div>
+                <div class="wf-table-row"><div class="wf-table-cell"></div><div class="wf-table-cell"></div><div class="wf-table-cell"></div><div class="wf-table-cell"></div><div class="wf-table-badge"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="annotations">
+          <div class="annotation"><span class="ann-num">①</span> 4 KPI cards: revenue, bookings, orders, active users</div>
+          <div class="annotation"><span class="ann-num">②</span> Revenue chart (bar) + destination distribution (donut)</div>
+          <div class="annotation"><span class="ann-num">③</span> Recent bookings table with inline status badges</div>
+        </div>
+      </div>
+
+      <!-- Products Manager -->
+      <div class="wf-screen-wrap">
+        <div class="wf-screen-label"><span>Products Manager (A05)</span><span class="wf-badge">Sub-Admin +</span></div>
+        <div class="wf-screen wf">
+          <div class="wf-sidebar-layout">
+            <div class="wf-sidebar" style="width:140px;">
+              <div class="wf-sidebar-logo"></div>
+              <div class="wf-sidebar-item"><div class="wf-sidebar-dot"></div><div class="wf-sidebar-text"></div></div>
+              <div class="wf-sidebar-item active"><div class="wf-sidebar-dot active"></div><div class="wf-sidebar-text"></div></div>
+              <div class="wf-sidebar-item"><div class="wf-sidebar-dot"></div><div class="wf-sidebar-text"></div></div>
+            </div>
+            <div class="wf-main-content">
+              <div class="wf-topbar"><div class="wf-topbar-title"></div><div class="wf-topbar-actions"><div class="wf-topbar-btn2"></div><div class="wf-topbar-btn"></div></div></div>
+              <!-- Filter/search bar -->
+              <div style="background:white; border:1px solid var(--wf-border); border-radius:6px; padding:8px 10px; display:flex; gap:8px; margin-bottom:10px;">
+                <div style="flex:2; background:var(--wf-img); height:30px; border-radius:4px;"></div>
+                <div style="background:var(--wf-img); height:30px; width:90px; border-radius:4px;"></div>
+                <div style="background:var(--wf-img); height:30px; width:90px; border-radius:4px;"></div>
+              </div>
+              <!-- Products table -->
+              <div class="wf-table">
+                <div class="wf-table-header"><div style="flex:0.3;"></div><div></div><div></div><div></div><div></div><div style="flex:0.5;"></div></div>
+                <div class="wf-table-row">
+                  <div style="background:var(--wf-img); width:30px; height:30px; border-radius:4px; flex-shrink:0;"></div>
+                  <div class="wf-table-cell bold"></div>
+                  <div class="wf-table-cell"></div>
+                  <div class="wf-table-cell bold" style="background:var(--gold-pale);"></div>
+                  <div class="wf-table-badge"></div>
+                  <div style="display:flex; gap:4px;"><div class="wf-table-action"></div><div class="wf-table-action"></div></div>
+                </div>
+                <div class="wf-table-row">
+                  <div style="background:var(--wf-img); width:30px; height:30px; border-radius:4px; flex-shrink:0;"></div>
+                  <div class="wf-table-cell"></div>
+                  <div class="wf-table-cell"></div>
+                  <div class="wf-table-cell" style="background:#fdecea;"></div>
+                  <div class="wf-table-badge" style="background:#fdecea;"></div>
+                  <div style="display:flex; gap:4px;"><div class="wf-table-action"></div><div class="wf-table-action"></div></div>
+                </div>
+                <div class="wf-table-row">
+                  <div style="background:var(--wf-img); width:30px; height:30px; border-radius:4px; flex-shrink:0;"></div>
+                  <div class="wf-table-cell"></div>
+                  <div class="wf-table-cell"></div>
+                  <div class="wf-table-cell bold"></div>
+                  <div class="wf-table-badge"></div>
+                  <div style="display:flex; gap:4px;"><div class="wf-table-action"></div><div class="wf-table-action"></div></div>
+                </div>
+              </div>
+              <!-- Inventory alert -->
+              <div style="background:#fef9e7; border:1px solid #f39c12; border-radius:6px; padding:8px 10px; display:flex; align-items:center; gap:8px; margin-top:8px;">
+                <div style="background:#f39c12; width:8px; height:8px; border-radius:50%;"></div>
+                <div style="flex:1; background:rgba(243,156,18,0.3); height:8px; border-radius:2px;"></div>
+                <div style="background:#f39c12; height:22px; width:70px; border-radius:3px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="annotations">
+          <div class="annotation"><span class="ann-num">①</span> Product thumbnail, name, category, stock, status, actions</div>
+          <div class="annotation"><span class="ann-num">②</span> Red row highlight = out of stock items</div>
+          <div class="annotation"><span class="ann-num">③</span> Inline low-stock alert bar with restock CTA</div>
+        </div>
+      </div>
+
+      <!-- User Management -->
+      <div class="wf-screen-wrap">
+        <div class="wf-screen-label"><span>User Management (S02)</span><span class="wf-badge">Super Admin Only</span></div>
+        <div class="wf-screen wf">
+          <div class="wf-sidebar-layout">
+            <div class="wf-sidebar" style="width:140px;">
+              <div class="wf-sidebar-logo"></div>
+              <div class="wf-sidebar-item"><div class="wf-sidebar-dot"></div><div class="wf-sidebar-text"></div></div>
+              <div class="wf-sidebar-item active"><div class="wf-sidebar-dot active"></div><div class="wf-sidebar-text"></div></div>
+              <div class="wf-sidebar-item"><div class="wf-sidebar-dot"></div><div class="wf-sidebar-text"></div></div>
+            </div>
+            <div class="wf-main-content">
+              <div class="wf-topbar"><div class="wf-topbar-title"></div><div class="wf-topbar-actions"><div class="wf-topbar-btn"></div></div></div>
+              <div style="display:flex; gap:8px; margin-bottom:10px;">
+                <div style="background:white; border:1px solid var(--wf-border); border-radius:6px; padding:8px 10px; flex:2; display:flex; gap:8px; align-items:center;"><div style="flex:1; background:var(--wf-img); height:28px; border-radius:4px;"></div><div style="background:var(--wf-img); height:28px; width:90px; border-radius:4px;"></div></div>
+              </div>
+              <!-- Role filter tabs -->
+              <div style="display:flex; gap:4px; margin-bottom:10px;">
+                <div style="background:var(--green-dark); height:26px; width:60px; border-radius:4px;"></div>
+                <div style="background:var(--gold-pale); border:1px solid var(--gold); height:26px; width:80px; border-radius:4px;"></div>
+                <div style="background:var(--wf-img); height:26px; width:80px; border-radius:4px;"></div>
+                <div style="background:var(--wf-img); height:26px; width:80px; border-radius:4px;"></div>
+              </div>
+              <!-- Users table -->
+              <div class="wf-table">
+                <div class="wf-table-header"><div></div><div></div><div></div><div style="flex:0.6;"></div><div style="flex:0.4;"></div></div>
+                <div class="wf-table-row">
+                  <div style="display:flex; align-items:center; gap:6px; flex:1;"><div style="background:var(--gold); width:24px; height:24px; border-radius:50%; flex-shrink:0;"></div><div><div style="background:var(--wf-border); height:8px; width:70px; border-radius:2px; margin-bottom:3px;"></div><div style="background:var(--wf-img); height:7px; width:60px; border-radius:2px;"></div></div></div>
+                  <div class="wf-table-cell"></div>
+                  <div class="wf-table-cell"></div>
+                  <div class="wf-table-badge" style="background:var(--gold-pale);"></div>
+                  <div class="wf-table-action"></div>
+                </div>
+                <div class="wf-table-row">
+                  <div style="display:flex; align-items:center; gap:6px; flex:1;"><div style="background:var(--wf-accent); width:24px; height:24px; border-radius:50%; flex-shrink:0;"></div><div><div style="background:var(--wf-border); height:8px; width:70px; border-radius:2px; margin-bottom:3px;"></div><div style="background:var(--wf-img); height:7px; width:60px; border-radius:2px;"></div></div></div>
+                  <div class="wf-table-cell"></div>
+                  <div class="wf-table-cell"></div>
+                  <div class="wf-table-badge" style="background:#F5EAF8;"></div>
+                  <div class="wf-table-action"></div>
+                </div>
+                <div class="wf-table-row">
+                  <div style="display:flex; align-items:center; gap:6px; flex:1;"><div style="background:var(--wf-img); width:24px; height:24px; border-radius:50%; flex-shrink:0;"></div><div><div style="background:var(--wf-border); height:8px; width:70px; border-radius:2px; margin-bottom:3px;"></div><div style="background:var(--wf-img); height:7px; width:60px; border-radius:2px;"></div></div></div>
+                  <div class="wf-table-cell"></div>
+                  <div class="wf-table-cell"></div>
+                  <div class="wf-table-badge" style="background:#EAF3FB;"></div>
+                  <div class="wf-table-action"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="annotations">
+          <div class="annotation"><span class="ann-num">①</span> Role filter tabs: All / Super Admin / Sub-Admin / Users</div>
+          <div class="annotation"><span class="ann-num">②</span> Color-coded avatar + role badge per user</div>
+          <div class="annotation"><span class="ann-num">③</span> Inline role edit — click badge to change role</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       PANEL 6: MOBILE
+  ══════════════════════════════════════════════ -->
+  <div class="wf-panel" id="panel-mobile">
+    <div class="section-header">
+      <div class="section-title">Mobile Wireframes</div>
+      <div class="section-sub">375px viewport — key customer-facing screens optimized for mobile</div>
+    </div>
+    <div style="display:flex; gap:24px; flex-wrap:wrap;">
+
+      <!-- Mobile Home -->
+      <div class="wf-screen-wrap mobile-frame" style="max-width:280px;">
+        <div class="wf-screen-label"><span>Mobile — Home</span><span class="wf-badge">375px</span></div>
+        <div class="wf-screen mobile-screen wf">
+          <!-- Mobile nav -->
+          <div style="background:var(--wf-dark); padding:10px 12px; display:flex; justify-content:space-between; align-items:center;">
+            <div style="background:rgba(255,255,255,0.4); height:12px; width:90px; border-radius:2px;"></div>
+            <div style="display:flex; gap:8px;">
+              <div style="background:rgba(255,255,255,0.3); width:20px; height:20px; border-radius:3px;"></div>
+              <div style="background:var(--gold); width:20px; height:20px; border-radius:3px;"></div>
+            </div>
+          </div>
+          <!-- Mobile hero -->
+          <div style="background:var(--wf-accent); height:160px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; padding:16px;">
+            <div style="background:rgba(255,255,255,0.8); height:20px; width:90%; border-radius:2px;"></div>
+            <div style="background:rgba(255,255,255,0.5); height:12px; width:70%; border-radius:2px;"></div>
+            <div style="background:var(--gold); height:32px; width:120px; border-radius:4px; margin-top:8px;"></div>
+          </div>
+          <!-- Destinations scroll -->
+          <div style="padding:10px 12px;">
+            <div style="background:var(--wf-border); height:12px; width:100px; border-radius:2px; margin-bottom:8px;"></div>
+            <div style="display:flex; gap:8px; overflow:hidden;">
+              <div class="wf-card" style="min-width:100px;"><div class="wf-card-img" style="height:70px;"></div><div class="wf-card-body"><div class="wf-card-title"></div></div></div>
+              <div class="wf-card" style="min-width:100px;"><div class="wf-card-img" style="height:70px;"></div><div class="wf-card-body"><div class="wf-card-title"></div></div></div>
+            </div>
+          </div>
+          <!-- Shop strip -->
+          <div style="background:var(--gold-pale); padding:10px 12px; border-top:1px solid var(--gold);">
+            <div style="background:var(--gold-dark); height:10px; width:80px; border-radius:2px; margin-bottom:8px;"></div>
+            <div style="display:flex; gap:8px;">
+              <div style="background:white; height:40px; flex:1; border-radius:4px; border:1px solid var(--wf-border);"></div>
+              <div style="background:white; height:40px; flex:1; border-radius:4px; border:1px solid var(--wf-border);"></div>
+              <div style="background:white; height:40px; flex:1; border-radius:4px; border:1px solid var(--wf-border);"></div>
+            </div>
+          </div>
+          <!-- Bottom nav -->
+          <div style="background:var(--wf-dark); padding:8px 12px; display:flex; justify-content:space-around;">
+            <div style="text-align:center;"><div style="background:var(--gold); width:20px; height:20px; border-radius:4px; margin:0 auto 3px;"></div><div style="background:rgba(255,255,255,0.3); height:7px; width:20px; border-radius:2px; margin:0 auto;"></div></div>
+            <div style="text-align:center;"><div style="background:rgba(255,255,255,0.3); width:20px; height:20px; border-radius:4px; margin:0 auto 3px;"></div><div style="background:rgba(255,255,255,0.2); height:7px; width:20px; border-radius:2px; margin:0 auto;"></div></div>
+            <div style="text-align:center;"><div style="background:rgba(255,255,255,0.3); width:20px; height:20px; border-radius:4px; margin:0 auto 3px;"></div><div style="background:rgba(255,255,255,0.2); height:7px; width:20px; border-radius:2px; margin:0 auto;"></div></div>
+            <div style="text-align:center;"><div style="background:rgba(255,255,255,0.3); width:20px; height:20px; border-radius:4px; margin:0 auto 3px;"></div><div style="background:rgba(255,255,255,0.2); height:7px; width:20px; border-radius:2px; margin:0 auto;"></div></div>
+          </div>
+        </div>
+        <div class="annotations">
+          <div class="annotation"><span class="ann-num">①</span> Hamburger nav with bottom tab bar</div>
+          <div class="annotation"><span class="ann-num">②</span> Horizontal scroll for destination cards</div>
+        </div>
+      </div>
+
+      <!-- Mobile Shop -->
+      <div class="wf-screen-wrap mobile-frame" style="max-width:280px;">
+        <div class="wf-screen-label"><span>Mobile — Shop</span><span class="wf-badge">375px</span></div>
+        <div class="wf-screen mobile-screen wf">
+          <div style="background:var(--wf-dark); padding:10px 12px; display:flex; justify-content:space-between; align-items:center;">
+            <div style="background:rgba(255,255,255,0.3); width:18px; height:18px; border-radius:2px;"></div>
+            <div style="background:rgba(255,255,255,0.4); height:12px; width:60px; border-radius:2px;"></div>
+            <div style="background:var(--gold); width:18px; height:18px; border-radius:2px; position:relative;"><div style="position:absolute; top:-3px; right:-3px; width:8px; height:8px; background:red; border-radius:50%;"></div></div>
+          </div>
+          <!-- Search bar -->
+          <div style="padding:8px 12px;"><div style="background:white; border:1.5px solid var(--wf-border); border-radius:20px; height:32px;"></div></div>
+          <!-- Category chips -->
+          <div style="padding:0 12px 8px; display:flex; gap:6px; overflow:hidden;">
+            <div style="background:var(--green-dark); height:24px; width:60px; border-radius:12px; flex-shrink:0;"></div>
+            <div style="background:var(--wf-img); height:24px; width:60px; border-radius:12px; flex-shrink:0;"></div>
+            <div style="background:var(--wf-img); height:24px; width:70px; border-radius:12px; flex-shrink:0;"></div>
+          </div>
+          <!-- Product grid 2-col -->
+          <div style="padding:0 12px; display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <div class="wf-card"><div class="wf-card-img" style="height:80px;"></div><div class="wf-card-body"><div class="wf-card-title"></div><div class="wf-card-text"></div></div><div class="wf-card-footer"><div class="wf-price"></div></div></div>
+            <div class="wf-card"><div class="wf-card-img" style="height:80px;"></div><div class="wf-card-body"><div class="wf-card-title"></div><div class="wf-card-text"></div></div><div class="wf-card-footer"><div class="wf-price"></div></div></div>
+            <div class="wf-card"><div class="wf-card-img" style="height:80px;"></div><div class="wf-card-body"><div class="wf-card-title"></div></div><div class="wf-card-footer"><div class="wf-price"></div></div></div>
+            <div class="wf-card"><div class="wf-card-img" style="height:80px;"></div><div class="wf-card-body"><div class="wf-card-title"></div></div><div class="wf-card-footer"><div class="wf-price"></div></div></div>
+          </div>
+          <div style="padding:8px 12px;"><div style="background:var(--gold); height:36px; border-radius:4px;"></div></div>
+          <div style="background:var(--wf-dark); padding:8px 12px; display:flex; justify-content:space-around; margin-top:8px;">
+            <div style="text-align:center;"><div style="background:rgba(255,255,255,0.3); width:20px; height:20px; border-radius:4px; margin:0 auto 3px;"></div></div>
+            <div style="text-align:center;"><div style="background:var(--gold); width:20px; height:20px; border-radius:4px; margin:0 auto 3px;"></div></div>
+            <div style="text-align:center;"><div style="background:rgba(255,255,255,0.3); width:20px; height:20px; border-radius:4px; margin:0 auto 3px;"></div></div>
+            <div style="text-align:center;"><div style="background:rgba(255,255,255,0.3); width:20px; height:20px; border-radius:4px; margin:0 auto 3px;"></div></div>
+          </div>
+        </div>
+        <div class="annotations">
+          <div class="annotation"><span class="ann-num">①</span> 2-col product grid (vs. 3-col desktop)</div>
+          <div class="annotation"><span class="ann-num">②</span> Cart badge on icon with item count</div>
+        </div>
+      </div>
+
+      <!-- Mobile Checkout -->
+      <div class="wf-screen-wrap mobile-frame" style="max-width:280px;">
+        <div class="wf-screen-label"><span>Mobile — Checkout</span><span class="wf-badge">375px</span></div>
+        <div class="wf-screen mobile-screen wf">
+          <div style="background:var(--wf-dark); padding:10px 12px; display:flex; justify-content:space-between; align-items:center;">
+            <div style="background:rgba(255,255,255,0.3); width:18px; height:18px; border-radius:2px;"></div>
+            <div style="background:rgba(255,255,255,0.4); height:12px; width:60px; border-radius:2px;"></div>
+            <div style="background:rgba(255,255,255,0.2); width:18px; height:18px; border-radius:2px;"></div>
+          </div>
+          <!-- Checkout steps -->
+          <div style="padding:10px 12px; display:flex; justify-content:center; gap:6px; align-items:center;">
+            <div style="background:var(--gold); width:24px; height:24px; border-radius:50%;"></div>
+            <div style="background:var(--gold); height:2px; width:20px;"></div>
+            <div style="background:var(--green-dark); border:2px solid var(--green-dark); width:24px; height:24px; border-radius:50%;"></div>
+            <div style="background:var(--wf-img); height:2px; width:20px;"></div>
+            <div style="background:var(--wf-img); border:2px solid var(--wf-border); width:24px; height:24px; border-radius:50%;"></div>
+          </div>
+          <!-- Form stacked -->
+          <div style="padding:0 12px;">
+            <div style="background:var(--wf-border); height:12px; width:80px; border-radius:2px; margin-bottom:10px;"></div>
+            <div style="margin-bottom:8px;"><div style="background:var(--wf-img); height:8px; width:60px; border-radius:2px; margin-bottom:4px;"></div><div class="wf-input"></div></div>
+            <div style="margin-bottom:8px;"><div style="background:var(--wf-img); height:8px; width:60px; border-radius:2px; margin-bottom:4px;"></div><div class="wf-input gold"></div></div>
+            <!-- Currency -->
+            <div style="background:var(--gold-pale); border:1px solid var(--gold); border-radius:6px; padding:8px; margin-bottom:8px;">
+              <div style="background:var(--gold-dark); height:8px; width:80px; border-radius:2px; margin-bottom:6px;"></div>
+              <div style="display:flex; gap:4px; flex-wrap:wrap;">
+                <div style="background:var(--gold); height:22px; width:36px; border-radius:3px;"></div>
+                <div style="background:var(--wf-img); height:22px; width:36px; border-radius:3px;"></div>
+                <div style="background:var(--wf-img); height:22px; width:36px; border-radius:3px;"></div>
+                <div style="background:var(--wf-img); height:22px; width:36px; border-radius:3px;"></div>
+              </div>
+            </div>
+            <!-- Payment methods -->
+            <div style="margin-bottom:8px;"><div style="background:var(--wf-img); height:8px; width:80px; border-radius:2px; margin-bottom:6px;"></div>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:4px;">
+                <div style="background:var(--gold-pale); border:1.5px solid var(--gold); height:32px; border-radius:4px;"></div>
+                <div style="background:white; border:1px solid var(--wf-border); height:32px; border-radius:4px;"></div>
+                <div style="background:white; border:1px solid var(--wf-border); height:32px; border-radius:4px;"></div>
+                <div style="background:white; border:1px solid var(--wf-border); height:32px; border-radius:4px;"></div>
+              </div>
+            </div>
+            <!-- CTA -->
+            <div style="background:var(--gold); height:40px; border-radius:4px;"></div>
+          </div>
+        </div>
+        <div class="annotations">
+          <div class="annotation"><span class="ann-num">①</span> Single-column stacked checkout on mobile</div>
+          <div class="annotation"><span class="ann-num">②</span> Currency selector + payment methods grid</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Successful Safaris — Design Package &nbsp;|&nbsp; <span>Wireframes v1.0</span> &nbsp;|&nbsp; Confidential &nbsp;|&nbsp; 2026</p>
+</footer>
+
+<script>
+  function showPanel(id) {
+    document.querySelectorAll('.wf-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.wf-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>

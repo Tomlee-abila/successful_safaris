@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kenya Safaris — Masai Mara, Amboseli & Beyond | Successful Safaris</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C; --gold-light: #E8C96A; --gold-pale: #F5E9C8; --gold-dark: #A07830;
+    --green-dark: #1A3A2A; --green-mid: #2D5A3D; --green-light: #4A8C5C;
+    --charcoal: #1A1A1A; --gray-mid: #555; --gray-light: #AAA;
+    --cream: #FAF7F0; --cream-mid: #F0EAD6; --white: #FFF;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); }
+  a { text-decoration: none; color: inherit; }
+
+  /* ── PROMO BANNER ── */
+  .promo-banner {
+    background: var(--gold); padding: 10px 48px;
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    font-size: 12px; font-weight: 600; color: var(--green-dark);
+    letter-spacing: 0.3px;
+  }
+  .promo-banner a { color: var(--green-dark); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* ── NAVIGATION ── */
+  .nav-wrapper { position: sticky; top: 0; z-index: 100; }
+  nav {
+    background: rgba(26,58,42,0.97);
+    backdrop-filter: blur(12px);
+    padding: 0 48px;
+    display: flex; align-items: center; height: 72px;
+    border-bottom: 1px solid rgba(201,168,76,0.25);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; margin-right: auto; }
+  .nav-logo-mark {
+    width: 40px; height: 40px; background: var(--gold); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 16px; color: var(--green-dark); font-weight: 700;
+  }
+  .nav-logo-text h2 { font-family: 'Playfair Display', serif; color: white; font-size: 18px; font-weight: 600; }
+  .nav-logo-text p { font-size: 9px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.85); font-size: 13px; letter-spacing: 0.5px; padding: 4px 0; border-bottom: 1.5px solid transparent; transition: all 0.2s; }
+  .nav-links a:hover { color: var(--gold-light); border-bottom-color: var(--gold-light); }
+  .nav-links a.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .nav-right { display: flex; align-items: center; gap: 16px; margin-left: 40px; }
+  .nav-currency {
+    font-size: 12px; color: var(--gold-light); border: 1px solid rgba(201,168,76,0.35);
+    padding: 5px 12px; border-radius: 4px; cursor: pointer; background: transparent;
+    display: flex; align-items: center; gap: 5px; transition: all 0.2s;
+  }
+  .nav-currency:hover { background: rgba(201,168,76,0.1); }
+  .nav-cart { position: relative; color: rgba(255,255,255,0.85); cursor: pointer; padding: 6px; font-size: 18px; transition: color 0.2s; }
+  .nav-cart:hover { color: var(--gold-light); }
+  .cart-badge {
+    position: absolute; top: 0; right: 0;
+    background: var(--gold); color: var(--green-dark);
+    width: 16px; height: 16px; border-radius: 50%;
+    font-size: 9px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nav-cta {
+    background: var(--gold); color: var(--green-dark); padding: 10px 22px;
+    border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; transition: all 0.25s;
+  }
+  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(201,168,76,0.4); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; height: 92vh; min-height: 640px;
+    background: linear-gradient(160deg, rgba(8,22,12,0.78) 0%, rgba(20,48,30,0.55) 45%, rgba(40,80,50,0.35) 100%),
+      url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1920&q=90') center/cover no-repeat;
+    display: flex; align-items: flex-end;
+    overflow: hidden;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(10,24,16,0.82) 0%, transparent 60%);
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    width: 100%; padding: 0 80px 80px;
+  }
+  .hero-breadcrumb {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 24px;
+    font-size: 11px; color: rgba(255,255,255,0.55); letter-spacing: 0.5px;
+  }
+  .hero-breadcrumb a { color: rgba(255,255,255,0.55); transition: color 0.2s; }
+  .hero-breadcrumb a:hover { color: var(--gold-light); }
+  .hero-breadcrumb span { color: var(--gold); }
+  .hero-top { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; }
+  .hero-left { max-width: 720px; }
+  .hero-overline {
+    font-size: 11px; color: var(--gold); letter-spacing: 4px; text-transform: uppercase;
+    font-weight: 600; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-overline::before { content: ''; width: 32px; height: 1px; background: var(--gold); }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 6vw, 88px);
+    font-weight: 700; line-height: 1.02;
+    color: white; margin-bottom: 20px;
+  }
+  .hero-title em { color: var(--gold-light); font-style: italic; }
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-style: italic; color: rgba(255,255,255,0.75);
+    line-height: 1.6; max-width: 560px; margin-bottom: 36px;
+  }
+  .hero-actions { display: flex; gap: 16px; align-items: center; }
+  .btn-hero-primary {
+    background: var(--gold); color: var(--green-dark);
+    padding: 16px 36px; border-radius: 4px;
+    font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    transition: all 0.25s; box-shadow: 0 4px 24px rgba(201,168,76,0.4);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-hero-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,168,76,0.5); }
+  .btn-hero-ghost {
+    color: rgba(255,255,255,0.9); padding: 16px 36px;
+    border: 1.5px solid rgba(255,255,255,0.4); border-radius: 4px;
+    font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    transition: all 0.25s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-hero-ghost:hover { background: rgba(255,255,255,0.08); border-color: white; }
+  .hero-right { flex-shrink: 0; }
+  .hero-award {
+    background: rgba(26,58,42,0.9); border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 12px; padding: 20px 24px; text-align: center;
+    backdrop-filter: blur(8px); min-width: 160px;
+  }
+  .hero-award-icon { font-size: 28px; margin-bottom: 8px; }
+  .hero-award-text { font-size: 11px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
+  .hero-award-sub { font-size: 10px; color: rgba(255,255,255,0.55); margin-top: 4px; }
+
+  /* ── QUICK FACTS BAR ── */
+  .quick-facts {
+    background: var(--green-dark);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  .facts-inner {
+    display: flex; max-width: none;
+    border-left: 1px solid rgba(255,255,255,0.06);
+  }
+  .fact-item {
+    flex: 1; padding: 24px 32px;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; gap: 14px;
+  }
+  .fact-icon { font-size: 22px; flex-shrink: 0; }
+  .fact-label { font-size: 9px; color: rgba(255,255,255,0.45); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 3px; }
+  .fact-value { font-size: 14px; color: white; font-weight: 500; }
+  .fact-value strong { color: var(--gold-light); }
+
+  /* ── BREADCRUMB ── */
+  .breadcrumb-bar {
+    padding: 16px 80px;
+    background: white;
+    border-bottom: 1px solid var(--cream-mid);
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: var(--gray-light);
+  }
+  .breadcrumb-bar a { color: var(--gray-mid); transition: color 0.2s; }
+  .breadcrumb-bar a:hover { color: var(--green-dark); }
+  .breadcrumb-bar .sep { color: var(--cream-mid); }
+  .breadcrumb-bar .current { color: var(--green-dark); font-weight: 600; }
+
+  /* ── SHARED ── */
+  .section { padding: 96px 80px; }
+  .section-header { text-align: center; margin-bottom: 56px; }
+  .section-overline {
+    font-size: 11px; color: var(--gold); letter-spacing: 4px; text-transform: uppercase;
+    font-weight: 600; margin-bottom: 12px; display: block;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px; font-weight: 600; color: var(--green-dark); line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .section-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 20px; color: var(--gray-mid); max-width: 560px; margin: 0 auto;
+  }
+  .gold-divider { width: 60px; height: 2px; background: var(--gold); margin: 20px auto 0; }
+
+  /* ── INTRO SPLIT ── */
+  .intro-section { padding: 96px 80px; background: white; }
+  .intro-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .intro-image-wrap { position: relative; }
+  .intro-img {
+    width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 4px;
+    display: block;
+  }
+  .intro-img-bg {
+    width: 100%; aspect-ratio: 4/5;
+    background: url('https://images.unsplash.com/photo-1534177616072-ef7dc120449d?auto=format&fit=crop&w=800&q=85') center/cover;
+    border-radius: 4px;
+  }
+  .intro-quote-badge {
+    position: absolute; bottom: -28px; right: -28px;
+    background: var(--green-dark); color: white;
+    padding: 28px 24px; border-radius: 4px; max-width: 220px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+  }
+  .intro-quote-badge p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 16px; line-height: 1.5; color: rgba(255,255,255,0.9);
+    margin-bottom: 12px;
+  }
+  .intro-quote-badge cite {
+    font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-style: normal;
+  }
+  .intro-text-wrap {}
+  .intro-flag {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--gold-pale); border: 1px solid var(--cream-mid);
+    border-radius: 24px; padding: 6px 16px; margin-bottom: 24px;
+    font-size: 12px; font-weight: 600; color: var(--green-dark);
+  }
+  .intro-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px; font-weight: 600; color: var(--green-dark);
+    line-height: 1.15; margin-bottom: 24px;
+  }
+  .intro-title em { font-style: italic; color: var(--green-light); }
+  .intro-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px; color: var(--gray-mid); line-height: 1.75;
+    margin-bottom: 20px;
+  }
+  .intro-body-sm {
+    font-size: 14px; color: var(--gray-mid); line-height: 1.75; margin-bottom: 32px;
+  }
+  .intro-highlights {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 36px;
+  }
+  .intro-hl {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; color: var(--charcoal); font-weight: 500;
+  }
+  .intro-hl::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold); flex-shrink: 0;
+  }
+  .btn-outline-dark {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1.5px solid var(--green-dark); color: var(--green-dark);
+    padding: 14px 32px; border-radius: 4px;
+    font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    transition: all 0.2s;
+  }
+  .btn-outline-dark:hover { background: var(--green-dark); color: white; }
+  .btn-solid-gold {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--gold); color: var(--green-dark);
+    padding: 14px 32px; border-radius: 4px;
+    font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    transition: all 0.25s; box-shadow: 0 4px 16px rgba(201,168,76,0.3);
+  }
+  .btn-solid-gold:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(201,168,76,0.4); }
+  .intro-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  /* ── REGIONS ── */
+  .regions-section { padding: 96px 80px; background: var(--cream); }
+  .regions-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border: 1px solid var(--cream-mid); border-radius: 12px; overflow: hidden; }
+  .region-card {
+    position: relative; overflow: hidden; cursor: pointer;
+  }
+  .region-img {
+    height: 320px;
+    background-size: cover; background-position: center;
+    transition: transform 0.6s ease;
+  }
+  .region-card:hover .region-img { transform: scale(1.06); }
+  .region-gradient {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(10,22,14,0.92) 0%, rgba(10,22,14,0.35) 55%, transparent 100%);
+    pointer-events: none;
+  }
+  .region-content {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 24px 20px; z-index: 2;
+  }
+  .region-tag {
+    font-size: 9px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase;
+    font-weight: 600; margin-bottom: 6px;
+  }
+  .region-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; font-weight: 600; color: white; line-height: 1.2; margin-bottom: 6px;
+  }
+  .region-desc {
+    font-size: 11px; color: rgba(255,255,255,0.65); line-height: 1.5;
+    max-height: 0; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s;
+    opacity: 0;
+  }
+  .region-card:hover .region-desc { max-height: 80px; opacity: 1; }
+  .region-chip {
+    display: inline-block; margin-top: 8px;
+    background: rgba(201,168,76,0.2); border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold-light); padding: 3px 10px; border-radius: 20px;
+    font-size: 9px; letter-spacing: 1px; text-transform: uppercase; font-weight: 600;
+  }
+  .region-divider { position: absolute; top: 0; bottom: 0; right: 0; width: 1px; background: rgba(255,255,255,0.06); }
+
+  /* ── WILDLIFE ── */
+  .wildlife-section { padding: 96px 80px; background: white; }
+  .wildlife-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+  .wildlife-card {
+    border-radius: 12px; overflow: hidden;
+    background: var(--cream); border: 1px solid var(--cream-mid);
+    transition: all 0.3s;
+  }
+  .wildlife-card:hover { transform: translateY(-5px); border-color: var(--gold); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+  .wildlife-img {
+    height: 220px;
+    background-size: cover; background-position: center;
+    position: relative;
+  }
+  .wildlife-badge {
+    position: absolute; top: 14px; left: 14px;
+    background: var(--green-dark); color: var(--gold);
+    padding: 4px 10px; border-radius: 2px;
+    font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .wildlife-body { padding: 20px; }
+  .wildlife-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 600; color: var(--green-dark); margin-bottom: 6px;
+  }
+  .wildlife-latin {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 14px; color: var(--gold); margin-bottom: 10px;
+  }
+  .wildlife-desc { font-size: 12px; color: var(--gray-mid); line-height: 1.6; margin-bottom: 14px; }
+  .wildlife-best {
+    font-size: 10px; color: var(--gray-mid); letter-spacing: 1px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .wildlife-best::before { content: '📅'; font-size: 12px; }
+
+  /* ── BEST TIME ── */
+  .best-time-section { padding: 96px 80px; background: var(--cream); }
+  .months-grid {
+    display: grid; grid-template-columns: repeat(12, 1fr);
+    border: 1px solid var(--cream-mid); border-radius: 12px; overflow: hidden;
+    background: white; margin-bottom: 48px;
+  }
+  .month-col { border-right: 1px solid var(--cream-mid); }
+  .month-col:last-child { border-right: none; }
+  .month-header {
+    background: var(--green-dark); color: rgba(255,255,255,0.7);
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 14px 0; text-align: center;
+  }
+  .month-row {
+    padding: 14px 0; text-align: center;
+    font-size: 11px; color: var(--gray-mid);
+    border-bottom: 1px solid var(--cream-mid);
+  }
+  .month-row:last-child { border-bottom: none; }
+  .month-row.peak { background: rgba(201,168,76,0.15); color: var(--gold-dark); font-weight: 600; }
+  .month-row.good { background: rgba(74,140,92,0.12); color: var(--green-mid); font-weight: 500; }
+  .month-row.low { background: rgba(255,255,255,0); color: var(--gray-light); }
+  .month-bar { height: 8px; border-radius: 0; }
+  .month-bar.peak { background: var(--gold); }
+  .month-bar.good { background: var(--green-light); }
+  .month-bar.low { background: var(--cream-mid); }
+  .months-legend {
+    display: flex; gap: 32px; justify-content: center; margin-top: 20px;
+    font-size: 12px; color: var(--gray-mid);
+  }
+  .legend-item { display: flex; align-items: center; gap: 8px; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 2px; }
+  .legend-dot.peak { background: var(--gold); }
+  .legend-dot.good { background: var(--green-light); }
+  .legend-dot.low { background: var(--cream-mid); border: 1px solid var(--cream-mid); }
+  .season-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .season-card {
+    background: white; border: 1px solid var(--cream-mid); border-radius: 12px; padding: 28px;
+    transition: all 0.3s;
+  }
+  .season-card:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.07); }
+  .season-icon { font-size: 32px; margin-bottom: 12px; }
+  .season-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 600; color: var(--green-dark); margin-bottom: 4px;
+  }
+  .season-months { font-size: 11px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 12px; }
+  .season-desc { font-size: 13px; color: var(--gray-mid); line-height: 1.65; margin-bottom: 16px; }
+  .season-highlight {
+    font-size: 11px; color: var(--green-mid); font-weight: 600;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .season-highlight::before { content: '✦'; color: var(--gold); font-size: 9px; }
+
+  /* ── ITINERARY ── */
+  .itinerary-section { padding: 96px 80px; background: white; }
+  .itinerary-layout { display: grid; grid-template-columns: 1fr 380px; gap: 64px; align-items: start; }
+  .itinerary-steps {}
+  .itinerary-step {
+    display: grid; grid-template-columns: 80px 1fr; gap: 0;
+    margin-bottom: 0;
+    position: relative;
+  }
+  .itinerary-step:not(:last-child)::after {
+    content: ''; position: absolute;
+    left: 40px; top: 52px; bottom: -1px;
+    width: 1px; background: var(--cream-mid);
+  }
+  .step-day {
+    padding: 24px 0 24px; text-align: center;
+  }
+  .step-day-num {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--gold); color: var(--green-dark);
+    font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto;
+    position: relative; z-index: 1;
+  }
+  .step-day-label {
+    font-size: 9px; color: var(--gray-light); letter-spacing: 1.5px; text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .step-content { padding: 20px 0 32px 24px; border-left: none; }
+  .step-location {
+    font-size: 10px; color: var(--gold); letter-spacing: 2.5px; text-transform: uppercase;
+    font-weight: 600; margin-bottom: 6px;
+  }
+  .step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 600; color: var(--green-dark); margin-bottom: 10px;
+  }
+  .step-desc { font-size: 13px; color: var(--gray-mid); line-height: 1.7; margin-bottom: 14px; }
+  .step-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .step-chip {
+    font-size: 10px; color: var(--gray-mid);
+    background: var(--cream); border: 1px solid var(--cream-mid);
+    padding: 4px 12px; border-radius: 20px;
+  }
+  .itinerary-sidebar { position: sticky; top: 96px; }
+  .sidebar-card {
+    background: var(--green-dark); border-radius: 12px; overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  }
+  .sidebar-img {
+    height: 200px;
+    background: url('https://images.unsplash.com/photo-1523805009345-7448845a9e53?auto=format&fit=crop&w=700&q=85') center/cover;
+  }
+  .sidebar-body { padding: 28px; }
+  .sidebar-label { font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 8px; }
+  .sidebar-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: white; margin-bottom: 6px; line-height: 1.25; }
+  .sidebar-duration { font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+  .sidebar-meta { margin-bottom: 24px; }
+  .sidebar-meta-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-size: 12px;
+  }
+  .sidebar-meta-row:last-child { border-bottom: none; }
+  .sidebar-meta-key { color: rgba(255,255,255,0.5); }
+  .sidebar-meta-val { color: white; font-weight: 500; }
+  .sidebar-price {
+    margin-bottom: 20px; padding-top: 4px;
+  }
+  .sidebar-from { font-size: 10px; color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase; }
+  .sidebar-amount { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: var(--gold-light); line-height: 1; }
+  .sidebar-pp { font-size: 11px; color: rgba(255,255,255,0.45); }
+  .sidebar-btn {
+    display: block; width: 100%; text-align: center;
+    background: var(--gold); color: var(--green-dark);
+    padding: 14px 24px; border-radius: 4px;
+    font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    transition: all 0.25s; margin-bottom: 10px;
+  }
+  .sidebar-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .sidebar-btn-ghost {
+    display: block; width: 100%; text-align: center;
+    color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.2);
+    padding: 13px 24px; border-radius: 4px;
+    font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    transition: all 0.2s;
+  }
+  .sidebar-btn-ghost:hover { border-color: white; color: white; }
+
+  /* ── LODGES ── */
+  .lodges-section { padding: 96px 80px; background: var(--cream); }
+  .lodges-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .lodge-card {
+    background: white; border-radius: 12px; overflow: hidden;
+    border: 1px solid var(--cream-mid); transition: all 0.3s;
+  }
+  .lodge-card:hover { transform: translateY(-5px); border-color: var(--gold); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+  .lodge-img {
+    height: 240px; position: relative;
+    background-size: cover; background-position: center;
+  }
+  .lodge-tier {
+    position: absolute; top: 16px; left: 16px;
+    background: var(--gold); color: var(--green-dark);
+    padding: 4px 12px; border-radius: 2px;
+    font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .lodge-region-tag {
+    position: absolute; bottom: 16px; left: 16px;
+    background: rgba(26,58,42,0.9); color: rgba(255,255,255,0.85);
+    padding: 4px 10px; border-radius: 2px;
+    font-size: 10px; font-weight: 600; letter-spacing: 1px;
+  }
+  .lodge-body { padding: 24px; }
+  .lodge-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 600; color: var(--green-dark); margin-bottom: 6px;
+  }
+  .lodge-desc { font-size: 13px; color: var(--gray-mid); line-height: 1.6; margin-bottom: 16px; }
+  .lodge-amenities { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  .lodge-am {
+    font-size: 10px; color: var(--gray-mid);
+    background: var(--cream); border: 1px solid var(--cream-mid);
+    padding: 3px 10px; border-radius: 20px;
+  }
+  .lodge-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 16px; border-top: 1px solid var(--cream-mid);
+  }
+  .lodge-price-from { font-size: 10px; color: var(--gray-light); text-transform: uppercase; letter-spacing: 1px; }
+  .lodge-price { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--green-dark); }
+  .lodge-price-pp { font-size: 10px; color: var(--gray-light); }
+  .lodge-stars { color: var(--gold); font-size: 12px; letter-spacing: 1px; }
+
+  /* ── PACKAGES ── */
+  .packages-section { background: var(--green-dark); padding: 96px 80px; }
+  .packages-section .section-title { color: white; }
+  .packages-section .section-overline { color: var(--gold); }
+  .packages-section .section-subtitle { color: rgba(255,255,255,0.6); }
+  .packages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .package-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 12px; overflow: hidden; transition: all 0.3s;
+  }
+  .package-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(201,168,76,0.5); transform: translateY(-4px); }
+  .package-img-wrap {
+    height: 240px; position: relative;
+    background-size: cover; background-position: center; overflow: hidden;
+  }
+  .package-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, rgba(10,20,14,0.75));
+  }
+  .package-duration {
+    position: absolute; top: 16px; left: 16px;
+    background: var(--gold); color: var(--green-dark);
+    padding: 4px 12px; border-radius: 2px;
+    font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  }
+  .package-badge {
+    position: absolute; top: 16px; right: 16px;
+    background: rgba(26,58,42,0.9); color: var(--gold-light);
+    padding: 4px 10px; border-radius: 2px;
+    font-size: 10px; font-weight: 600; border: 1px solid rgba(201,168,76,0.4);
+  }
+  .wish-btn {
+    position: absolute; top: 14px; right: 50px; z-index: 2;
+    background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.2);
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; cursor: pointer; transition: all 0.2s;
+  }
+  .wish-btn:hover, .wish-btn.active { background: rgba(220,53,69,0.8); border-color: transparent; }
+  .package-body { padding: 24px; }
+  .package-tag { font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 8px; }
+  .package-name { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: white; margin-bottom: 10px; line-height: 1.25; }
+  .package-desc { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.6; margin-bottom: 16px; }
+  .package-features { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+  .pkg-feat {
+    font-size: 10px; color: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.06); padding: 4px 10px; border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .package-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .package-from { font-size: 10px; color: var(--gray-light); text-transform: uppercase; letter-spacing: 1px; }
+  .package-price { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--gold-light); }
+  .package-pp { font-size: 11px; color: var(--gray-light); }
+  .pkg-btn {
+    background: transparent; color: var(--gold); border: 1.5px solid var(--gold);
+    padding: 10px 20px; border-radius: 4px;
+    font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s; display: inline-block;
+  }
+  .pkg-btn:hover { background: var(--gold); color: var(--green-dark); }
+  .packages-view-all {
+    text-align: center; margin-top: 48px;
+  }
+
+  /* ── GALLERY ── */
+  .gallery-section { padding: 96px 80px; background: white; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 280px 200px;
+    gap: 8px;
+  }
+  .gallery-item {
+    overflow: hidden; cursor: pointer; position: relative;
+    background-size: cover; background-position: center;
+    transition: all 0.3s;
+  }
+  .gallery-item:hover { filter: brightness(1.08); }
+  .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+  .gallery-item:nth-child(2) { grid-column: span 1; }
+  .gallery-item:nth-child(3) { grid-column: span 1; }
+  .gallery-overlay {
+    position: absolute; inset: 0;
+    background: rgba(10,22,14,0.45);
+    opacity: 0; transition: opacity 0.3s;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; color: white;
+  }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-last-overlay {
+    position: absolute; inset: 0; background: rgba(10,22,14,0.7);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 6px;
+    font-size: 22px; font-weight: 700; color: white;
+    font-family: 'Playfair Display', serif;
+  }
+  .gallery-last-sub { font-size: 11px; color: rgba(255,255,255,0.7); font-family: 'Inter', sans-serif; letter-spacing: 2px; text-transform: uppercase; font-weight: 400; }
+
+  /* ── FAQ ── */
+  .faq-section { padding: 96px 80px; background: var(--cream); }
+  .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 60px; }
+  .faq-item {
+    border-bottom: 1px solid var(--cream-mid); padding: 0;
+    cursor: pointer;
+  }
+  .faq-question {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 0; gap: 20px;
+    font-size: 15px; font-weight: 600; color: var(--green-dark);
+    user-select: none;
+  }
+  .faq-icon {
+    flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+    background: var(--cream-mid); border: 1px solid var(--cream-mid);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; color: var(--green-dark); transition: all 0.3s;
+    font-weight: 300;
+  }
+  .faq-item.open .faq-icon { background: var(--gold); border-color: var(--gold); color: var(--green-dark); transform: rotate(45deg); }
+  .faq-answer {
+    font-size: 14px; color: var(--gray-mid); line-height: 1.75;
+    max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.3s;
+    padding-bottom: 0;
+  }
+  .faq-item.open .faq-answer { max-height: 300px; padding-bottom: 24px; }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding: 96px 80px;
+    background: linear-gradient(135deg, var(--green-dark) 0%, #0D2318 100%);
+    position: relative; overflow: hidden; text-align: center;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 600 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3CradialGradient id='a' cx='50%25' cy='50%25'%3E%3Cstop offset='0' stop-color='%23C9A84C' stop-opacity='.07'/%3E%3Cstop offset='1' stop-color='transparent'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='600' height='400'/%3E%3C/svg%3E") center/cover;
+  }
+  .cta-inner { position: relative; z-index: 1; }
+  .cta-overline {
+    font-size: 11px; color: var(--gold); letter-spacing: 4px; text-transform: uppercase;
+    font-weight: 600; margin-bottom: 20px; display: block;
+  }
+  .cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 4vw, 56px); font-weight: 700;
+    color: white; margin-bottom: 20px; line-height: 1.1;
+  }
+  .cta-title em { font-style: italic; color: var(--gold-light); }
+  .cta-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-style: italic; color: rgba(255,255,255,0.65);
+    margin-bottom: 48px; max-width: 520px; margin-left: auto; margin-right: auto;
+  }
+  .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-cta-primary {
+    background: var(--gold); color: var(--green-dark);
+    padding: 18px 48px; border-radius: 4px;
+    font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    transition: all 0.25s; box-shadow: 0 4px 24px rgba(201,168,76,0.35);
+  }
+  .btn-cta-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,168,76,0.5); }
+  .btn-cta-ghost {
+    color: rgba(255,255,255,0.85); border: 1.5px solid rgba(255,255,255,0.35);
+    padding: 18px 48px; border-radius: 4px;
+    font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+    transition: all 0.25s;
+  }
+  .btn-cta-ghost:hover { border-color: white; color: white; background: rgba(255,255,255,0.06); }
+
+  /* ── FOOTER ── */
+  footer { background: var(--charcoal); padding: 72px 80px 40px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+  .footer-brand-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .footer-brand-mark {
+    width: 36px; height: 36px; background: var(--gold); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 14px; color: var(--green-dark); font-weight: 700;
+  }
+  .footer-brand-name { font-family: 'Playfair Display', serif; color: white; font-size: 16px; font-weight: 600; }
+  .footer-brand-text { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; margin-bottom: 24px; max-width: 280px; }
+  .footer-social { display: flex; gap: 10px; }
+  .soc-btn {
+    width: 34px; height: 34px; border: 1px solid rgba(255,255,255,0.15); border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; color: rgba(255,255,255,0.5); transition: all 0.2s; cursor: pointer;
+  }
+  .soc-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .footer-col-title { font-size: 11px; color: var(--gold); letter-spacing: 2.5px; text-transform: uppercase; font-weight: 700; margin-bottom: 20px; }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 10px; }
+  .footer-links a { font-size: 13px; color: rgba(255,255,255,0.45); transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold-light); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding-top: 28px; display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+  .footer-legal { display: flex; gap: 24px; }
+  .footer-legal a { font-size: 12px; color: rgba(255,255,255,0.3); transition: color 0.2s; }
+  .footer-legal a:hover { color: var(--gold-light); }
+
+  /* ── DESTINATION SWITCH ── */
+  .dest-switch { padding: 40px 80px; background: white; border-bottom: 1px solid var(--cream-mid); }
+  .dest-switch-inner { display: flex; align-items: center; gap: 0; }
+  .dest-switch-label { font-size: 11px; color: var(--gray-light); letter-spacing: 2px; text-transform: uppercase; margin-right: 24px; white-space: nowrap; }
+  .dest-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .dest-pill {
+    display: flex; align-items: center; gap: 7px;
+    padding: 9px 18px; border-radius: 24px;
+    font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+    border: 1.5px solid var(--cream-mid); color: var(--gray-mid); background: white;
+  }
+  .dest-pill:hover { border-color: var(--gold); color: var(--green-dark); }
+  .dest-pill.active { background: var(--green-dark); color: white; border-color: var(--green-dark); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    nav { padding: 0 24px; }
+    .nav-links { gap: 20px; display: none; }
+    .hero-content { padding: 0 24px 64px; }
+    .hero-top { flex-direction: column; gap: 24px; }
+    .hero-right { align-self: flex-start; }
+    .section, .intro-section, .regions-section, .wildlife-section,
+    .best-time-section, .itinerary-section, .lodges-section,
+    .packages-section, .gallery-section, .faq-section, .cta-section { padding: 64px 24px; }
+    .intro-grid { grid-template-columns: 1fr; gap: 48px; }
+    .intro-quote-badge { display: none; }
+    .regions-grid { grid-template-columns: repeat(3, 1fr); }
+    .wildlife-grid { grid-template-columns: repeat(2, 1fr); }
+    .itinerary-layout { grid-template-columns: 1fr; }
+    .itinerary-sidebar { position: static; }
+    .lodges-grid { grid-template-columns: 1fr 1fr; }
+    .packages-grid { grid-template-columns: 1fr 1fr; }
+    .faq-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .breadcrumb-bar { padding: 16px 24px; }
+    .dest-switch { padding: 24px; }
+  }
+  @media (max-width: 767px) {
+    .facts-inner { flex-wrap: wrap; }
+    .fact-item { flex: 0 0 50%; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .regions-grid { grid-template-columns: 1fr 1fr; }
+    .wildlife-grid { grid-template-columns: 1fr; }
+    .season-cards { grid-template-columns: 1fr; }
+    .months-grid { grid-template-columns: repeat(6, 1fr); }
+    .months-grid .month-col:nth-child(n+7) { display: none; }
+    .lodges-grid { grid-template-columns: 1fr; }
+    .packages-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .gallery-item:nth-child(1) { grid-column: span 2; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .cta-actions { flex-direction: column; align-items: center; }
+    .hero-actions { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PROMO BANNER -->
+<div class="promo-banner">
+  ✦ &nbsp; Save <strong>15%</strong> on all Kenya packages booked before 30 June 2026 — <a href="/packages/">Browse Kenya Packages →</a>
+</div>
+
+<!-- NAVIGATION -->
+<div class="nav-wrapper">
+  <nav>
+    <a href="/" class="nav-logo">
+      <div class="nav-logo-mark">S</div>
+      <div class="nav-logo-text">
+        <h2>Successful Safaris</h2>
+        <p>Est. 2008 · Nairobi</p>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/destinations/" class="active">Destinations</a></li>
+      <li><a href="/packages/">Packages</a></li>
+      <li><a href="/shop/">Shop</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/contact/">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-currency">USD ▾</div>
+      <a href="/shop/" class="nav-cart">🛒<span class="cart-badge">2</span></a>
+      <a href="/booking/" class="nav-cta">Book Now</a>
+    </div>
+  </nav>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-breadcrumb">
+      <a href="/">Home</a>
+      <span>›</span>
+      <a href="/destinations/">Destinations</a>
+      <span>›</span>
+      <span>Kenya</span>
+    </div>
+    <div class="hero-top">
+      <div class="hero-left">
+        <div class="hero-overline">🇰🇪 East Africa · Kenya</div>
+        <h1 class="hero-title">Kenya —<br>the <em>Heartbeat</em><br>of Africa</h1>
+        <p class="hero-subtitle">Where sweeping plains meet the greatest wildlife spectacle on Earth. Fourteen national parks. Five distinct ecosystems. One unmistakable soul.</p>
+        <div class="hero-actions">
+          <a href="/packages/" class="btn-hero-primary">View Kenya Packages ›</a>
+          <a href="/booking/" class="btn-hero-ghost">Plan My Safari</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-award">
+          <div class="hero-award-icon">🏆</div>
+          <div class="hero-award-text">Top Safari<br>Destination</div>
+          <div class="hero-award-sub">Condé Nast 2024</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK FACTS -->
+<div class="quick-facts">
+  <div class="facts-inner">
+    <div class="fact-item">
+      <div class="fact-icon">📅</div>
+      <div>
+        <div class="fact-label">Peak Season</div>
+        <div class="fact-value"><strong>Jul – Oct</strong></div>
+      </div>
+    </div>
+    <div class="fact-item">
+      <div class="fact-icon">🦁</div>
+      <div>
+        <div class="fact-label">Wildlife</div>
+        <div class="fact-value"><strong>Big Five</strong> + Migration</div>
+      </div>
+    </div>
+    <div class="fact-item">
+      <div class="fact-icon">🏕️</div>
+      <div>
+        <div class="fact-label">Parks & Reserves</div>
+        <div class="fact-value"><strong>14</strong> Protected Areas</div>
+      </div>
+    </div>
+    <div class="fact-item">
+      <div class="fact-icon">✈️</div>
+      <div>
+        <div class="fact-label">Fly-In From</div>
+        <div class="fact-value"><strong>Nairobi</strong> (NBO/WIL)</div>
+      </div>
+    </div>
+    <div class="fact-item">
+      <div class="fact-icon">💰</div>
+      <div>
+        <div class="fact-label">Packages From</div>
+        <div class="fact-value"><strong>$2,800</strong> per person</div>
+      </div>
+    </div>
+    <div class="fact-item">
+      <div class="fact-icon">🌡️</div>
+      <div>
+        <div class="fact-label">Climate</div>
+        <div class="fact-value"><strong>18–28°C</strong> year-round</div>
+      </div>
+    </div>
+    <div class="fact-item">
+      <div class="fact-icon">🗣️</div>
+      <div>
+        <div class="fact-label">Languages</div>
+        <div class="fact-value"><strong>Swahili</strong> · English</div>
+      </div>
+    </div>
+    <div class="fact-item">
+      <div class="fact-icon">🎯</div>
+      <div>
+        <div class="fact-label">Experience Level</div>
+        <div class="fact-value"><strong>All levels</strong> welcome</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BREADCRUMB + DESTINATION SWITCH -->
+<div class="breadcrumb-bar">
+  <a href="/">Home</a>
+  <span class="sep">›</span>
+  <a href="/destinations/">Destinations</a>
+  <span class="sep">›</span>
+  <span class="current">Kenya</span>
+</div>
+
+<div class="dest-switch">
+  <div class="dest-switch-inner">
+    <div class="dest-switch-label">Explore by Country</div>
+    <div class="dest-pills">
+      <div class="dest-pill active">🇰🇪 Kenya</div>
+      <a href="/destinations/" class="dest-pill">🇹🇿 Tanzania</a>
+      <a href="/destinations/" class="dest-pill">🦍 Rwanda</a>
+      <a href="/destinations/" class="dest-pill">🇺🇬 Uganda</a>
+      <a href="/destinations/" class="dest-pill">🏖️ Zanzibar</a>
+    </div>
+  </div>
+</div>
+
+<!-- INTRO / STORY -->
+<section class="intro-section">
+  <div class="intro-grid">
+    <div class="intro-image-wrap">
+      <div class="intro-img-bg"></div>
+      <div class="intro-quote-badge">
+        <p>"Kenya is not a destination — it is a feeling you carry forever."</p>
+        <cite>— James Kimani, Head Guide</cite>
+      </div>
+    </div>
+    <div class="intro-text-wrap">
+      <div class="intro-flag">🇰🇪 &nbsp;Kenya · East Africa</div>
+      <h2 class="intro-title">Safari at its most <em>elemental</em></h2>
+      <p class="intro-body">Kenya is the safari that defined all safaris. Its landscapes shift from the open wheat-gold plains of the Masai Mara — home to the Great Migration — to the snow-capped summit of Kilimanjaro glimpsed across Amboseli, and north to the arid beauty of Samburu's red earth.</p>
+      <p class="intro-body-sm">With sixteen years of operating across every corner of Kenya, our guides know the secret waterholes, the hidden game paths, and the private conservancies that no mass-market operator can access. We design itineraries that fit your rhythm — whether that means a six-night first-time classic or a bespoke twenty-day circuit through every ecosystem.</p>
+      <div class="intro-highlights">
+        <div class="intro-hl">Great Wildebeest Migration</div>
+        <div class="intro-hl">Big Five all year round</div>
+        <div class="intro-hl">Private conservancy access</div>
+        <div class="intro-hl">Masai community encounters</div>
+        <div class="intro-hl">Kilimanjaro sunrise views</div>
+        <div class="intro-hl">Laikipia rhino tracking</div>
+        <div class="intro-hl">Luxury camp & lodge stays</div>
+        <div class="intro-hl">Expert KPSGA-certified guides</div>
+      </div>
+      <div class="intro-actions">
+        <a href="/packages/" class="btn-solid-gold">Browse Kenya Packages ›</a>
+        <a href="/contact/" class="btn-outline-dark">Speak to an Expert</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGIONS -->
+<section class="regions-section">
+  <div class="section-header">
+    <span class="section-overline">Where to Go</span>
+    <h2 class="section-title">Kenya's Five Great Regions</h2>
+    <p class="section-subtitle">Each ecosystem offers a distinct cast of characters and a different chapter of the African story.</p>
+    <div class="gold-divider"></div>
+  </div>
+  <div class="regions-grid">
+    <div class="region-card">
+      <div class="region-img" style="background-image:url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=600&q=80')"></div>
+      <div class="region-gradient"></div>
+      <div class="region-content">
+        <div class="region-tag">Southwest</div>
+        <div class="region-name">Masai Mara</div>
+        <div class="region-desc">Home to the Great Migration and the most dramatic predator–prey interactions on the continent. Year-round exceptional game.</div>
+        <span class="region-chip">Migration · Jul–Oct</span>
+      </div>
+      <div class="region-divider"></div>
+    </div>
+    <div class="region-card">
+      <div class="region-img" style="background-image:url('https://images.unsplash.com/photo-1474440692490-2e83ae13ba29?auto=format&fit=crop&w=600&q=80')"></div>
+      <div class="region-gradient"></div>
+      <div class="region-content">
+        <div class="region-tag">Southeast</div>
+        <div class="region-name">Amboseli</div>
+        <div class="region-desc">Africa's most photographed park — vast elephant herds against the iconic Kilimanjaro backdrop on clear mornings.</div>
+        <span class="region-chip">Elephants · All Year</span>
+      </div>
+      <div class="region-divider"></div>
+    </div>
+    <div class="region-card">
+      <div class="region-img" style="background-image:url('https://images.unsplash.com/photo-1549366021-119489353986?auto=format&fit=crop&w=600&q=80')"></div>
+      <div class="region-gradient"></div>
+      <div class="region-content">
+        <div class="region-tag">North</div>
+        <div class="region-name">Samburu</div>
+        <div class="region-desc">Rugged semi-arid landscapes and the exclusive Northern Specials — reticulated giraffe, Grévy's zebra, Beisa oryx, Somali ostrich.</div>
+        <span class="region-chip">Rare Species</span>
+      </div>
+      <div class="region-divider"></div>
+    </div>
+    <div class="region-card">
+      <div class="region-img" style="background-image:url('https://images.unsplash.com/photo-1585249096062-3c19f6e0a6d1?auto=format&fit=crop&w=600&q=80')"></div>
+      <div class="region-gradient"></div>
+      <div class="region-content">
+        <div class="region-tag">Central</div>
+        <div class="region-name">Laikipia</div>
+        <div class="region-desc">A mosaic of private conservancies with the highest density of black rhino outside protected areas. Night drives permitted.</div>
+        <span class="region-chip">Rhino · Night Drives</span>
+      </div>
+      <div class="region-divider"></div>
+    </div>
+    <div class="region-card">
+      <div class="region-img" style="background-image:url('https://images.unsplash.com/photo-1559827291-72ee739d0d9a?auto=format&fit=crop&w=600&q=80')"></div>
+      <div class="region-gradient"></div>
+      <div class="region-content">
+        <div class="region-tag">Southeast</div>
+        <div class="region-name">Tsavo</div>
+        <div class="region-desc">Kenya's largest park — two immense wilderness areas with red-dusted elephants, volcanic rock formations and dramatic remoteness.</div>
+        <span class="region-chip">Wilderness · Remote</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WILDLIFE -->
+<section class="wildlife-section">
+  <div class="section-header">
+    <span class="section-overline">What You'll See</span>
+    <h2 class="section-title">Kenya's Iconic Wildlife</h2>
+    <p class="section-subtitle">Every game drive is different. These are the encounters that define a Kenya safari.</p>
+    <div class="gold-divider"></div>
+  </div>
+  <div class="wildlife-grid">
+    <div class="wildlife-card">
+      <div class="wildlife-img" style="background-image:url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=600&q=80')">
+        <div class="wildlife-badge">Big Five</div>
+      </div>
+      <div class="wildlife-body">
+        <div class="wildlife-name">African Lion</div>
+        <div class="wildlife-latin">Panthera leo</div>
+        <div class="wildlife-desc">The Masai Mara holds some of Africa's densest lion populations. Pride interactions — hunts, cub play, territorial confrontations — are frequent and extraordinary.</div>
+        <div class="wildlife-best">Best: Masai Mara · Jul – Oct</div>
+      </div>
+    </div>
+    <div class="wildlife-card">
+      <div class="wildlife-img" style="background-image:url('https://images.unsplash.com/photo-1534177616072-ef7dc120449d?auto=format&fit=crop&w=600&q=80')">
+        <div class="wildlife-badge">Spectacle</div>
+      </div>
+      <div class="wildlife-body">
+        <div class="wildlife-name">Wildebeest Migration</div>
+        <div class="wildlife-latin">Connochaetes taurinus</div>
+        <div class="wildlife-desc">Over 1.5 million wildebeest and 300,000 zebra crossing the Mara River in a primal, thundering spectacle. The world's greatest wildlife event.</div>
+        <div class="wildlife-best">Best: Masai Mara · Jul – Oct</div>
+      </div>
+    </div>
+    <div class="wildlife-card">
+      <div class="wildlife-img" style="background-image:url('https://images.unsplash.com/photo-1474440692490-2e83ae13ba29?auto=format&fit=crop&w=600&q=80')">
+        <div class="wildlife-badge">Big Five</div>
+      </div>
+      <div class="wildlife-body">
+        <div class="wildlife-name">African Elephant</div>
+        <div class="wildlife-latin">Loxodonta africana</div>
+        <div class="wildlife-desc">Amboseli's elephants are the most studied on Earth. Watch vast matriarchal herds move in silence against the backdrop of Kilimanjaro.</div>
+        <div class="wildlife-best">Best: Amboseli · All Year</div>
+      </div>
+    </div>
+    <div class="wildlife-card">
+      <div class="wildlife-img" style="background-image:url('https://images.unsplash.com/photo-1549366021-119489353986?auto=format&fit=crop&w=600&q=80')">
+        <div class="wildlife-badge">Rare</div>
+      </div>
+      <div class="wildlife-body">
+        <div class="wildlife-name">Reticulated Giraffe</div>
+        <div class="wildlife-latin">Giraffa reticulata</div>
+        <div class="wildlife-desc">One of Kenya's Northern Specials, found only in Samburu and Laikipia. Larger patches and a more vivid pattern than the common Masai giraffe.</div>
+        <div class="wildlife-best">Best: Samburu · All Year</div>
+      </div>
+    </div>
+    <div class="wildlife-card">
+      <div class="wildlife-img" style="background-image:url('https://images.unsplash.com/photo-1585249096062-3c19f6e0a6d1?auto=format&fit=crop&w=600&q=80')">
+        <div class="wildlife-badge">Endangered</div>
+      </div>
+      <div class="wildlife-body">
+        <div class="wildlife-name">Black Rhinoceros</div>
+        <div class="wildlife-latin">Diceros bicornis</div>
+        <div class="wildlife-desc">Laikipia Plateau hosts Kenya's densest black rhino population outside national parks. Night tracking safaris offer heart-stopping encounters at close range.</div>
+        <div class="wildlife-best">Best: Laikipia · All Year</div>
+      </div>
+    </div>
+    <div class="wildlife-card">
+      <div class="wildlife-img" style="background-image:url('https://images.unsplash.com/photo-1559827291-72ee739d0d9a?auto=format&fit=crop&w=600&q=80')">
+        <div class="wildlife-badge">Iconic</div>
+      </div>
+      <div class="wildlife-body">
+        <div class="wildlife-name">Cheetah</div>
+        <div class="wildlife-latin">Acinonyx jubatus</div>
+        <div class="wildlife-desc">The open short-grass plains of the Mara Triangle are among the best places on Earth to witness a cheetah hunt at full sprint — 112 km/h of pure grace.</div>
+        <div class="wildlife-best">Best: Masai Mara · Jun – Oct</div>
+      </div>
+    </div>
+    <div class="wildlife-card">
+      <div class="wildlife-img" style="background-image:url('https://images.unsplash.com/photo-1523805009345-7448845a9e53?auto=format&fit=crop&w=600&q=80')">
+        <div class="wildlife-badge">Big Five</div>
+      </div>
+      <div class="wildlife-body">
+        <div class="wildlife-name">Cape Buffalo</div>
+        <div class="wildlife-latin">Syncerus caffer</div>
+        <div class="wildlife-desc">Massive herds roam Tsavo and the Mara, while lone dagga boys lurk in thick bush — unpredictable and magnetic in equal measure.</div>
+        <div class="wildlife-best">Best: Tsavo · All Year</div>
+      </div>
+    </div>
+    <div class="wildlife-card">
+      <div class="wildlife-img" style="background-image:url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=600&q=80')">
+        <div class="wildlife-badge">Nocturnal</div>
+      </div>
+      <div class="wildlife-body">
+        <div class="wildlife-name">Leopard</div>
+        <div class="wildlife-latin">Panthera pardus</div>
+        <div class="wildlife-desc">Solitary and elusive. The Mara's fig trees and Laikipia's rocky outcrops are prime locations for sightings of the most beautiful of Africa's cats.</div>
+        <div class="wildlife-best">Best: Masai Mara · Year-round</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEST TIME -->
+<section class="best-time-section">
+  <div class="section-header">
+    <span class="section-overline">When to Go</span>
+    <h2 class="section-title">Best Time to Visit Kenya</h2>
+    <p class="section-subtitle">Kenya rewards visitors year-round, but certain months unlock once-in-a-lifetime events.</p>
+    <div class="gold-divider"></div>
+  </div>
+
+  <div class="months-grid">
+    <div class="month-col">
+      <div class="month-header">Jan</div>
+      <div class="month-row good">Good</div>
+      <div class="month-bar good"></div>
+    </div>
+    <div class="month-col">
+      <div class="month-header">Feb</div>
+      <div class="month-row good">Good</div>
+      <div class="month-bar good"></div>
+    </div>
+    <div class="month-col">
+      <div class="month-header">Mar</div>
+      <div class="month-row low">Fair</div>
+      <div class="month-bar low"></div>
+    </div>
+    <div class="month-col">
+      <div class="month-header">Apr</div>
+      <div class="month-row low">Wet</div>
+      <div class="month-bar low"></div>
+    </div>
+    <div class="month-col">
+      <div class="month-header">May</div>
+      <div class="month-row low">Wet</div>
+      <div class="month-bar low"></div>
+    </div>
+    <div class="month-col">
+      <div class="month-header">Jun</div>
+      <div class="month-row good">Good</div>
+      <div class="month-bar good"></div>
+    </div>
+    <div class="month-col">
+      <div class="month-header">Jul</div>
+      <div class="month-row peak">Peak</div>
+      <div class="month-bar peak"></div>
+    </div>
+    <div class="month-col">
+      <div class="month-header">Aug</div>
+      <div class="month-row peak">Peak</div>
+      <div class="month-bar peak"></div>
+    </div>
+    <div class="month-col">
+      <div class="month-header">Sep</div>
+      <div class="month-row peak">Peak</div>
+      <div class="month-bar peak"></div>
+    </div>
+    <div class="month-col">
+      <div class="month-header">Oct</div>
+      <div class="month-row peak">Peak</div>
+      <div class="month-bar peak"></div>
+    </div>
+    <div class="month-col">
+      <div class="month-header">Nov</div>
+      <div class="month-row low">Rains</div>
+      <div class="month-bar low"></div>
+    </div>
+    <div class="month-col">
+      <div class="month-header">Dec</div>
+      <div class="month-row good">Good</div>
+      <div class="month-bar good"></div>
+    </div>
+  </div>
+  <div class="months-legend">
+    <div class="legend-item"><div class="legend-dot peak"></div> Peak Season</div>
+    <div class="legend-item"><div class="legend-dot good"></div> Good Season</div>
+    <div class="legend-item"><div class="legend-dot low"></div> Low / Wet Season</div>
+  </div>
+
+  <div class="season-cards" style="margin-top: 48px;">
+    <div class="season-card">
+      <div class="season-icon">☀️</div>
+      <div class="season-name">The Migration Season</div>
+      <div class="season-months">July — October</div>
+      <p class="season-desc">The wildebeest river crossings are at their dramatic peak. Short dry grass means superb visibility for predator action. This is Kenya at its most spectacular — and most sought-after.</p>
+      <div class="season-highlight">Book 12–18 months in advance</div>
+    </div>
+    <div class="season-card">
+      <div class="season-icon">🌿</div>
+      <div class="season-name">The Shoulder Season</div>
+      <div class="season-months">January — February · June · December</div>
+      <p class="season-desc">Excellent game viewing with fewer visitors. January–February is calving season in the Mara — newborn wildebeest and the predator activity that follows is unforgettable.</p>
+      <div class="season-highlight">Best value for money</div>
+    </div>
+    <div class="season-card">
+      <div class="season-icon">🌧️</div>
+      <div class="season-name">The Green Season</div>
+      <div class="season-months">March — May · November</div>
+      <p class="season-desc">Long rains transform Kenya into vivid emerald. Dramatic skies, abundant birdlife, newborn animals everywhere. Fewer tourists, lower rates, and a genuine feeling of wilderness solitude.</p>
+      <div class="season-highlight">Up to 30% lower rates</div>
+    </div>
+  </div>
+</section>
+
+<!-- SAMPLE ITINERARY -->
+<section class="itinerary-section">
+  <div class="section-header">
+    <span class="section-overline">Sample Journey</span>
+    <h2 class="section-title">The Classic Kenya Circuit</h2>
+    <p class="section-subtitle">A 10-night itinerary covering Kenya's greatest highlights — fully customisable for your dates and interests.</p>
+    <div class="gold-divider"></div>
+  </div>
+  <div class="itinerary-layout">
+    <div class="itinerary-steps">
+
+      <div class="itinerary-step">
+        <div class="step-day">
+          <div class="step-day-num">1</div>
+          <div class="step-day-label">Day</div>
+        </div>
+        <div class="step-content">
+          <div class="step-location">Nairobi</div>
+          <div class="step-title">Arrival & City Immersion</div>
+          <p class="step-desc">Met at Jomo Kenyatta International Airport by your private guide. Transfer to your Nairobi hotel for check-in and briefing. Optional: Karen Blixen Museum, Giraffe Centre, and Nairobi National Park game drive before dinner at Talisman Restaurant.</p>
+          <div class="step-chips">
+            <span class="step-chip">Airport Transfer</span>
+            <span class="step-chip">Hotel Briefing</span>
+            <span class="step-chip">City Excursion Optional</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="itinerary-step">
+        <div class="step-day">
+          <div class="step-day-num">2–3</div>
+          <div class="step-day-label">Days</div>
+        </div>
+        <div class="step-content">
+          <div class="step-location">Amboseli National Park</div>
+          <div class="step-title">Elephants & Kilimanjaro</div>
+          <p class="step-desc">Fly or drive to Amboseli. The park's famous elephant herds — some of the most studied in the world — move between swamps and open plains against the magnificent backdrop of Kilimanjaro. Two full days of game drives with your KPSGA-certified guide.</p>
+          <div class="step-chips">
+            <span class="step-chip">Elephant Herds</span>
+            <span class="step-chip">Kilimanjaro Views</span>
+            <span class="step-chip">Swamp Drives</span>
+            <span class="step-chip">Masai Village Visit</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="itinerary-step">
+        <div class="step-day">
+          <div class="step-day-num">4–5</div>
+          <div class="step-day-label">Days</div>
+        </div>
+        <div class="step-content">
+          <div class="step-location">Laikipia Plateau</div>
+          <div class="step-title">Rhinos, Predators & Night Drives</div>
+          <p class="step-desc">Transfer to a private conservancy on the Laikipia Plateau. Unlike national parks, conservancies permit walking safaris, night drives, and bush dining. Track black rhino on foot with an armed ranger — one of Kenya's most intimate wildlife experiences.</p>
+          <div class="step-chips">
+            <span class="step-chip">Black Rhino Tracking</span>
+            <span class="step-chip">Night Drives</span>
+            <span class="step-chip">Walking Safari</span>
+            <span class="step-chip">Bush Sundowners</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="itinerary-step">
+        <div class="step-day">
+          <div class="step-day-num">6–9</div>
+          <div class="step-day-label">Days</div>
+        </div>
+        <div class="step-content">
+          <div class="step-location">Masai Mara National Reserve</div>
+          <div class="step-title">The Great Mara Experience</div>
+          <p class="step-desc">Fly into the Mara for four unforgettable days. Morning and evening game drives in the golden light. Hot air balloon option at dawn. River crossings (July–October). Big cat tracking with guides who know individual lions, leopards, and cheetahs by name. Evening star-lit dining under canvas.</p>
+          <div class="step-chips">
+            <span class="step-chip">Big Cats Daily</span>
+            <span class="step-chip">River Crossings (seasonal)</span>
+            <span class="step-chip">Hot Air Balloon Optional</span>
+            <span class="step-chip">Masai Dance & Culture</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="itinerary-step">
+        <div class="step-day">
+          <div class="step-day-num">10</div>
+          <div class="step-day-label">Day</div>
+        </div>
+        <div class="step-content">
+          <div class="step-location">Nairobi · Departure</div>
+          <div class="step-title">Final Morning Game Drive & Farewell</div>
+          <p class="step-desc">Last morning drive in the Mara, followed by a charter flight back to Nairobi. Overnight in Nairobi pre-departure with a farewell dinner, or connect directly to your international flight. Your guide remains with you until the final goodbye.</p>
+          <div class="step-chips">
+            <span class="step-chip">Morning Drive</span>
+            <span class="step-chip">Charter Flight</span>
+            <span class="step-chip">Airport Transfer</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="itinerary-sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-img"></div>
+        <div class="sidebar-body">
+          <div class="sidebar-label">Featured Package</div>
+          <div class="sidebar-title">The Classic Kenya Circuit</div>
+          <div class="sidebar-duration">10 nights · Amboseli + Laikipia + Masai Mara</div>
+          <div class="sidebar-meta">
+            <div class="sidebar-meta-row">
+              <span class="sidebar-meta-key">Accommodation</span>
+              <span class="sidebar-meta-val">Luxury Tented Camps</span>
+            </div>
+            <div class="sidebar-meta-row">
+              <span class="sidebar-meta-key">Group Size</span>
+              <span class="sidebar-meta-val">2 – 8 guests</span>
+            </div>
+            <div class="sidebar-meta-row">
+              <span class="sidebar-meta-key">Included</span>
+              <span class="sidebar-meta-val">All meals & drives</span>
+            </div>
+            <div class="sidebar-meta-row">
+              <span class="sidebar-meta-key">Difficulty</span>
+              <span class="sidebar-meta-val">All levels</span>
+            </div>
+            <div class="sidebar-meta-row">
+              <span class="sidebar-meta-key">Best Season</span>
+              <span class="sidebar-meta-val">Jul – Oct</span>
+            </div>
+          </div>
+          <div class="sidebar-price">
+            <div class="sidebar-from">From</div>
+            <div class="sidebar-amount">$6,200</div>
+            <div class="sidebar-pp">per person, fully inclusive</div>
+          </div>
+          <a href="/booking/" class="sidebar-btn">Book This Itinerary</a>
+          <a href="/contact/" class="sidebar-btn-ghost">Customise This Trip</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LODGES -->
+<section class="lodges-section">
+  <div class="section-header">
+    <span class="section-overline">Where to Stay</span>
+    <h2 class="section-title">Our Handpicked Kenya Lodges</h2>
+    <p class="section-subtitle">Every property is visited and verified by our team. We partner only with camps that share our commitment to wildlife, community, and conservation.</p>
+    <div class="gold-divider"></div>
+  </div>
+  <div class="lodges-grid">
+    <div class="lodge-card">
+      <div class="lodge-img" style="background-image:url('https://images.unsplash.com/photo-1597348989645-aea4a31ccc28?auto=format&fit=crop&w=700&q=85')">
+        <div class="lodge-tier">Ultra-Luxury</div>
+        <div class="lodge-region-tag">Masai Mara</div>
+      </div>
+      <div class="lodge-body">
+        <div class="lodge-name">Angama Mara</div>
+        <p class="lodge-desc">Perched on the edge of the Great Rift Valley with the most dramatic vista in Africa. Sixteen tented suites open entirely to the view — and the silence.</p>
+        <div class="lodge-amenities">
+          <span class="lodge-am">Private Plunge Pool</span>
+          <span class="lodge-am">Photographic Studio</span>
+          <span class="lodge-am">Community Visits</span>
+          <span class="lodge-am">Spa</span>
+        </div>
+        <div class="lodge-footer">
+          <div>
+            <div class="lodge-price-from">From</div>
+            <div class="lodge-price">$1,800<span class="lodge-price-pp">/pp/night</span></div>
+          </div>
+          <div class="lodge-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    <div class="lodge-card">
+      <div class="lodge-img" style="background-image:url('https://images.unsplash.com/photo-1523805009345-7448845a9e53?auto=format&fit=crop&w=700&q=85')">
+        <div class="lodge-tier">Luxury</div>
+        <div class="lodge-region-tag">Amboseli</div>
+      </div>
+      <div class="lodge-body">
+        <div class="lodge-name">Tortilis Camp</div>
+        <p class="lodge-desc">Fourteen spacious tented cottages beneath iconic umbrella thorn trees — Tortilis offers intimate Kilimanjaro views and the finest elephant research access in the park.</p>
+        <div class="lodge-amenities">
+          <span class="lodge-am">Kilimanjaro Views</span>
+          <span class="lodge-am">Walking Safaris</span>
+          <span class="lodge-am">Elephant Interaction</span>
+          <span class="lodge-am">Pool</span>
+        </div>
+        <div class="lodge-footer">
+          <div>
+            <div class="lodge-price-from">From</div>
+            <div class="lodge-price">$890<span class="lodge-price-pp">/pp/night</span></div>
+          </div>
+          <div class="lodge-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    <div class="lodge-card">
+      <div class="lodge-img" style="background-image:url('https://images.unsplash.com/photo-1585249096062-3c19f6e0a6d1?auto=format&fit=crop&w=700&q=85')">
+        <div class="lodge-tier">Premier</div>
+        <div class="lodge-region-tag">Laikipia</div>
+      </div>
+      <div class="lodge-body">
+        <div class="lodge-name">Ol Pejeta Bush Camp</div>
+        <p class="lodge-desc">A classic tented camp on the renowned Ol Pejeta Conservancy — home to the last two northern white rhinos on Earth and exceptional black rhino density.</p>
+        <div class="lodge-amenities">
+          <span class="lodge-am">Rhino Tracking</span>
+          <span class="lodge-am">Night Drives</span>
+          <span class="lodge-am">Walking Safaris</span>
+          <span class="lodge-am">Conservation Tour</span>
+        </div>
+        <div class="lodge-footer">
+          <div>
+            <div class="lodge-price-from">From</div>
+            <div class="lodge-price">$620<span class="lodge-price-pp">/pp/night</span></div>
+          </div>
+          <div class="lodge-stars">★★★★☆</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KENYA PACKAGES -->
+<section class="packages-section">
+  <div class="section-header">
+    <span class="section-overline">Kenya · Featured Packages</span>
+    <h2 class="section-title">Safari Packages in Kenya</h2>
+    <p class="section-subtitle">Curated journeys from 5 nights to 21 days — every itinerary personally designed and guided.</p>
+    <div class="gold-divider" style="background: var(--gold); margin-top: 20px;"></div>
+  </div>
+  <div class="packages-grid">
+
+    <div class="package-card">
+      <div class="package-img-wrap" style="background-image:url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=700&q=80')">
+        <div class="package-img-overlay"></div>
+        <div class="package-duration">7 Nights</div>
+        <div class="package-badge">Migration Special</div>
+        <div class="wish-btn" onclick="toggleWish(this)">♡</div>
+      </div>
+      <div class="package-body">
+        <div class="package-tag">Kenya · Masai Mara</div>
+        <a href="/packages/detail/" style="text-decoration:none"><div class="package-name" style="cursor:pointer">Great Migration Safari</div></a>
+        <p class="package-desc">Seven nights in the Mara during peak crossing season — intimate camps, expert guides, and front-row seats to the world's greatest wildlife event.</p>
+        <div class="package-features">
+          <span class="pkg-feat">All-Inclusive</span>
+          <span class="pkg-feat">Expert Guide</span>
+          <span class="pkg-feat">Private Vehicle</span>
+          <span class="pkg-feat">Bush Dining</span>
+        </div>
+        <div class="package-footer">
+          <div>
+            <div class="package-from">From</div>
+            <div class="package-price">$4,600</div>
+            <div class="package-pp">per person</div>
+          </div>
+          <a href="/packages/detail/" class="pkg-btn">View Details</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="package-card">
+      <div class="package-img-wrap" style="background-image:url('https://images.unsplash.com/photo-1474440692490-2e83ae13ba29?auto=format&fit=crop&w=700&q=80')">
+        <div class="package-img-overlay"></div>
+        <div class="package-duration">5 Nights</div>
+        <div class="package-badge">Best Seller</div>
+        <div class="wish-btn" onclick="toggleWish(this)">♡</div>
+      </div>
+      <div class="package-body">
+        <div class="package-tag">Kenya · Amboseli</div>
+        <div class="package-name">Amboseli Elephant Classic</div>
+        <p class="package-desc">Five nights at Tortilis Camp with the most celebrated elephant herds in Africa, morning Kilimanjaro reveals, and walking safaris with Masai guides.</p>
+        <div class="package-features">
+          <span class="pkg-feat">Elephant Research</span>
+          <span class="pkg-feat">Walking Safari</span>
+          <span class="pkg-feat">Masai Guide</span>
+          <span class="pkg-feat">All Meals</span>
+        </div>
+        <div class="package-footer">
+          <div>
+            <div class="package-from">From</div>
+            <div class="package-price">$2,800</div>
+            <div class="package-pp">per person</div>
+          </div>
+          <a href="/booking/" class="pkg-btn">Book Now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="package-card">
+      <div class="package-img-wrap" style="background-image:url('https://images.unsplash.com/photo-1549366021-119489353986?auto=format&fit=crop&w=700&q=80')">
+        <div class="package-img-overlay"></div>
+        <div class="package-duration">10 Nights</div>
+        <div class="package-badge">Multi-Region</div>
+        <div class="wish-btn" onclick="toggleWish(this)">♡</div>
+      </div>
+      <div class="package-body">
+        <div class="package-tag">Kenya · Classic Circuit</div>
+        <div class="package-name">The Classic Kenya Circuit</div>
+        <p class="package-desc">The complete Kenya experience — Amboseli, Laikipia, and the Masai Mara in one seamless journey. Our most popular itinerary for first-time visitors to Kenya.</p>
+        <div class="package-features">
+          <span class="pkg-feat">3 Ecosystems</span>
+          <span class="pkg-feat">Rhino Tracking</span>
+          <span class="pkg-feat">Night Drives</span>
+          <span class="pkg-feat">Fully Guided</span>
+        </div>
+        <div class="package-footer">
+          <div>
+            <div class="package-from">From</div>
+            <div class="package-price">$6,200</div>
+            <div class="package-pp">per person</div>
+          </div>
+          <a href="/booking/" class="pkg-btn">Book Now</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="packages-view-all">
+    <a href="/packages/" style="display:inline-block; color:rgba(255,255,255,0.8); border: 1.5px solid rgba(255,255,255,0.3); padding: 14px 40px; border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; transition: all 0.2s;" onmouseover="this.style.borderColor='white';this.style.color='white'" onmouseout="this.style.borderColor='rgba(255,255,255,0.3)';this.style.color='rgba(255,255,255,0.8)'">
+      View All Kenya Packages →
+    </a>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section">
+  <div class="section-header">
+    <span class="section-overline">Kenya in Images</span>
+    <h2 class="section-title">A Visual Journey</h2>
+    <p class="section-subtitle">Every photograph tells a story your itinerary will write.</p>
+    <div class="gold-divider"></div>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1000&q=85')">
+      <div class="gallery-overlay">+</div>
+    </div>
+    <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1474440692490-2e83ae13ba29?auto=format&fit=crop&w=600&q=85')">
+      <div class="gallery-overlay">+</div>
+    </div>
+    <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1534177616072-ef7dc120449d?auto=format&fit=crop&w=600&q=85')">
+      <div class="gallery-overlay">+</div>
+    </div>
+    <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1523805009345-7448845a9e53?auto=format&fit=crop&w=600&q=85')">
+      <div class="gallery-overlay">+</div>
+    </div>
+    <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=600&q=85')">
+      <div class="gallery-overlay">+</div>
+    </div>
+    <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1585249096062-3c19f6e0a6d1?auto=format&fit=crop&w=600&q=85')">
+      <div class="gallery-overlay">+</div>
+    </div>
+    <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1549366021-119489353986?auto=format&fit=crop&w=600&q=85')">
+      <div class="gallery-overlay">+</div>
+    </div>
+    <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1559827291-72ee739d0d9a?auto=format&fit=crop&w=600&q=85')">
+      <div class="gallery-last-overlay">
+        <span>+42</span>
+        <span class="gallery-last-sub">View Full Gallery</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-header">
+    <span class="section-overline">Common Questions</span>
+    <h2 class="section-title">Kenya Safari FAQ</h2>
+    <p class="section-subtitle">Answers to the questions our guests ask most before their first Kenya adventure.</p>
+    <div class="gold-divider"></div>
+  </div>
+  <div class="faq-grid">
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        When is the best time to see the Great Migration in Kenya?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">The Mara River crossings — the most dramatic part of the migration — typically occur between late July and early October, though exact timing varies year to year depending on rainfall patterns in Tanzania's Serengeti. July–August tends to see the highest crossing activity. We monitor the movement in real-time and update itineraries accordingly.</div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        Do I need a visa to enter Kenya?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">Kenya introduced the Electronic Travel Authorisation (eTA) in January 2024, replacing the old visa system. Most nationalities — including all EU and US citizens — apply online at etakenya.go.ke before travel. The eTA currently costs $30 USD and is typically approved within 72 hours. Our team provides full pre-departure documentation support.</div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        Are yellow fever vaccinations required for Kenya?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">Kenya does not require yellow fever vaccination for entry unless you are arriving from a yellow fever endemic country. However, we strongly recommend consulting a travel health clinic 6–8 weeks before departure. Recommended vaccinations typically include Hepatitis A & B, Typhoid, and up-to-date Tetanus. Malaria prophylaxis is advised for all wildlife areas.</div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        What is the typical accommodation on a Kenya safari?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">Most of our Kenya packages use luxury tented camps — permanent structures with en-suite bathrooms, king beds, and all modern amenities, but with canvas walls that bring you close to nature. Standards range from premier (from $350/pp/night all-inclusive) to ultra-luxury (from $1,200/pp/night). We also use lodges and private villa options. All properties are personally vetted.</div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        How do I get between parks in Kenya?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">Inter-park transfers in Kenya are typically by scheduled or charter light aircraft — bush flights on Cessna Caravans from airstrips within the parks. Flying reduces long road transfers and maximises your time on game drives. For shorter distances (e.g., Nairobi to Amboseli), road transfers in private 4×4 vehicles are used. All logistics are pre-arranged by our operations team.</div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        Is Kenya safe for tourists?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">Kenya's wildlife areas and national parks are extremely safe. Our guides are licensed by the Kenya Professional Safari Guides Association (KPSGA) and operate to strict safety protocols. Nairobi has areas that require the same common-sense precautions as any major city, and our team provides thorough pre-departure safety briefings. We maintain 24/7 on-ground support throughout your journey.</div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        What currency is used in Kenya?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">Kenya's currency is the Kenyan Shilling (KES). However, USD is widely accepted in safari lodges, camps, and tourist areas. We recommend carrying USD for tips, curio purchases, and small expenses. Most lodge extras and park fees can also be settled by card. Our pre-departure pack includes a comprehensive money and tipping guide.</div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        Can you build a bespoke Kenya itinerary for us?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">Absolutely — bespoke design is our core service. Whether you want a family itinerary with young children, a honeymoon with ultra-romantic camps, a photography safari with specialist equipment, or a multi-country circuit, we design every detail around you. Use the contact form to share your vision and we'll respond within 24 hours with a tailored proposal.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <span class="cta-overline">🇰🇪 Your Kenya Adventure Awaits</span>
+    <h2 class="cta-title">Ready to witness<br>the <em>Migration</em>?</h2>
+    <p class="cta-subtitle">Tell us your dates, your dreams, and your number of travellers — we'll design the rest.</p>
+    <div class="cta-actions">
+      <a href="/booking/" class="btn-cta-primary">Start Planning Your Kenya Safari</a>
+      <a href="/contact/" class="btn-cta-ghost">Speak to a Kenya Expert</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-logo">
+        <div class="footer-brand-mark">S</div>
+        <span class="footer-brand-name">Successful Safaris</span>
+      </div>
+      <p class="footer-brand-text">Since 2008, we have been the trusted partner of discerning travellers seeking authentic, luxurious African safari experiences across Kenya, Tanzania, Rwanda, Uganda, and Zanzibar.</p>
+      <div class="footer-social">
+        <div class="soc-btn">f</div>
+        <div class="soc-btn">in</div>
+        <div class="soc-btn">tw</div>
+        <div class="soc-btn">ig</div>
+        <div class="soc-btn">yt</div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Destinations</div>
+      <ul class="footer-links">
+        <li><a href="/destinations/kenya/">Kenya Safaris</a></li>
+        <li><a href="/destinations/">Tanzania Safaris</a></li>
+        <li><a href="/destinations/">Rwanda & Gorillas</a></li>
+        <li><a href="/destinations/">Uganda Safaris</a></li>
+        <li><a href="/destinations/">Zanzibar Beach</a></li>
+        <li><a href="/destinations/">Multi-Country</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Kenya Highlights</div>
+      <ul class="footer-links">
+        <li><a href="#">Masai Mara</a></li>
+        <li><a href="#">Amboseli</a></li>
+        <li><a href="#">Samburu</a></li>
+        <li><a href="#">Laikipia</a></li>
+        <li><a href="#">Tsavo</a></li>
+        <li><a href="#">Lake Nakuru</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="/about/">About Us</a></li>
+        <li><a href="/about/">Our Guides</a></li>
+        <li><a href="/about/">Conservation</a></li>
+        <li><a href="#">Journal</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Support</div>
+      <ul class="footer-links">
+        <li><a href="#">Trip Planning</a></li>
+        <li><a href="#">Visa & Health</a></li>
+        <li><a href="#">Travel Insurance</a></li>
+        <li><a href="#">Packing Guide</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 Successful Safaris Ltd. All rights reserved. ATOL Protected · IATA Accredited · KATO Member</p>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Cookie Settings</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleFaq(el) {
+    const wasOpen = el.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) el.classList.add('open');
+  }
+
+  function toggleWish(btn) {
+    btn.classList.toggle('active');
+    btn.textContent = btn.classList.contains('active') ? '♥' : '♡';
+  }
+</script>
+</body>
+</html>

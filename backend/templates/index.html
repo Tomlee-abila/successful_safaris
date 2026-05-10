@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Successful Safaris — Design Package</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96B;
+    --gold-dark: #A07830;
+    --gold-pale: #F5EDD6;
+    --green: #1A3A2A;
+    --green-mid: #2D5C40;
+    --green-light: #3D7A56;
+    --green-pale: #E8F0EB;
+    --black: #1A1A1A;
+    --charcoal: #2D2D2D;
+    --gray-700: #4A4A4A;
+    --gray-500: #7A7A7A;
+    --gray-300: #C5C5C5;
+    --gray-100: #F0F0F0;
+    --cream: #FAF7F0;
+    --white: #FFFFFF;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-editorial: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --radius: 8px;
+    --radius-lg: 16px;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+    --shadow-md: 0 8px 32px rgba(0,0,0,0.12);
+    --shadow-lg: 0 20px 60px rgba(0,0,0,0.18);
+    --transition: all 0.3s ease;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--cream);
+    color: var(--black);
+    line-height: 1.6;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: var(--green);
+    background-image:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(201,168,76,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 80% at 20% 80%, rgba(45,92,64,0.8) 0%, transparent 60%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(201,168,76,0.04) 60px, rgba(201,168,76,0.04) 61px),
+      repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(201,168,76,0.04) 60px, rgba(201,168,76,0.04) 61px);
+    pointer-events: none;
+  }
+
+  .hero-nav {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 60px;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+  }
+
+  .logo-text {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--white);
+    letter-spacing: 0.02em;
+  }
+
+  .logo-text span {
+    color: var(--gold);
+  }
+
+  .nav-meta {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    font-family: var(--font-body);
+  }
+
+  .nav-meta strong {
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  .nav-badge {
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold-light);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 40px;
+    position: relative;
+    z-index: 5;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 30px;
+    padding: 8px 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 32px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    max-width: 900px;
+    margin-bottom: 24px;
+  }
+
+  .hero-title .accent {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-editorial);
+    font-size: clamp(18px, 2.5vw, 26px);
+    color: rgba(255,255,255,0.7);
+    font-style: italic;
+    max-width: 640px;
+    margin-bottom: 48px;
+    line-height: 1.5;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero-stat {
+    text-align: center;
+  }
+
+  .hero-stat-number {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .hero-stat-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--black);
+    padding: 16px 36px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: var(--transition);
+    box-shadow: 0 4px 20px rgba(201,168,76,0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(201,168,76,0.5);
+  }
+
+  .btn-outline {
+    border: 1px solid rgba(255,255,255,0.3);
+    color: var(--white);
+    padding: 16px 36px;
+    border-radius: var(--radius);
+    font-weight: 500;
+    font-size: 15px;
+    text-decoration: none;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-outline:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.5);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.4);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.3));
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .section {
+    padding: 100px 60px;
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 64px;
+  }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 16px;
+    padding: 5px 16px;
+    background: var(--gold-pale);
+    border-radius: 20px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 700;
+    color: var(--green);
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .section-title em {
+    color: var(--gold-dark);
+    font-style: italic;
+  }
+
+  .section-desc {
+    font-size: 17px;
+    color: var(--gray-500);
+    line-height: 1.7;
+    font-family: var(--font-editorial);
+    font-style: italic;
+  }
+
+  /* ─── DELIVERABLES GRID ─── */
+  .deliverables-section {
+    background: var(--white);
+  }
+
+  .deliverables-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 28px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .deliverable-card {
+    background: var(--cream);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: var(--transition);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .deliverable-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(201,168,76,0.4);
+  }
+
+  .card-preview {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-preview-icon {
+    font-size: 64px;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2));
+  }
+
+  .card-preview-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background-image:
+      repeating-linear-gradient(45deg, currentColor 0, currentColor 1px, transparent 0, transparent 50%);
+    background-size: 20px 20px;
+  }
+
+  .preview-sitemap { background: linear-gradient(135deg, #1A3A2A, #2D5C40); color: var(--gold); }
+  .preview-styleguide { background: linear-gradient(135deg, #C9A84C, #A07830); }
+  .preview-wireframes { background: linear-gradient(135deg, #2D2D2D, #4A4A4A); color: var(--gold); }
+  .preview-home { background: linear-gradient(135deg, #1A3A2A, #3D7A56); color: var(--gold-light); }
+  .preview-shop { background: linear-gradient(135deg, #C9A84C, #1A3A2A 60%); color: white; }
+  .preview-booking { background: linear-gradient(135deg, #1A3A2A, #C9A84C 120%); color: white; }
+  .preview-checkout { background: linear-gradient(135deg, #2D5C40, #1A1A1A); color: var(--gold); }
+  .preview-admin { background: linear-gradient(135deg, #1A1A1A, #2D2D2D); color: var(--gold); }
+
+  .card-label {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(8px);
+    color: rgba(255,255,255,0.9);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  .card-status {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(50,200,100,0.25);
+    border: 1px solid rgba(50,200,100,0.4);
+    color: #5de89c;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  .card-body {
+    padding: 24px 28px 28px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-number {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--gold-dark);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 10px;
+    line-height: 1.25;
+  }
+
+  .card-desc {
+    font-size: 14px;
+    color: var(--gray-500);
+    line-height: 1.65;
+    margin-bottom: 20px;
+    flex: 1;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+
+  .card-tag {
+    background: var(--green-pale);
+    color: var(--green-mid);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.03em;
+  }
+
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--gold-dark);
+    font-weight: 600;
+    font-size: 14px;
+    transition: var(--transition);
+  }
+
+  .card-link svg {
+    transition: transform 0.2s;
+  }
+
+  .deliverable-card:hover .card-link svg {
+    transform: translateX(4px);
+  }
+
+  /* ─── FEATURES STRIP ─── */
+  .features-section {
+    background: var(--green);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .features-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 80% at 100% 0%, rgba(201,168,76,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .features-section .section-tag {
+    background: rgba(201,168,76,0.15);
+    color: var(--gold-light);
+  }
+
+  .features-section .section-title {
+    color: var(--white);
+  }
+
+  .features-section .section-title em {
+    color: var(--gold);
+  }
+
+  .features-section .section-desc {
+    color: rgba(255,255,255,0.6);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    max-width: 1200px;
+    margin: 0 auto;
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .feature-item {
+    background: rgba(255,255,255,0.03);
+    padding: 40px 36px;
+    border-right: 1px solid rgba(201,168,76,0.1);
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    transition: var(--transition);
+  }
+
+  .feature-item:hover {
+    background: rgba(201,168,76,0.06);
+  }
+
+  .feature-item:nth-child(3n) { border-right: none; }
+  .feature-item:nth-last-child(-n+3) { border-bottom: none; }
+
+  .feature-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(201,168,76,0.15);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .feature-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+
+  .feature-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.65;
+  }
+
+  /* ─── TECH STACK ─── */
+  .tech-section {
+    background: var(--cream);
+  }
+
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .tech-card {
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+    text-align: center;
+    transition: var(--transition);
+  }
+
+  .tech-card:hover {
+    border-color: var(--gold);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+  }
+
+  .tech-icon {
+    font-size: 40px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .tech-name {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+
+  .tech-desc {
+    font-size: 13px;
+    color: var(--gray-500);
+    line-height: 1.6;
+  }
+
+  /* ─── USER ROLES ─── */
+  .roles-section {
+    background: var(--white);
+  }
+
+  .roles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .role-card {
+    border-radius: var(--radius-lg);
+    padding: 36px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .role-card::after {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    opacity: 0.08;
+    background: currentColor;
+  }
+
+  .role-visitor { background: var(--green-pale); color: var(--green); }
+  .role-user { background: #EEF2FF; color: #3B4AB8; }
+  .role-subadmin { background: #F5F0FF; color: #6D28D9; }
+  .role-superadmin { background: var(--gold-pale); color: var(--gold-dark); }
+
+  .role-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    background: rgba(255,255,255,0.7);
+  }
+
+  .role-icon { font-size: 40px; margin-bottom: 16px; display: block; }
+
+  .role-name {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .role-perms {
+    list-style: none;
+    font-size: 13px;
+    line-height: 2;
+    opacity: 0.8;
+    text-align: left;
+  }
+
+  .role-perms li::before { content: '→ '; font-weight: 700; }
+
+  /* ─── QUICK LINKS ─── */
+  .quicklinks-section {
+    background: var(--green);
+    padding: 60px;
+  }
+
+  .quicklinks-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .quicklinks-text h2 {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .quicklinks-text p {
+    color: rgba(255,255,255,0.6);
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-size: 17px;
+  }
+
+  .quicklinks-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .ql-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: var(--transition);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.8);
+  }
+
+  .ql-btn:hover {
+    background: rgba(201,168,76,0.15);
+    border-color: rgba(201,168,76,0.4);
+    color: var(--gold-light);
+  }
+
+  .ql-btn.featured {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    border-color: transparent;
+    color: var(--black);
+    font-weight: 600;
+  }
+
+  .ql-btn.featured:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(201,168,76,0.4);
+    color: var(--black);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--black);
+    padding: 60px;
+    text-align: center;
+  }
+
+  .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    text-decoration: none;
+  }
+
+  .footer-logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  .footer-logo-text {
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--white);
+  }
+
+  .footer-logo-text span { color: var(--gold); }
+
+  .footer-divider {
+    width: 60px;
+    height: 1px;
+    background: rgba(201,168,76,0.3);
+    margin: 24px auto;
+  }
+
+  .footer-copy {
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+    line-height: 1.8;
+  }
+
+  .footer-copy a {
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1024px) {
+    .section { padding: 80px 40px; }
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+    .tech-grid { grid-template-columns: repeat(2, 1fr); }
+    .roles-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    .hero-nav { padding: 20px 24px; }
+    .nav-meta { display: none; }
+    .section { padding: 60px 24px; }
+    .deliverables-grid { grid-template-columns: 1fr; }
+    .features-grid { grid-template-columns: 1fr; }
+    .tech-grid { grid-template-columns: 1fr 1fr; }
+    .roles-grid { grid-template-columns: 1fr; }
+    .quicklinks-section { padding: 48px 24px; }
+    .quicklinks-inner { flex-direction: column; align-items: flex-start; }
+    footer { padding: 48px 24px; }
+    .hero-stats { gap: 28px; }
+    .hero-cta-group { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <nav class="hero-nav">
+    <a href="#" class="logo">
+      <div class="logo-icon">🦁</div>
+      <span class="logo-text">Successful <span>Safaris</span></span>
+    </a>
+    <div class="nav-meta">
+      <span>Design Package</span>
+      <span>·</span>
+      <span>8 Deliverables</span>
+      <span>·</span>
+      <strong>Production Ready</strong>
+      <span class="nav-badge">v1.0</span>
+    </div>
+  </nav>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Complete Design Package</div>
+
+    <h1 class="hero-title">
+      Luxury Safari<br>
+      <span class="accent">Design System</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      A comprehensive, production-ready design package for a premium
+      African safari tourism platform — from sitemap to pixel-perfect UI.
+    </p>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-number">8</div>
+        <div class="hero-stat-label">Deliverables</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-number">40+</div>
+        <div class="hero-stat-label">Page Designs</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-number">4</div>
+        <div class="hero-stat-label">User Roles</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-number">12+</div>
+        <div class="hero-stat-label">Currencies</div>
+      </div>
+    </div>
+
+    <div class="hero-cta-group">
+      <a href="/" class="btn-primary">
+        View Live Site
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="admin-/dashboard/" class="btn-outline">
+        Admin Dashboard
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Explore
+  </div>
+</section>
+
+<!-- ─── DELIVERABLES ─── -->
+<section class="section deliverables-section" id="deliverables">
+  <div class="section-header">
+    <span class="section-tag">All Deliverables</span>
+    <h2 class="section-title">Every File, <em>Ready to Open</em></h2>
+    <p class="section-desc">Eight standalone HTML files, each fully self-contained with embedded CSS, JavaScript, and cross-page navigation — no build step required.</p>
+  </div>
+
+  <div class="deliverables-grid">
+
+    <!-- Sitemap -->
+    <a href="/sitemap/" class="deliverable-card">
+      <div class="card-preview preview-sitemap">
+        <div class="card-preview-pattern"></div>
+        <span class="card-preview-icon">🗺️</span>
+        <span class="card-label">Architecture</span>
+        <span class="card-status">✓ Complete</span>
+      </div>
+      <div class="card-body">
+        <div class="card-number">01 · Foundation</div>
+        <h3 class="card-title">Sitemap & Architecture</h3>
+        <p class="card-desc">Full site architecture with 6 portals, 40+ page inventory cards, role-based permission matrix, and 6 user journey flows mapped end-to-end.</p>
+        <div class="card-tags">
+          <span class="card-tag">6 Portals</span>
+          <span class="card-tag">Permission Matrix</span>
+          <span class="card-tag">User Flows</span>
+          <span class="card-tag">40+ Pages</span>
+        </div>
+        <span class="card-link">
+          Open Sitemap
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <!-- Style Guide -->
+    <a href="/style-guide/" class="deliverable-card">
+      <div class="card-preview preview-styleguide">
+        <div class="card-preview-pattern"></div>
+        <span class="card-preview-icon">🎨</span>
+        <span class="card-label">Brand System</span>
+        <span class="card-status">✓ Complete</span>
+      </div>
+      <div class="card-body">
+        <div class="card-number">02 · Brand</div>
+        <h3 class="card-title">Style Guide</h3>
+        <p class="card-desc">Complete luxury brand system: 20+ color tokens, 3-typeface hierarchy, full component library — buttons, forms, cards, badges, alerts, tables, and spacing scale.</p>
+        <div class="card-tags">
+          <span class="card-tag">Color System</span>
+          <span class="card-tag">Typography</span>
+          <span class="card-tag">Components</span>
+          <span class="card-tag">CSS Variables</span>
+        </div>
+        <span class="card-link">
+          Open Style Guide
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <!-- Wireframes -->
+    <a href="/wireframes/" class="deliverable-card">
+      <div class="card-preview preview-wireframes">
+        <div class="card-preview-pattern"></div>
+        <span class="card-preview-icon">📐</span>
+        <span class="card-label">UX Planning</span>
+        <span class="card-status">✓ Complete</span>
+      </div>
+      <div class="card-body">
+        <div class="card-number">03 · UX</div>
+        <h3 class="card-title">Wireframes</h3>
+        <p class="card-desc">Annotated wireframes across 6 tabs: Public Pages, E-Commerce, Booking Flow, User Dashboard, Admin Portal, and Mobile Views at 375px viewport.</p>
+        <div class="card-tags">
+          <span class="card-tag">6 Tab Groups</span>
+          <span class="card-tag">Mobile Views</span>
+          <span class="card-tag">Annotated</span>
+          <span class="card-tag">All Flows</span>
+        </div>
+        <span class="card-link">
+          Open Wireframes
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <!-- Home -->
+    <a href="/" class="deliverable-card">
+      <div class="card-preview preview-home">
+        <div class="card-preview-pattern"></div>
+        <span class="card-preview-icon">🏠</span>
+        <span class="card-label">Customer-Facing</span>
+        <span class="card-status">✓ Complete</span>
+      </div>
+      <div class="card-body">
+        <div class="card-number">04 · Homepage</div>
+        <h3 class="card-title">Home Page</h3>
+        <p class="card-desc">Full-bleed hero, animated stats strip, destination pills, featured packages, "Why Us" section, shop promo, testimonials, gold CTA strip, and newsletter footer.</p>
+        <div class="card-tags">
+          <span class="card-tag">Hero + Nav</span>
+          <span class="card-tag">Destinations</span>
+          <span class="card-tag">Packages</span>
+          <span class="card-tag">Testimonials</span>
+        </div>
+        <span class="card-link">
+          Open Homepage
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <!-- Shop -->
+    <a href="/shop/" class="deliverable-card">
+      <div class="card-preview preview-shop">
+        <div class="card-preview-pattern"></div>
+        <span class="card-preview-icon">🛒</span>
+        <span class="card-label">E-Commerce</span>
+        <span class="card-status">✓ Complete</span>
+      </div>
+      <div class="card-body">
+        <div class="card-number">05 · Shop</div>
+        <h3 class="card-title">Safari Shop</h3>
+        <p class="card-desc">Slide-in cart drawer, sticky category tabs, filter sidebar with price range and swatches, 3-column product grid with hover quick-view, bundle section, and countdown timer.</p>
+        <div class="card-tags">
+          <span class="card-tag">Cart Drawer</span>
+          <span class="card-tag">Filter System</span>
+          <span class="card-tag">Bundles</span>
+          <span class="card-tag">Countdown</span>
+        </div>
+        <span class="card-link">
+          Open Shop
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <!-- Booking -->
+    <a href="/booking/" class="deliverable-card">
+      <div class="card-preview preview-booking">
+        <div class="card-preview-pattern"></div>
+        <span class="card-preview-icon">📅</span>
+        <span class="card-label">Conversion</span>
+        <span class="card-status">✓ Complete</span>
+      </div>
+      <div class="card-body">
+        <div class="card-number">06 · Booking</div>
+        <h3 class="card-title">Booking Flow</h3>
+        <p class="card-desc">4-step progress bar, interactive date picker calendar with range selection, guest counters, accommodation cards, 6 add-ons, gear cross-sell, day-by-day itinerary, and live pricing sidebar.</p>
+        <div class="card-tags">
+          <span class="card-tag">Date Picker</span>
+          <span class="card-tag">Add-Ons</span>
+          <span class="card-tag">Cross-Sell</span>
+          <span class="card-tag">Live Pricing</span>
+        </div>
+        <span class="card-link">
+          Open Booking
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <!-- Checkout -->
+    <a href="/checkout/" class="deliverable-card">
+      <div class="card-preview preview-checkout">
+        <div class="card-preview-pattern"></div>
+        <span class="card-preview-icon">💳</span>
+        <span class="card-label">Payment</span>
+        <span class="card-status">✓ Complete</span>
+      </div>
+      <div class="card-body">
+        <div class="card-number">07 · Checkout</div>
+        <h3 class="card-title">Checkout & Payment</h3>
+        <p class="card-desc">5-step checkout, 12+ currency selector, deposit vs full payment toggle, 6 payment methods including M-Pesa, animated live card preview, and booking confirmation modal with reference number.</p>
+        <div class="card-tags">
+          <span class="card-tag">12 Currencies</span>
+          <span class="card-tag">6 Pay Methods</span>
+          <span class="card-tag">Card Preview</span>
+          <span class="card-tag">Confirmation</span>
+        </div>
+        <span class="card-link">
+          Open Checkout
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <!-- Admin Dashboard -->
+    <a href="admin-/dashboard/" class="deliverable-card">
+      <div class="card-preview preview-admin">
+        <div class="card-preview-pattern"></div>
+        <span class="card-preview-icon">⚙️</span>
+        <span class="card-label">Admin System</span>
+        <span class="card-status">✓ Complete</span>
+      </div>
+      <div class="card-body">
+        <div class="card-number">08 · Admin</div>
+        <h3 class="card-title">Admin Dashboard</h3>
+        <p class="card-desc">Fixed sidebar with 13 switchable sections: KPI dashboard, product & inventory management, user roles, analytics charts, promotions, audit logs, currency rates, and permission toggle modals.</p>
+        <div class="card-tags">
+          <span class="card-tag">13 Sections</span>
+          <span class="card-tag">Role Modals</span>
+          <span class="card-tag">Analytics</span>
+          <span class="card-tag">Audit Logs</span>
+        </div>
+        <span class="card-link">
+          Open Dashboard
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ─── FEATURES ─── -->
+<section class="section features-section">
+  <div class="section-header">
+    <span class="section-tag">What's Included</span>
+    <h2 class="section-title">Built for <em>Production</em></h2>
+    <p class="section-desc">Every interaction, edge case, and user scenario accounted for — from public browsing to super admin oversight.</p>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-item">
+      <div class="feature-icon">🎯</div>
+      <h4 class="feature-title">Multi-Currency Checkout</h4>
+      <p class="feature-desc">12+ currencies with live UI toggle — USD, EUR, GBP, KES, AUD, CAD, JPY, ZAR, AED, SGD, TZS, CHF — across booking, shop, and checkout flows.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🔐</div>
+      <h4 class="feature-title">Role-Based Permissions</h4>
+      <p class="feature-desc">Granular per-module permission toggles in the Add User modal. Four distinct roles: Super Admin, Sub-Admin, Registered User, and Public Visitor.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">📦</div>
+      <h4 class="feature-title">E-Commerce System</h4>
+      <p class="feature-desc">Full product catalog with filtering, cart drawer, bundle pricing, inventory tracking with low-stock alerts, and SKU management in the admin panel.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">📱</div>
+      <h4 class="feature-title">Fully Responsive</h4>
+      <p class="feature-desc">Three breakpoints across all pages: desktop ≥1024px, tablet 768–1023px, and mobile ≤767px. Mobile wireframes included at 375px viewport.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">✨</div>
+      <h4 class="feature-title">Interactive Prototypes</h4>
+      <p class="feature-desc">Working interactions in pure vanilla JS: cart drawer, modals, tab switching, calendar date selection, animated card preview, countdown timer, and live pricing.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🏕️</div>
+      <h4 class="feature-title">Safari Add-Ons & Cross-Sell</h4>
+      <p class="feature-desc">Toggle-able experience add-ons (balloon safari, photography, bush dinner, spa), gear cross-sell in the booking flow, and bundle packages with savings callouts.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">📊</div>
+      <h4 class="feature-title">Admin Analytics</h4>
+      <p class="feature-desc">Revenue bar charts, destination donut charts via CSS conic-gradient, conversion rate cards, top markets table, e-commerce revenue breakdown, and KPI dashboard.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🔍</div>
+      <h4 class="feature-title">Audit Trail</h4>
+      <p class="feature-desc">Chronological audit log panel with color-coded activity dots, action descriptions, IP addresses, browser metadata, and filterable event categories.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🌍</div>
+      <h4 class="feature-title">5 Destinations</h4>
+      <p class="feature-desc">Kenya, Tanzania, Rwanda, Uganda, and Zanzibar — each as a browsable destination with flag emojis, package counts, and dedicated content throughout the design.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TECH STACK ─── -->
+<section class="section tech-section">
+  <div class="section-header">
+    <span class="section-tag">Technical Stack</span>
+    <h2 class="section-title">Zero Dependencies, <em>Full Power</em></h2>
+    <p class="section-desc">Pure web standards — open any file in a browser with no build step, server, or framework required.</p>
+  </div>
+
+  <div class="tech-grid">
+    <div class="tech-card">
+      <span class="tech-icon">🌐</span>
+      <div class="tech-name">HTML5</div>
+      <p class="tech-desc">Semantic markup, accessible structure, no external dependencies. Each file fully self-contained.</p>
+    </div>
+    <div class="tech-card">
+      <span class="tech-icon">🎨</span>
+      <div class="tech-name">CSS3</div>
+      <p class="tech-desc">Custom properties, Grid, Flexbox, backdrop-filter, conic-gradient, keyframe animations, and media queries.</p>
+    </div>
+    <div class="tech-card">
+      <span class="tech-icon">⚡</span>
+      <div class="tech-name">Vanilla JS</div>
+      <p class="tech-desc">Pure JavaScript for all interactions — no React, no Vue, no jQuery. Cart, modals, tabs, card animation, timers.</p>
+    </div>
+    <div class="tech-card">
+      <span class="tech-icon">🔤</span>
+      <div class="tech-name">Google Fonts</div>
+      <p class="tech-desc">Playfair Display (headings), Cormorant Garamond (editorial/italic), Inter (body/UI) — loaded via CDN.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── USER ROLES ─── -->
+<section class="section roles-section">
+  <div class="section-header">
+    <span class="section-tag">Access Model</span>
+    <h2 class="section-title">Four Roles, <em>One Platform</em></h2>
+    <p class="section-desc">A multi-tier user system with granular permissions from public browsing to full system administration.</p>
+  </div>
+
+  <div class="roles-grid">
+    <div class="role-card role-visitor">
+      <span class="role-badge">Public</span>
+      <span class="role-icon">👁️</span>
+      <div class="role-name">Visitor</div>
+      <ul class="role-perms">
+        <li>Browse destinations</li>
+        <li>View packages & pricing</li>
+        <li>Browse the shop</li>
+        <li>View testimonials</li>
+        <li>Contact & enquire</li>
+      </ul>
+    </div>
+    <div class="role-card role-user">
+      <span class="role-badge">Registered</span>
+      <span class="role-icon">🧳</span>
+      <div class="role-name">Tourist</div>
+      <ul class="role-perms">
+        <li>All Visitor access</li>
+        <li>Book safari packages</li>
+        <li>Purchase shop items</li>
+        <li>Manage bookings</li>
+        <li>View booking history</li>
+      </ul>
+    </div>
+    <div class="role-card role-subadmin">
+      <span class="role-badge">Staff</span>
+      <span class="role-icon">🛠️</span>
+      <div class="role-name">Sub-Admin</div>
+      <ul class="role-perms">
+        <li>Manage destinations</li>
+        <li>Edit packages & products</li>
+        <li>Handle inventory</li>
+        <li>Process bookings</li>
+        <li>View analytics</li>
+      </ul>
+    </div>
+    <div class="role-card role-superadmin">
+      <span class="role-badge">Super Admin</span>
+      <span class="role-icon">👑</span>
+      <div class="role-name">Super Admin</div>
+      <ul class="role-perms">
+        <li>Full system access</li>
+        <li>Manage all users & roles</li>
+        <li>Configure currencies</li>
+        <li>View audit logs</li>
+        <li>Set promotions & pricing</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ─── QUICK LINKS ─── -->
+<div class="quicklinks-section">
+  <div class="quicklinks-inner">
+    <div class="quicklinks-text">
+      <h2>Jump Straight In</h2>
+      <p>All files are cross-linked — navigate naturally between pages.</p>
+    </div>
+    <div class="quicklinks-links">
+      <a href="/" class="ql-btn featured">🏠 Homepage</a>
+      <a href="/shop/" class="ql-btn">🛒 Shop</a>
+      <a href="/booking/" class="ql-btn">📅 Booking</a>
+      <a href="/checkout/" class="ql-btn">💳 Checkout</a>
+      <a href="admin-/dashboard/" class="ql-btn">⚙️ Admin</a>
+      <a href="/sitemap/" class="ql-btn">🗺️ Sitemap</a>
+      <a href="/style-guide/" class="ql-btn">🎨 Styles</a>
+      <a href="/wireframes/" class="ql-btn">📐 Wireframes</a>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <a href="#" class="footer-logo">
+    <div class="footer-logo-icon">🦁</div>
+    <span class="footer-logo-text">Successful <span>Safaris</span></span>
+  </a>
+  <div class="footer-divider"></div>
+  <p class="footer-copy">
+    Design Package · 8 Deliverables · HTML5 / CSS3 / Vanilla JS<br>
+    Premium Luxury Safari Tourism Platform
+  </p>
+</footer>
+
+</body>
+</html>
