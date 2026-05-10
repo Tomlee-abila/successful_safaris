@@ -665,7 +665,7 @@
   }
   function updateName(el) { document.getElementById('name-display').textContent = el.value.toUpperCase() || 'YOUR NAME'; }
   function updateExpiry(el) { document.getElementById('expiry-display').textContent = el.value || 'MM/YY'; }
-  function showConfirm() { document.getElementById('confirmModal').classList.add('show'); }
+  function showConfirm() { window.location.href = 'order-confirmation.html'; }
   function closeConfirm() { document.getElementById('confirmModal').classList.remove('show'); }
 </script>
 </body>
