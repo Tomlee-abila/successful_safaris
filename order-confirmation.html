@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Confirmed — Successful Safaris</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C; --gold-light: #E8C96A; --gold-pale: #F5E9C8; --gold-dark: #A07830;
+    --green-dark: #1A3A2A; --green-mid: #2D5A3D; --green-light: #4A8C5C; --green-pale: #EAF5EE;
+    --charcoal: #1A1A1A; --gray-dark: #2A2A2A; --gray-mid: #555; --gray-light: #AAA;
+    --cream: #FAF7F0; --cream-mid: #F0EAD6; --white: #FFF;
+    --success: #27AE60;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); line-height: 1.6; }
+  a { text-decoration: none; color: inherit; transition: 0.2s; }
+  button { cursor: pointer; border: none; outline: none; transition: 0.2s; }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--green-dark); padding: 0 48px;
+    display: flex; align-items: center; height: 72px;
+    border-bottom: 1px solid var(--gold);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; margin-right: auto; }
+  .nav-logo-mark { width: 40px; height: 40px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 16px; color: var(--green-dark); font-weight: 700; }
+  .nav-logo-text h2 { font-family: 'Playfair Display', serif; color: white; font-size: 18px; }
+  .nav-logo-text p { font-size: 9px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { color: rgba(255,255,255,0.8); font-size: 13px; }
+  .nav-links a:hover { color: var(--gold-light); }
+
+  /* ── SUCCESS HERO ── */
+  .success-hero {
+    background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
+    padding: 80px 48px; text-align: center; color: white; position: relative; overflow: hidden;
+  }
+  .success-hero::before {
+    content: '🦓'; position: absolute; left: -40px; top: -40px;
+    font-size: 200px; opacity: 0.05; transform: rotate(-15deg);
+  }
+  .success-hero::after {
+    content: '🦒'; position: absolute; right: -40px; bottom: -40px;
+    font-size: 200px; opacity: 0.05; transform: rotate(15deg);
+  }
+  .success-icon {
+    width: 80px; height: 80px; background: var(--gold); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 40px; margin: 0 auto 24px; box-shadow: 0 0 0 10px rgba(201,168,76,0.1);
+  }
+  .success-hero h1 { font-family: 'Playfair Display', serif; font-size: 48px; margin-bottom: 12px; }
+  .success-hero p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; color: var(--gold-light); max-width: 600px; margin: 0 auto 32px; }
+  .order-ref {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    padding: 12px 24px; border-radius: 40px; backdrop-filter: blur(8px);
+  }
+  .order-ref-label { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.6); }
+  .order-ref-num { font-family: 'Courier New', monospace; font-size: 18px; font-weight: 700; color: white; }
+
+  /* ── MAIN CONTENT ── */
+  .conf-container { max-width: 1200px; margin: -40px auto 80px; padding: 0 48px; display: grid; grid-template-columns: 1fr 380px; gap: 40px; }
+
+  /* LEFT COL */
+  .conf-main {}
+  .conf-card { background: white; border-radius: 12px; border: 1px solid var(--cream-mid); box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 32px; overflow: hidden; }
+  .conf-card-header { padding: 24px 32px; border-bottom: 1px solid var(--cream-mid); display: flex; justify-content: space-between; align-items: center; }
+  .conf-card-title { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--green-dark); }
+  .conf-card-body { padding: 32px; }
+
+  /* Order Summary */
+  .order-item { display: flex; gap: 20px; padding-bottom: 24px; border-bottom: 1px solid var(--cream-mid); margin-bottom: 24px; }
+  .order-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .item-img { width: 100px; height: 100px; border-radius: 8px; background: var(--cream); flex-shrink: 0; overflow: hidden; }
+  .item-img img { width: 100%; height: 100%; object-fit: cover; }
+  .item-info { flex: 1; }
+  .item-tag { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--gold-dark); font-weight: 700; margin-bottom: 4px; }
+  .item-name { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--green-dark); margin-bottom: 4px; }
+  .item-meta { font-size: 13px; color: var(--gray-mid); }
+  .item-price { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--charcoal); align-self: flex-start; }
+
+  .order-totals { background: var(--cream); border-radius: 8px; padding: 24px; margin-top: 32px; }
+  .total-row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 12px; }
+  .total-row.main { margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.06); font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--green-dark); margin-bottom: 0; }
+  .total-label { color: var(--gray-mid); }
+  .total-value { font-weight: 600; color: var(--charcoal); }
+
+  /* Details Grid */
+  .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .detail-group h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gray-light); margin-bottom: 12px; }
+  .detail-group p { font-size: 14px; color: var(--gray-dark); }
+
+  /* RIGHT COL */
+  .conf-sidebar {}
+  .sidebar-widget { background: white; border-radius: 12px; padding: 32px; border: 1px solid var(--cream-mid); margin-bottom: 24px; }
+  .widget-title { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--green-dark); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+  .widget-icon { font-size: 20px; }
+
+  /* Steps Widget */
+  .step-list { display: flex; flex-direction: column; gap: 20px; }
+  .step-item { display: flex; gap: 16px; position: relative; }
+  .step-item::before { content: ''; position: absolute; left: 12px; top: 24px; bottom: -20px; width: 2px; background: var(--cream-mid); }
+  .step-item:last-child::before { display: none; }
+  .step-num { width: 26px; height: 26px; border-radius: 50%; background: var(--green-pale); color: var(--green-dark); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; position: relative; z-index: 1; }
+  .step-item.done .step-num { background: var(--success); color: white; }
+  .step-text h5 { font-size: 14px; font-weight: 600; color: var(--charcoal); margin-bottom: 2px; }
+  .step-text p { font-size: 12px; color: var(--gray-mid); }
+
+  /* Action Buttons */
+  .sidebar-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 32px; }
+  .btn-conf { padding: 16px; border-radius: 6px; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; text-align: center; }
+  .btn-conf-primary { background: var(--gold); color: var(--green-dark); box-shadow: 0 4px 12px rgba(201,168,76,0.2); }
+  .btn-conf-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-conf-secondary { background: white; color: var(--green-dark); border: 1.5px solid var(--green-dark); }
+  .btn-conf-secondary:hover { background: var(--green-pale); }
+
+  /* Upsell Card */
+  .upsell-card { background: linear-gradient(rgba(26,58,42,0.9), rgba(26,58,42,0.9)), url('https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=400&q=80') center/cover; color: white; border-radius: 12px; padding: 32px; position: relative; overflow: hidden; }
+  .upsell-tag { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; }
+  .upsell-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 12px; line-height: 1.2; }
+  .upsell-card p { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 24px; }
+  .btn-upsell { background: var(--gold); color: var(--green-dark); padding: 10px 20px; border-radius: 4px; font-size: 12px; font-weight: 700; display: inline-block; }
+
+  footer { background: var(--charcoal); color: white; padding: 48px 80px 24px; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,0.3); }
+
+  @media (max-width: 1024px) {
+    .conf-container { grid-template-columns: 1fr; padding: 0 24px; }
+    .success-hero h1 { font-size: 36px; }
+    .details-grid { grid-template-columns: 1fr; gap: 24px; }
+    footer { padding: 40px 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-mark">SS</div>
+    <div class="nav-logo-text">
+      <h2>Successful Safaris</h2>
+      <p>Luxury African Experiences</p>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="home.html">Home</a></li>
+    <li><a href="destinations.html">Destinations</a></li>
+    <li><a href="packages.html">Packages</a></li>
+    <li><a href="shop.html">Shop</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="success-hero">
+  <div class="success-icon">✓</div>
+  <h1>Adventure Awaits!</h1>
+  <p>Your African safari and premium gear order has been successfully confirmed. A new chapter of exploration begins today.</p>
+  <div class="order-ref">
+    <span class="order-ref-label">Reference</span>
+    <span class="order-ref-num">#SS-2026-0421</span>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="conf-container">
+  
+  <div class="conf-main">
+    <!-- Order Summary Card -->
+    <div class="conf-card">
+      <div class="conf-card-header">
+        <h3 class="conf-card-title">Order Summary</h3>
+        <span style="font-size:12px; color:var(--gray-mid);">Confirmed May 10, 2026</span>
+      </div>
+      <div class="conf-card-body">
+        
+        <!-- Item 1: Safari -->
+        <div class="order-item">
+          <div class="item-img"><img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=200&q=80" alt="Masai Mara"></div>
+          <div class="item-info">
+            <div class="item-tag">Safari Booking</div>
+            <h4 class="item-name">Masai Mara 7-Day Luxury Safari</h4>
+            <div class="item-meta">15 Aug 2026 – 22 Aug 2026<br>2 Adults · Private Guide · All-Inclusive</div>
+          </div>
+          <div class="item-price">$9,700.00</div>
+        </div>
+
+        <!-- Item 2: Add-on -->
+        <div class="order-item">
+          <div class="item-img"><img src="https://images.unsplash.com/photo-1543874049-af2a0bbe3b1a?auto=format&fit=crop&w=200&q=80" alt="Balloon"></div>
+          <div class="item-info">
+            <div class="item-tag">Luxury Add-on</div>
+            <h4 class="item-name">Serengeti Sunrise Balloon Flight</h4>
+            <div class="item-meta">Aug 18, 2026 · 2 Persons<br>Includes Champagne Bush Breakfast</div>
+          </div>
+          <div class="item-price">$960.00</div>
+        </div>
+
+        <!-- Item 3: Gear -->
+        <div class="order-item">
+          <div class="item-img"><img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=200&q=80" alt="Jacket"></div>
+          <div class="item-info">
+            <div class="item-tag">Safari Gear</div>
+            <h4 class="item-name">Premium Safari Field Jacket</h4>
+            <div class="item-meta">Size: Medium · Color: Khaki<br>Delivery to Home Address</div>
+          </div>
+          <div class="item-price">$189.00</div>
+        </div>
+
+        <!-- Totals -->
+        <div class="order-totals">
+          <div class="total-row">
+            <span class="total-label">Subtotal</span>
+            <span class="total-value">$10,849.00</span>
+          </div>
+          <div class="total-row">
+            <span class="total-label">Gear Bundle Discount</span>
+            <span class="total-value" style="color:var(--success);">-$36.00</span>
+          </div>
+          <div class="total-row">
+            <span class="total-label">Shipping</span>
+            <span class="total-value">Free</span>
+          </div>
+          <div class="total-row main">
+            <span class="total-label">Total Paid</span>
+            <span class="total-value">$2,703.25</span>
+          </div>
+          <div style="font-size:12px; color:var(--gray-mid); margin-top:8px; text-align:right;">
+            Balance of $8,109.75 due by June 15, 2026
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Logistics Card -->
+    <div class="conf-card">
+      <div class="conf-card-header">
+        <h3 class="conf-card-title">Logistics & Details</h3>
+      </div>
+      <div class="conf-card-body">
+        <div class="details-grid">
+          <div class="detail-group">
+            <h4>Shipping Address</h4>
+            <p><strong>Sarah Wilson</strong><br>14 Safari Close<br>London, SW3 4PL<br>United Kingdom</p>
+          </div>
+          <div class="detail-group">
+            <h4>Billing Method</h4>
+            <p><strong>Visa ending in 4242</strong><br>Charged: $2,703.25 USD<br>Secure 3D-Auth ID: #TX-9821-W</p>
+          </div>
+          <div class="detail-group">
+            <h4>Lead Guest Info</h4>
+            <p><strong>Passport:</strong> GBR123456789<br><strong>Dietary:</strong> Vegetarian<br><strong>Notes:</strong> 10th Anniversary</p>
+          </div>
+          <div class="detail-group">
+            <h4>Support</h4>
+            <p>Your specialist: <strong>David Ngugi</strong><br>Email: david.n@successfulsafaris.com<br>Direct: +254 722 000 000</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="conf-sidebar">
+    <div class="sidebar-widget">
+      <h3 class="widget-title"><span class="widget-icon">🗓️</span> Next Steps</h3>
+      <div class="step-list">
+        <div class="step-item done">
+          <div class="step-num">✓</div>
+          <div class="step-text">
+            <h5>Booking Confirmed</h5>
+            <p>Your deposit has been processed.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <h5>Prepare Your Gear</h5>
+            <p>Jacket ships in 24h. Tracking to follow.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-text">
+            <h5>Documentation</h5>
+            <p>Complete visa info in your dashboard.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-text">
+            <h5>Final Payment</h5>
+            <p>Due 60 days before your departure.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-actions">
+        <a href="dashboard.html" class="btn-conf btn-conf-primary">View My Dashboard</a>
+        <button onclick="window.print()" class="btn-conf btn-conf-secondary">Print Receipt</button>
+      </div>
+    </div>
+
+    <!-- Upsell -->
+    <div class="upsell-card">
+      <div class="upsell-tag">Complete the kit</div>
+      <h3>Capture Every Moment</h3>
+      <p>Our expert guides recommend Swarovski 8x42 binoculars for the ultimate wildlife viewing experience.</p>
+      <a href="shop.html" class="btn-upsell">Browse Optics →</a>
+    </div>
+
+    <div style="margin-top:24px; text-align:center;">
+      <p style="font-size:12px; color:var(--gray-mid);">Need to make changes?<br><a href="contact.html" style="color:var(--gold-dark); text-decoration:underline;">Contact Safari Concierge</a></p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <p>© 2026 Successful Safaris Ltd. · ATOL Protected #7421</p>
+    <div style="display:flex; gap:24px;">
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
