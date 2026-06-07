@@ -1,37 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Safari Bundle Builder — Successful Safaris</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --gold: #C9A84C; --gold-light: #E8C96A; --gold-pale: #F5E9C8; --gold-dark: #A07830;
-    --green-dark: #1A3A2A; --green-mid: #2D5A3D; --green-light: #4A8C5C; --green-pale: #EAF5EE;
-    --charcoal: #1A1A1A; --gray-dark: #2A2A2A; --gray-mid: #555; --gray-light: #AAA;
-    --cream: #FAF7F0; --cream-mid: #F0EAD6; --white: #FFF;
-    --shadow-lg: 0 20px 50px rgba(0,0,0,0.1);
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); line-height: 1.6; }
-  a { text-decoration: none; color: inherit; transition: 0.2s; }
-  button { cursor: pointer; border: none; outline: none; transition: 0.2s; font-family: 'Inter', sans-serif; }
+{% extends 'base.html' %}
+{% load static %}
 
-  /* ── NAV ── */
-  nav {
-    background: var(--green-dark); padding: 0 48px;
-    display: flex; align-items: center; height: 72px;
-    border-bottom: 1px solid var(--gold); position: sticky; top: 0; z-index: 100;
-  }
-  .nav-logo { display: flex; align-items: center; gap: 12px; margin-right: auto; }
-  .nav-logo-mark { width: 40px; height: 40px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 16px; color: var(--green-dark); font-weight: 700; }
-  .nav-logo-text h2 { font-family: 'Playfair Display', serif; color: white; font-size: 18px; }
-  .nav-logo-text p { font-size: 9px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
-  .nav-links { display: flex; gap: 28px; }
-  .nav-links a { color: rgba(255,255,255,0.8); font-size: 13px; }
-  .nav-links a:hover { color: var(--gold-light); }
+{% block title %}Safari Bundle Builder — SUCCESSFUL LUXURY SAFARIS{% endblock %}
 
+{% block extra_style %}
   /* ── HEADER ── */
   .builder-header {
     background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
@@ -46,11 +18,7 @@
     padding: 10px; display: flex; justify-content: space-between; border: 1px solid var(--cream-mid);
     box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative; z-index: 2;
   }
-  .prog-step {
-    flex: 1; display: flex; align-items: center; justify-content: center; gap: 10px;
-    padding: 12px; border-radius: 40px; font-size: 13px; font-weight: 600; color: var(--gray-light);
-    transition: 0.3s;
-  }
+  .prog-step { flex: 1; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px; border-radius: 40px; font-size: 13px; font-weight: 600; color: var(--gray-light); transition: 0.3s; }
   .prog-step.active { background: var(--green-dark); color: white; }
   .prog-step.done { color: var(--green-mid); }
   .prog-num { width: 24px; height: 24px; border-radius: 50%; background: var(--cream); color: var(--gray-mid); display: flex; align-items: center; justify-content: center; font-size: 11px; }
@@ -60,7 +28,6 @@
   /* ── MAIN CONTENT ── */
   .builder-main { max-width: 1400px; margin: 0 auto; padding: 0 48px 100px; display: grid; grid-template-columns: 1fr 380px; gap: 48px; }
 
-  /* STEPS */
   .step-panel { display: none; }
   .step-panel.active { display: block; animation: fadeIn 0.4s ease-out; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -68,22 +35,13 @@
   .step-title { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--green-dark); margin-bottom: 8px; }
   .step-subtitle { font-size: 15px; color: var(--gray-mid); margin-bottom: 32px; }
 
-  /* GRID COMPONENTS */
   .item-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-  .selectable-card {
-    background: white; border-radius: 16px; border: 2px solid transparent; overflow: hidden;
-    cursor: pointer; transition: 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-    display: flex; flex-direction: column;
-  }
+  .selectable-card { background: white; border-radius: 16px; border: 2px solid transparent; overflow: hidden; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.03); display: flex; flex-direction: column; }
   .selectable-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
   .selectable-card.selected { border-color: var(--gold); background: var(--gold-pale); }
   .card-img { height: 180px; background: white; display: flex; align-items: center; justify-content: center; font-size: 64px; position: relative; }
   .card-img img { width: 100%; height: 100%; object-fit: cover; }
-  .card-check {
-    position: absolute; top: 12px; right: 12px; width: 28px; height: 28px;
-    background: white; border-radius: 50%; border: 2px solid var(--cream-mid);
-    display: flex; align-items: center; justify-content: center; font-size: 14px; color: transparent;
-  }
+  .card-check { position: absolute; top: 12px; right: 12px; width: 28px; height: 28px; background: white; border-radius: 50%; border: 2px solid var(--cream-mid); display: flex; align-items: center; justify-content: center; font-size: 14px; color: transparent; }
   .selectable-card.selected .card-check { background: var(--gold); border-color: var(--gold); color: var(--green-dark); }
   .card-body { padding: 20px; flex: 1; }
   .card-tag { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 8px; }
@@ -99,7 +57,7 @@
   .summary-card { background: var(--green-dark); color: white; border-radius: 16px; padding: 32px; box-shadow: var(--shadow-lg); overflow: hidden; position: relative; }
   .summary-card::before { content: ''; position: absolute; top: 0; right: 0; width: 100px; height: 100px; background: rgba(201,168,76,0.1); border-radius: 0 0 0 100%; }
   .summary-title { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px; }
-  
+
   .summary-items { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; min-height: 100px; }
   .empty-msg { font-size: 13px; color: rgba(255,255,255,0.4); font-style: italic; text-align: center; margin-top: 20px; }
   .s-item { display: flex; justify-content: space-between; gap: 12px; animation: slideIn 0.3s ease-out; }
@@ -112,40 +70,18 @@
   .s-total-row.savings { color: var(--gold-light); font-weight: 700; }
   .s-total-row.final { margin-top: 16px; font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; }
 
-  .btn-next { width: 100%; background: var(--gold); color: var(--green-dark); padding: 18px; border-radius: 8px; font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-top: 24px; }
+  .btn-next { width: 100%; background: var(--gold); color: var(--green-dark); padding: 18px; border-radius: 8px; font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-top: 24px; border: none; cursor: pointer; }
   .btn-next:hover { background: var(--gold-light); transform: translateY(-2px); }
   .btn-next:disabled { background: var(--gray-mid); color: var(--gray-light); cursor: not-allowed; transform: none; }
-
-  /* FOOTER */
-  footer { background: var(--charcoal); color: white; padding: 48px 80px 24px; }
-  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,0.3); }
 
   @media (max-width: 1024px) {
     .builder-main { grid-template-columns: 1fr; }
     .builder-sidebar { position: static; }
     .item-grid { grid-template-columns: 1fr; }
   }
-</style>
-</head>
-<body>
+{% endblock %}
 
-<!-- NAVIGATION -->
-<nav>
-  <div class="nav-logo">
-    <div class="nav-logo-mark">SS</div>
-    <div class="nav-logo-text">
-      <h2>Successful Safaris</h2>
-      <p>Luxury African Experiences</p>
-    </div>
-  </div>
-  <ul class="nav-links">
-    <li><a href="/">Home</a></li>
-    <li><a href="/destinations/">Destinations</a></li>
-    <li><a href="/packages/">Packages</a></li>
-    <li><a href="/shop/">Shop</a></li>
-  </ul>
-</nav>
-
+{% block content %}
 <header class="builder-header">
   <h1>Safari Bundle Builder</h1>
   <p>Create your custom African experience and unlock exclusive bundled savings of up to 20%.</p>
@@ -158,42 +94,29 @@
 </div>
 
 <main class="builder-main">
-  
   <div class="conf-main">
-    
+
     <!-- STEP 1: TOURS -->
     <div class="step-panel active" id="panel-1">
       <h2 class="step-title">1. Choose Your Safari</h2>
       <p class="step-subtitle">Start with one of our signature multi-day experiences.</p>
-      
       <div class="item-grid">
         <div class="selectable-card" onclick="toggleItem('tour', 'Great Migration Safari', 9700, this)">
-          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=400&q=80') center/cover;">
-            <div class="card-check">✓</div>
-          </div>
+          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=400&q=80') center/cover;"><div class="card-check">✓</div></div>
           <div class="card-body">
             <div class="card-tag">7 Days · Kenya</div>
             <h3 class="card-name">Great Migration Safari</h3>
             <p class="card-desc">Witness nature's greatest spectacle in the Masai Mara. Luxury tented camps and private guides included.</p>
-            <div class="card-footer">
-              <div class="card-price">$9,700</div>
-              <button class="btn-select">Select</button>
-            </div>
+            <div class="card-footer"><div class="card-price">$9,700</div><button class="btn-select">Select</button></div>
           </div>
         </div>
-
         <div class="selectable-card" onclick="toggleItem('tour', 'Serengeti Grand Safari', 7400, this)">
-          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=400&q=80') center/cover;">
-            <div class="card-check">✓</div>
-          </div>
+          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=400&q=80') center/cover;"><div class="card-check">✓</div></div>
           <div class="card-body">
             <div class="card-tag">10 Days · Tanzania</div>
             <h3 class="card-name">Serengeti Grand Safari</h3>
             <p class="card-desc">Deep exploration of the Serengeti plains. Balloon flights and expert naturalist trackers.</p>
-            <div class="card-footer">
-              <div class="card-price">$7,400</div>
-              <button class="btn-select">Select</button>
-            </div>
+            <div class="card-footer"><div class="card-price">$7,400</div><button class="btn-select">Select</button></div>
           </div>
         </div>
       </div>
@@ -203,65 +126,41 @@
     <div class="step-panel" id="panel-2">
       <h2 class="step-title">2. Add Premium Gear</h2>
       <p class="step-subtitle">Essential equipment for the African bush. Save 15% on gear in this bundle.</p>
-      
       <div class="item-grid">
         <div class="selectable-card" onclick="toggleItem('gear', 'Safari Field Jacket', 189, this)">
-          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=400&q=80') center/cover;">
-            <div class="card-check">✓</div>
-          </div>
+          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=400&q=80') center/cover;"><div class="card-check">✓</div></div>
           <div class="card-body">
-            <div class="card-tag">Successful Safaris Gear</div>
+            <div class="card-tag">SUCCESSFUL LUXURY SAFARIS Gear</div>
             <h3 class="card-name">Premium Field Jacket</h3>
             <p class="card-desc">UPF 50+ protection, 8 utility pockets, and silent hardware for wildlife viewing.</p>
-            <div class="card-footer">
-              <div class="card-price">$189</div>
-              <button class="btn-select">Add to Bundle</button>
-            </div>
+            <div class="card-footer"><div class="card-price">$189</div><button class="btn-select">Add to Bundle</button></div>
           </div>
         </div>
-
         <div class="selectable-card" onclick="toggleItem('gear', 'Swarovski Binoculars', 2450, this)">
-          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80') center/cover;">
-            <div class="card-check">✓</div>
-          </div>
+          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80') center/cover;"><div class="card-check">✓</div></div>
           <div class="card-body">
             <div class="card-tag">Optics · Professional</div>
             <h3 class="card-name">Swarovski 10x42 EL</h3>
             <p class="card-desc">Industry-leading clarity. Waterproof, field flattener lens system. The pro guide's choice.</p>
-            <div class="card-footer">
-              <div class="card-price">$2,450</div>
-              <button class="btn-select">Add to Bundle</button>
-            </div>
+            <div class="card-footer"><div class="card-price">$2,450</div><button class="btn-select">Add to Bundle</button></div>
           </div>
         </div>
-
         <div class="selectable-card" onclick="toggleItem('gear', 'All-Terrain Boots', 245, this)">
-          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=400&q=80') center/cover;">
-            <div class="card-check">✓</div>
-          </div>
+          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=400&q=80') center/cover;"><div class="card-check">✓</div></div>
           <div class="card-body">
             <div class="card-tag">Footwear · GORE-TEX</div>
             <h3 class="card-name">All-Terrain Safari Boots</h3>
             <p class="card-desc">Vibram sole, breathable mesh, and high ankle support for bush walks.</p>
-            <div class="card-footer">
-              <div class="card-price">$245</div>
-              <button class="btn-select">Add to Bundle</button>
-            </div>
+            <div class="card-footer"><div class="card-price">$245</div><button class="btn-select">Add to Bundle</button></div>
           </div>
         </div>
-
         <div class="selectable-card" onclick="toggleItem('gear', 'Wide-Brim Sun Hat', 65, this)">
-          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=400&q=80') center/cover;">
-            <div class="card-check">✓</div>
-          </div>
+          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=400&q=80') center/cover;"><div class="card-check">✓</div></div>
           <div class="card-body">
             <div class="card-tag">Headwear · UPF 80+</div>
             <h3 class="card-name">Wide-Brim Sun Hat</h3>
             <p class="card-desc">Packable, moisture-control band, adjustable fit for windy drives.</p>
-            <div class="card-footer">
-              <div class="card-price">$65</div>
-              <button class="btn-select">Add to Bundle</button>
-            </div>
+            <div class="card-footer"><div class="card-price">$65</div><button class="btn-select">Add to Bundle</button></div>
           </div>
         </div>
       </div>
@@ -271,35 +170,23 @@
     <div class="step-panel" id="panel-3">
       <h2 class="step-title">3. Luxury Add-ons</h2>
       <p class="step-subtitle">Special experiences to make your journey unforgettable.</p>
-      
       <div class="item-grid">
         <div class="selectable-card" onclick="toggleItem('addon', 'Balloon Flight (2pax)', 960, this)">
-          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1543874049-af2a0bbe3b1a?auto=format&fit=crop&w=400&q=80') center/cover;">
-            <div class="card-check">✓</div>
-          </div>
+          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1543874049-af2a0bbe3b1a?auto=format&fit=crop&w=400&q=80') center/cover;"><div class="card-check">✓</div></div>
           <div class="card-body">
             <div class="card-tag">Experience · Sunrise</div>
             <h3 class="card-name">Balloon Flight (2pax)</h3>
             <p class="card-desc">Float over the savanna at dawn followed by a champagne breakfast in the bush.</p>
-            <div class="card-footer">
-              <div class="card-price">$960</div>
-              <button class="btn-select">Add to Bundle</button>
-            </div>
+            <div class="card-footer"><div class="card-price">$960</div><button class="btn-select">Add to Bundle</button></div>
           </div>
         </div>
-
         <div class="selectable-card" onclick="toggleItem('addon', 'Private Photo Guide', 350, this)">
-          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=400&q=80') center/cover;">
-            <div class="card-check">✓</div>
-          </div>
+          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=400&q=80') center/cover;"><div class="card-check">✓</div></div>
           <div class="card-body">
             <div class="card-tag">Specialist · 1 Day</div>
             <h3 class="card-name">Private Photo Guide</h3>
             <div class="card-desc">Professional wildlife photographer to assist with settings and positioning.</div>
-            <div class="card-footer">
-              <div class="card-price">$350</div>
-              <button class="btn-select">Add to Bundle</button>
-            </div>
+            <div class="card-footer"><div class="card-price">$350</div><button class="btn-select">Add to Bundle</button></div>
           </div>
         </div>
       </div>
@@ -311,83 +198,39 @@
   <aside class="builder-sidebar">
     <div class="summary-card">
       <h3 class="summary-title">Bundle Summary</h3>
-      
       <div class="summary-items" id="summary-items">
         <div class="empty-msg">No items selected yet</div>
       </div>
-
       <div class="summary-totals">
-        <div class="s-total-row">
-          <span class="s-total-label">Subtotal</span>
-          <span class="s-total-value" id="s-subtotal">$0</span>
-        </div>
-        <div class="s-total-row savings" id="savings-row" style="display:none;">
-          <span class="s-total-label">Bundle Saving</span>
-          <span class="s-total-value" id="s-savings">-$0</span>
-        </div>
-        <div class="s-total-row final">
-          <span class="s-total-label">Total</span>
-          <span class="s-total-value" id="s-total">$0</span>
-        </div>
+        <div class="s-total-row"><span class="s-total-label">Subtotal</span><span class="s-total-value" id="s-subtotal">$0</span></div>
+        <div class="s-total-row savings" id="savings-row" style="display:none;"><span class="s-total-label">Bundle Saving</span><span class="s-total-value" id="s-savings">-$0</span></div>
+        <div class="s-total-row final"><span class="s-total-label">Total</span><span class="s-total-value" id="s-total">$0</span></div>
       </div>
-
       <button class="btn-next" id="btn-next" onclick="nextStep()" disabled>Next: Premium Gear</button>
       <div style="margin-top:16px; text-align:center;">
         <a href="#" style="font-size:12px; color:rgba(255,255,255,0.4); text-decoration:underline;">Need help building?</a>
       </div>
     </div>
   </aside>
-
 </main>
+{% endblock %}
 
-<footer>
-  <div class="footer-bottom">
-    <p>© 2026 Successful Safaris Ltd. · Curated Bundles · Global Delivery</p>
-    <div style="display:flex; gap:24px;">
-      <a href="#">Instagram</a>
-      <a href="#">Terms of Sale</a>
-    </div>
-  </div>
-</footer>
-
+{% block extra_script %}
 <script>
   let currentStep = 1;
-  const bundle = {
-    tour: null,
-    gear: [],
-    addons: []
-  };
+  const bundle = { tour: null, gear: [], addons: [] };
 
   function toggleItem(type, name, price, el) {
     if (type === 'tour') {
-      // Only one tour allowed
       const wasSelected = el.classList.contains('selected');
       document.querySelectorAll('#panel-1 .selectable-card').forEach(c => c.classList.remove('selected'));
-      
-      if (wasSelected) {
-        bundle.tour = null;
-      } else {
-        el.classList.add('selected');
-        bundle.tour = { name, price };
-      }
+      if (wasSelected) { bundle.tour = null; } else { el.classList.add('selected'); bundle.tour = { name, price }; }
     } else if (type === 'gear') {
       const idx = bundle.gear.findIndex(i => i.name === name);
-      if (idx > -1) {
-        bundle.gear.splice(idx, 1);
-        el.classList.remove('selected');
-      } else {
-        bundle.gear.push({ name, price });
-        el.classList.add('selected');
-      }
+      if (idx > -1) { bundle.gear.splice(idx, 1); el.classList.remove('selected'); } else { bundle.gear.push({ name, price }); el.classList.add('selected'); }
     } else if (type === 'addon') {
       const idx = bundle.addons.findIndex(i => i.name === name);
-      if (idx > -1) {
-        bundle.addons.splice(idx, 1);
-        el.classList.remove('selected');
-      } else {
-        bundle.addons.push({ name, price });
-        el.classList.add('selected');
-      }
+      if (idx > -1) { bundle.addons.splice(idx, 1); el.classList.remove('selected'); } else { bundle.addons.push({ name, price }); el.classList.add('selected'); }
     }
     updateSummary();
   }
@@ -395,24 +238,11 @@
   function updateSummary() {
     const itemsEl = document.getElementById('summary-items');
     itemsEl.innerHTML = '';
-    
-    let subtotal = 0;
-    let gearTotal = 0;
-
+    let subtotal = 0, gearTotal = 0;
     const allItems = [];
-    if (bundle.tour) {
-      allItems.push(bundle.tour);
-      subtotal += bundle.tour.price;
-    }
-    bundle.gear.forEach(i => {
-      allItems.push(i);
-      subtotal += i.price;
-      gearTotal += i.price;
-    });
-    bundle.addons.forEach(i => {
-      allItems.push(i);
-      subtotal += i.price;
-    });
+    if (bundle.tour) { allItems.push(bundle.tour); subtotal += bundle.tour.price; }
+    bundle.gear.forEach(i => { allItems.push(i); subtotal += i.price; gearTotal += i.price; });
+    bundle.addons.forEach(i => { allItems.push(i); subtotal += i.price; });
 
     if (allItems.length === 0) {
       itemsEl.innerHTML = '<div class="empty-msg">No items selected yet</div>';
@@ -420,15 +250,11 @@
       allItems.forEach(item => {
         const div = document.createElement('div');
         div.className = 's-item';
-        div.innerHTML = `
-          <span class="s-item-name">${item.name}</span>
-          <span class="s-item-price">$${item.price.toLocaleString()}</span>
-        `;
+        div.innerHTML = `<span class="s-item-name">${item.name}</span><span class="s-item-price">$${item.price.toLocaleString()}</span>`;
         itemsEl.appendChild(div);
       });
     }
 
-    // Savings logic: 15% off gear if bundled with a tour
     let savings = 0;
     if (bundle.tour && bundle.gear.length > 0) {
       savings = Math.round(gearTotal * 0.15);
@@ -441,18 +267,10 @@
     document.getElementById('s-subtotal').textContent = `$${subtotal.toLocaleString()}`;
     document.getElementById('s-total').textContent = `$${(subtotal - savings).toLocaleString()}`;
 
-    // Update Button State
     const nextBtn = document.getElementById('btn-next');
-    if (currentStep === 1) {
-      nextBtn.disabled = !bundle.tour;
-      nextBtn.textContent = 'Next: Premium Gear';
-    } else if (currentStep === 2) {
-      nextBtn.disabled = false;
-      nextBtn.textContent = 'Next: Luxury Add-ons';
-    } else {
-      nextBtn.disabled = false;
-      nextBtn.textContent = 'Complete Bundle →';
-    }
+    if (currentStep === 1) { nextBtn.disabled = !bundle.tour; nextBtn.textContent = 'Next: Premium Gear'; }
+    else if (currentStep === 2) { nextBtn.disabled = false; nextBtn.textContent = 'Next: Luxury Add-ons'; }
+    else { nextBtn.disabled = false; nextBtn.textContent = 'Complete Bundle →'; }
   }
 
   function nextStep() {
@@ -460,20 +278,15 @@
       document.getElementById(`panel-${currentStep}`).classList.remove('active');
       document.getElementById(`p-step-${currentStep}`).classList.remove('active');
       document.getElementById(`p-step-${currentStep}`).classList.add('done');
-      
       currentStep++;
-      
       document.getElementById(`panel-${currentStep}`).classList.add('active');
       document.getElementById(`p-step-${currentStep}`).classList.add('active');
       updateSummary();
     } else {
-      // Completed!
       window.location.href = '/checkout/';
     }
   }
 
   updateSummary();
 </script>
-
-</body>
-</html>
+{% endblock %}

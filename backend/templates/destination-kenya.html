@@ -1,21 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kenya Safaris — Masai Mara, Amboseli & Beyond | Successful Safaris</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --gold: #C9A84C; --gold-light: #E8C96A; --gold-pale: #F5E9C8; --gold-dark: #A07830;
-    --green-dark: #1A3A2A; --green-mid: #2D5A3D; --green-light: #4A8C5C;
-    --charcoal: #1A1A1A; --gray-mid: #555; --gray-light: #AAA;
-    --cream: #FAF7F0; --cream-mid: #F0EAD6; --white: #FFF;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); }
-  a { text-decoration: none; color: inherit; }
+{% extends 'base.html' %}
+{% load static %}
 
+{% block title %}Kenya Safaris — Masai Mara, Amboseli &amp; Beyond | SUCCESSFUL LUXURY SAFARIS{% endblock %}
+
+{% block extra_style %}
   /* ── PROMO BANNER ── */
   .promo-banner {
     background: var(--gold); padding: 10px 48px;
@@ -24,50 +12,6 @@
     letter-spacing: 0.3px;
   }
   .promo-banner a { color: var(--green-dark); text-decoration: underline; text-underline-offset: 2px; }
-
-  /* ── NAVIGATION ── */
-  .nav-wrapper { position: sticky; top: 0; z-index: 100; }
-  nav {
-    background: rgba(26,58,42,0.97);
-    backdrop-filter: blur(12px);
-    padding: 0 48px;
-    display: flex; align-items: center; height: 72px;
-    border-bottom: 1px solid rgba(201,168,76,0.25);
-  }
-  .nav-logo { display: flex; align-items: center; gap: 12px; margin-right: auto; }
-  .nav-logo-mark {
-    width: 40px; height: 40px; background: var(--gold); border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Playfair Display', serif; font-size: 16px; color: var(--green-dark); font-weight: 700;
-  }
-  .nav-logo-text h2 { font-family: 'Playfair Display', serif; color: white; font-size: 18px; font-weight: 600; }
-  .nav-logo-text p { font-size: 9px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a { color: rgba(255,255,255,0.85); font-size: 13px; letter-spacing: 0.5px; padding: 4px 0; border-bottom: 1.5px solid transparent; transition: all 0.2s; }
-  .nav-links a:hover { color: var(--gold-light); border-bottom-color: var(--gold-light); }
-  .nav-links a.active { color: var(--gold); border-bottom-color: var(--gold); }
-  .nav-right { display: flex; align-items: center; gap: 16px; margin-left: 40px; }
-  .nav-currency {
-    font-size: 12px; color: var(--gold-light); border: 1px solid rgba(201,168,76,0.35);
-    padding: 5px 12px; border-radius: 4px; cursor: pointer; background: transparent;
-    display: flex; align-items: center; gap: 5px; transition: all 0.2s;
-  }
-  .nav-currency:hover { background: rgba(201,168,76,0.1); }
-  .nav-cart { position: relative; color: rgba(255,255,255,0.85); cursor: pointer; padding: 6px; font-size: 18px; transition: color 0.2s; }
-  .nav-cart:hover { color: var(--gold-light); }
-  .cart-badge {
-    position: absolute; top: 0; right: 0;
-    background: var(--gold); color: var(--green-dark);
-    width: 16px; height: 16px; border-radius: 50%;
-    font-size: 9px; font-weight: 700;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .nav-cta {
-    background: var(--gold); color: var(--green-dark); padding: 10px 22px;
-    border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
-    text-transform: uppercase; transition: all 0.25s;
-  }
-  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(201,168,76,0.4); }
 
   /* ── HERO ── */
   .hero {
@@ -709,39 +653,6 @@
   }
   .btn-cta-ghost:hover { border-color: white; color: white; background: rgba(255,255,255,0.06); }
 
-  /* ── FOOTER ── */
-  footer { background: var(--charcoal); padding: 72px 80px 40px; }
-  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
-  .footer-brand-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-  .footer-brand-mark {
-    width: 36px; height: 36px; background: var(--gold); border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Playfair Display', serif; font-size: 14px; color: var(--green-dark); font-weight: 700;
-  }
-  .footer-brand-name { font-family: 'Playfair Display', serif; color: white; font-size: 16px; font-weight: 600; }
-  .footer-brand-text { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; margin-bottom: 24px; max-width: 280px; }
-  .footer-social { display: flex; gap: 10px; }
-  .soc-btn {
-    width: 34px; height: 34px; border: 1px solid rgba(255,255,255,0.15); border-radius: 4px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px; color: rgba(255,255,255,0.5); transition: all 0.2s; cursor: pointer;
-  }
-  .soc-btn:hover { border-color: var(--gold); color: var(--gold); }
-  .footer-col-title { font-size: 11px; color: var(--gold); letter-spacing: 2.5px; text-transform: uppercase; font-weight: 700; margin-bottom: 20px; }
-  .footer-links { list-style: none; }
-  .footer-links li { margin-bottom: 10px; }
-  .footer-links a { font-size: 13px; color: rgba(255,255,255,0.45); transition: color 0.2s; }
-  .footer-links a:hover { color: var(--gold-light); }
-  .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.07);
-    padding-top: 28px; display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 12px;
-  }
-  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
-  .footer-legal { display: flex; gap: 24px; }
-  .footer-legal a { font-size: 12px; color: rgba(255,255,255,0.3); transition: color 0.2s; }
-  .footer-legal a:hover { color: var(--gold-light); }
-
   /* ── DESTINATION SWITCH ── */
   .dest-switch { padding: 40px 80px; background: white; border-bottom: 1px solid var(--cream-mid); }
   .dest-switch-inner { display: flex; align-items: center; gap: 0; }
@@ -758,8 +669,6 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 1024px) {
-    nav { padding: 0 24px; }
-    .nav-links { gap: 20px; display: none; }
     .hero-content { padding: 0 24px 64px; }
     .hero-top { flex-direction: column; gap: 24px; }
     .hero-right { align-self: flex-start; }
@@ -776,7 +685,6 @@
     .packages-grid { grid-template-columns: 1fr 1fr; }
     .faq-grid { grid-template-columns: 1fr; }
     .gallery-grid { grid-template-columns: repeat(3, 1fr); }
-    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
     .breadcrumb-bar { padding: 16px 24px; }
     .dest-switch { padding: 24px; }
   }
@@ -792,43 +700,16 @@
     .packages-grid { grid-template-columns: 1fr; }
     .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
     .gallery-item:nth-child(1) { grid-column: span 2; }
-    .footer-grid { grid-template-columns: 1fr; }
     .cta-actions { flex-direction: column; align-items: center; }
     .hero-actions { flex-direction: column; align-items: flex-start; }
   }
-</style>
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
 
 <!-- PROMO BANNER -->
 <div class="promo-banner">
   ✦ &nbsp; Save <strong>15%</strong> on all Kenya packages booked before 30 June 2026 — <a href="/packages/">Browse Kenya Packages →</a>
-</div>
-
-<!-- NAVIGATION -->
-<div class="nav-wrapper">
-  <nav>
-    <a href="/" class="nav-logo">
-      <div class="nav-logo-mark">S</div>
-      <div class="nav-logo-text">
-        <h2>Successful Safaris</h2>
-        <p>Est. 2008 · Nairobi</p>
-      </div>
-    </a>
-    <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/destinations/" class="active">Destinations</a></li>
-      <li><a href="/packages/">Packages</a></li>
-      <li><a href="/shop/">Shop</a></li>
-      <li><a href="/about/">About</a></li>
-      <li><a href="/contact/">Contact</a></li>
-    </ul>
-    <div class="nav-right">
-      <div class="nav-currency">USD ▾</div>
-      <a href="/shop/" class="nav-cart">🛒<span class="cart-badge">2</span></a>
-      <a href="/booking/" class="nav-cta">Book Now</a>
-    </div>
-  </nav>
 </div>
 
 <!-- HERO -->
@@ -883,7 +764,7 @@
     <div class="fact-item">
       <div class="fact-icon">🏕️</div>
       <div>
-        <div class="fact-label">Parks & Reserves</div>
+        <div class="fact-label">Parks &amp; Reserves</div>
         <div class="fact-value"><strong>14</strong> Protected Areas</div>
       </div>
     </div>
@@ -969,7 +850,7 @@
         <div class="intro-hl">Masai community encounters</div>
         <div class="intro-hl">Kilimanjaro sunrise views</div>
         <div class="intro-hl">Laikipia rhino tracking</div>
-        <div class="intro-hl">Luxury camp & lodge stays</div>
+        <div class="intro-hl">Luxury camp &amp; lodge stays</div>
         <div class="intro-hl">Expert KPSGA-certified guides</div>
       </div>
       <div class="intro-actions">
@@ -1266,7 +1147,7 @@
         </div>
         <div class="step-content">
           <div class="step-location">Nairobi</div>
-          <div class="step-title">Arrival & City Immersion</div>
+          <div class="step-title">Arrival &amp; City Immersion</div>
           <p class="step-desc">Met at Jomo Kenyatta International Airport by your private guide. Transfer to your Nairobi hotel for check-in and briefing. Optional: Karen Blixen Museum, Giraffe Centre, and Nairobi National Park game drive before dinner at Talisman Restaurant.</p>
           <div class="step-chips">
             <span class="step-chip">Airport Transfer</span>
@@ -1283,7 +1164,7 @@
         </div>
         <div class="step-content">
           <div class="step-location">Amboseli National Park</div>
-          <div class="step-title">Elephants & Kilimanjaro</div>
+          <div class="step-title">Elephants &amp; Kilimanjaro</div>
           <p class="step-desc">Fly or drive to Amboseli. The park's famous elephant herds — some of the most studied in the world — move between swamps and open plains against the magnificent backdrop of Kilimanjaro. Two full days of game drives with your KPSGA-certified guide.</p>
           <div class="step-chips">
             <span class="step-chip">Elephant Herds</span>
@@ -1301,7 +1182,7 @@
         </div>
         <div class="step-content">
           <div class="step-location">Laikipia Plateau</div>
-          <div class="step-title">Rhinos, Predators & Night Drives</div>
+          <div class="step-title">Rhinos, Predators &amp; Night Drives</div>
           <p class="step-desc">Transfer to a private conservancy on the Laikipia Plateau. Unlike national parks, conservancies permit walking safaris, night drives, and bush dining. Track black rhino on foot with an armed ranger — one of Kenya's most intimate wildlife experiences.</p>
           <div class="step-chips">
             <span class="step-chip">Black Rhino Tracking</span>
@@ -1325,7 +1206,7 @@
             <span class="step-chip">Big Cats Daily</span>
             <span class="step-chip">River Crossings (seasonal)</span>
             <span class="step-chip">Hot Air Balloon Optional</span>
-            <span class="step-chip">Masai Dance & Culture</span>
+            <span class="step-chip">Masai Dance &amp; Culture</span>
           </div>
         </div>
       </div>
@@ -1337,7 +1218,7 @@
         </div>
         <div class="step-content">
           <div class="step-location">Nairobi · Departure</div>
-          <div class="step-title">Final Morning Game Drive & Farewell</div>
+          <div class="step-title">Final Morning Game Drive &amp; Farewell</div>
           <p class="step-desc">Last morning drive in the Mara, followed by a charter flight back to Nairobi. Overnight in Nairobi pre-departure with a farewell dinner, or connect directly to your international flight. Your guide remains with you until the final goodbye.</p>
           <div class="step-chips">
             <span class="step-chip">Morning Drive</span>
@@ -1367,7 +1248,7 @@
             </div>
             <div class="sidebar-meta-row">
               <span class="sidebar-meta-key">Included</span>
-              <span class="sidebar-meta-val">All meals & drives</span>
+              <span class="sidebar-meta-val">All meals &amp; drives</span>
             </div>
             <div class="sidebar-meta-row">
               <span class="sidebar-meta-key">Difficulty</span>
@@ -1644,7 +1525,7 @@
         Are yellow fever vaccinations required for Kenya?
         <span class="faq-icon">+</span>
       </div>
-      <div class="faq-answer">Kenya does not require yellow fever vaccination for entry unless you are arriving from a yellow fever endemic country. However, we strongly recommend consulting a travel health clinic 6–8 weeks before departure. Recommended vaccinations typically include Hepatitis A & B, Typhoid, and up-to-date Tetanus. Malaria prophylaxis is advised for all wildlife areas.</div>
+      <div class="faq-answer">Kenya does not require yellow fever vaccination for entry unless you are arriving from a yellow fever endemic country. However, we strongly recommend consulting a travel health clinic 6–8 weeks before departure. Recommended vaccinations typically include Hepatitis A &amp; B, Typhoid, and up-to-date Tetanus. Malaria prophylaxis is advised for all wildlife areas.</div>
     </div>
 
     <div class="faq-item" onclick="toggleFaq(this)">
@@ -1703,78 +1584,9 @@
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-grid">
-    <div>
-      <div class="footer-brand-logo">
-        <div class="footer-brand-mark">S</div>
-        <span class="footer-brand-name">Successful Safaris</span>
-      </div>
-      <p class="footer-brand-text">Since 2008, we have been the trusted partner of discerning travellers seeking authentic, luxurious African safari experiences across Kenya, Tanzania, Rwanda, Uganda, and Zanzibar.</p>
-      <div class="footer-social">
-        <div class="soc-btn">f</div>
-        <div class="soc-btn">in</div>
-        <div class="soc-btn">tw</div>
-        <div class="soc-btn">ig</div>
-        <div class="soc-btn">yt</div>
-      </div>
-    </div>
-    <div>
-      <div class="footer-col-title">Destinations</div>
-      <ul class="footer-links">
-        <li><a href="/destinations/kenya/">Kenya Safaris</a></li>
-        <li><a href="/destinations/">Tanzania Safaris</a></li>
-        <li><a href="/destinations/">Rwanda & Gorillas</a></li>
-        <li><a href="/destinations/">Uganda Safaris</a></li>
-        <li><a href="/destinations/">Zanzibar Beach</a></li>
-        <li><a href="/destinations/">Multi-Country</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Kenya Highlights</div>
-      <ul class="footer-links">
-        <li><a href="#">Masai Mara</a></li>
-        <li><a href="#">Amboseli</a></li>
-        <li><a href="#">Samburu</a></li>
-        <li><a href="#">Laikipia</a></li>
-        <li><a href="#">Tsavo</a></li>
-        <li><a href="#">Lake Nakuru</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Company</div>
-      <ul class="footer-links">
-        <li><a href="/about/">About Us</a></li>
-        <li><a href="/about/">Our Guides</a></li>
-        <li><a href="/about/">Conservation</a></li>
-        <li><a href="#">Journal</a></li>
-        <li><a href="/contact/">Contact</a></li>
-        <li><a href="#">Careers</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Support</div>
-      <ul class="footer-links">
-        <li><a href="#">Trip Planning</a></li>
-        <li><a href="#">Visa & Health</a></li>
-        <li><a href="#">Travel Insurance</a></li>
-        <li><a href="#">Packing Guide</a></li>
-        <li><a href="#">FAQ</a></li>
-        <li><a href="#">Terms & Conditions</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p class="footer-copy">© 2026 Successful Safaris Ltd. All rights reserved. ATOL Protected · IATA Accredited · KATO Member</p>
-    <div class="footer-legal">
-      <a href="#">Privacy Policy</a>
-      <a href="#">Terms of Use</a>
-      <a href="#">Cookie Settings</a>
-    </div>
-  </div>
-</footer>
+{% endblock %}
 
+{% block extra_script %}
 <script>
   function toggleFaq(el) {
     const wasOpen = el.classList.contains('open');
@@ -1787,5 +1599,4 @@
     btn.textContent = btn.classList.contains('active') ? '♥' : '♡';
   }
 </script>
-</body>
-</html>
+{% endblock %}

@@ -1,37 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Successful Safaris — Sitemap</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --gold: #C9A84C;
-    --gold-light: #E8C96A;
-    --gold-pale: #F5E9C8;
-    --green-dark: #1A3A2A;
-    --green-mid: #2D5A3D;
-    --green-light: #4A8C5C;
-    --black: #0A0A0A;
-    --charcoal: #1A1A1A;
-    --gray-dark: #2A2A2A;
-    --gray-mid: #555555;
-    --gray-light: #AAAAAA;
-    --cream: #FAF7F0;
-    --cream-mid: #F0EAD6;
-    --white: #FFFFFF;
-    --red: #C0392B;
-    --blue: #2980B9;
-    --purple: #8E44AD;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--cream);
-    color: var(--charcoal);
-    min-height: 100vh;
-  }
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SUCCESSFUL LUXURY SAFARIS — Sitemap{% endblock %}
+
+{% block extra_style %}
   header {
     background: var(--green-dark);
     padding: 24px 48px;
@@ -59,8 +31,8 @@
     letter-spacing: 3px;
     text-transform: uppercase;
   }
-  nav { display: flex; gap: 24px; }
-  nav a {
+  .sitemap-nav { display: flex; gap: 24px; }
+  .sitemap-nav a {
     color: var(--cream-mid);
     text-decoration: none;
     font-size: 13px;
@@ -69,8 +41,8 @@
     border-radius: 4px;
     transition: all 0.2s;
   }
-  nav a:hover { background: rgba(201,168,76,0.15); color: var(--gold-light); }
-  nav a.active { background: var(--gold); color: var(--green-dark); font-weight: 600; }
+  .sitemap-nav a:hover { background: rgba(201,168,76,0.15); color: var(--gold-light); }
+  .sitemap-nav a.active { background: var(--gold); color: var(--green-dark); font-weight: 600; }
 
   .page-hero {
     background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
@@ -94,8 +66,6 @@
   }
   .page-hero p {
     color: var(--gold-light);
-    font-size: 15px;
-    letter-spacing: 1px;
     position: relative;
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
@@ -124,10 +94,10 @@
   .legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--gray-dark); }
   .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
   .dot-public { background: var(--green-mid); }
-  .dot-user { background: var(--blue); }
-  .dot-subadmin { background: var(--purple); }
+  .dot-user { background: #2980B9; }
+  .dot-subadmin { background: #8E44AD; }
   .dot-superadmin { background: var(--gold); }
-  .dot-ecommerce { background: var(--red); }
+  .dot-ecommerce { background: #C0392B; }
   .dot-shared { background: var(--gray-mid); }
 
   /* Sitemap Layout */
@@ -222,10 +192,10 @@
   }
   .section-node:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
   .section-node.public { background: #EAF5EE; border-color: var(--green-mid); color: var(--green-dark); }
-  .section-node.user { background: #EAF3FB; border-color: var(--blue); color: #1A5C8A; }
-  .section-node.subadmin { background: #F5EAF8; border-color: var(--purple); color: #5C1A7A; }
+  .section-node.user { background: #EAF3FB; border-color: #2980B9; color: #1A5C8A; }
+  .section-node.subadmin { background: #F5EAF8; border-color: #8E44AD; color: #5C1A7A; }
   .section-node.superadmin { background: var(--gold-pale); border-color: var(--gold); color: #7A5C0A; }
-  .section-node.ecommerce { background: #FDECEA; border-color: var(--red); color: #8A1A1A; }
+  .section-node.ecommerce { background: #FDECEA; border-color: #C0392B; color: #8A1A1A; }
 
   .role-badge {
     font-size: 9px;
@@ -238,8 +208,8 @@
     font-weight: 600;
   }
   .rb-public { background: var(--green-mid); color: white; }
-  .rb-user { background: var(--blue); color: white; }
-  .rb-subadmin { background: var(--purple); color: white; }
+  .rb-user { background: #2980B9; color: white; }
+  .rb-subadmin { background: #8E44AD; color: white; }
   .rb-superadmin { background: var(--gold); color: var(--green-dark); }
   .rb-all { background: var(--charcoal); color: white; }
 
@@ -392,8 +362,8 @@
     border-top: 3px solid;
   }
   .flow-card.fc-public { border-top-color: var(--green-mid); }
-  .flow-card.fc-user { border-top-color: var(--blue); }
-  .flow-card.fc-subadmin { border-top-color: var(--purple); }
+  .flow-card.fc-user { border-top-color: #2980B9; }
+  .flow-card.fc-subadmin { border-top-color: #8E44AD; }
   .flow-card.fc-superadmin { border-top-color: var(--gold); }
   .flow-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
   .flow-card .role-tag {
@@ -411,34 +381,23 @@
     margin-top: 1px;
   }
   .fc-public .flow-num { background: var(--green-mid); color: white; }
-  .fc-user .flow-num { background: var(--blue); color: white; }
-  .fc-subadmin .flow-num { background: var(--purple); color: white; }
+  .fc-user .flow-num { background: #2980B9; color: white; }
+  .fc-subadmin .flow-num { background: #8E44AD; color: white; }
   .fc-superadmin .flow-num { background: var(--gold); color: var(--green-dark); }
+{% endblock %}
 
-  footer {
-    background: var(--green-dark);
-    padding: 24px 48px;
-    text-align: center;
-    color: var(--gray-light);
-    font-size: 12px;
-    margin-top: 80px;
-    border-top: 1px solid rgba(201,168,76,0.3);
-  }
-  footer span { color: var(--gold); }
-</style>
-</head>
-<body>
+{% block content %}
 
 <header>
   <div class="logo">
     <div class="logo-mark">SS</div>
     <div class="logo-text">
-      <h1>Successful Safaris</h1>
+      <h1>SUCCESSFUL LUXURY SAFARIS</h1>
       <p>Luxury African Experiences</p>
     </div>
   </div>
   <div class="doc-title">Design Package — Sitemap</div>
-  <nav>
+  <nav class="sitemap-nav">
     <a href="index.html">Overview</a>
     <a href="/sitemap/" class="active">Sitemap</a>
     <a href="/style-guide/">Style Guide</a>
@@ -452,9 +411,9 @@
 </header>
 
 <div class="page-hero">
-  <h2>Site Architecture & Information Architecture</h2>
+  <h2>Site Architecture &amp; Information Architecture</h2>
   <div class="gold-line"></div>
-  <p>Multi-tier user system — Public visitors, Authenticated users, Sub-admins & Super admins</p>
+  <p>Multi-tier user system — Public visitors, Authenticated users, Sub-admins &amp; Super admins</p>
 </div>
 
 <div class="container">
@@ -503,14 +462,14 @@
           <div><span class="role-badge rb-all">All + Auth</span></div>
         </div>
         <div class="sub-pages" style="max-width: 160px;">
-          <div class="sub-page"><div class="dot" style="background:var(--red)"></div> Shop Home</div>
-          <div class="sub-page"><div class="dot" style="background:var(--red)"></div> Gear & Clothing</div>
-          <div class="sub-page"><div class="dot" style="background:var(--red)"></div> Luxury Add-ons</div>
-          <div class="sub-page"><div class="dot" style="background:var(--red)"></div> Seasonal Promos</div>
-          <div class="sub-page"><div class="dot" style="background:var(--red)"></div> Bundle Packages</div>
-          <div class="sub-page"><div class="dot" style="background:var(--red)"></div> Product Detail</div>
-          <div class="sub-page"><div class="dot" style="background:var(--red)"></div> Cart / Checkout</div>
-          <div class="sub-page"><div class="dot" style="background:var(--red)"></div> Order Confirmation</div>
+          <div class="sub-page"><div class="dot" style="background:#C0392B"></div> Shop Home</div>
+          <div class="sub-page"><div class="dot" style="background:#C0392B"></div> Gear &amp; Clothing</div>
+          <div class="sub-page"><div class="dot" style="background:#C0392B"></div> Luxury Add-ons</div>
+          <div class="sub-page"><div class="dot" style="background:#C0392B"></div> Seasonal Promos</div>
+          <div class="sub-page"><div class="dot" style="background:#C0392B"></div> Bundle Packages</div>
+          <div class="sub-page"><div class="dot" style="background:#C0392B"></div> Product Detail</div>
+          <div class="sub-page"><div class="dot" style="background:#C0392B"></div> Cart / Checkout</div>
+          <div class="sub-page"><div class="dot" style="background:#C0392B"></div> Order Confirmation</div>
         </div>
       </div>
 
@@ -521,13 +480,13 @@
           <div><span class="role-badge rb-user">Registered Users</span></div>
         </div>
         <div class="sub-pages" style="max-width: 160px;">
-          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Browse Packages</div>
-          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Trip Customizer</div>
-          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Add Gear Bundle</div>
-          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Guest Details</div>
-          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Payment (Multi-FX)</div>
-          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Confirmation</div>
-          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Trip Documents</div>
+          <div class="sub-page"><div class="dot" style="background:#2980B9"></div> Browse Packages</div>
+          <div class="sub-page"><div class="dot" style="background:#2980B9"></div> Trip Customizer</div>
+          <div class="sub-page"><div class="dot" style="background:#2980B9"></div> Add Gear Bundle</div>
+          <div class="sub-page"><div class="dot" style="background:#2980B9"></div> Guest Details</div>
+          <div class="sub-page"><div class="dot" style="background:#2980B9"></div> Payment (Multi-FX)</div>
+          <div class="sub-page"><div class="dot" style="background:#2980B9"></div> Confirmation</div>
+          <div class="sub-page"><div class="dot" style="background:#2980B9"></div> Trip Documents</div>
         </div>
       </div>
 
@@ -538,13 +497,13 @@
           <div><span class="role-badge rb-user">Registered Users</span></div>
         </div>
         <div class="sub-pages" style="max-width: 160px;">
-          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> My Bookings</div>
-          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Order History</div>
-          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Saved Packages</div>
-          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Loyalty Points</div>
-          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Profile & Prefs</div>
-          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Notifications</div>
-          <div class="sub-page"><div class="dot" style="background:var(--blue)"></div> Reviews & Gallery</div>
+          <div class="sub-page"><div class="dot" style="background:#2980B9"></div> My Bookings</div>
+          <div class="sub-page"><div class="dot" style="background:#2980B9"></div> Order History</div>
+          <div class="sub-page"><div class="dot" style="background:#2980B9"></div> Saved Packages</div>
+          <div class="sub-page"><div class="dot" style="background:#2980B9"></div> Loyalty Points</div>
+          <div class="sub-page"><div class="dot" style="background:#2980B9"></div> Profile &amp; Prefs</div>
+          <div class="sub-page"><div class="dot" style="background:#2980B9"></div> Notifications</div>
+          <div class="sub-page"><div class="dot" style="background:#2980B9"></div> Reviews &amp; Gallery</div>
         </div>
       </div>
 
@@ -555,14 +514,14 @@
           <div><span class="role-badge rb-subadmin">Sub-Admins</span></div>
         </div>
         <div class="sub-pages" style="max-width: 160px;">
-          <div class="sub-page"><div class="dot" style="background:var(--purple)"></div> Admin Dashboard</div>
-          <div class="sub-page"><div class="dot" style="background:var(--purple)"></div> Manage Destinations</div>
-          <div class="sub-page"><div class="dot" style="background:var(--purple)"></div> Manage Packages</div>
-          <div class="sub-page"><div class="dot" style="background:var(--purple)"></div> Bookings Manager</div>
-          <div class="sub-page"><div class="dot" style="background:var(--purple)"></div> Product Manager</div>
-          <div class="sub-page"><div class="dot" style="background:var(--purple)"></div> Inventory Alerts</div>
-          <div class="sub-page"><div class="dot" style="background:var(--purple)"></div> Content / Blog</div>
-          <div class="sub-page"><div class="dot" style="background:var(--purple)"></div> Reports (Limited)</div>
+          <div class="sub-page"><div class="dot" style="background:#8E44AD"></div> Admin Dashboard</div>
+          <div class="sub-page"><div class="dot" style="background:#8E44AD"></div> Manage Destinations</div>
+          <div class="sub-page"><div class="dot" style="background:#8E44AD"></div> Manage Packages</div>
+          <div class="sub-page"><div class="dot" style="background:#8E44AD"></div> Bookings Manager</div>
+          <div class="sub-page"><div class="dot" style="background:#8E44AD"></div> Product Manager</div>
+          <div class="sub-page"><div class="dot" style="background:#8E44AD"></div> Inventory Alerts</div>
+          <div class="sub-page"><div class="dot" style="background:#8E44AD"></div> Content / Blog</div>
+          <div class="sub-page"><div class="dot" style="background:#8E44AD"></div> Reports (Limited)</div>
         </div>
       </div>
 
@@ -575,11 +534,11 @@
         <div class="sub-pages" style="max-width: 160px;">
           <div class="sub-page"><div class="dot" style="background:var(--gold)"></div> Master Dashboard</div>
           <div class="sub-page"><div class="dot" style="background:var(--gold)"></div> User Management</div>
-          <div class="sub-page"><div class="dot" style="background:var(--gold)"></div> Role & Permissions</div>
+          <div class="sub-page"><div class="dot" style="background:var(--gold)"></div> Role &amp; Permissions</div>
           <div class="sub-page"><div class="dot" style="background:var(--gold)"></div> All Bookings</div>
           <div class="sub-page"><div class="dot" style="background:var(--gold)"></div> All Orders</div>
-          <div class="sub-page"><div class="dot" style="background:var(--gold)"></div> Analytics & Sales</div>
-          <div class="sub-page"><div class="dot" style="background:var(--gold)"></div> Promotions & Codes</div>
+          <div class="sub-page"><div class="dot" style="background:var(--gold)"></div> Analytics &amp; Sales</div>
+          <div class="sub-page"><div class="dot" style="background:var(--gold)"></div> Promotions &amp; Codes</div>
           <div class="sub-page"><div class="dot" style="background:var(--gold)"></div> System Settings</div>
           <div class="sub-page"><div class="dot" style="background:var(--gold)"></div> Audit Logs</div>
           <div class="sub-page"><div class="dot" style="background:var(--gold)"></div> Multi-Currency Setup</div>
@@ -688,7 +647,7 @@
         <div class="smt-card-header ecommerce">
           <div class="smt-icon" style="background: #f5c6cb; font-size:20px;">🛒</div>
           <div>
-            <h4 style="color: var(--red);">E-Commerce / Shop</h4>
+            <h4 style="color: #C0392B;">E-Commerce / Shop</h4>
             <div><span class="role-badge rb-all">All + Auth for Checkout</span></div>
           </div>
         </div>
@@ -809,7 +768,7 @@
             <li>
               <div class="smt-page-num">U05</div>
               <div class="smt-page-info">
-                <div class="smt-page-name">Loyalty & Rewards</div>
+                <div class="smt-page-name">Loyalty &amp; Rewards</div>
                 <div class="smt-page-desc">Points balance, tier status, redemption history</div>
                 <div class="smt-perms"><span class="smt-perm perm-view">View</span></div>
               </div>
@@ -817,7 +776,7 @@
             <li>
               <div class="smt-page-num">U06</div>
               <div class="smt-page-info">
-                <div class="smt-page-name">Profile & Preferences</div>
+                <div class="smt-page-name">Profile &amp; Preferences</div>
                 <div class="smt-page-desc">Personal info, currency, language, notification prefs</div>
                 <div class="smt-perms"><span class="smt-perm perm-edit">Edit</span></div>
               </div>
@@ -935,7 +894,7 @@
             <li>
               <div class="smt-page-num">S03</div>
               <div class="smt-page-info">
-                <div class="smt-page-name">Roles & Permissions</div>
+                <div class="smt-page-name">Roles &amp; Permissions</div>
                 <div class="smt-page-desc">Define custom roles, assign permission sets per module</div>
                 <div class="smt-perms"><span class="smt-perm perm-manage">Full Manage</span></div>
               </div>
@@ -943,7 +902,7 @@
             <li>
               <div class="smt-page-num">S04</div>
               <div class="smt-page-info">
-                <div class="smt-page-name">Analytics & Reporting</div>
+                <div class="smt-page-name">Analytics &amp; Reporting</div>
                 <div class="smt-page-desc">Revenue, conversion, geographic, seasonal analytics</div>
                 <div class="smt-perms"><span class="smt-perm perm-view">Full View</span><span class="smt-perm perm-create">Export</span></div>
               </div>
@@ -1005,7 +964,7 @@
         </thead>
         <tbody>
           <tr>
-            <td><strong>Browse Destinations & Packages</strong></td>
+            <td><strong>Browse Destinations &amp; Packages</strong></td>
             <td><span class="check">✓</span></td>
             <td><span class="check">✓</span></td>
             <td><span class="check">✓</span></td>
@@ -1089,7 +1048,7 @@
             <td><span class="check">✓</span></td>
           </tr>
           <tr>
-            <td><strong>Full Analytics & Revenue Reports</strong></td>
+            <td><strong>Full Analytics &amp; Revenue Reports</strong></td>
             <td><span class="cross">✗</span></td>
             <td><span class="cross">✗</span></td>
             <td><span class="cross">✗</span></td>
@@ -1110,7 +1069,7 @@
             <td><span class="check">✓</span></td>
           </tr>
           <tr>
-            <td><strong>Assign Roles & Permissions</strong></td>
+            <td><strong>Assign Roles &amp; Permissions</strong></td>
             <td><span class="cross">✗</span></td>
             <td><span class="cross">✗</span></td>
             <td><span class="cross">✗</span></td>
@@ -1162,7 +1121,7 @@
 
       <div class="flow-card fc-user">
         <h4>Returning User → Shop Purchase</h4>
-        <span class="role-tag" style="color: var(--blue);">Registered User Flow</span>
+        <span class="role-tag" style="color: #2980B9;">Registered User Flow</span>
         <div class="flow-step"><div class="flow-num">1</div> Sign in → redirected to personal dashboard</div>
         <div class="flow-step"><div class="flow-num">2</div> See notification: "Gear for your Kenya trip"</div>
         <div class="flow-step"><div class="flow-num">3</div> Click through to Shop → pre-filtered by trip</div>
@@ -1174,7 +1133,7 @@
 
       <div class="flow-card fc-subadmin">
         <h4>Sub-Admin → Add New Package</h4>
-        <span class="role-tag" style="color: var(--purple);">Sub-Admin Workflow</span>
+        <span class="role-tag" style="color: #8E44AD;">Sub-Admin Workflow</span>
         <div class="flow-step"><div class="flow-num">1</div> Log into admin portal → view dashboard KPIs</div>
         <div class="flow-step"><div class="flow-num">2</div> Navigate to Packages Manager</div>
         <div class="flow-step"><div class="flow-num">3</div> Click "Create New Package"</div>
@@ -1196,9 +1155,9 @@
         <div class="flow-step"><div class="flow-num">7</div> Action logged in Audit Trail</div>
       </div>
 
-      <div class="flow-card fc-user" style="border-top-color: var(--red);">
+      <div class="flow-card fc-user" style="border-top-color: #C0392B;">
         <h4>Bundle Purchase Flow</h4>
-        <span class="role-tag" style="color: var(--red);">Cross-sell: Tour + Gear</span>
+        <span class="role-tag" style="color: #C0392B;">Cross-sell: Tour + Gear</span>
         <div class="flow-step"><div class="flow-num">1</div> User views package detail page</div>
         <div class="flow-step"><div class="flow-num">2</div> "Complete Your Safari" section shows gear</div>
         <div class="flow-step"><div class="flow-num">3</div> Add bundle to cart with one click</div>
@@ -1208,9 +1167,9 @@
         <div class="flow-step"><div class="flow-num">7</div> Single confirmation for both bookings</div>
       </div>
 
-      <div class="flow-card fc-subadmin" style="border-top-color: var(--red);">
+      <div class="flow-card fc-subadmin" style="border-top-color: #C0392B;">
         <h4>Sub-Admin → Manage Inventory</h4>
-        <span class="role-tag" style="color: var(--red);">Inventory Alert Response</span>
+        <span class="role-tag" style="color: #C0392B;">Inventory Alert Response</span>
         <div class="flow-step"><div class="flow-num">1</div> Dashboard shows low-stock alert badge</div>
         <div class="flow-step"><div class="flow-num">2</div> Navigate to Inventory Manager</div>
         <div class="flow-step"><div class="flow-num">3</div> View items below threshold (red indicators)</div>
@@ -1225,9 +1184,4 @@
 
 </div>
 
-<footer>
-  <p>Successful Safaris — Design Package &nbsp;|&nbsp; <span>Sitemap v1.0</span> &nbsp;|&nbsp; Confidential &nbsp;|&nbsp; 2026</p>
-</footer>
-
-</body>
-</html>
+{% endblock %}

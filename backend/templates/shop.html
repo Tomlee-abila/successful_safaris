@@ -1,955 +1,108 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Successful Safaris — Safari Shop</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --gold: #C9A84C; --gold-light: #E8C96A; --gold-pale: #F5E9C8; --gold-dark: #A07830;
-    --green-dark: #1A3A2A; --green-mid: #2D5A3D; --green-light: #4A8C5C;
-    --charcoal: #1A1A1A; --gray-dark: #2A2A2A; --gray-mid: #555; --gray-light: #AAA;
-    --cream: #FAF7F0; --cream-mid: #F0EAD6; --white: #FFF;
-    --error: #C0392B; --success: #27AE60; --warning: #F39C12;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); }
-  a { text-decoration: none; color: inherit; }
-  button { cursor: pointer; }
+{% extends 'base.html' %}
+{% load static %}
 
-  /* ── NAV ── */
-  nav {
-    background: rgba(26,58,42,0.97); backdrop-filter: blur(12px);
-    padding: 0 48px; display: flex; align-items: center; height: 72px;
-    border-bottom: 1px solid rgba(201,168,76,0.25); position: sticky; top: 0; z-index: 100;
-  }
-  .nav-logo { display: flex; align-items: center; gap: 12px; margin-right: auto; }
-  .nav-logo-mark { width: 40px; height: 40px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 16px; color: var(--green-dark); font-weight: 700; }
-  .nav-logo-text h2 { font-family: 'Playfair Display', serif; color: white; font-size: 18px; }
-  .nav-logo-text p { font-size: 9px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
-  .nav-links { display: flex; gap: 28px; list-style: none; }
-  .nav-links a { color: rgba(255,255,255,0.8); font-size: 13px; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--gold-light); }
-  .nav-links a.active { color: var(--gold); border-bottom: 1.5px solid var(--gold); padding-bottom: 4px; }
-  .nav-right { display: flex; align-items: center; gap: 16px; margin-left: 32px; }
-  .nav-currency { font-size: 12px; color: var(--gold-light); border: 1px solid rgba(201,168,76,0.3); padding: 5px 12px; border-radius: 4px; cursor: pointer; background: transparent; }
-  .nav-cart { position: relative; color: rgba(255,255,255,0.85); cursor: pointer; font-size: 18px; padding: 6px; }
-  .cart-badge { position: absolute; top: 0; right: 0; background: var(--gold); color: var(--green-dark); width: 16px; height: 16px; border-radius: 50%; font-size: 9px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
-  .nav-user { color: rgba(255,255,255,0.8); font-size: 13px; cursor: pointer; }
-  .nav-cta { background: var(--gold); color: var(--green-dark); padding: 10px 22px; border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
-  .nav-cta:hover { background: var(--gold-light); }
+{% block title %}The Safari Shop — SUCCESSFUL LUXURY SAFARIS{% endblock %}
 
+{% block extra_style %}
   /* ── SHOP HERO ── */
   .shop-hero {
     background: linear-gradient(135deg, var(--charcoal) 0%, var(--gray-dark) 100%);
-    padding: 64px 80px;
-    position: relative; overflow: hidden;
+    padding: 64px 80px; position: relative; overflow: hidden;
   }
-  .shop-hero::before {
-    content: '🛒'; position: absolute; right: -40px; top: -40px;
-    font-size: 300px; opacity: 0.03; pointer-events: none;
-  }
-  .shop-hero-content { max-width: 600px; }
-  .shop-hero-breadcrumb { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-  .shop-hero-breadcrumb a { color: var(--gold-light); }
-  .shop-hero-overline { font-size: 11px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; font-weight: 600; margin-bottom: 10px; }
-  .shop-hero h1 { font-family: 'Playfair Display', serif; font-size: 52px; font-weight: 700; color: white; line-height: 1.1; margin-bottom: 16px; }
-  .shop-hero p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 20px; color: rgba(255,255,255,0.7); margin-bottom: 28px; }
-  .shop-search {
-    display: flex; gap: 0; max-width: 480px;
-  }
-  .shop-search input {
-    flex: 1; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
-    border-right: none; padding: 12px 18px; color: white;
-    font-size: 13px; border-radius: 4px 0 0 4px; outline: none;
-  }
-  .shop-search input::placeholder { color: rgba(255,255,255,0.35); }
-  .shop-search input:focus { border-color: var(--gold); background: rgba(255,255,255,0.1); }
-  .shop-search-btn {
-    background: var(--gold); color: var(--green-dark); border: none;
-    padding: 12px 20px; font-size: 14px; border-radius: 0 4px 4px 0;
-  }
-  .shop-hero-stats { display: flex; gap: 28px; margin-top: 28px; }
-  .shop-stat { }
-  .shop-stat-num { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--gold-light); }
-  .shop-stat-label { font-size: 11px; color: rgba(255,255,255,0.5); }
-
-  /* ── PROMO BANNER ── */
-  .promo-strip {
-    background: var(--gold); padding: 12px 80px;
-    display: flex; align-items: center; justify-content: center; gap: 12px;
-  }
-  .promo-strip p { font-size: 13px; color: var(--green-dark); font-weight: 600; }
-  .promo-strip a { color: var(--green-dark); font-weight: 700; text-decoration: underline; }
+  .shop-hero::before { content: '🛒'; position: absolute; right: -40px; top: -40px; font-size: 300px; opacity: 0.03; pointer-events: none; }
+  .shop-hero h1 { font-family: 'Playfair Display', serif; font-size: 52px; color: white; margin-bottom: 16px; }
+  .shop-hero p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 20px; color: rgba(255,255,255,0.7); max-width: 600px; }
 
   /* ── CATEGORY TABS ── */
-  .category-tabs {
-    background: white; border-bottom: 1px solid var(--cream-mid);
-    padding: 0 80px; display: flex; gap: 0; overflow-x: auto;
-    position: sticky; top: 72px; z-index: 90;
-  }
-  .cat-tab {
-    padding: 18px 24px; font-size: 13px; font-weight: 500; color: var(--gray-mid);
-    cursor: pointer; border-bottom: 2.5px solid transparent; white-space: nowrap;
-    transition: all 0.2s; display: flex; align-items: center; gap: 6px;
-  }
-  .cat-tab:hover { color: var(--green-dark); }
+  .category-tabs { background: white; border-bottom: 1px solid var(--cream-mid); padding: 0 80px; display: flex; overflow-x: auto; sticky; top: 80px; z-index: 90; }
+  .cat-tab { padding: 18px 24px; font-size: 13px; font-weight: 500; color: var(--gray-mid); cursor: pointer; border-bottom: 2.5px solid transparent; white-space: nowrap; }
   .cat-tab.active { color: var(--green-dark); border-bottom-color: var(--gold); font-weight: 600; }
-  .cat-count { font-size: 10px; background: var(--cream-mid); padding: 1px 6px; border-radius: 10px; color: var(--gray-mid); }
-  .cat-tab.active .cat-count { background: var(--gold-pale); color: var(--gold-dark); }
 
-  /* ── SHOP LAYOUT ── */
-  .shop-layout { display: flex; gap: 0; max-width: 1400px; margin: 0 auto; padding: 40px 80px; }
-
-  /* FILTERS SIDEBAR */
-  .filter-sidebar {
-    width: 260px; flex-shrink: 0; margin-right: 40px;
-  }
-  .filter-sticky { position: sticky; top: 135px; }
-  .filter-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
-  .filter-title { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--green-dark); }
-  .filter-clear { font-size: 12px; color: var(--gold-dark); cursor: pointer; text-decoration: underline; }
-  .filter-section { margin-bottom: 24px; }
-  .filter-section-title { font-size: 11px; color: var(--charcoal); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
-  .filter-section-title span { color: var(--gray-light); font-size: 16px; }
-  .filter-divider { height: 1px; background: var(--cream-mid); margin-bottom: 20px; }
-  .filter-option { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; cursor: pointer; }
-  .filter-checkbox { width: 16px; height: 16px; border: 1.5px solid var(--cream-mid); border-radius: 3px; flex-shrink: 0; transition: all 0.15s; display: flex; align-items: center; justify-content: center; font-size: 10px; }
-  .filter-option:hover .filter-checkbox { border-color: var(--gold); }
-  .filter-option.checked .filter-checkbox { background: var(--gold); border-color: var(--gold); color: var(--green-dark); }
-  .filter-label { font-size: 13px; color: var(--gray-dark); }
-  .filter-count { font-size: 11px; color: var(--gray-light); margin-left: auto; }
-  .price-slider { margin-top: 8px; }
-  .price-range-bar { height: 4px; background: var(--cream-mid); border-radius: 2px; position: relative; margin-bottom: 12px; }
-  .price-range-fill { position: absolute; left: 10%; right: 20%; height: 100%; background: var(--gold); border-radius: 2px; }
-  .price-range-thumb { position: absolute; width: 14px; height: 14px; background: white; border: 2px solid var(--gold); border-radius: 50%; top: 50%; transform: translateY(-50%); cursor: pointer; }
-  .price-range-thumb.left { left: 10%; transform: translate(-50%, -50%); }
-  .price-range-thumb.right { right: 20%; transform: translate(50%, -50%); }
-  .price-values { display: flex; justify-content: space-between; font-size: 12px; color: var(--gray-mid); }
-  .color-swatches { display: flex; flex-wrap: wrap; gap: 8px; }
-  .color-swatch-btn {
-    width: 28px; height: 28px; border-radius: 50%; cursor: pointer;
-    border: 2px solid transparent; transition: transform 0.15s;
-    display: flex; align-items: center; justify-content: center; font-size: 12px;
-  }
-  .color-swatch-btn:hover { transform: scale(1.15); }
-  .color-swatch-btn.selected { border-color: var(--gold); }
-  .size-grid { display: flex; flex-wrap: wrap; gap: 6px; }
-  .size-btn { width: 36px; height: 32px; border: 1.5px solid var(--cream-mid); border-radius: 4px; font-size: 11px; font-weight: 600; color: var(--gray-mid); background: white; cursor: pointer; transition: all 0.15s; }
-  .size-btn:hover { border-color: var(--gold); color: var(--gold-dark); }
-  .size-btn.selected { background: var(--green-dark); color: white; border-color: var(--green-dark); }
-
-  /* PRODUCTS MAIN */
-  .products-main { flex: 1; }
-  .products-toolbar {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 24px; flex-wrap: wrap; gap: 12px;
-  }
-  .products-count { font-size: 13px; color: var(--gray-mid); }
-  .products-count strong { color: var(--charcoal); }
-  .toolbar-right { display: flex; align-items: center; gap: 12px; }
-  .sort-select {
-    padding: 8px 14px; border: 1.5px solid var(--cream-mid); border-radius: 6px;
-    font-size: 13px; color: var(--charcoal); background: white; outline: none; cursor: pointer;
-    appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath fill='%23555' d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
-    background-repeat: no-repeat; background-position: right 10px center; padding-right: 28px;
-  }
-  .view-toggle { display: flex; border: 1.5px solid var(--cream-mid); border-radius: 6px; overflow: hidden; }
-  .view-btn { padding: 7px 10px; background: white; color: var(--gray-light); border: none; cursor: pointer; transition: all 0.15s; font-size: 14px; }
-  .view-btn.active { background: var(--green-dark); color: white; }
-
-  /* ACTIVE FILTERS */
-  .active-filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
-  .active-filter {
-    background: var(--gold-pale); border: 1px solid var(--gold);
-    padding: 4px 10px; border-radius: 20px; font-size: 11px; color: var(--gold-dark);
-    font-weight: 600; display: flex; align-items: center; gap: 6px; cursor: pointer;
-  }
-  .active-filter span { color: var(--gold); font-size: 14px; line-height: 1; }
-
-  /* PRODUCT GRID */
+  /* ── GRID ── */
+  .shop-container { padding: 40px 80px; max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 260px 1fr; gap: 48px; }
   .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  
   .product-card {
-    background: white; border-radius: 10px; overflow: hidden;
-    border: 1px solid var(--cream-mid);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-    transition: all 0.3s; cursor: pointer;
+    background: white; border-radius: 12px; overflow: hidden; border: 1px solid var(--cream-mid);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04); transition: 0.3s; cursor: pointer;
   }
   .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,0.1); border-color: rgba(201,168,76,0.3); }
-  .product-img {
-    height: 220px; position: relative; overflow: hidden;
-    display: flex; align-items: center; justify-content: center; font-size: 72px;
-  }
-  .product-labels { position: absolute; top: 12px; left: 12px; display: flex; flex-direction: column; gap: 4px; }
-  .product-label {
-    padding: 3px 10px; border-radius: 2px; font-size: 9px; font-weight: 700;
-    letter-spacing: 1px; text-transform: uppercase; display: inline-block;
-  }
-  .label-sale { background: var(--error); color: white; }
-  .label-new { background: var(--success); color: white; }
-  .label-popular { background: var(--gold); color: var(--green-dark); }
-  .label-bundle { background: var(--green-dark); color: var(--gold); }
-  .label-luxury { background: linear-gradient(135deg, var(--gold-dark), var(--gold-light)); color: white; }
-  .product-wish {
-    position: absolute; top: 12px; right: 12px;
-    width: 32px; height: 32px; background: white; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    cursor: pointer; transition: all 0.2s; color: var(--gray-light);
-  }
-  .product-wish:hover { color: var(--error); transform: scale(1.1); }
-  .product-wish.active { color: var(--error); }
-  .product-quick {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    background: var(--green-dark); color: var(--gold-light);
-    padding: 10px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
-    text-align: center; transform: translateY(100%); transition: transform 0.25s;
-  }
-  .product-card:hover .product-quick { transform: translateY(0); }
-  .product-body { padding: 18px; }
-  .product-category { font-size: 10px; color: var(--gold-dark); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 5px; }
-  .product-name { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; color: var(--green-dark); margin-bottom: 5px; line-height: 1.25; }
-  .product-desc { font-size: 12px; color: var(--gray-mid); line-height: 1.5; margin-bottom: 10px; }
-  .product-rating { display: flex; align-items: center; gap: 5px; margin-bottom: 10px; }
-  .stars { color: var(--gold); font-size: 12px; }
-  .rating-count { font-size: 11px; color: var(--gray-light); }
-  .product-variants { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 10px; }
-  .variant-dot { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid rgba(0,0,0,0.1); cursor: pointer; }
-  .variant-dot:hover { transform: scale(1.2); }
-  .product-footer {
-    padding: 14px 18px; border-top: 1px solid var(--cream-mid);
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .product-price-block {}
-  .product-price-old { font-size: 12px; color: var(--gray-light); text-decoration: line-through; }
+  .product-img { height: 220px; display: flex; align-items: center; justify-content: center; font-size: 72px; background: var(--cream); position: relative; }
+  .product-body { padding: 20px; }
+  .product-cat { font-size: 10px; color: var(--gold-dark); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 6px; }
+  .product-name { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--green-dark); margin-bottom: 8px; }
+  .product-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--cream-mid); padding: 16px 20px; }
   .product-price { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--green-dark); }
-  .product-price.sale { color: var(--error); }
-  .product-per { font-size: 11px; color: var(--gray-light); }
-  .add-to-cart {
-    background: var(--gold); color: var(--green-dark);
-    padding: 10px 18px; border-radius: 4px; border: none;
-    font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
-    transition: all 0.2s;
-  }
-  .add-to-cart:hover { background: var(--gold-light); transform: translateY(-1px); }
-  .stock-badge { font-size: 10px; color: var(--success); font-weight: 600; display: flex; align-items: center; gap: 3px; }
-  .stock-low { color: var(--warning); }
-  .stock-out { color: var(--gray-light); }
+  .btn-add { background: var(--gold); color: var(--green-dark); padding: 8px 16px; border-radius: 4px; font-size: 11px; font-weight: 700; border: none; cursor: pointer; }
 
-  /* BUNDLE SECTION */
-  .bundle-section {
-    background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
-    margin: 48px 0; border-radius: 12px; padding: 40px;
-    border: 1px solid rgba(201,168,76,0.2);
-  }
-  .bundle-header { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
-  .bundle-icon { font-size: 32px; }
-  .bundle-title { font-family: 'Playfair Display', serif; font-size: 26px; color: white; }
-  .bundle-sub { font-size: 14px; color: rgba(255,255,255,0.7); margin-top: 2px; }
-  .bundle-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .bundle-card {
-    background: rgba(255,255,255,0.06); border: 1px solid rgba(201,168,76,0.2);
-    border-radius: 10px; overflow: hidden; transition: all 0.3s;
-  }
-  .bundle-card:hover { background: rgba(255,255,255,0.1); border-color: rgba(201,168,76,0.5); }
-  .bundle-card-img { height: 140px; display: flex; align-items: center; justify-content: center; font-size: 52px; position: relative; }
-  .bundle-card-save {
-    position: absolute; top: 10px; right: 10px;
-    background: var(--gold); color: var(--green-dark);
-    padding: 3px 8px; border-radius: 2px; font-size: 9px; font-weight: 700;
-  }
-  .bundle-card-body { padding: 14px; }
-  .bundle-card-name { font-family: 'Playfair Display', serif; font-size: 15px; color: white; margin-bottom: 5px; }
-  .bundle-card-items { font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 10px; line-height: 1.5; }
-  .bundle-card-footer { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-top: 1px solid rgba(255,255,255,0.07); }
-  .bundle-price { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--gold-light); }
-  .bundle-original { font-size: 11px; color: rgba(255,255,255,0.4); text-decoration: line-through; }
-  .bundle-btn { background: var(--gold); color: var(--green-dark); border: none; padding: 8px 14px; border-radius: 3px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; }
+  @media (max-width: 1100px) { .product-grid { grid-template-columns: 1fr 1fr; } .shop-container { grid-template-columns: 1fr; } }
+{% endblock %}
 
-  /* PROMO SECTION */
-  .seasonal-promo {
-    background: var(--gold-pale); border: 1px solid var(--gold);
-    border-radius: 12px; padding: 32px 40px; margin: 32px 0;
-    display: flex; align-items: center; gap: 32px;
-  }
-  .promo-icon { font-size: 52px; flex-shrink: 0; }
-  .promo-content {}
-  .promo-title { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--green-dark); margin-bottom: 6px; }
-  .promo-text { font-size: 13px; color: var(--gray-mid); margin-bottom: 12px; }
-  .promo-code { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .code-badge { background: var(--gold); color: var(--green-dark); padding: 6px 16px; border-radius: 4px; font-size: 14px; font-weight: 700; letter-spacing: 2px; font-family: 'Courier New', monospace; }
-  .promo-copy-btn { background: var(--green-dark); color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: 600; }
-  .promo-countdown { margin-left: auto; text-align: center; flex-shrink: 0; }
-  .countdown-label { font-size: 10px; color: var(--gray-mid); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-  .countdown-timer { display: flex; gap: 8px; }
-  .countdown-unit { text-align: center; }
-  .countdown-num { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--green-dark); line-height: 1; }
-  .countdown-unit-label { font-size: 9px; color: var(--gray-mid); text-transform: uppercase; letter-spacing: 1px; }
-  .countdown-sep { font-size: 24px; color: var(--gold); font-weight: 700; align-self: center; margin-bottom: 8px; }
-
-  /* PAGINATION */
-  .pagination { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 48px; }
-  .page-btn { width: 36px; height: 36px; border-radius: 6px; border: 1.5px solid var(--cream-mid); background: white; font-size: 13px; color: var(--gray-mid); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
-  .page-btn:hover { border-color: var(--gold); color: var(--gold-dark); }
-  .page-btn.active { background: var(--green-dark); color: white; border-color: var(--green-dark); }
-  .page-btn.arrow { font-size: 16px; }
-
-  /* RECENTLY VIEWED */
-  .recently-viewed { margin-top: 64px; padding-top: 40px; border-top: 1px solid var(--cream-mid); }
-  .rv-title { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--green-dark); margin-bottom: 20px; }
-  .rv-grid { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 8px; }
-  .rv-card { min-width: 160px; background: white; border-radius: 8px; border: 1px solid var(--cream-mid); overflow: hidden; flex-shrink: 0; }
-  .rv-img { height: 100px; display: flex; align-items: center; justify-content: center; font-size: 40px; }
-  .rv-body { padding: 10px; }
-  .rv-name { font-size: 12px; font-weight: 600; color: var(--green-dark); }
-  .rv-price { font-size: 13px; font-weight: 700; color: var(--gold-dark); margin-top: 4px; }
-
-  /* CART DRAWER (simplified) */
-  .cart-drawer {
-    position: fixed; top: 0; right: -400px; width: 380px; height: 100vh;
-    background: white; z-index: 200; box-shadow: -4px 0 32px rgba(0,0,0,0.12);
-    transition: right 0.3s; overflow-y: auto;
-    display: flex; flex-direction: column;
-  }
-  .cart-drawer.open { right: 0; }
-  .cart-drawer-header { background: var(--green-dark); padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; }
-  .cart-drawer-title { font-family: 'Playfair Display', serif; font-size: 20px; color: white; }
-  .cart-close { color: rgba(255,255,255,0.7); font-size: 24px; cursor: pointer; background: none; border: none; }
-  .cart-body { flex: 1; padding: 20px 24px; }
-  .cart-item { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--cream-mid); }
-  .ci-img { width: 64px; height: 64px; background: var(--cream); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; }
-  .ci-info { flex: 1; }
-  .ci-name { font-size: 14px; font-weight: 600; color: var(--green-dark); margin-bottom: 3px; }
-  .ci-variant { font-size: 11px; color: var(--gray-mid); margin-bottom: 6px; }
-  .ci-qty { display: flex; align-items: center; gap: 8px; }
-  .qty-btn { width: 24px; height: 24px; border: 1px solid var(--cream-mid); border-radius: 4px; background: white; cursor: pointer; font-size: 14px; }
-  .qty-num { font-size: 13px; font-weight: 600; min-width: 20px; text-align: center; }
-  .ci-price { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--green-dark); align-self: center; }
-  .cart-footer { padding: 20px 24px; border-top: 1px solid var(--cream-mid); background: white; }
-  .cart-total-line { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px; color: var(--gray-mid); }
-  .cart-total-main { display: flex; justify-content: space-between; font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--green-dark); margin: 10px 0; }
-  .cart-currency-row { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
-  .cart-currency-btn { padding: 4px 10px; border: 1.5px solid var(--cream-mid); border-radius: 4px; font-size: 11px; font-weight: 600; cursor: pointer; background: white; color: var(--gray-mid); }
-  .cart-currency-btn.active { background: var(--green-dark); color: white; border-color: var(--green-dark); }
-  .checkout-btn { background: var(--gold); color: var(--green-dark); padding: 15px; border: none; width: 100%; border-radius: 4px; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
-  .checkout-btn:hover { background: var(--gold-light); }
-  .continue-btn { background: white; color: var(--green-dark); padding: 12px; border: 1.5px solid var(--green-dark); width: 100%; border-radius: 4px; font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
-  .cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 199; display: none; }
-  .cart-overlay.visible { display: block; }
-
-  footer { background: var(--charcoal); color: white; padding: 48px 80px 24px; }
-  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 32px; }
-
-  @media (max-width: 1024px) {
-    nav { padding: 0 24px; }
-    .shop-hero, .shop-layout, .promo-strip, .category-tabs { padding-left: 24px; padding-right: 24px; }
-    .filter-sidebar { display: none; }
-    .product-grid { grid-template-columns: repeat(2, 1fr); }
-    .bundle-grid { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 767px) {
-    .nav-links { display: none; }
-    .shop-hero h1 { font-size: 36px; }
-    .product-grid { grid-template-columns: 1fr 1fr; }
-    .bundle-grid { grid-template-columns: 1fr; }
-    .seasonal-promo { flex-direction: column; }
-    .promo-countdown { margin-left: 0; }
-    footer { padding: 32px 24px 20px; }
-  }
-</style>
-</head>
-<body>
-
-<!-- CART OVERLAY -->
-<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
-
-<!-- CART DRAWER -->
-<div class="cart-drawer" id="cart-drawer">
-  <div class="cart-drawer-header">
-    <div class="cart-drawer-title">🛒 Your Safari Cart (3)</div>
-    <button class="cart-close" onclick="closeCart()">×</button>
-  </div>
-  <div class="cart-body">
-    <div class="cart-item">
-      <div class="ci-img" style="background: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=128&q=80') center/cover no-repeat; border-radius:6px;"></div>
-      <div class="ci-info">
-        <div class="ci-name">Safari Field Jacket</div>
-        <div class="ci-variant">Size: M · Khaki</div>
-        <div class="ci-qty">
-          <button class="qty-btn">−</button>
-          <span class="qty-num">1</span>
-          <button class="qty-btn">+</button>
-          <span style="font-size:11px; color:var(--error); cursor:pointer; margin-left:8px;">Remove</span>
-        </div>
-      </div>
-      <div class="ci-price">$189</div>
-    </div>
-    <div class="cart-item">
-      <div class="ci-img" style="background: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=128&q=80') center/cover no-repeat; border-radius:6px;"></div>
-      <div class="ci-info">
-        <div class="ci-name">Private Photography Guide</div>
-        <div class="ci-variant">1 Day · Add-on for Kenya Trip</div>
-        <div class="ci-qty">
-          <button class="qty-btn">−</button>
-          <span class="qty-num">1</span>
-          <button class="qty-btn">+</button>
-        </div>
-      </div>
-      <div class="ci-price">$350</div>
-    </div>
-    <div class="cart-item" style="border-left: 3px solid var(--gold);">
-      <div class="ci-img" style="background: url('https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=128&q=80') center/cover no-repeat; border-radius:6px;"></div>
-      <div class="ci-info">
-        <div class="ci-name" style="color:var(--green-dark);">Masai Mara 7D Safari</div>
-        <div class="ci-variant">2 Adults · 15 Aug 2026</div>
-        <div style="font-size:10px; background:var(--gold-pale); color:var(--gold-dark); padding:2px 8px; border-radius:10px; display:inline-block; margin-top:4px;">Tour Booking</div>
-      </div>
-      <div class="ci-price">$9,700</div>
-    </div>
-    <!-- Bundle savings notice -->
-    <div style="background:var(--green-pale); border:1px solid var(--green-light); border-radius:6px; padding:10px 12px; margin-top:12px; font-size:12px; color:var(--green-dark);">
-      🎉 <strong>Bundle Saving Applied:</strong> You save $95 for adding gear with your safari booking!
-    </div>
-  </div>
-  <div class="cart-footer">
-    <div class="cart-total-line"><span>Subtotal (3 items)</span><span>$10,239</span></div>
-    <div class="cart-total-line"><span>Bundle Discount</span><span style="color:var(--success);">-$95</span></div>
-    <div class="cart-total-line"><span>Shipping</span><span>Calculated at checkout</span></div>
-    <div class="cart-total-main"><span>Total</span><span>$10,144</span></div>
-    <div class="cart-currency-row">
-      <span class="cart-currency-btn active">USD</span>
-      <span class="cart-currency-btn">EUR</span>
-      <span class="cart-currency-btn">GBP</span>
-      <span class="cart-currency-btn">KES</span>
-    </div>
-    <a href="/checkout/"><button class="checkout-btn">Proceed to Checkout →</button></a>
-    <button class="continue-btn" onclick="closeCart()">Continue Shopping</button>
-  </div>
-</div>
-
-<!-- NAVIGATION -->
-<nav>
-  <div class="nav-logo">
-    <div class="nav-logo-mark">SS</div>
-    <div class="nav-logo-text">
-      <h2>Successful Safaris</h2>
-      <p>Luxury African Experiences</p>
-    </div>
-  </div>
-  <ul class="nav-links">
-    <li><a href="/">Home</a></li>
-    <li><a href="#">Destinations</a></li>
-    <li><a href="#">Packages</a></li>
-    <li><a href="/shop/" class="active">Shop</a></li>
-    <li><a href="#">About</a></li>
-    <li><a href="#">Contact</a></li>
-  </ul>
-  <div class="nav-right">
-    <div class="nav-currency">USD $ ▾</div>
-    <div class="nav-cart" onclick="openCart()">🛒 <span class="cart-badge">3</span></div>
-    <div class="nav-user">👤 Sarah W.</div>
-    <a href="/booking/" class="nav-cta">Book Safari</a>
-  </div>
-</nav>
-
-<!-- SEASONAL PROMO STRIP -->
-<div class="promo-strip">
-  <p>🎉 <strong>SEASON15</strong> — Save 15% on all gear orders over $200 · Free shipping on orders over $150 · <a href="#">Terms apply</a></p>
-</div>
-
-<!-- SHOP HERO -->
+{% block content %}
 <div class="shop-hero">
-  <div class="shop-hero-content">
-    <div class="shop-hero-breadcrumb">
-      <a href="/">Home</a> › <span>Safari Shop</span>
-    </div>
-    <div class="shop-hero-overline">Safari Essentials & Luxury Add-ons</div>
-    <h1 class="shop-hero h1" style="font-family:'Playfair Display',serif; font-size:52px; font-weight:700; color:white; line-height:1.1; margin-bottom:16px;">The Safari Shop</h1>
-    <p class="shop-hero p" style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:20px; color:rgba(255,255,255,0.7); margin-bottom:24px;">Premium gear, curated accessories, and luxury experiences — everything you need for Africa's greatest adventure.</p>
-    <div class="shop-search">
-      <input type="text" placeholder="Search products, gear, add-ons...">
-      <button class="shop-search-btn">🔍</button>
-    </div>
-    <div class="shop-hero-stats">
-      <div class="shop-stat"><div class="shop-stat-num">340+</div><div class="shop-stat-label">Products</div></div>
-      <div class="shop-stat"><div class="shop-stat-num">4.9★</div><div class="shop-stat-label">Avg Rating</div></div>
-      <div class="shop-stat"><div class="shop-stat-num">Free</div><div class="shop-stat-label">Returns (30d)</div></div>
-    </div>
-  </div>
+  <h1>The Safari Shop</h1>
+  <p>Premium gear, curated accessories, and luxury add-ons — everything you need for Africa's greatest adventure.</p>
 </div>
 
-<!-- CATEGORY TABS -->
 <div class="category-tabs">
-  <div class="cat-tab active">All Products <span class="cat-count">340</span></div>
-  <div class="cat-tab">🎒 Gear & Bags <span class="cat-count">87</span></div>
-  <div class="cat-tab">👕 Clothing <span class="cat-count">124</span></div>
-  <div class="cat-tab">🔭 Optics <span class="cat-count">32</span></div>
-  <div class="cat-tab">📸 Photography <span class="cat-count">28</span></div>
-  <div class="cat-tab">✦ Luxury Add-ons <span class="cat-count">45</span></div>
-  <div class="cat-tab" onclick="window.location.href='/shop/bundle-builder/'">🎁 Bundle Builder <span class="cat-count">New</span></div>
-  <div class="cat-tab">🔥 Sale <span class="cat-count">38</span></div>
+  <div class="cat-tab active">All Products</div>
+  <div class="cat-tab">🎒 Gear & Bags</div>
+  <div class="cat-tab">👕 Clothing</div>
+  <div class="cat-tab">🔭 Optics</div>
+  <div class="cat-tab" onclick="window.location='/shop/bundle-builder/'">🎁 Bundle Builder <span style="font-size:10px; background:var(--gold-pale); padding:2px 6px; border-radius:10px; color:var(--gold-dark);">New</span></div>
 </div>
 
-<!-- MAIN SHOP LAYOUT -->
-<div class="shop-layout">
-
-  <!-- FILTER SIDEBAR -->
-  <div class="filter-sidebar">
-    <div class="filter-sticky">
-      <div class="filter-header">
-        <div class="filter-title">Filters</div>
-        <div class="filter-clear">Clear All</div>
-      </div>
-
-      <div class="filter-section">
-        <div class="filter-section-title">Category <span>−</span></div>
-        <div class="filter-option checked">
-          <div class="filter-checkbox">✓</div>
-          <span class="filter-label">Safari Clothing</span>
-          <span class="filter-count">124</span>
-        </div>
-        <div class="filter-option">
-          <div class="filter-checkbox"></div>
-          <span class="filter-label">Gear & Bags</span>
-          <span class="filter-count">87</span>
-        </div>
-        <div class="filter-option">
-          <div class="filter-checkbox"></div>
-          <span class="filter-label">Optics</span>
-          <span class="filter-count">32</span>
-        </div>
-        <div class="filter-option">
-          <div class="filter-checkbox"></div>
-          <span class="filter-label">Luxury Add-ons</span>
-          <span class="filter-count">45</span>
-        </div>
-        <div class="filter-option">
-          <div class="filter-checkbox"></div>
-          <span class="filter-label">Photography</span>
-          <span class="filter-count">28</span>
-        </div>
-      </div>
-      <div class="filter-divider"></div>
-
-      <div class="filter-section">
-        <div class="filter-section-title">Price Range (USD) <span>−</span></div>
-        <div class="price-slider">
-          <div class="price-range-bar">
-            <div class="price-range-fill"></div>
-            <div class="price-range-thumb left"></div>
-            <div class="price-range-thumb right"></div>
-          </div>
-          <div class="price-values"><span>$0</span><span>$5,000</span></div>
-        </div>
-      </div>
-      <div class="filter-divider"></div>
-
-      <div class="filter-section">
-        <div class="filter-section-title">Color <span>−</span></div>
-        <div class="color-swatches">
-          <div class="color-swatch-btn selected" style="background:#8B6914;" title="Khaki"></div>
-          <div class="color-swatch-btn" style="background:#556B2F;" title="Olive"></div>
-          <div class="color-swatch-btn" style="background:#D2B48C;" title="Sand"></div>
-          <div class="color-swatch-btn" style="background:#8B4513;" title="Brown"></div>
-          <div class="color-swatch-btn" style="background:#1A1A1A;" title="Black"></div>
-          <div class="color-swatch-btn" style="background:#808080;" title="Grey"></div>
-          <div class="color-swatch-btn" style="background:#FFFFFF; border:1.5px solid #ccc;" title="White"></div>
-          <div class="color-swatch-btn" style="background:linear-gradient(135deg,#C9A84C,#E8C96A);" title="Gold"></div>
-        </div>
-      </div>
-      <div class="filter-divider"></div>
-
-      <div class="filter-section">
-        <div class="filter-section-title">Size <span>−</span></div>
-        <div class="size-grid">
-          <button class="size-btn">XS</button>
-          <button class="size-btn selected">S</button>
-          <button class="size-btn selected">M</button>
-          <button class="size-btn">L</button>
-          <button class="size-btn">XL</button>
-          <button class="size-btn">XXL</button>
-        </div>
-      </div>
-      <div class="filter-divider"></div>
-
-      <div class="filter-section">
-        <div class="filter-section-title">Rating <span>−</span></div>
-        <div class="filter-option checked">
-          <div class="filter-checkbox">✓</div>
-          <span class="filter-label">★★★★★ Only</span>
-        </div>
-        <div class="filter-option">
-          <div class="filter-checkbox"></div>
-          <span class="filter-label">4★ & Above</span>
-        </div>
-        <div class="filter-option">
-          <div class="filter-checkbox"></div>
-          <span class="filter-label">3★ & Above</span>
-        </div>
-      </div>
-      <div class="filter-divider"></div>
-
-      <div class="filter-section">
-        <div class="filter-section-title">Availability <span>−</span></div>
-        <div class="filter-option checked">
-          <div class="filter-checkbox">✓</div>
-          <span class="filter-label">In Stock</span>
-          <span class="filter-count">302</span>
-        </div>
-        <div class="filter-option">
-          <div class="filter-checkbox"></div>
-          <span class="filter-label">Pre-Order</span>
-          <span class="filter-count">18</span>
-        </div>
-      </div>
+<div class="shop-container">
+  <aside class="sidebar">
+    <h3 style="font-family:'Playfair Display',serif; margin-bottom:20px;">Filters</h3>
+    <!-- Filter placeholders -->
+    <div style="padding:20px; background:white; border-radius:8px; border:1px solid var(--cream-mid);">
+      <p style="font-size:12px; color:var(--gray-mid);">Filter by category, price, and color coming soon.</p>
     </div>
-  </div>
+  </aside>
 
-  <!-- PRODUCTS MAIN -->
-  <div class="products-main">
-
-    <!-- Toolbar -->
-    <div class="products-toolbar">
-      <div class="products-count">Showing <strong>48</strong> of <strong>340</strong> products</div>
-      <div class="toolbar-right">
-        <select class="sort-select">
-          <option>Sort: Featured</option>
-          <option>Price: Low to High</option>
-          <option>Price: High to Low</option>
-          <option>Newest First</option>
-          <option>Best Rated</option>
-          <option>Most Popular</option>
-        </select>
-        <div class="view-toggle">
-          <button class="view-btn active">⊞</button>
-          <button class="view-btn">≡</button>
-        </div>
+  <main class="product-grid">
+    <!-- Product 1 -->
+    <div class="product-card" onclick="window.location='/shop/product/'">
+      <div class="product-img">🧥</div>
+      <div class="product-body">
+        <div class="product-cat">Clothing</div>
+        <h3 class="product-name">Premium Safari Field Jacket</h3>
+        <p style="font-size:13px; color:var(--gray-mid);">UPF 50+ protection, 8 utility pockets.</p>
+      </div>
+      <div class="product-footer">
+        <div class="product-price">$189</div>
+        <button class="btn-add" onclick="event.stopPropagation(); openCart()">+ Cart</button>
       </div>
     </div>
 
-    <!-- Active Filters -->
-    <div class="active-filters">
-      <div class="active-filter">Safari Clothing <span>×</span></div>
-      <div class="active-filter">Color: Khaki <span>×</span></div>
-      <div class="active-filter">Size: S, M <span>×</span></div>
-      <div class="active-filter">★★★★★ Only <span>×</span></div>
-    </div>
-
-    <!-- Seasonal Promo -->
-    <div class="seasonal-promo">
-      <div class="promo-icon">🌞</div>
-      <div class="promo-content">
-        <div class="promo-title">Great Migration Season Sale — Up to 20% Off</div>
-        <div class="promo-text">Stock up on all your safari essentials before the July–October peak season. Exclusive discount for Successful Safaris guests.</div>
-        <div class="promo-code">
-          <span>Use code:</span>
-          <span class="code-badge">MIGRATE20</span>
-          <button class="promo-copy-btn" onclick="this.textContent='Copied!'">📋 Copy</button>
-        </div>
+    <!-- Product 2 -->
+    <div class="product-card">
+      <div class="product-img">🔭</div>
+      <div class="product-body">
+        <div class="product-cat">Optics</div>
+        <h3 class="product-name">Swarovski 10x42 Binoculars</h3>
+        <p style="font-size:13px; color:var(--gray-mid);">Professional-grade clarity and light.</p>
       </div>
-      <div class="promo-countdown">
-        <div class="countdown-label">Offer Ends In</div>
-        <div class="countdown-timer">
-          <div class="countdown-unit"><div class="countdown-num">08</div><div class="countdown-unit-label">Days</div></div>
-          <div class="countdown-sep">:</div>
-          <div class="countdown-unit"><div class="countdown-num">14</div><div class="countdown-unit-label">Hrs</div></div>
-          <div class="countdown-sep">:</div>
-          <div class="countdown-unit"><div class="countdown-num">32</div><div class="countdown-unit-label">Min</div></div>
-        </div>
+      <div class="product-footer">
+        <div class="product-price">$2,450</div>
+        <button class="btn-add" onclick="event.stopPropagation(); openCart()">+ Cart</button>
       </div>
     </div>
 
-    <!-- Product Grid -->
-    <div class="product-grid">
-
-      <!-- Product 1 -->
-      <div class="product-card" onclick="window.location.href='/shop/product/'">
-        <div class="product-img" style="background: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
-          <div class="product-labels"><span class="product-label label-popular">Bestseller</span></div>
-          <div class="product-wish active">♥</div>
-          <div class="product-quick">Quick View</div>
-        </div>
-        <div class="product-body">
-          <div class="product-category">Safari Gear</div>
-          <div class="product-name">Premium Safari Field Jacket</div>
-          <div class="product-desc">Lightweight, UPF 50+, moisture-wicking. 8 pockets, roll-up sleeves.</div>
-          <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(47 reviews)</span></div>
-          <div class="product-variants">
-            <div class="variant-dot selected" style="background:#8B6914;" title="Khaki"></div>
-            <div class="variant-dot" style="background:#556B2F;" title="Olive"></div>
-            <div class="variant-dot" style="background:#D2B48C;" title="Sand"></div>
-          </div>
-          <div class="stock-badge">✓ In Stock (23 units)</div>
-        </div>
-        <div class="product-footer">
-          <div class="product-price-block">
-            <div class="product-price">$189</div>
-            <div class="product-per">All sizes</div>
-          </div>
-          <button class="add-to-cart" onclick="openCart()">+ Cart</button>
-        </div>
+    <!-- Product 3 -->
+    <div class="product-card">
+      <div class="product-img">🎒</div>
+      <div class="product-body">
+        <div class="product-cat">Gear</div>
+        <h3 class="product-name">Explorer Canvas Daypack</h3>
+        <p style="font-size:13px; color:var(--gray-mid);">Rugged durability meets heritage style.</p>
       </div>
-
-      <!-- Product 2 -->
-      <div class="product-card">
-        <div class="product-img" style="background: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
-          <div class="product-labels"><span class="product-label label-luxury">✦ Luxury</span></div>
-          <div class="product-wish">♡</div>
-          <div class="product-quick">Quick View</div>
-        </div>
-        <div class="product-body">
-          <div class="product-category">Optics</div>
-          <div class="product-name">Swarovski EL 10×42 Binoculars</div>
-          <div class="product-desc">Industry-leading clarity. Waterproof, field flattener lens system. Professional-grade optics.</div>
-          <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(23 reviews)</span></div>
-          <div class="stock-badge">✓ In Stock (8 units)</div>
-        </div>
-        <div class="product-footer">
-          <div class="product-price-block">
-            <div class="product-price">$2,450</div>
-          </div>
-          <button class="add-to-cart">+ Cart</button>
-        </div>
-      </div>
-
-      <!-- Product 3 - Sale -->
-      <div class="product-card">
-        <div class="product-img" style="background: url('https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
-          <div class="product-labels"><span class="product-label label-sale">-25%</span><span class="product-label label-new">New</span></div>
-          <div class="product-wish">♡</div>
-          <div class="product-quick">Quick View</div>
-        </div>
-        <div class="product-body">
-          <div class="product-category">Headwear</div>
-          <div class="product-name">Wide-Brim Safari Sun Hat</div>
-          <div class="product-desc">UPF 80+ protection. Moisture-control band. Packable. Adjustable fit.</div>
-          <div class="product-rating"><span class="stars">★★★★☆</span><span class="rating-count">(31 reviews)</span></div>
-          <div class="product-variants">
-            <div class="variant-dot" style="background:#8B6914;"></div>
-            <div class="variant-dot selected" style="background:#D2B48C;"></div>
-            <div class="variant-dot" style="background:#1A1A1A;"></div>
-          </div>
-          <div class="stock-badge stock-low">⚠ Low Stock (4 units)</div>
-        </div>
-        <div class="product-footer">
-          <div class="product-price-block">
-            <div class="product-price-old">$86</div>
-            <div class="product-price sale">$65</div>
-          </div>
-          <button class="add-to-cart">+ Cart</button>
-        </div>
-      </div>
-
-      <!-- Product 4 - Luxury Add-on -->
-      <div class="product-card">
-        <div class="product-img" style="background: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
-          <div class="product-labels"><span class="product-label label-popular">Popular</span></div>
-          <div class="product-wish">♡</div>
-          <div class="product-quick">Quick View</div>
-        </div>
-        <div class="product-body">
-          <div class="product-category">Luxury Add-on</div>
-          <div class="product-name">Private Photography Guide (1 Day)</div>
-          <div class="product-desc">Dedicated wildlife photography specialist. Positioning tips, camera settings, exclusive access to prime spots.</div>
-          <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(38 reviews)</span></div>
-          <div class="stock-badge">✓ Available — add to any booking</div>
-        </div>
-        <div class="product-footer">
-          <div class="product-price-block">
-            <div class="product-price">$350</div>
-            <div class="product-per">per day</div>
-          </div>
-          <button class="add-to-cart">+ Cart</button>
-        </div>
-      </div>
-
-      <!-- Product 5 - Balloon -->
-      <div class="product-card">
-        <div class="product-img" style="background: url('https://images.unsplash.com/photo-1543874049-af2a0bbe3b1a?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
-          <div class="product-labels"><span class="product-label label-luxury">✦ Luxury</span></div>
-          <div class="product-wish">♡</div>
-          <div class="product-quick">Quick View</div>
-        </div>
-        <div class="product-body">
-          <div class="product-category">Experience</div>
-          <div class="product-name">Serengeti Sunrise Balloon Flight</div>
-          <div class="product-desc">Float over the golden plains at dawn. Champagne breakfast in the bush. Certificate of flight included.</div>
-          <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(91 reviews)</span></div>
-          <div class="stock-badge">✓ Limited dates available</div>
-        </div>
-        <div class="product-footer">
-          <div class="product-price-block">
-            <div class="product-price">$480</div>
-            <div class="product-per">per person</div>
-          </div>
-          <button class="add-to-cart">+ Cart</button>
-        </div>
-      </div>
-
-      <!-- Product 6 - Boots -->
-      <div class="product-card">
-        <div class="product-img" style="background: url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
-          <div class="product-labels"><span class="product-label label-new">New</span></div>
-          <div class="product-wish">♡</div>
-          <div class="product-quick">Quick View</div>
-        </div>
-        <div class="product-body">
-          <div class="product-category">Footwear</div>
-          <div class="product-name">Merrell All-Terrain Safari Boot</div>
-          <div class="product-desc">Vibram sole. GORE-TEX waterproof. Ankle support. Breathable mesh lining. Endorsed by our guides.</div>
-          <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(62 reviews)</span></div>
-          <div class="product-variants">
-            <div class="variant-dot" style="background:#8B6914;"></div>
-            <div class="variant-dot selected" style="background:#1A1A1A;"></div>
-            <div class="variant-dot" style="background:#808080;"></div>
-          </div>
-          <div class="stock-badge">✓ In Stock — multiple sizes</div>
-        </div>
-        <div class="product-footer">
-          <div class="product-price-block">
-            <div class="product-price">$245</div>
-          </div>
-          <button class="add-to-cart">+ Cart</button>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Bundle Section -->
-    <div class="bundle-section">
-      <div class="bundle-header">
-        <div class="bundle-icon">🎁</div>
-        <div>
-          <div class="bundle-title">Curated Safari Bundles</div>
-          <div class="bundle-sub">Everything you need — at a bundled saving</div>
-        </div>
-      </div>
-      <div class="bundle-grid">
-        <div class="bundle-card">
-          <div class="bundle-card-img" style="background: url('https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
-            <span class="bundle-card-save">Save 18%</span>
-          </div>
-          <div class="bundle-card-body">
-            <div class="bundle-card-name">The Essential Starter</div>
-            <div class="bundle-card-items">Field jacket · Sun hat · Day pack · Water bottle · Insect repellent kit</div>
-          </div>
-          <div class="bundle-card-footer">
-            <div><div class="bundle-price">$385</div><div class="bundle-original">$470</div></div>
-            <button class="bundle-btn" onclick="openCart()">Add Bundle</button>
-          </div>
-        </div>
-        <div class="bundle-card">
-          <div class="bundle-card-img" style="background: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
-            <span class="bundle-card-save">Save 22%</span>
-          </div>
-          <div class="bundle-card-body">
-            <div class="bundle-card-name">The Photographer's Kit</div>
-            <div class="bundle-card-items">Swarovski binoculars · Photo guide (1 day) · Camera rain cover · Lens cleaning kit</div>
-          </div>
-          <div class="bundle-card-footer">
-            <div><div class="bundle-price">$2,650</div><div class="bundle-original">$3,400</div></div>
-            <button class="bundle-btn">Add Bundle</button>
-          </div>
-        </div>
-        <div class="bundle-card">
-          <div class="bundle-card-img" style="background: url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
-            <span class="bundle-card-save">Save 20%</span>
-          </div>
-          <div class="bundle-card-body">
-            <div class="bundle-card-name">The Luxury Safari Experience</div>
-            <div class="bundle-card-items">Balloon flight · Private guide (2 days) · Champagne setup · Spa treatment</div>
-          </div>
-          <div class="bundle-card-footer">
-            <div><div class="bundle-price">$1,440</div><div class="bundle-original">$1,800</div></div>
-            <button class="bundle-btn">Add Bundle</button>
-          </div>
-        </div>
+      <div class="product-footer">
+        <div class="product-price">$145</div>
+        <button class="btn-add" onclick="event.stopPropagation(); openCart()">+ Cart</button>
       </div>
     </div>
-
-    <!-- More Products -->
-    <div class="product-grid" style="margin-top: 32px;">
-      <div class="product-card">
-        <div class="product-img" style="background: url('https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;"><div class="product-wish">♡</div><div class="product-quick">Quick View</div></div>
-        <div class="product-body">
-          <div class="product-category">Clothing</div>
-          <div class="product-name">Moisture-Wick Safari Shirt</div>
-          <div class="product-rating"><span class="stars">★★★★☆</span><span class="rating-count">(29)</span></div>
-          <div class="stock-badge">✓ In Stock</div>
-        </div>
-        <div class="product-footer"><div class="product-price">$98</div><button class="add-to-cart">+ Cart</button></div>
-      </div>
-      <div class="product-card">
-        <div class="product-img" style="background: url('https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;"><div class="product-labels"><span class="product-label label-new">Eco</span></div><div class="product-wish">♡</div><div class="product-quick">Quick View</div></div>
-        <div class="product-body">
-          <div class="product-category">Sustainable</div>
-          <div class="product-name">Recycled Fleece Midlayer</div>
-          <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(15)</span></div>
-          <div class="stock-badge">✓ In Stock</div>
-        </div>
-        <div class="product-footer"><div class="product-price">$145</div><button class="add-to-cart">+ Cart</button></div>
-      </div>
-      <div class="product-card">
-        <div class="product-img" style="background: url('https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;"><div class="product-wish">♡</div><div class="product-quick">Quick View</div></div>
-        <div class="product-body">
-          <div class="product-category">Health & Protection</div>
-          <div class="product-name">Travel Health & Malaria Kit</div>
-          <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-count">(82)</span></div>
-          <div class="stock-badge">✓ In Stock</div>
-        </div>
-        <div class="product-footer"><div class="product-price">$59</div><button class="add-to-cart">+ Cart</button></div>
-      </div>
-    </div>
-
-    <!-- Pagination -->
-    <div class="pagination">
-      <button class="page-btn arrow">‹</button>
-      <button class="page-btn active">1</button>
-      <button class="page-btn">2</button>
-      <button class="page-btn">3</button>
-      <span style="font-size:13px; color:var(--gray-light); padding: 0 4px;">...</span>
-      <button class="page-btn">12</button>
-      <button class="page-btn arrow">›</button>
-    </div>
-
-    <!-- Recently Viewed -->
-    <div class="recently-viewed">
-      <div class="rv-title">Recently Viewed</div>
-      <div class="rv-grid">
-        <div class="rv-card"><div class="rv-img" style="background: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=200&q=80') center/cover no-repeat;"></div><div class="rv-body"><div class="rv-name">Field Jacket — Khaki</div><div class="rv-price">$189</div></div></div>
-        <div class="rv-card"><div class="rv-img" style="background: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=200&q=80') center/cover no-repeat;"></div><div class="rv-body"><div class="rv-name">Swarovski Binoculars</div><div class="rv-price">$2,450</div></div></div>
-        <div class="rv-card"><div class="rv-img" style="background: url('https://images.unsplash.com/photo-1543874049-af2a0bbe3b1a?auto=format&fit=crop&w=200&q=80') center/cover no-repeat;"></div><div class="rv-body"><div class="rv-name">Balloon Flight</div><div class="rv-price">$480</div></div></div>
-        <div class="rv-card"><div class="rv-img" style="background: url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=200&q=80') center/cover no-repeat;"></div><div class="rv-body"><div class="rv-name">Safari Boot</div><div class="rv-price">$245</div></div></div>
-        <div class="rv-card"><div class="rv-img" style="background: url('https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=200&q=80') center/cover no-repeat;"></div><div class="rv-body"><div class="rv-name">Sun Hat (Sale)</div><div class="rv-price">$65</div></div></div>
-      </div>
-    </div>
-
-  </div>
+  </main>
 </div>
-
-<footer>
-  <div style="display:flex; justify-content:space-between; gap:32px; flex-wrap:wrap;">
-    <div><p style="font-family:'Playfair Display',serif; font-size:18px; color:white; margin-bottom:8px;">Successful Safaris</p><p style="font-size:13px; color:rgba(255,255,255,0.5); max-width:280px; line-height:1.6;">Luxury safari experiences since 2008 · ATOL Protected</p></div>
-    <div style="display:flex; gap:32px; flex-wrap:wrap; font-size:13px; color:rgba(255,255,255,0.5);">
-      <div><p style="color:var(--gold); font-size:11px; letter-spacing:2px; text-transform:uppercase; margin-bottom:10px;">Shop</p><p style="margin-bottom:6px;">All Products</p><p style="margin-bottom:6px;">Bundles</p><p>Sale</p></div>
-      <div><p style="color:var(--gold); font-size:11px; letter-spacing:2px; text-transform:uppercase; margin-bottom:10px;">Help</p><p style="margin-bottom:6px;">Shipping</p><p style="margin-bottom:6px;">Returns</p><p>FAQ</p></div>
-    </div>
-  </div>
-  <div class="footer-bottom"><p>© 2026 Successful Safaris Ltd.</p><p>Secure payments · PCI DSS Compliant · SSL Encrypted</p></div>
-</footer>
-
-<script>
-  function openCart() {
-    document.getElementById('cart-drawer').classList.add('open');
-    document.getElementById('cart-overlay').classList.add('visible');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeCart() {
-    document.getElementById('cart-drawer').classList.remove('open');
-    document.getElementById('cart-overlay').classList.remove('visible');
-    document.body.style.overflow = '';
-  }
-</script>
-</body>
-</html>
+{% endblock %}

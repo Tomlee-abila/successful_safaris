@@ -1,70 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Successful Safaris — Home</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --gold: #C9A84C; --gold-light: #E8C96A; --gold-pale: #F5E9C8; --gold-dark: #A07830;
-    --green-dark: #1A3A2A; --green-mid: #2D5A3D; --green-light: #4A8C5C;
-    --charcoal: #1A1A1A; --gray-mid: #555; --gray-light: #AAA;
-    --cream: #FAF7F0; --cream-mid: #F0EAD6; --white: #FFF;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); }
-  a { text-decoration: none; color: inherit; }
+{% extends 'base.html' %}
+{% load static %}
 
-  /* ── NAVIGATION ── */
-  .nav-wrapper { position: sticky; top: 0; z-index: 100; }
-  nav {
-    background: rgba(26,58,42,0.97);
-    backdrop-filter: blur(12px);
-    padding: 0 48px;
-    display: flex; align-items: center; height: 72px;
-    border-bottom: 1px solid rgba(201,168,76,0.25);
-  }
-  .nav-logo { display: flex; align-items: center; gap: 12px; margin-right: auto; }
-  .nav-logo-mark {
-    width: 40px; height: 40px; background: var(--gold); border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Playfair Display', serif; font-size: 16px; color: var(--green-dark); font-weight: 700;
-  }
-  .nav-logo-text h2 { font-family: 'Playfair Display', serif; color: white; font-size: 18px; font-weight: 600; }
-  .nav-logo-text p { font-size: 9px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a { color: rgba(255,255,255,0.85); font-size: 13px; letter-spacing: 0.5px; padding: 4px 0; border-bottom: 1.5px solid transparent; transition: all 0.2s; }
-  .nav-links a:hover { color: var(--gold-light); border-bottom-color: var(--gold-light); }
-  .nav-links a.active { color: var(--gold); border-bottom-color: var(--gold); }
-  .nav-right { display: flex; align-items: center; gap: 16px; margin-left: 40px; }
-  .nav-currency {
-    font-size: 12px; color: var(--gold-light); border: 1px solid rgba(201,168,76,0.35);
-    padding: 5px 12px; border-radius: 4px; cursor: pointer; background: transparent;
-    display: flex; align-items: center; gap: 5px; transition: all 0.2s;
-  }
-  .nav-currency:hover { background: rgba(201,168,76,0.1); }
-  .nav-cart {
-    position: relative; color: rgba(255,255,255,0.85); cursor: pointer; padding: 6px;
-    font-size: 18px; transition: color 0.2s;
-  }
-  .nav-cart:hover { color: var(--gold-light); }
-  .cart-badge {
-    position: absolute; top: 0; right: 0;
-    background: var(--gold); color: var(--green-dark);
-    width: 16px; height: 16px; border-radius: 50%;
-    font-size: 9px; font-weight: 700;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .nav-cta {
-    background: var(--gold); color: var(--green-dark); padding: 10px 22px;
-    border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
-    text-transform: uppercase; transition: all 0.25s;
-  }
-  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(201,168,76,0.4); }
-  .nav-user { color: rgba(255,255,255,0.85); font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 5px; }
-  .nav-user:hover { color: var(--gold-light); }
+{% block title %}Home — Successful Luxury Safaris{% endblock %}
 
+{% block extra_style %}
   /* ── HERO ── */
   .hero {
     position: relative; height: 100vh; min-height: 700px;
@@ -80,11 +19,6 @@
     position: absolute; inset: 0;
     background-image: radial-gradient(circle, rgba(201,168,76,0.03) 1px, transparent 1px);
     background-size: 40px 40px;
-  }
-  .hero-silhouette {
-    position: absolute; bottom: 0; right: 0; width: 60%;
-    opacity: 0.06; font-size: 500px; line-height: 1; text-align: right;
-    pointer-events: none; user-select: none;
   }
   .hero-content {
     position: relative; z-index: 2;
@@ -152,7 +86,7 @@
   .stat-unit { font-size: 18px; color: var(--gold); margin-left: 2px; }
   .stat-label { font-size: 11px; color: rgba(255,255,255,0.6); letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; }
 
-  /* ── SECTION HEADERS ── */
+  /* ── SECTIONS ── */
   .section { padding: 96px 80px; }
   .section-header { text-align: center; margin-bottom: 56px; }
   .section-overline {
@@ -172,52 +106,27 @@
     width: 60px; height: 2px; background: var(--gold); margin: 20px auto 0;
   }
 
-  /* ── DESTINATION CARDS ── */
-  .destinations-grid { display: grid; grid-template-columns: repeat(3, 1fr) repeat(2, 1fr); gap: 0; }
-  .dest-card {
-    position: relative; overflow: hidden; cursor: pointer;
-    aspect-ratio: 3/4;
+  /* ── DESTINATIONS ROW ── */
+  .destinations-row-section { padding: 96px 80px; background: var(--cream); }
+  .destinations-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .dest-pill {
+    background: white; border-radius: 10px; overflow: hidden;
+    border: 1px solid var(--cream-mid); transition: all 0.3s; cursor: pointer;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
   }
-  .dest-card:first-child, .dest-card:nth-child(2) { aspect-ratio: 4/5; }
-  .dest-card-bg {
-    position: absolute; inset: 0;
-    transition: transform 0.6s ease;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 120px;
+  .dest-pill:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(26,58,42,0.12); border-color: var(--gold); }
+  .dest-pill-img {
+    height: 180px; display: flex; align-items: center; justify-content: center;
+    font-size: 64px; position: relative;
   }
-  .dest-card:hover .dest-card-bg { transform: scale(1.05); }
-  .dest-card-gradient {
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(10,20,14,0.92) 0%, rgba(10,20,14,0.3) 50%, transparent 100%);
+  .dest-pill-flag {
+    position: absolute; top: 12px; right: 12px;
+    font-size: 20px;
   }
-  .dest-card-content {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    padding: 28px; z-index: 2;
-  }
-  .dest-country {
-    font-size: 10px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase;
-    font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;
-  }
-  .dest-country::before { content: ''; width: 16px; height: 1px; background: var(--gold); }
-  .dest-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px; font-weight: 600; color: white; margin-bottom: 6px; line-height: 1.2;
-  }
-  .dest-desc { font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.5; margin-bottom: 12px; }
-  .dest-from { font-size: 12px; color: var(--gold-light); }
-  .dest-from strong { font-size: 16px; font-family: 'Playfair Display', serif; }
-  .dest-arrow {
-    position: absolute; top: 24px; right: 24px;
-    width: 36px; height: 36px; background: rgba(201,168,76,0);
-    border: 1.5px solid rgba(255,255,255,0.3); border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    color: white; font-size: 14px; transition: all 0.3s; z-index: 2;
-  }
-  .dest-card:hover .dest-arrow { background: var(--gold); border-color: var(--gold); color: var(--green-dark); }
-
-  .dest-grid-main { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 0; }
-  .dest-grid-main .dest-card:first-child { aspect-ratio: 3/2; }
-  .dest-grid-sec { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .dest-pill-body { padding: 16px; }
+  .dest-pill-country { font-size: 10px; color: var(--gold-dark); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
+  .dest-pill-name { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; color: var(--green-dark); margin-bottom: 4px; }
+  .dest-pill-count { font-size: 11px; color: var(--gray-mid); }
 
   /* ── FEATURED PACKAGES ── */
   .packages-section { background: var(--green-dark); padding: 96px 80px; }
@@ -264,10 +173,7 @@
     border: 1px solid rgba(255,255,255,0.1);
   }
   .package-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1); }
-  .package-price-block {}
-  .package-from { font-size: 10px; color: var(--gray-light); text-transform: uppercase; letter-spacing: 1px; }
   .package-price { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--gold-light); }
-  .package-pp { font-size: 11px; color: var(--gray-light); }
   .pkg-btn {
     background: transparent; color: var(--gold); border: 1.5px solid var(--gold);
     padding: 10px 20px; border-radius: 4px;
@@ -276,153 +182,24 @@
   }
   .pkg-btn:hover { background: var(--gold); color: var(--green-dark); }
 
-  /* ── WHY US ── */
-  .why-section { padding: 96px 80px; background: var(--cream); }
-  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-  .why-visual {
-    background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
-    border-radius: 12px; overflow: hidden; position: relative;
-    height: 520px; display: flex; align-items: center; justify-content: center;
-    font-size: 200px;
-  }
-  .why-visual-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(10,20,14,0.4), rgba(201,168,76,0.1));
-  }
-  .why-badge {
-    position: absolute; bottom: 32px; left: 32px; right: 32px;
-    background: rgba(26,58,42,0.92); backdrop-filter: blur(10px);
-    border: 1px solid rgba(201,168,76,0.3); border-radius: 10px;
-    padding: 20px 24px;
-  }
-  .why-badge-quote {
-    font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: 17px; color: white; line-height: 1.5; margin-bottom: 12px;
-  }
-  .why-badge-author { font-size: 11px; color: var(--gold); letter-spacing: 1px; }
-  .why-content {}
-  .why-features { margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
-  .why-feature { display: flex; gap: 16px; }
-  .why-feature-icon {
-    width: 48px; height: 48px; background: var(--gold-pale);
-    border: 1px solid var(--gold); border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px; flex-shrink: 0;
-  }
-  .why-feature-title { font-size: 15px; font-weight: 700; color: var(--green-dark); margin-bottom: 4px; }
-  .why-feature-text { font-size: 13px; color: var(--gray-mid); line-height: 1.55; }
-
-  /* ── SHOP PROMO SECTION ── */
-  .shop-section { background: linear-gradient(135deg, var(--charcoal) 0%, var(--gray-dark) 100%); padding: 96px 80px; }
-  .shop-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 48px; }
-  .shop-header .section-title { color: white; text-align: left; }
-  .shop-header .section-overline { color: var(--gold); text-align: left; }
-  .shop-header .section-subtitle { color: rgba(255,255,255,0.6); text-align: left; margin: 0; }
-  .shop-view-all {
-    color: var(--gold); border: 1.5px solid var(--gold);
-    padding: 12px 28px; border-radius: 4px;
-    font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-    white-space: nowrap; flex-shrink: 0; margin-left: 40px; align-self: flex-end;
-    transition: all 0.2s;
-  }
-  .shop-view-all:hover { background: var(--gold); color: var(--charcoal); }
-  .shop-products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-  .shop-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 10px; overflow: hidden; cursor: pointer;
-    transition: all 0.3s;
-  }
-  .shop-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(201,168,76,0.4); transform: translateY(-3px); }
-  .shop-card-img {
-    height: 220px; background: rgba(255,255,255,0.03);
-    display: flex; align-items: center; justify-content: center; font-size: 70px;
-    position: relative; overflow: hidden;
-  }
-  .shop-card-label {
-    position: absolute; top: 12px; left: 12px;
-    background: var(--gold); color: var(--green-dark);
-    padding: 3px 10px; border-radius: 2px; font-size: 9px; font-weight: 700; letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-  .shop-card-wish {
-    position: absolute; top: 12px; right: 12px;
-    color: rgba(255,255,255,0.4); font-size: 18px; cursor: pointer; transition: color 0.2s;
-  }
-  .shop-card-wish:hover { color: var(--gold-light); }
-  .shop-card-body { padding: 18px; }
-  .shop-card-category { font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
-  .shop-card-name { font-family: 'Playfair Display', serif; font-size: 16px; color: white; margin-bottom: 6px; line-height: 1.25; }
-  .shop-card-stars { color: var(--gold); font-size: 12px; margin-bottom: 8px; }
-  .shop-card-stars span { font-size: 11px; color: rgba(255,255,255,0.4); margin-left: 4px; }
-  .shop-card-footer { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; border-top: 1px solid rgba(255,255,255,0.07); }
-  .shop-price { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--gold-light); }
-  .shop-add-btn {
-    background: var(--gold); color: var(--green-dark);
-    padding: 8px 14px; border-radius: 4px; font-size: 11px; font-weight: 700;
-    cursor: pointer; transition: all 0.2s; border: none;
-    letter-spacing: 0.5px;
-  }
-  .shop-add-btn:hover { background: var(--gold-light); }
-
-  /* ── DESTINATIONS ROW ── */
-  .destinations-row-section { padding: 96px 80px; background: var(--cream); }
-  .destinations-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
-  .dest-pill {
-    background: white; border-radius: 10px; overflow: hidden;
-    border: 1px solid var(--cream-mid); transition: all 0.3s; cursor: pointer;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-  }
-  .dest-pill:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(26,58,42,0.12); border-color: var(--gold); }
-  .dest-pill-img {
-    height: 180px; display: flex; align-items: center; justify-content: center;
-    font-size: 64px; position: relative;
-  }
-  .dest-pill-flag {
-    position: absolute; top: 12px; right: 12px;
-    font-size: 20px;
-  }
-  .dest-pill-body { padding: 16px; }
-  .dest-pill-country { font-size: 10px; color: var(--gold-dark); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
-  .dest-pill-name { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; color: var(--green-dark); margin-bottom: 4px; }
-  .dest-pill-count { font-size: 11px; color: var(--gray-mid); }
-
   /* ── TESTIMONIALS ── */
   .testimonials-section {
     background: linear-gradient(160deg, var(--green-dark), var(--green-mid));
     padding: 96px 80px; position: relative; overflow: hidden;
   }
-  .testimonials-section::before {
-    content: '❝';
-    position: absolute; top: -40px; left: 40px;
-    font-size: 300px; color: rgba(201,168,76,0.05); font-family: 'Playfair Display', serif;
-    line-height: 1;
-  }
-  .testimonials-section .section-title { color: white; }
-  .testimonials-section .section-overline { color: var(--gold); }
-  .testimonials-section .gold-divider { opacity: 0.6; }
   .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
   .testimonial-card {
     background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.15);
     border-radius: 12px; padding: 32px;
-    position: relative;
-  }
-  .testimonial-card::before {
-    content: '❝'; position: absolute; top: 20px; left: 24px;
-    font-size: 40px; color: var(--gold); opacity: 0.5; line-height: 1;
-    font-family: 'Playfair Display', serif;
   }
   .testimonial-text {
     font-family: 'Cormorant Garamond', serif; font-style: italic;
     font-size: 18px; color: rgba(255,255,255,0.9); line-height: 1.65;
-    margin-bottom: 24px; margin-top: 16px;
+    margin-bottom: 24px;
   }
   .testimonial-author { display: flex; align-items: center; gap: 12px; }
-  .testimonial-avatar {
-    width: 44px; height: 44px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px; flex-shrink: 0;
-  }
+  .testimonial-avatar { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; }
+  .testimonial-avatar img { width: 100%; height: 100%; object-fit: cover; }
   .testimonial-name { font-size: 14px; font-weight: 600; color: white; }
   .testimonial-trip { font-size: 11px; color: var(--gold-light); }
   .testimonial-stars { color: var(--gold); font-size: 13px; margin-bottom: 4px; }
@@ -432,174 +209,35 @@
     background: var(--gold); padding: 64px 80px;
     display: flex; align-items: center; justify-content: space-between; gap: 40px;
   }
-  .cta-strip-text {}
-  .cta-strip-overline { font-size: 11px; color: rgba(26,58,42,0.7); letter-spacing: 3px; text-transform: uppercase; font-weight: 600; margin-bottom: 8px; }
-  .cta-strip-title { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 700; color: var(--green-dark); line-height: 1.15; }
-  .cta-strip-sub { font-size: 15px; color: rgba(26,58,42,0.7); margin-top: 8px; }
-  .cta-strip-actions { display: flex; gap: 14px; flex-shrink: 0; }
+  .cta-strip-title { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 700; color: var(--green-dark); }
   .cta-btn-dark {
     background: var(--green-dark); color: white;
     padding: 16px 32px; border-radius: 4px;
     font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-    transition: all 0.2s;
   }
-  .cta-btn-dark:hover { background: var(--green-mid); }
-  .cta-btn-outline {
-    background: transparent; color: var(--green-dark);
-    padding: 16px 32px; border-radius: 4px; border: 2px solid var(--green-dark);
-    font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-    transition: all 0.2s;
-  }
-  .cta-btn-outline:hover { background: var(--green-dark); color: white; }
 
-  /* ── FOOTER ── */
-  footer { background: var(--charcoal); color: white; padding: 64px 80px 32px; }
-  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr; gap: 48px; margin-bottom: 48px; }
-  .footer-brand { }
-  .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-  .footer-logo-mark { width: 36px; height: 36px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 14px; color: var(--green-dark); font-weight: 700; }
-  .footer-logo-text h3 { font-family: 'Playfair Display', serif; font-size: 16px; color: white; }
-  .footer-logo-text p { font-size: 9px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; }
-  .footer-brand-text { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 20px; }
-  .footer-social { display: flex; gap: 10px; }
-  .footer-social-btn { width: 32px; height: 32px; background: rgba(255,255,255,0.07); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; transition: background 0.2s; cursor: pointer; }
-  .footer-social-btn:hover { background: var(--gold); }
-  .footer-col h4 { font-size: 12px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 700; margin-bottom: 16px; }
-  .footer-col ul { list-style: none; }
-  .footer-col ul li { margin-bottom: 8px; }
-  .footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.55); transition: color 0.2s; }
-  .footer-col ul li a:hover { color: var(--gold-light); }
-  .footer-newsletter { }
-  .footer-newsletter p { font-size: 13px; color: rgba(255,255,255,0.55); margin-bottom: 12px; line-height: 1.6; }
-  .newsletter-form { display: flex; gap: 0; }
-  .newsletter-input {
-    flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
-    border-right: none; padding: 10px 14px; color: white;
-    font-size: 13px; border-radius: 4px 0 0 4px; outline: none;
-  }
-  .newsletter-input::placeholder { color: rgba(255,255,255,0.3); }
-  .newsletter-btn {
-    background: var(--gold); color: var(--green-dark); border: none;
-    padding: 10px 16px; font-size: 12px; font-weight: 700; letter-spacing: 1px;
-    cursor: pointer; border-radius: 0 4px 4px 0; transition: background 0.2s;
-  }
-  .newsletter-btn:hover { background: var(--gold-light); }
-  .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.08);
-    padding-top: 24px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.35); }
-  .footer-bottom-links { display: flex; gap: 24px; }
-  .footer-bottom-links a { font-size: 12px; color: rgba(255,255,255,0.35); }
-  .footer-bottom-links a:hover { color: var(--gold-light); }
-
-  /* ── CURRENCIES SECTION ── */
-  .currency-bar {
-    background: var(--cream-mid); padding: 12px 80px;
-    display: flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--cream-mid);
-  }
-  .currency-label { font-size: 11px; color: var(--gray-mid); letter-spacing: 1px; text-transform: uppercase; }
-  .currency-chips { display: flex; gap: 6px; }
-  .currency-chip {
-    padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600;
-    cursor: pointer; transition: all 0.2s;
-  }
-  .currency-chip.active { background: var(--green-dark); color: white; }
-  .currency-chip:not(.active) { background: white; color: var(--gray-mid); border: 1px solid var(--cream-mid); }
-  .currency-chip:not(.active):hover { border-color: var(--gold); color: var(--gold-dark); }
-
-  /* ── PROMOTIONS BANNER ── */
-  .promo-banner {
-    background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
-    padding: 14px 80px;
-    display: flex; align-items: center; justify-content: center; gap: 16px;
-    border-bottom: 1px solid rgba(201,168,76,0.2);
-  }
-  .promo-tag {
-    background: var(--gold); color: var(--green-dark);
-    padding: 3px 10px; border-radius: 2px; font-size: 9px; font-weight: 700; letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-  .promo-text { font-size: 13px; color: rgba(255,255,255,0.9); }
-  .promo-text strong { color: var(--gold-light); }
-  .promo-cta { font-size: 11px; color: var(--gold); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; text-decoration: underline; cursor: pointer; }
-  .promo-close { color: rgba(255,255,255,0.4); cursor: pointer; margin-left: auto; font-size: 18px; }
-
-  /* Responsive */
   @media (max-width: 1024px) {
-    nav { padding: 0 24px; }
-    .section, .packages-section, .shop-section, .why-section, .destinations-row-section, .testimonials-section { padding: 64px 24px; }
+    .section, .packages-section, .destinations-row-section, .testimonials-section { padding: 64px 24px; }
     .stats-strip { padding: 0 24px; }
     .hero-content { padding: 0 24px 0 40px; }
     .cta-strip { padding: 48px 24px; flex-direction: column; text-align: center; }
-    footer { padding: 48px 24px 24px; }
-    .currency-bar, .promo-banner { padding: 12px 24px; }
     .packages-grid { grid-template-columns: 1fr; }
-    .shop-products { grid-template-columns: repeat(2, 1fr); }
     .destinations-row { grid-template-columns: repeat(3, 1fr); }
     .testimonials-grid { grid-template-columns: 1fr; }
-    .footer-grid { grid-template-columns: 1fr 1fr; }
-    .why-grid { grid-template-columns: 1fr; }
   }
-  @media (max-width: 767px) {
-    .nav-links { display: none; }
-    .hero-title { font-size: 40px; }
-    .hero-content { padding: 0 20px; }
-    .packages-grid { grid-template-columns: 1fr; }
-    .shop-products { grid-template-columns: 1fr 1fr; }
-    .destinations-row { grid-template-columns: 1fr 1fr; }
-    .shop-header { flex-direction: column; align-items: flex-start; }
-    .footer-grid { grid-template-columns: 1fr; }
-    .cta-strip-actions { flex-direction: column; }
-    .stat-number { font-size: 28px; }
-  }
-</style>
-</head>
-<body>
+{% endblock %}
 
-<!-- PROMO BANNER -->
-<div class="promo-banner">
-  <span class="promo-tag">Limited Offer</span>
-  <span class="promo-text">Save <strong>15%</strong> on all Kenya packages when you book before 30 June 2026 — The Great Migration awaits</span>
-  <span class="promo-cta">Book Now →</span>
-  <span class="promo-close">×</span>
-</div>
-
-<!-- NAVIGATION -->
-<div class="nav-wrapper">
-  <nav>
-    <div class="nav-logo">
-      <div class="nav-logo-mark">SS</div>
-      <div class="nav-logo-text">
-        <h2>Successful Safaris</h2>
-        <p>Luxury African Experiences</p>
-      </div>
-    </div>
-    <ul class="nav-links">
-      <li><a href="#" class="active">Home</a></li>
-      <li><a href="/destinations/">Destinations</a></li>
-      <li><a href="/packages/">Packages</a></li>
-      <li><a href="/shop/">Shop</a></li>
-      <li><a href="/about/">About</a></li>
-      <li><a href="/contact/">Contact</a></li>
-    </ul>
-    <div class="nav-right">
-      <div class="nav-currency">USD $ ▾</div>
-      <div class="nav-cart">
-        🛒 <span class="cart-badge">2</span>
-      </div>
-      <a href="/auth/" class="nav-user">👤 Sign In</a>
-      <a href="/booking/" class="nav-cta">Book Now</a>
-    </div>
-  </nav>
+{% block content %}
+<!-- PROMO BANNER (Specific to Home) -->
+<div style="background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%); padding: 14px 48px; text-align: center; color: white; font-size: 13px; border-bottom: 1px solid rgba(201,168,76,0.2);">
+  <span style="background: var(--gold); color: var(--green-dark); padding: 3px 10px; border-radius: 2px; font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-right: 12px;">Limited Offer</span>
+  Save <strong>15%</strong> on all Kenya packages when you book before 30 June 2026 — The Great Migration awaits
 </div>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-pattern"></div>
-  <div class="hero-silhouette" style="opacity:0;"></div>
   <div class="hero-content">
     <div class="hero-overline">Est. 2008 · Luxury Safari Specialists</div>
     <h1 class="hero-title">
@@ -656,7 +294,7 @@
     <div class="gold-divider"></div>
   </div>
   <div class="destinations-row">
-    <div class="dest-pill">
+    <div class="dest-pill" onclick="window.location='/destinations/kenya/'">
       <div class="dest-pill-img" style="background: url('https://images.unsplash.com/photo-1535941339077-2dd1c7963098?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
         <div class="dest-pill-flag">🇰🇪</div>
       </div>
@@ -666,7 +304,7 @@
         <div class="dest-pill-count">14 packages · From $2,800</div>
       </div>
     </div>
-    <div class="dest-pill">
+    <div class="dest-pill" onclick="window.location='/destinations/tanzania/'">
       <div class="dest-pill-img" style="background: url('https://images.unsplash.com/photo-1547970810-dc1eac37d174?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
         <div class="dest-pill-flag">🇹🇿</div>
       </div>
@@ -719,7 +357,7 @@
   </div>
   <div class="packages-grid">
 
-    <div class="package-card">
+    <div class="package-card" onclick="window.location='/packages/detail/'">
       <div class="package-img" style="background: url('https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;">
         <div class="package-img-overlay"></div>
         <div class="package-duration">7 Nights</div>
@@ -738,9 +376,7 @@
       </div>
       <div class="package-footer">
         <div class="package-price-block">
-          <div class="package-from">from</div>
           <div class="package-price">$4,850</div>
-          <div class="package-pp">per person · DBL</div>
         </div>
         <a href="/booking/" class="pkg-btn">Book Now</a>
       </div>
@@ -764,9 +400,7 @@
       </div>
       <div class="package-footer">
         <div class="package-price-block">
-          <div class="package-from">from</div>
           <div class="package-price">$7,400</div>
-          <div class="package-pp">per person · All incl.</div>
         </div>
         <a href="/booking/" class="pkg-btn">Book Now</a>
       </div>
@@ -790,128 +424,12 @@
       </div>
       <div class="package-footer">
         <div class="package-price-block">
-          <div class="package-from">from</div>
           <div class="package-price">$6,200</div>
-          <div class="package-pp">per person · 2 pax min</div>
         </div>
         <a href="/booking/" class="pkg-btn">Book Now</a>
       </div>
     </div>
 
-  </div>
-  <div style="text-align: center; margin-top: 40px;">
-    <a href="#" style="color: var(--gold-light); border: 1.5px solid rgba(201,168,76,0.5); padding: 14px 36px; border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; display: inline-block; transition: all 0.2s;">View All 56 Packages →</a>
-  </div>
-</section>
-
-<!-- WHY US -->
-<section class="why-section">
-  <div class="why-grid">
-    <div class="why-visual" style="background: url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80') center/cover no-repeat; font-size:0;">
-      <div class="why-visual-overlay"></div>
-      <div class="why-badge">
-        <div class="why-badge-quote">"The guides' knowledge of the land and wildlife was extraordinary. Every sunrise felt like a private performance."</div>
-        <div class="why-badge-author">— Sarah & James Wilson, Kenya Trip · September 2025 · ★★★★★</div>
-      </div>
-    </div>
-    <div class="why-content">
-      <span class="section-overline">Why Successful Safaris</span>
-      <h2 class="section-title" style="text-align:left; margin-bottom:12px;">We Don't Just Plan Trips.</h2>
-      <h2 class="section-title" style="text-align:left; font-style:italic; color:var(--gold-dark); font-size:36px; margin-bottom:16px;">We Craft Legends.</h2>
-      <p style="font-size:15px; color:var(--gray-mid); line-height:1.7;">Since 2008, we have been matching extraordinary travellers with Africa's most exclusive experiences. Every detail — from the first inquiry to the final farewell — is handled with precision, warmth, and genuine passion for the continent.</p>
-      <div class="why-features">
-        <div class="why-feature">
-          <div class="why-feature-icon">🏆</div>
-          <div><div class="why-feature-title">Award-Winning Guides</div><div class="why-feature-text">Certified naturalists with deep local knowledge and fluency in 8+ languages</div></div>
-        </div>
-        <div class="why-feature">
-          <div class="why-feature-icon">🔒</div>
-          <div><div class="why-feature-title">100% Secure Booking</div><div class="why-feature-text">PCI-compliant payments with full refund protection and travel guarantee</div></div>
-        </div>
-        <div class="why-feature">
-          <div class="why-feature-icon">🌿</div>
-          <div><div class="why-feature-title">Responsible Tourism</div><div class="why-feature-text">Carbon-offset, community-supported, conservation-aligned itineraries</div></div>
-        </div>
-        <div class="why-feature">
-          <div class="why-feature-icon">✈️</div>
-          <div><div class="why-feature-title">End-to-End Logistics</div><div class="why-feature-text">Flights, visas, vaccinations, gear, transfers — all handled seamlessly</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SHOP SECTION -->
-<section class="shop-section">
-  <div class="shop-header">
-    <div>
-      <span class="section-overline">Safari Essentials</span>
-      <h2 class="section-title">The Safari Shop</h2>
-      <p class="section-subtitle">Premium gear, luxury add-ons, and curated accessories for every adventurer</p>
-    </div>
-    <a href="/shop/" class="shop-view-all">Shop All Products</a>
-  </div>
-  <div class="shop-products">
-    <div class="shop-card">
-      <div class="shop-card-img" style="background: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=400&q=80') center/cover no-repeat;">
-        <span class="shop-card-label">Bestseller</span>
-        <span class="shop-card-wish">♡</span>
-      </div>
-      <div class="shop-card-body">
-        <div class="shop-card-category">Safari Gear</div>
-        <div class="shop-card-name">Premium Safari Field Jacket</div>
-        <div class="shop-card-stars">★★★★★ <span>(47)</span></div>
-      </div>
-      <div class="shop-card-footer">
-        <div class="shop-price">$189</div>
-        <button class="shop-add-btn">+ Cart</button>
-      </div>
-    </div>
-    <div class="shop-card">
-      <div class="shop-card-img" style="background: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80') center/cover no-repeat;">
-        <span class="shop-card-label">New</span>
-        <span class="shop-card-wish">♡</span>
-      </div>
-      <div class="shop-card-body">
-        <div class="shop-card-category">Optics</div>
-        <div class="shop-card-name">Swarovski 10×42 Binoculars</div>
-        <div class="shop-card-stars">★★★★★ <span>(23)</span></div>
-      </div>
-      <div class="shop-card-footer">
-        <div class="shop-price">$2,450</div>
-        <button class="shop-add-btn">+ Cart</button>
-      </div>
-    </div>
-    <div class="shop-card">
-      <div class="shop-card-img" style="background: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=400&q=80') center/cover no-repeat;">
-        <span class="shop-card-label">Popular</span>
-        <span class="shop-card-wish">♡</span>
-      </div>
-      <div class="shop-card-body">
-        <div class="shop-card-category">Luxury Add-On</div>
-        <div class="shop-card-name">Private Photography Guide</div>
-        <div class="shop-card-stars">★★★★★ <span>(38)</span></div>
-      </div>
-      <div class="shop-card-footer">
-        <div class="shop-price">$350 <span style="font-size:12px; color:rgba(255,255,255,0.4);">/day</span></div>
-        <button class="shop-add-btn">+ Cart</button>
-      </div>
-    </div>
-    <div class="shop-card">
-      <div class="shop-card-img" style="background: url('https://images.unsplash.com/photo-1543874049-af2a0bbe3b1a?auto=format&fit=crop&w=400&q=80') center/cover no-repeat;">
-        <span class="shop-card-label" style="background:var(--gold-dark);">Bundle</span>
-        <span class="shop-card-wish">♡</span>
-      </div>
-      <div class="shop-card-body">
-        <div class="shop-card-category">Luxury Experience</div>
-        <div class="shop-card-name">Hot Air Balloon at Sunrise</div>
-        <div class="shop-card-stars">★★★★★ <span>(91)</span></div>
-      </div>
-      <div class="shop-card-footer">
-        <div class="shop-price">$480</div>
-        <button class="shop-add-btn">+ Cart</button>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -925,9 +443,9 @@
   <div class="testimonials-grid">
     <div class="testimonial-card">
       <div class="testimonial-stars">★★★★★</div>
-      <p class="testimonial-text">"Witnessing the wildebeest crossing the Mara River at dawn, with our guide's hushed commentary and a flask of coffee — that moment is permanently etched in our hearts. Truly flawless from first email to farewell."</p>
+      <p class="testimonial-text">"Witnessing the wildebeest crossing the Mara River at dawn, with our guide's hushed commentary and a flask of coffee — that moment is permanently etched in our hearts."</p>
       <div class="testimonial-author">
-        <div class="testimonial-avatar" style="overflow:hidden; padding:0;"><img src="https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?auto=format&fit=crop&w=88&h=88&q=80" alt="James & Sarah Wilson" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+        <div class="testimonial-avatar"><img src="https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?auto=format&fit=crop&w=88&h=88&q=80" alt="Author"></div>
         <div>
           <div class="testimonial-name">James & Sarah Wilson</div>
           <div class="testimonial-trip">Kenya — Masai Mara · Sept 2025</div>
@@ -936,9 +454,9 @@
     </div>
     <div class="testimonial-card">
       <div class="testimonial-stars">★★★★★</div>
-      <p class="testimonial-text">"We asked for something unforgettable. We got a private tented camp with candlelit dinners, a cheetah hunt at sunset, and a family of elephants walking past our lodge at breakfast. Extraordinary."</p>
+      <p class="testimonial-text">"We asked for something unforgettable. We got a private tented camp with candlelit dinners, a cheetah hunt at sunset, and a family of elephants walking past our lodge at breakfast."</p>
       <div class="testimonial-author">
-        <div class="testimonial-avatar" style="overflow:hidden; padding:0;"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=88&h=88&q=80" alt="Marie Dubois" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+        <div class="testimonial-avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=88&h=88&q=80" alt="Author"></div>
         <div>
           <div class="testimonial-name">Marie Dubois</div>
           <div class="testimonial-trip">Tanzania — Serengeti · July 2025</div>
@@ -947,9 +465,9 @@
     </div>
     <div class="testimonial-card">
       <div class="testimonial-stars">★★★★★</div>
-      <p class="testimonial-text">"The gorilla trek was worth every penny. Being 5 metres from a silverback in his natural habitat changed something in all of us. The whole Chen family still talks about it at every gathering."</p>
+      <p class="testimonial-text">"The gorilla trek was worth every penny. Being 5 metres from a silverback in his natural habitat changed something in all of us. Truly life-altering."</p>
       <div class="testimonial-author">
-        <div class="testimonial-avatar" style="overflow:hidden; padding:0;"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=88&h=88&q=80" alt="Chen Family" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+        <div class="testimonial-avatar"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=88&h=88&q=80" alt="Author"></div>
         <div>
           <div class="testimonial-name">Chen Family</div>
           <div class="testimonial-trip">Rwanda — Gorillas · August 2025</div>
@@ -962,84 +480,8 @@
 <!-- CTA STRIP -->
 <div class="cta-strip">
   <div class="cta-strip-text">
-    <div class="cta-strip-overline">Your Story Starts Here</div>
     <h2 class="cta-strip-title">Ready for Your Safari?</h2>
-    <p class="cta-strip-sub">Speak with a specialist today. No pressure — just pure African inspiration.</p>
   </div>
-  <div class="cta-strip-actions">
-    <a href="/booking/" class="cta-btn-dark">Plan My Safari</a>
-    <a href="#" class="cta-btn-outline">💬 Chat with Us</a>
-  </div>
+  <a href="/booking/" class="cta-btn-dark">Plan My Safari</a>
 </div>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <div class="footer-logo">
-        <div class="footer-logo-mark">SS</div>
-        <div class="footer-logo-text">
-          <h3>Successful Safaris</h3>
-          <p>Luxury African Experiences</p>
-        </div>
-      </div>
-      <p class="footer-brand-text">Since 2008, we have been the trusted partner of discerning travellers seeking authentic, luxurious African safari experiences across Kenya, Tanzania, Rwanda, Uganda, and Zanzibar.</p>
-      <div class="footer-social">
-        <div class="footer-social-btn">📘</div>
-        <div class="footer-social-btn">📸</div>
-        <div class="footer-social-btn">🐦</div>
-        <div class="footer-social-btn">▶️</div>
-      </div>
-    </div>
-    <div class="footer-col">
-      <h4>Destinations</h4>
-      <ul>
-        <li><a href="#">Kenya Safaris</a></li>
-        <li><a href="#">Tanzania Safaris</a></li>
-        <li><a href="#">Rwanda Gorillas</a></li>
-        <li><a href="#">Uganda Wildlife</a></li>
-        <li><a href="#">Zanzibar Island</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Experiences</h4>
-      <ul>
-        <li><a href="#">Private Safaris</a></li>
-        <li><a href="#">Family Safaris</a></li>
-        <li><a href="#">Honeymoon</a></li>
-        <li><a href="#">Photography</a></li>
-        <li><a href="#">Balloon Safaris</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Company</h4>
-      <ul>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Our Guides</a></li>
-        <li><a href="#">Blog & Journal</a></li>
-        <li><a href="#">Contact Us</a></li>
-        <li><a href="#">Careers</a></li>
-      </ul>
-    </div>
-    <div class="footer-newsletter">
-      <h4>Safari Newsletter</h4>
-      <p>Wildlife updates, seasonal tips, and exclusive offers delivered to your inbox.</p>
-      <div class="newsletter-form">
-        <input class="newsletter-input" type="email" placeholder="your@email.com">
-        <button class="newsletter-btn">Join</button>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2026 Successful Safaris Ltd. All rights reserved. ATOL Protected. IATA Accredited.</p>
-    <div class="footer-bottom-links">
-      <a href="#">Privacy Policy</a>
-      <a href="#">Terms & Conditions</a>
-      <a href="#">Cookie Settings</a>
-      <a href="#">Accessibility</a>
-    </div>
-  </div>
-</footer>
-
-</body>
-</html>
+{% endblock %}

@@ -1,44 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Premium Safari Field Jacket — Successful Safaris Shop</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --gold: #C9A84C; --gold-light: #E8C96A; --gold-pale: #F5E9C8; --gold-dark: #A07830;
-    --green-dark: #1A3A2A; --green-mid: #2D5A3D; --green-light: #4A8C5C; --green-pale: #EAF5EE;
-    --charcoal: #1A1A1A; --gray-dark: #2A2A2A; --gray-mid: #555; --gray-light: #AAA;
-    --cream: #FAF7F0; --cream-mid: #F0EAD6; --white: #FFF;
-    --error: #C0392B; --success: #27AE60; --warning: #F39C12;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); line-height: 1.6; }
-  a { text-decoration: none; color: inherit; transition: 0.2s; }
-  button { cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.2s; border: none; outline: none; }
-  ul { list-style: none; }
+{% extends 'base.html' %}
+{% load static %}
 
-  /* ── NAV ── */
-  nav {
-    background: rgba(26,58,42,0.97); backdrop-filter: blur(12px);
-    padding: 0 48px; display: flex; align-items: center; height: 72px;
-    border-bottom: 1px solid rgba(201,168,76,0.25); position: sticky; top: 0; z-index: 100;
-  }
-  .nav-logo { display: flex; align-items: center; gap: 12px; margin-right: auto; }
-  .nav-logo-mark { width: 40px; height: 40px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 16px; color: var(--green-dark); font-weight: 700; }
-  .nav-logo-text h2 { font-family: 'Playfair Display', serif; color: white; font-size: 18px; }
-  .nav-logo-text p { font-size: 9px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
-  .nav-links { display: flex; gap: 28px; }
-  .nav-links a { color: rgba(255,255,255,0.8); font-size: 13px; }
-  .nav-links a:hover { color: var(--gold-light); }
-  .nav-links a.active { color: var(--gold); border-bottom: 1.5px solid var(--gold); padding-bottom: 4px; }
-  .nav-right { display: flex; align-items: center; gap: 16px; margin-left: 32px; }
-  .nav-currency { font-size: 12px; color: var(--gold-light); border: 1px solid rgba(201,168,76,0.3); padding: 5px 12px; border-radius: 4px; }
-  .nav-cart { position: relative; color: rgba(255,255,255,0.85); font-size: 18px; padding: 6px; }
-  .cart-badge { position: absolute; top: 0; right: 0; background: var(--gold); color: var(--green-dark); width: 16px; height: 16px; border-radius: 50%; font-size: 9px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
-  .nav-cta { background: var(--gold); color: var(--green-dark); padding: 10px 22px; border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+{% block title %}Premium Safari Field Jacket — SUCCESSFUL LUXURY SAFARIS Shop{% endblock %}
 
+{% block extra_style %}
   /* ── BREADCRUMB ── */
   .breadcrumb {
     padding: 24px 80px 0; font-size: 12px; color: var(--gray-mid);
@@ -115,7 +80,7 @@
   .qty-selector {
     display: flex; align-items: center; border: 1.5px solid var(--cream-mid); border-radius: 6px; width: fit-content; background: white;
   }
-  .qty-btn { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--gray-mid); background: none; }
+  .qty-btn { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--gray-mid); background: none; border: none; cursor: pointer; }
   .qty-btn:hover { color: var(--gold-dark); }
   .qty-num { width: 40px; text-align: center; font-weight: 600; font-size: 15px; border: none; background: none; }
 
@@ -123,12 +88,13 @@
   .btn-add-cart {
     flex: 1; background: var(--gold); color: var(--green-dark);
     padding: 16px; border-radius: 6px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
-    font-size: 14px; box-shadow: 0 4px 12px rgba(201,168,76,0.2);
+    font-size: 14px; box-shadow: 0 4px 12px rgba(201,168,76,0.2); border: none; cursor: pointer;
   }
   .btn-add-cart:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.3); }
   .btn-wishlist {
     width: 52px; height: 52px; border: 1.5px solid var(--cream-mid); border-radius: 6px;
     display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--gray-light); background: white;
+    cursor: pointer;
   }
   .btn-wishlist:hover { color: var(--error); border-color: var(--error); }
   .btn-wishlist.active { color: var(--error); border-color: var(--error); background: #fff5f5; }
@@ -147,7 +113,7 @@
   }
   .tab-btn {
     padding-bottom: 16px; font-size: 15px; font-weight: 600; color: var(--gray-light);
-    background: none; position: relative;
+    background: none; border: none; cursor: pointer; position: relative;
   }
   .tab-btn.active { color: var(--green-dark); }
   .tab-btn.active::after {
@@ -203,110 +169,21 @@
   .pc-title { font-family: 'Playfair Display', serif; font-size: 16px; margin: 4px 0 8px; color: var(--green-dark); }
   .pc-price { font-weight: 700; color: var(--charcoal); }
 
-  /* FOOTER */
-  footer { background: var(--charcoal); color: white; padding: 64px 80px 24px; }
-  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
-  .footer-logo { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
-  .footer-logo span { color: var(--gold); }
-  .footer-desc { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.6; }
-  .footer-h { font-size: 11px; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 24px; font-weight: 700; }
-  .footer-links li { margin-bottom: 12px; }
-  .footer-links a { font-size: 14px; color: rgba(255,255,255,0.6); }
-  .footer-links a:hover { color: white; }
-  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,0.3); }
-
-  /* CART DRAWER */
-  .cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 200; display: none; opacity: 0; transition: 0.3s; }
-  .cart-overlay.visible { display: block; opacity: 1; }
-  .cart-drawer {
-    position: fixed; top: 0; right: -420px; width: 400px; height: 100vh;
-    background: white; z-index: 201; box-shadow: -10px 0 40px rgba(0,0,0,0.15);
-    transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    display: flex; flex-direction: column;
-  }
-  .cart-drawer.open { right: 0; }
-  .cart-header { background: var(--green-dark); padding: 24px; display: flex; justify-content: space-between; align-items: center; }
-  .cart-title { font-family: 'Playfair Display', serif; color: white; font-size: 20px; }
-  .cart-close { background: none; color: white; font-size: 24px; }
-  .cart-items { flex: 1; overflow-y: auto; padding: 24px; }
-  .cart-item { display: flex; gap: 16px; margin-bottom: 24px; border-bottom: 1px solid var(--cream-mid); padding-bottom: 24px; }
-  .ci-img { width: 80px; height: 80px; background: var(--cream); border-radius: 8px; flex-shrink: 0; overflow: hidden; }
-  .ci-img img { width: 100%; height: 100%; object-fit: cover; }
-  .ci-info { flex: 1; }
-  .ci-name { font-weight: 600; font-size: 15px; color: var(--green-dark); margin-bottom: 4px; }
-  .ci-meta { font-size: 12px; color: var(--gray-mid); margin-bottom: 8px; }
-  .ci-price { font-family: 'Playfair Display', serif; font-weight: 700; color: var(--charcoal); }
-  .cart-footer { padding: 24px; background: var(--cream); border-top: 1px solid var(--cream-mid); }
-  .cart-total-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; color: var(--gray-mid); }
-  .cart-total-final { display: flex; justify-content: space-between; margin: 16px 0; font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--green-dark); }
-  .btn-checkout { background: var(--gold); color: var(--green-dark); padding: 16px; width: 100%; border-radius: 6px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
-
   @media (max-width: 1024px) {
     .product-hero { grid-template-columns: 1fr; gap: 40px; padding: 24px; }
     .product-gallery { position: static; }
-    .breadcrumb, .tabs-section, .related-section, footer { padding-left: 24px; padding-right: 24px; }
+    .breadcrumb, .tabs-section, .related-section { padding-left: 24px; padding-right: 24px; }
     .reviews-summary { grid-template-columns: 1fr 1fr; }
-    .footer-grid { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 768px) {
     .product-title { font-size: 32px; }
     .reviews-summary { grid-template-columns: 1fr; }
     .tabs-nav { gap: 24px; overflow-x: auto; }
     .related-grid { grid-template-columns: 1fr 1fr; }
-    .footer-grid { grid-template-columns: 1fr; }
   }
-</style>
-</head>
-<body>
+{% endblock %}
 
-<!-- CART COMPONENTS -->
-<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
-<div class="cart-drawer" id="cart-drawer">
-  <div class="cart-header">
-    <div class="cart-title">Your Safari Cart</div>
-    <button class="cart-close" onclick="closeCart()">×</button>
-  </div>
-  <div class="cart-items">
-    <div class="cart-item">
-      <div class="ci-img"><img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=200&q=80" alt="Jacket"></div>
-      <div class="ci-info">
-        <div class="ci-name">Premium Safari Field Jacket</div>
-        <div class="ci-meta">Size: M · Color: Khaki</div>
-        <div class="ci-price">$189.00</div>
-      </div>
-    </div>
-  </div>
-  <div class="cart-footer">
-    <div class="cart-total-row"><span>Subtotal</span><span>$189.00</span></div>
-    <div class="cart-total-row"><span>Shipping</span><span style="color:var(--success);">Free</span></div>
-    <div class="cart-total-final"><span>Total</span><span>$189.00</span></div>
-    <a href="/checkout/"><button class="btn-checkout">Proceed to Checkout →</button></a>
-  </div>
-</div>
-
-<!-- NAVIGATION -->
-<nav>
-  <div class="nav-logo">
-    <div class="nav-logo-mark">SS</div>
-    <div class="nav-logo-text">
-      <h2>Successful Safaris</h2>
-      <p>Luxury African Experiences</p>
-    </div>
-  </div>
-  <ul class="nav-links">
-    <li><a href="/">Home</a></li>
-    <li><a href="/destinations/">Destinations</a></li>
-    <li><a href="/packages/">Packages</a></li>
-    <li><a href="/shop/" class="active">Shop</a></li>
-    <li><a href="/about/">About</a></li>
-    <li><a href="/contact/">Contact</a></li>
-  </ul>
-  <div class="nav-right">
-    <div class="nav-currency">USD $ ▾</div>
-    <div class="nav-cart" onclick="openCart()">🛒 <span class="cart-badge">1</span></div>
-    <a href="/booking/" class="nav-cta">Book Safari</a>
-  </div>
-</nav>
+{% block content %}
 
 <!-- BREADCRUMB -->
 <div class="breadcrumb">
@@ -424,7 +301,7 @@
   <div class="tabs-nav">
     <button class="tab-btn active" onclick="openTab(event, 'description')">Description</button>
     <button class="tab-btn" onclick="openTab(event, 'specs')">Specifications</button>
-    <button class="tab-btn" onclick="openTab(event, 'shipping')">Shipping & Returns</button>
+    <button class="tab-btn" onclick="openTab(event, 'shipping')">Shipping &amp; Returns</button>
     <button class="tab-btn" onclick="openTab(event, 'reviews')">Reviews (47)</button>
   </div>
 
@@ -591,50 +468,9 @@
   </div>
 </section>
 
-<footer>
-  <div class="footer-grid">
-    <div>
-      <div class="footer-logo">Successful <span>Safaris</span></div>
-      <p class="footer-desc">Crafting legendary African adventures since 2008. From the plains of the Serengeti to the jungles of Rwanda, we provide luxury experiences that respect the wild.</p>
-    </div>
-    <div>
-      <h4 class="footer-h">Destinations</h4>
-      <ul class="footer-links">
-        <li><a href="#">Kenya</a></li>
-        <li><a href="#">Tanzania</a></li>
-        <li><a href="#">Rwanda</a></li>
-        <li><a href="#">Botswana</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4 class="footer-h">Quick Links</h4>
-      <ul class="footer-links">
-        <li><a href="/shop/">The Safari Shop</a></li>
-        <li><a href="#">Trip Planner</a></li>
-        <li><a href="#">Our Story</a></li>
-        <li><a href="#">Sustainability</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4 class="footer-h">Contact</h4>
-      <ul class="footer-links">
-        <li><a href="#">Support Center</a></li>
-        <li><a href="#">Shipping Policy</a></li>
-        <li><a href="#">Terms of Service</a></li>
-        <li><a href="#">Privacy</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2026 Successful Safaris Ltd. ATOL Protected #7421</p>
-    <div style="display:flex; gap:24px;">
-      <a href="#">Instagram</a>
-      <a href="#">Facebook</a>
-      <a href="#">LinkedIn</a>
-    </div>
-  </div>
-</footer>
+{% endblock %}
 
+{% block extra_script %}
 <script>
   // GALLERY SWITCHER
   function switchImg(thumb, src) {
@@ -677,19 +513,5 @@
     document.getElementById(tabName).classList.add('active');
     evt.currentTarget.classList.add('active');
   }
-
-  // CART
-  function openCart() {
-    document.getElementById('cart-drawer').classList.add('open');
-    document.getElementById('cart-overlay').classList.add('visible');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeCart() {
-    document.getElementById('cart-drawer').classList.remove('open');
-    document.getElementById('cart-overlay').classList.remove('visible');
-    document.body.style.overflow = '';
-  }
 </script>
-
-</body>
-</html>
+{% endblock %}

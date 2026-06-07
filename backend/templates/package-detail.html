@@ -1,21 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Great Migration Safari — 7 Nights Masai Mara | Successful Safaris</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --gold: #C9A84C; --gold-light: #E8C96A; --gold-pale: #F5E9C8; --gold-dark: #A07830;
-    --green-dark: #1A3A2A; --green-mid: #2D5A3D; --green-light: #4A8C5C;
-    --charcoal: #1A1A1A; --gray-mid: #555; --gray-light: #AAA;
-    --cream: #FAF7F0; --cream-mid: #F0EAD6; --white: #FFF;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); }
-  a { text-decoration: none; color: inherit; }
+{% extends 'base.html' %}
+{% load static %}
 
+{% block title %}Great Migration Safari — 7 Nights Masai Mara | SUCCESSFUL LUXURY SAFARIS{% endblock %}
+
+{% block extra_style %}
   /* ── PROMO BANNER ── */
   .promo-banner {
     background: var(--gold); padding: 10px 48px;
@@ -23,34 +11,6 @@
     font-size: 12px; font-weight: 600; color: var(--green-dark);
   }
   .promo-banner a { color: var(--green-dark); text-decoration: underline; text-underline-offset: 2px; }
-
-  /* ── NAVIGATION ── */
-  .nav-wrapper { position: sticky; top: 0; z-index: 200; }
-  nav {
-    background: rgba(26,58,42,0.97); backdrop-filter: blur(12px);
-    padding: 0 48px; display: flex; align-items: center; height: 72px;
-    border-bottom: 1px solid rgba(201,168,76,0.25);
-  }
-  .nav-logo { display: flex; align-items: center; gap: 12px; margin-right: auto; }
-  .nav-logo-mark {
-    width: 40px; height: 40px; background: var(--gold); border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Playfair Display', serif; font-size: 16px; color: var(--green-dark); font-weight: 700;
-  }
-  .nav-logo-text h2 { font-family: 'Playfair Display', serif; color: white; font-size: 18px; font-weight: 600; }
-  .nav-logo-text p { font-size: 9px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a { color: rgba(255,255,255,0.85); font-size: 13px; letter-spacing: 0.5px; padding: 4px 0; border-bottom: 1.5px solid transparent; transition: all 0.2s; }
-  .nav-links a:hover { color: var(--gold-light); border-bottom-color: var(--gold-light); }
-  .nav-links a.active { color: var(--gold); border-bottom-color: var(--gold); }
-  .nav-right { display: flex; align-items: center; gap: 16px; margin-left: 40px; }
-  .nav-currency { font-size: 12px; color: var(--gold-light); border: 1px solid rgba(201,168,76,0.35); padding: 5px 12px; border-radius: 4px; cursor: pointer; background: transparent; display: flex; align-items: center; gap: 5px; transition: all 0.2s; }
-  .nav-currency:hover { background: rgba(201,168,76,0.1); }
-  .nav-cart { position: relative; color: rgba(255,255,255,0.85); cursor: pointer; padding: 6px; font-size: 18px; transition: color 0.2s; }
-  .nav-cart:hover { color: var(--gold-light); }
-  .cart-badge { position: absolute; top: 0; right: 0; background: var(--gold); color: var(--green-dark); width: 16px; height: 16px; border-radius: 50%; font-size: 9px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
-  .nav-cta { background: var(--gold); color: var(--green-dark); padding: 10px 22px; border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; transition: all 0.25s; }
-  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(201,168,76,0.4); }
 
   /* ── HERO ── */
   .hero {
@@ -397,31 +357,8 @@
   .btn-cta-ghost { color: rgba(255,255,255,0.85); border: 1.5px solid rgba(255,255,255,0.35); padding: 17px 44px; border-radius: 4px; font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; transition: all 0.25s; }
   .btn-cta-ghost:hover { border-color: white; color: white; background: rgba(255,255,255,0.06); }
 
-  /* ── FOOTER ── */
-  footer { background: var(--charcoal); padding: 72px 80px 40px; }
-  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
-  .footer-brand-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-  .footer-brand-mark { width: 36px; height: 36px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 14px; color: var(--green-dark); font-weight: 700; }
-  .footer-brand-name { font-family: 'Playfair Display', serif; color: white; font-size: 16px; font-weight: 600; }
-  .footer-brand-text { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; margin-bottom: 24px; max-width: 280px; }
-  .footer-social { display: flex; gap: 10px; }
-  .soc-btn { width: 34px; height: 34px; border: 1px solid rgba(255,255,255,0.15); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: rgba(255,255,255,0.5); transition: all 0.2s; cursor: pointer; }
-  .soc-btn:hover { border-color: var(--gold); color: var(--gold); }
-  .footer-col-title { font-size: 11px; color: var(--gold); letter-spacing: 2.5px; text-transform: uppercase; font-weight: 700; margin-bottom: 20px; }
-  .footer-links { list-style: none; }
-  .footer-links li { margin-bottom: 10px; }
-  .footer-links a { font-size: 13px; color: rgba(255,255,255,0.45); transition: color 0.2s; }
-  .footer-links a:hover { color: var(--gold-light); }
-  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
-  .footer-legal { display: flex; gap: 24px; }
-  .footer-legal a { font-size: 12px; color: rgba(255,255,255,0.3); transition: color 0.2s; }
-  .footer-legal a:hover { color: var(--gold-light); }
-
   /* ── RESPONSIVE ── */
   @media (max-width: 1024px) {
-    nav { padding: 0 24px; }
-    .nav-links { display: none; }
     .hero-content { padding: 0 24px 56px; }
     .hero-top { flex-direction: column; gap: 20px; }
     .main-layout { grid-template-columns: 1fr; padding: 40px 24px; }
@@ -430,8 +367,6 @@
     .related-section { padding: 64px 24px; }
     .related-grid { grid-template-columns: 1fr 1fr; }
     .cta-section { padding: 64px 24px; }
-    footer { padding: 56px 24px 32px; }
-    .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
     .sticky-bar { padding: 14px 24px; }
     .inc-grid { grid-template-columns: 1fr; }
     .tiers-grid { grid-template-columns: 1fr; }
@@ -445,46 +380,19 @@
     .facts-inner { flex-wrap: wrap; }
     .fact-item { flex: 0 0 50%; }
     .related-grid { grid-template-columns: 1fr; }
-    .footer-grid { grid-template-columns: 1fr; }
     .cta-actions { flex-direction: column; align-items: center; }
     .guide-card { grid-template-columns: 1fr; }
     .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 160px 160px 160px; }
     .gallery-item:nth-child(1) { grid-row: span 1; grid-column: span 2; }
     .day-activities { grid-template-columns: 1fr; }
   }
-</style>
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
 
 <!-- PROMO BANNER -->
 <div class="promo-banner">
   ✦ &nbsp; Save <strong>15%</strong> on Migration season packages booked before 30 June 2026 — <a href="/packages/">Browse All Packages →</a>
-</div>
-
-<!-- NAVIGATION -->
-<div class="nav-wrapper">
-  <nav>
-    <a href="/" class="nav-logo">
-      <div class="nav-logo-mark">S</div>
-      <div class="nav-logo-text">
-        <h2>Successful Safaris</h2>
-        <p>Est. 2008 · Nairobi</p>
-      </div>
-    </a>
-    <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/destinations/">Destinations</a></li>
-      <li><a href="/packages/" class="active">Packages</a></li>
-      <li><a href="/shop/">Shop</a></li>
-      <li><a href="/about/">About</a></li>
-      <li><a href="/contact/">Contact</a></li>
-    </ul>
-    <div class="nav-right">
-      <div class="nav-currency">USD ▾</div>
-      <a href="/shop/" class="nav-cart">🛒<span class="cart-badge">2</span></a>
-      <a href="/booking/" class="nav-cta">Book Now</a>
-    </div>
-  </nav>
 </div>
 
 <!-- HERO -->
@@ -605,7 +513,7 @@
             </div>
             <div class="day-info">
               <div class="day-location">Nairobi → Masai Mara</div>
-              <div class="day-title-text">Arrival & First Game Drive</div>
+              <div class="day-title-text">Arrival &amp; First Game Drive</div>
             </div>
             <div class="day-toggle">+</div>
           </div>
@@ -616,7 +524,7 @@
                 <div class="day-activity">Wilson Airport charter flight (NBO → Mara)</div>
                 <div class="day-activity">Camp welcome briefing with your lead guide</div>
                 <div class="day-activity">Afternoon game drive in private conservancy</div>
-                <div class="day-activity">Bush sundowners — drinks & canapes in the wild</div>
+                <div class="day-activity">Bush sundowners — drinks &amp; canapes in the wild</div>
                 <div class="day-activity">Welcome dinner at camp</div>
                 <div class="day-activity">Night sky introduction with guide</div>
               </div>
@@ -649,7 +557,7 @@
                 <div class="day-activity">Off-road access in private conservancy</div>
                 <div class="day-activity">River crossing vigil (seasonal, Jul–Oct)</div>
                 <div class="day-activity">Bush breakfast in the field</div>
-                <div class="day-activity">Afternoon rest & spa at camp</div>
+                <div class="day-activity">Afternoon rest &amp; spa at camp</div>
                 <div class="day-activity">Evening game drive to sunset</div>
                 <div class="day-activity">After-dark drive with spotlights</div>
                 <div class="day-activity">Bush dinner under stars (one night)</div>
@@ -672,7 +580,7 @@
             </div>
             <div class="day-info">
               <div class="day-location">Masai Mara · Optional</div>
-              <div class="day-title-text">Hot Air Balloon & Masai Culture</div>
+              <div class="day-title-text">Hot Air Balloon &amp; Masai Culture</div>
             </div>
             <div class="day-toggle">+</div>
           </div>
@@ -738,7 +646,7 @@
             </div>
             <div class="day-info">
               <div class="day-location">Masai Mara · Final Morning</div>
-              <div class="day-title-text">Last Drive & Farewell</div>
+              <div class="day-title-text">Last Drive &amp; Farewell</div>
             </div>
             <div class="day-toggle">+</div>
           </div>
@@ -749,7 +657,7 @@
                 <div class="day-activity">Final dawn game drive</div>
                 <div class="day-activity">Farewell brunch at camp</div>
                 <div class="day-activity">Charter flight to Nairobi Wilson</div>
-                <div class="day-activity">Airport transfer & departure assistance</div>
+                <div class="day-activity">Airport transfer &amp; departure assistance</div>
               </div>
               <div class="day-meals">
                 <span class="meal-chip">B Breakfast</span>
@@ -766,7 +674,7 @@
     <!-- Inclusions -->
     <div class="inclusions-block">
       <div class="block-overline">What's Covered</div>
-      <h2 class="block-title">Inclusions & Exclusions</h2>
+      <h2 class="block-title">Inclusions &amp; Exclusions</h2>
       <div class="inc-grid">
         <div class="inc-col">
           <div class="inc-col-title"><span class="inc-icon">✔</span> What's Included</div>
@@ -777,13 +685,13 @@
             <li><span class="inc-check">✔</span> All house drinks (wines, spirits, soft drinks)</li>
             <li><span class="inc-check">✔</span> Private 4×4 game vehicle for your group only</li>
             <li><span class="inc-check">✔</span> KPSGA-certified expert guide throughout</li>
-            <li><span class="inc-check">✔</span> All park & conservancy fees (approx. $120/day)</li>
+            <li><span class="inc-check">✔</span> All park &amp; conservancy fees (approx. $120/day)</li>
             <li><span class="inc-check">✔</span> Masai village cultural visit</li>
-            <li><span class="inc-check">✔</span> Bush sundowners & one star-lit bush dinner</li>
+            <li><span class="inc-check">✔</span> Bush sundowners &amp; one star-lit bush dinner</li>
             <li><span class="inc-check">✔</span> Night drives in private conservancy</li>
             <li><span class="inc-check">✔</span> Complimentary laundry service at camp</li>
-            <li><span class="inc-check">✔</span> 24/7 Successful Safaris operations support</li>
-            <li><span class="inc-check">✔</span> Pre-departure documentation & visa guidance</li>
+            <li><span class="inc-check">✔</span> 24/7 SUCCESSFUL LUXURY SAFARIS operations support</li>
+            <li><span class="inc-check">✔</span> Pre-departure documentation &amp; visa guidance</li>
           </ul>
         </div>
         <div class="inc-col">
@@ -794,9 +702,9 @@
             <li><span class="exc-check">✗</span> Travel insurance (strongly recommended)</li>
             <li><span class="exc-check">✗</span> Hot air balloon safari ($500 pp, bookable on arrival)</li>
             <li><span class="exc-check">✗</span> Spa treatments at camp</li>
-            <li><span class="exc-check">✗</span> Premium imported spirits & champagne</li>
+            <li><span class="exc-check">✗</span> Premium imported spirits &amp; champagne</li>
             <li><span class="exc-check">✗</span> Gratuities (guide: ~$30/day; camp staff: ~$15/day)</li>
-            <li><span class="exc-check">✗</span> Personal shopping & curio purchases</li>
+            <li><span class="exc-check">✗</span> Personal shopping &amp; curio purchases</li>
             <li><span class="exc-check">✗</span> Emergency medical evacuation (covered by insurance)</li>
             <li><span class="exc-check">✗</span> Items of a personal nature</li>
           </ul>
@@ -947,7 +855,7 @@
         <div class="review-card">
           <div class="review-header">
             <div class="reviewer-info">
-              <div class="reviewer-name">Charlotte & Marcus Webb</div>
+              <div class="reviewer-name">Charlotte &amp; Marcus Webb</div>
               <div class="reviewer-trip">Great Migration Safari · August 2025</div>
             </div>
             <div class="review-stars">★★★★★</div>
@@ -1155,69 +1063,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-grid">
-    <div>
-      <div class="footer-brand-logo">
-        <div class="footer-brand-mark">S</div>
-        <span class="footer-brand-name">Successful Safaris</span>
-      </div>
-      <p class="footer-brand-text">Since 2008, we have been the trusted partner of discerning travellers seeking authentic, luxurious African safari experiences across Kenya, Tanzania, Rwanda, Uganda, and Zanzibar.</p>
-      <div class="footer-social">
-        <div class="soc-btn">f</div><div class="soc-btn">in</div><div class="soc-btn">tw</div><div class="soc-btn">ig</div><div class="soc-btn">yt</div>
-      </div>
-    </div>
-    <div>
-      <div class="footer-col-title">Destinations</div>
-      <ul class="footer-links">
-        <li><a href="/destinations/kenya/">Kenya Safaris</a></li>
-        <li><a href="/destinations/">Tanzania Safaris</a></li>
-        <li><a href="/destinations/">Rwanda & Gorillas</a></li>
-        <li><a href="/destinations/">Uganda Safaris</a></li>
-        <li><a href="/destinations/">Zanzibar Beach</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Packages</div>
-      <ul class="footer-links">
-        <li><a href="/packages/">Wildlife Safaris</a></li>
-        <li><a href="/packages/">Gorilla Trekking</a></li>
-        <li><a href="/packages/">Luxury Safaris</a></li>
-        <li><a href="/packages/">Family Safaris</a></li>
-        <li><a href="/packages/">Honeymoon Safaris</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Company</div>
-      <ul class="footer-links">
-        <li><a href="/about/">About Us</a></li>
-        <li><a href="/about/">Our Guides</a></li>
-        <li><a href="/about/">Conservation</a></li>
-        <li><a href="/contact/">Contact</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Support</div>
-      <ul class="footer-links">
-        <li><a href="#">Trip Planning</a></li>
-        <li><a href="#">Visa & Health</a></li>
-        <li><a href="#">Travel Insurance</a></li>
-        <li><a href="#">Packing Guide</a></li>
-        <li><a href="#">FAQ</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p class="footer-copy">© 2026 Successful Safaris Ltd. All rights reserved. ATOL Protected · IATA Accredited · KATO Member</p>
-    <div class="footer-legal">
-      <a href="#">Privacy Policy</a>
-      <a href="#">Terms of Use</a>
-      <a href="#">Cookie Settings</a>
-    </div>
-  </div>
-</footer>
-
 <!-- STICKY BOOKING BAR -->
 <div class="sticky-bar" id="stickyBar">
   <div class="sticky-pkg-info">
@@ -1237,6 +1082,9 @@
   </div>
 </div>
 
+{% endblock %}
+
+{% block extra_script %}
 <script>
   function toggleDay(item) {
     const wasOpen = item.classList.contains('open');
@@ -1267,5 +1115,4 @@
     }
   }, { passive: true });
 </script>
-</body>
-</html>
+{% endblock %}
