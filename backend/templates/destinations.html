@@ -58,80 +58,21 @@
 <section class="dest-grid-section">
   <div class="dest-grid">
     
-    <!-- Kenya -->
-    <div class="dest-card" onclick="window.location='/destinations/kenya/'">
-      <img src="https://images.unsplash.com/photo-1535941339077-2dd1c7963098?auto=format&fit=crop&w=800&q=80" alt="Kenya" class="dest-card-img">
+    {% for dest in destinations %}
+    <div class="dest-card" onclick="window.location='{% url 'destination_detail' dest.id %}'">
+      <img src="{% if dest.hero_image %}{{ dest.hero_image.url }}{% else %}https://images.unsplash.com/photo-1535941339077-2dd1c7963098?auto=format&fit=crop&w=800&q=80{% endif %}" alt="{{ dest.name }}" class="dest-card-img">
       <div class="dest-card-overlay"></div>
       <div class="dest-card-content">
-        <div class="dest-card-tag">Masai Mara & Beyond</div>
-        <h2 class="dest-card-name">Kenya</h2>
-        <p class="dest-card-desc">The birthplace of the safari. Witness the Great Migration and the majestic red-robed Maasai warriors in the cradle of mankind.</p>
+        <div class="dest-card-tag">{{ dest.featured_wildlife|default:"African Adventure" }}</div>
+        <h2 class="dest-card-name">{{ dest.name }}</h2>
+        <p class="dest-card-desc">{{ dest.description|truncatewords:20 }}</p>
         <div class="dest-card-meta">
-          <div class="dest-price">Starting from <strong>$2,800</strong></div>
+          <div class="dest-price">Starting from <strong>${{ dest.min_price|floatformat:0|default:"TBD" }}</strong></div>
           <span class="dest-btn">Explore →</span>
         </div>
       </div>
     </div>
-
-    <!-- Tanzania -->
-    <div class="dest-card" onclick="window.location='/destinations/tanzania/'">
-      <img src="https://images.unsplash.com/photo-1547970810-dc1eac37d174?auto=format&fit=crop&w=800&q=80" alt="Tanzania" class="dest-card-img">
-      <div class="dest-card-overlay"></div>
-      <div class="dest-card-content">
-        <div class="dest-card-tag">Serengeti & Kilimanjaro</div>
-        <h2 class="dest-card-name">Tanzania</h2>
-        <p class="dest-card-desc">Home to the roof of Africa and the endless plains of the Serengeti. Discover untamed wilderness on an epic scale.</p>
-        <div class="dest-card-meta">
-          <div class="dest-price">Starting from <strong>$3,400</strong></div>
-          <span class="dest-btn">Explore →</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Rwanda -->
-    <div class="dest-card">
-      <img src="https://images.unsplash.com/photo-1530126483408-aa533e55bdb2?auto=format&fit=crop&w=800&q=80" alt="Rwanda" class="dest-card-img">
-      <div class="dest-card-overlay"></div>
-      <div class="dest-card-content">
-        <div class="dest-card-tag">Mountain Gorillas</div>
-        <h2 class="dest-card-name">Rwanda</h2>
-        <p class="dest-card-desc">A land of a thousand hills. Embark on a soul-stirring trek through emerald rainforests to meet our closest relatives.</p>
-        <div class="dest-card-meta">
-          <div class="dest-price">Starting from <strong>$4,200</strong></div>
-          <span class="dest-btn">Explore →</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Uganda -->
-    <div class="dest-card">
-      <img src="https://images.unsplash.com/photo-1564760055775-d63b17a55c44?auto=format&fit=crop&w=800&q=80" alt="Uganda" class="dest-card-img">
-      <div class="dest-card-overlay"></div>
-      <div class="dest-card-content">
-        <div class="dest-card-tag">Pearl of Africa</div>
-        <h2 class="dest-card-name">Uganda</h2>
-        <p class="dest-card-desc">From the source of the Nile to the tree-climbing lions of Ishasha. A diverse haven for primate lovers and bird watchers.</p>
-        <div class="dest-card-meta">
-          <div class="dest-price">Starting from <strong>$3,600</strong></div>
-          <span class="dest-btn">Explore →</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Zanzibar -->
-    <div class="dest-card">
-      <img src="https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=800&q=80" alt="Zanzibar" class="dest-card-img">
-      <div class="dest-card-overlay"></div>
-      <div class="dest-card-content">
-        <div class="dest-card-tag">Island Paradise</div>
-        <h2 class="dest-card-name">Zanzibar</h2>
-        <p class="dest-card-desc">White sands, turquoise waters, and the historic Stone Town. The perfect end to an untamed safari adventure.</p>
-        <div class="dest-card-meta">
-          <div class="dest-price">Starting from <strong>$2,200</strong></div>
-          <span class="dest-btn">Explore →</span>
-        </div>
-      </div>
-    </div>
+    {% endfor %}
 
   </div>
 </section>

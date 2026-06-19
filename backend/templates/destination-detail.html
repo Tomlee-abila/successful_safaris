@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Tanzania — SUCCESSFUL LUXURY SAFARIS{% endblock %}
+{% block title %}{{ destination.name }} — SUCCESSFUL LUXURY SAFARIS{% endblock %}
 
 {% block extra_style %}
-  .dest-hero { height: 60vh; position: relative; background: url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1600&q=80') center/cover; display: flex; align-items: center; justify-content: center; color: white; text-align: center; }
+  .dest-hero { height: 60vh; position: relative; background: url('{% if destination.hero_image %}{{ destination.hero_image.url }}{% else %}https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1600&q=80{% endif %}') center/cover; display: flex; align-items: center; justify-content: center; color: white; text-align: center; }
   .dest-hero::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.4); }
   .dest-hero-content { position: relative; z-index: 1; }
   .dest-hero h1 { font-family: 'Playfair Display', serif; font-size: 64px; }
@@ -33,7 +33,7 @@
 <header class="dest-hero">
   <div class="dest-hero-content">
     <p>Discover Africa</p>
-    <h1>Tanzania</h1>
+    <h1>{{ destination.name }}</h1>
   </div>
 </header>
 
@@ -41,14 +41,19 @@
   <div class="dest-grid">
     <div class="dest-desc">
       <h2 class="section-title">A Land of Infinite Wonders</h2>
-      <p>Home to the legendary Serengeti, the majestic Mount Kilimanjaro, and the exotic spice islands of Zanzibar, Tanzania offers a safari experience that is unparalleled in its diversity and scale.</p>
-      <p>Whether you're witnessing the Great Migration across the golden plains or tracking chimpanzees in the rainforests of Gombe, Tanzania provides a raw, unfiltered connection to the wild heart of Africa.</p>
+      <p>{{ destination.description|linebreaksbr }}</p>
 
       <h3 style="margin-top:48px; font-family:'Playfair Display',serif; font-size:24px;">Signature Wildlife</h3>
       <div class="wildlife-row">
-        <div class="wild-card"><div class="wild-img">🦁</div><div class="wild-name">The Big Five</div></div>
-        <div class="wild-card"><div class="wild-img">🦓</div><div class="wild-name">Great Migration</div></div>
-        <div class="wild-card"><div class="wild-img">🐘</div><div class="wild-name">Tarangire Giants</div></div>
+        {% if wildlife_list %}
+            {% for animal in wildlife_list %}
+            <div class="wild-card"><div class="wild-img">🐾</div><div class="wild-name">{{ animal }}</div></div>
+            {% endfor %}
+        {% else %}
+          <div class="wild-card"><div class="wild-img">🦁</div><div class="wild-name">The Big Five</div></div>
+          <div class="wild-card"><div class="wild-img">🦓</div><div class="wild-name">Great Migration</div></div>
+          <div class="wild-card"><div class="wild-img">🐘</div><div class="wild-name">Iconic Landscapes</div></div>
+        {% endif %}
       </div>
     </div>
 
@@ -56,10 +61,10 @@
       <div class="dest-sidebar-card">
         <h3 class="sidebar-h">Quick Facts</h3>
         <ul class="info-list">
-          <li><span>Best Time</span><span>June - October</span></li>
-          <li><span>Wildlife</span><span>Big Five, Migration</span></li>
-          <li><span>Language</span><span>Swahili, English</span></li>
-          <li><span>Currency</span><span>Tanzanian Shilling</span></li>
+          <li><span>Best Time</span><span>{{ destination.best_travel_season|default:"Year-round" }}</span></li>
+          <li><span>Wildlife</span><span>{{ destination.featured_wildlife|truncatechars:20|default:"Big Five" }}</span></li>
+          <li><span>Health</span><span>{{ destination.health_requirements|truncatechars:20|default:"Consult Doctor" }}</span></li>
+          <li><span>Packages</span><span>{{ destination.package_count }} Available</span></li>
         </ul>
         <a href="/packages/" class="btn-book">View Packages →</a>
       </div>

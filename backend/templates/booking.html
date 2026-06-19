@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Book Your Safari — SUCCESSFUL LUXURY SAFARIS{% endblock %}
+{% block title %}Plan Your Journey — SUCCESSFUL LUXURY SAFARIS{% endblock %}
 
 {% block extra_style %}
   .booking-hero { background: var(--green-dark); padding: 60px 48px; text-align: center; color: white; }
@@ -23,8 +23,12 @@
   .form-input { width: 100%; padding: 12px; border: 1.5px solid var(--cream-mid); border-radius: 6px; font-size: 14px; outline: none; }
   .form-input:focus { border-color: var(--gold); }
 
-  .btn-booking { background: var(--gold); color: var(--green-dark); padding: 16px 32px; border-radius: 6px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; width: 100%; margin-top: 20px; }
+  .btn-booking { background: var(--gold); color: var(--green-dark); padding: 16px 32px; border-radius: 6px; border:none; cursor:pointer; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; width: 100%; margin-top: 20px; }
   .btn-booking:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  .summary-box { background: var(--cream); padding: 24px; border-radius: 8px; border: 1px solid var(--cream-mid); margin-bottom: 32px; }
+  .summary-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
+  .summary-total { border-top: 1px solid var(--gray-light); padding-top: 12px; margin-top: 12px; font-weight: 700; font-size: 18px; color: var(--green-dark); }
 {% endblock %}
 
 {% block content %}
@@ -34,48 +38,99 @@
 
 <div class="booking-container">
   <div class="booking-card">
+    <!-- Step Indicators -->
     <div class="step-header">
-      <div class="step active"><span class="step-num">1</span> Journey Details</div>
-      <div class="step"><span class="step-num">2</span> Personal Info</div>
+      <div class="step {% if step == 1 %}active{% endif %}"><span class="step-num">1</span> Journey Selection</div>
+      <div class="step {% if step == 2 %}active{% endif %}"><span class="step-num">2</span> Traveler Details</div>
       <div class="step"><span class="step-num">3</span> Confirmation</div>
     </div>
 
-    <form>
+    {% if step == 1 %}
+    <!-- STEP 1: JOURNEY SELECTION -->
+    <form method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="step" value="1">
       <h2 class="form-h">Tell us about your trip</h2>
       
       <div class="form-group">
-        <label class="form-label">Select Your Destination</label>
-        <select class="form-input">
-          <option>Kenya - Masai Mara</option>
-          <option>Tanzania - Serengeti</option>
-          <option>Rwanda - Gorillas</option>
-          <option>Uganda - Primate Safari</option>
+        <label class="form-label">Select Signature Safari Package</label>
+        <select name="package" class="form-input" required>
+          {% for pkg in packages %}
+          <option value="{{ pkg.id }}">{{ pkg.title }} ({{ pkg.duration_days }} Days) — From ${{ pkg.base_price|floatformat:0 }}</option>
+          {% endfor %}
         </select>
       </div>
 
       <div class="grid-2">
         <div class="form-group">
-          <label class="form-label">Preferred Month</label>
-          <input type="month" class="form-input">
+          <label class="form-label">Preferred Start Date</label>
+          <input type="date" name="start_date" class="form-input" required min="{{ today|date:'Y-m-d' }}">
         </div>
         <div class="form-group">
           <label class="form-label">Number of Guests</label>
-          <input type="number" class="form-input" value="2" min="1">
+          <input type="number" name="guests" class="form-input" value="2" min="1" max="12" required>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-booking">Continue to Details →</button>
+    </form>
+    {% endif %}
+
+    {% if step == 2 %}
+    <!-- STEP 2: TRAVELER DETAILS -->
+    <form method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="step" value="2">
+      <input type="hidden" name="package_id" value="{{ selected_package.id }}">
+      <input type="hidden" name="start_date" value="{{ start_date }}">
+      <input type="hidden" name="guests" value="{{ guests }}">
+
+      <div class="summary-box">
+        <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 12px;">Booking Summary</h3>
+        <div class="summary-row"><span>Package:</span> <span>{{ selected_package.title }}</span></div>
+        <div class="summary-row"><span>Start Date:</span> <span>{{ start_date }}</span></div>
+        <div class="summary-row"><span>Guests:</span> <span>{{ guests }}</span></div>
+        <div class="summary-total"><span>Total Amount:</span> <span>${{ total_amount|floatformat:0 }}</span></div>
+      </div>
+
+      <h2 class="form-h">Primary Traveler Information</h2>
+      <div class="grid-2">
+        <div class="form-group">
+          <label class="form-label">First Name</label>
+          <input type="text" name="first_name" class="form-input" value="{{ request.user.first_name }}" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name</label>
+          <input type="text" name="last_name" class="form-input" value="{{ request.user.last_name }}" required>
         </div>
       </div>
 
       <div class="form-group">
-        <label class="form-label">Duration</label>
-        <select class="form-input">
-          <option>7 Days</option>
-          <option>10 Days</option>
-          <option>14 Days</option>
-          <option>Custom</option>
-        </select>
+        <label class="form-label">Passport Number</label>
+        <input type="text" name="passport_number" class="form-input" placeholder="Enter passport number for park permits" required>
       </div>
 
-      <button type="button" class="btn-booking" onclick="window.location='/checkout/'">Continue to Details →</button>
+      <div class="grid-2">
+        <div class="form-group">
+          <label class="form-label">Nationality</label>
+          <input type="text" name="nationality" class="form-input" placeholder="e.g. United States" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Date of Birth</label>
+          <input type="date" name="dob" class="form-input" required>
+        </div>
+      </div>
+
+      {% if guests > 1 %}
+      <div style="margin-top: 32px; padding: 24px; border: 1px dashed var(--cream-mid); border-radius: 8px;">
+        <p style="font-size: 13px; color: var(--gray-mid);"><span style="color: var(--gold-dark); font-weight: 700;">Note:</span> You have selected <strong>{{ guests }} guests</strong>. Our team will contact you after booking to collect details for the additional travelers.</p>
+      </div>
+      {% endif %}
+
+      <button type="submit" class="btn-booking">Finalize Booking & Pay Deposit →</button>
+      <a href="{% url 'booking' %}" style="display:block; text-align:center; margin-top:16px; font-size:12px; color:var(--gray-mid);">← Back to Selection</a>
     </form>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

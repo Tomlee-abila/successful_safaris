@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Two-Factor Authentication — SUCCESSFUL LUXURY SAFARIS{% endblock %}
+
+{% block extra_style %}
+.mfa-section { padding: 80px 48px; background: var(--cream); min-height: 80vh; display: flex; align-items: center;
+justify-content: center; }
+.mfa-card { background: white; border-radius: 16px; padding: 48px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); border: 1px
+solid var(--cream-mid); width: 100%; max-width: 440px; }
+.mfa-icon { font-size: 48px; text-align: center; margin-bottom: 12px; }
+.mfa-h { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--green-dark); margin-bottom: 8px;
+text-align: center; }
+.mfa-sub { font-size: 14px; color: var(--gray-mid); text-align: center; margin-bottom: 32px; line-height: 1.65; }
+
+.form-group { margin-bottom: 20px; }
+.form-label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color:
+var(--gray-mid); margin-bottom: 8px; }
+.form-input { width: 100%; padding: 16px; border: 1.5px solid var(--cream-mid); border-radius: 6px; outline: none;
+transition: 0.2s; text-align: center; letter-spacing: 8px; font-family: monospace; font-size: 26px; }
+.form-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.1); }
+.btn-primary { background: var(--green-dark); color: white; padding: 14px; border-radius: 6px; font-size: 13px;
+font-weight: 700; letter-spacing: 1px; text-transform: uppercase; width: 100%; border: none; cursor: pointer;
+transition: 0.2s; }
+.btn-primary:hover { background: var(--green-mid); transform: translateY(-1px); }
+.hint { font-size: 12px; color: var(--gray-light); text-align: center; margin-top: 12px; }
+.error-msg { color: #C0392B; font-size: 13px; margin-bottom: 16px; text-align: center; background: #FDEDEC; padding:
+10px; border-radius: 4px; }
+.timer-bar { height: 3px; background: var(--cream-mid); border-radius: 2px; margin-bottom: 24px; overflow: hidden; }
+.timer-fill { height: 100%; background: linear-gradient(to right, var(--gold), var(--gold-light)); border-radius: 2px;
+animation: countdown 30s linear infinite; }
+@keyframes countdown { from { width: 100%; } to { width: 0%; } }
+{% endblock %}
+
+{% block content %}
+<section class="mfa-section">
+    <div class="mfa-card">
+        <div class="mfa-icon">🛡️</div>
+        <h1 class="mfa-h">Authentication Required</h1>
+        <p class="mfa-sub">Open your authenticator app and enter the 6-digit code to complete sign in.</p>
+
+        <div class="timer-bar">
+            <div class="timer-fill"></div>
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+            {% if error %}
+            <div class="error-msg">{{ error }}</div>
+            {% endif %}
+            <div class="form-group">
+                <label class="form-label" for="mfa-code">6-Digit Code</label>
+                <input type="text" id="mfa-code" name="code" class="form-input" placeholder="······" maxlength="6"
+                    inputmode="numeric" autocomplete="one-time-code" autofocus required>
+            </div>
+            <button type="submit" class="btn-primary">Verify &amp; Sign In</button>
+        </form>
+        <p class="hint">Codes refresh every 30 seconds. Make sure your device clock is correct.</p>
+    </div>
+</section>
+{% endblock %}

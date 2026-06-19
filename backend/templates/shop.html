@@ -46,10 +46,10 @@
 
 <div class="category-tabs">
   <div class="cat-tab active">All Products</div>
-  <div class="cat-tab">🎒 Gear & Bags</div>
-  <div class="cat-tab">👕 Clothing</div>
-  <div class="cat-tab">🔭 Optics</div>
-  <div class="cat-tab" onclick="window.location='/shop/bundle-builder/'">🎁 Bundle Builder <span style="font-size:10px; background:var(--gold-pale); padding:2px 6px; border-radius:10px; color:var(--gold-dark);">New</span></div>
+  {% for cat in categories %}
+  <div class="cat-tab">{{ cat.name }}</div>
+  {% endfor %}
+  <div class="cat-tab" onclick="window.location='{% url 'bundle_builder' %}'">🎁 Bundle Builder <span style="font-size:10px; background:var(--gold-pale); padding:2px 6px; border-radius:10px; color:var(--gold-dark);">New</span></div>
 </div>
 
 <div class="shop-container">
@@ -62,47 +62,45 @@
   </aside>
 
   <main class="product-grid">
-    <!-- Product 1 -->
+    {% for prod in products %}
     <div class="product-card" onclick="window.location='/shop/product/'">
-      <div class="product-img">🧥</div>
+      <div class="product-img" style="background: url('{% if prod.image %}{{ prod.image.url }}{% else %}https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80{% endif %}') center/cover no-repeat; font-size: 0;"></div>
       <div class="product-body">
-        <div class="product-cat">Clothing</div>
-        <h3 class="product-name">Premium Safari Field Jacket</h3>
-        <p style="font-size:13px; color:var(--gray-mid);">UPF 50+ protection, 8 utility pockets.</p>
+        <div class="product-cat">{{ prod.category.name }}</div>
+        <h3 class="product-name">{{ prod.name }}</h3>
+        <p style="font-size:13px; color:var(--gray-mid);">{{ prod.description|truncatewords:10 }}</p>
       </div>
       <div class="product-footer">
-        <div class="product-price">$189</div>
-        <button class="btn-add" onclick="event.stopPropagation(); openCart()">+ Cart</button>
+        <div class="product-price">${{ prod.price|floatformat:0 }}</div>
+        <button class="btn-add" onclick="event.stopPropagation(); addToCart('{{ prod.id }}')">+ Cart</button>
       </div>
     </div>
-
-    <!-- Product 2 -->
-    <div class="product-card">
-      <div class="product-img">🔭</div>
-      <div class="product-body">
-        <div class="product-cat">Optics</div>
-        <h3 class="product-name">Swarovski 10x42 Binoculars</h3>
-        <p style="font-size:13px; color:var(--gray-mid);">Professional-grade clarity and light.</p>
-      </div>
-      <div class="product-footer">
-        <div class="product-price">$2,450</div>
-        <button class="btn-add" onclick="event.stopPropagation(); openCart()">+ Cart</button>
-      </div>
-    </div>
-
-    <!-- Product 3 -->
-    <div class="product-card">
-      <div class="product-img">🎒</div>
-      <div class="product-body">
-        <div class="product-cat">Gear</div>
-        <h3 class="product-name">Explorer Canvas Daypack</h3>
-        <p style="font-size:13px; color:var(--gray-mid);">Rugged durability meets heritage style.</p>
-      </div>
-      <div class="product-footer">
-        <div class="product-price">$145</div>
-        <button class="btn-add" onclick="event.stopPropagation(); openCart()">+ Cart</button>
-      </div>
-    </div>
+    {% empty %}
+    <p>No products available at the moment.</p>
+    {% endfor %}
   </main>
 </div>
+{% endblock %}
+
+{% block extra_script %}
+<script>
+  function addToCart(productId) {
+    fetch('{% url "add_to_cart" %}', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-CSRFToken': '{{ csrf_token }}'
+      },
+      body: 'product_id=' + productId + '&quantity=1'
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 'success') {
+        alert('Product added to your selection');
+      } else {
+        alert('Failed to add product');
+      }
+    });
+  }
+</script>
 {% endblock %}

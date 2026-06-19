@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Set Up Two-Factor Authentication — SUCCESSFUL LUXURY SAFARIS{% endblock %}
+
+{% block extra_style %}
+  .mfa-section { padding: 80px 48px; background: var(--cream); min-height: 80vh; display: flex; align-items: center; justify-content: center; }
+  .mfa-card { background: white; border-radius: 16px; padding: 48px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); border: 1px solid var(--cream-mid); width: 100%; max-width: 520px; }
+  .mfa-icon { font-size: 48px; text-align: center; margin-bottom: 12px; }
+  .mfa-h { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--green-dark); margin-bottom: 8px; text-align: center; }
+  .mfa-sub { font-size: 14px; color: var(--gray-mid); text-align: center; margin-bottom: 32px; line-height: 1.65; }
+
+  .mfa-steps { counter-reset: step; display: flex; flex-direction: column; gap: 20px; margin-bottom: 32px; }
+  .mfa-step { display: flex; gap: 16px; align-items: flex-start; }
+  .mfa-step-num { counter-increment: step; content: counter(step); width: 28px; height: 28px; border-radius: 50%; background: var(--green-dark); color: var(--gold); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .mfa-step-body { flex: 1; }
+  .mfa-step-title { font-size: 13px; font-weight: 700; color: var(--green-dark); margin-bottom: 4px; }
+  .mfa-step-text { font-size: 12px; color: var(--gray-mid); line-height: 1.55; }
+
+  .qr-wrap { text-align: center; padding: 20px; background: var(--cream); border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--cream-mid); }
+  .qr-wrap img { width: 180px; height: 180px; border-radius: 8px; }
+  .secret-box { font-family: monospace; font-size: 15px; letter-spacing: 3px; color: var(--green-dark); background: var(--cream); border: 1.5px dashed var(--cream-mid); border-radius: 6px; padding: 10px; text-align: center; margin-top: 12px; word-break: break-all; }
+  .secret-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--gray-light); margin-bottom: 6px; }
+
+  .form-group { margin-bottom: 20px; }
+  .form-label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--gray-mid); margin-bottom: 8px; }
+  .form-input { width: 100%; padding: 14px; border: 1.5px solid var(--cream-mid); border-radius: 6px; font-size: 14px; outline: none; transition: 0.2s; text-align: center; letter-spacing: 6px; font-family: monospace; font-size: 22px; }
+  .form-input:focus { border-color: var(--gold); }
+  .btn-primary { background: var(--green-dark); color: white; padding: 14px; border-radius: 6px; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; width: 100%; border: none; cursor: pointer; transition: 0.2s; }
+  .btn-primary:hover { background: var(--green-mid); transform: translateY(-1px); }
+  .btn-back { display: block; text-align: center; margin-top: 16px; font-size: 13px; color: var(--gray-mid); }
+  .btn-back:hover { color: var(--green-dark); }
+  .error-msg { color: #C0392B; font-size: 13px; margin-bottom: 16px; text-align: center; background: #FDEDEC; padding: 10px; border-radius: 4px; }
+{% endblock %}
+
+{% block content %}
+<section class="mfa-section">
+  <div class="mfa-card">
+    <div class="mfa-icon">🔐</div>
+    <h1 class="mfa-h">Secure Your Account</h1>
+    <p class="mfa-sub">Set up two-factor authentication for an extra layer of protection. You'll need an authenticator app like Google Authenticator or Authy.</p>
+
+    <div class="mfa-steps">
+      <div class="mfa-step">
+        <div class="mfa-step-num">1</div>
+        <div class="mfa-step-body">
+          <div class="mfa-step-title">Install an Authenticator App</div>
+          <div class="mfa-step-text">Download Google Authenticator, Authy, or any TOTP-compatible app on your phone.</div>
+        </div>
+      </div>
+      <div class="mfa-step">
+        <div class="mfa-step-num">2</div>
+        <div class="mfa-step-body">
+          <div class="mfa-step-title">Scan the QR Code</div>
+          <div class="mfa-step-text">Open the authenticator app, tap "+", and scan the code below.</div>
+        </div>
+      </div>
+      <div class="mfa-step">
+        <div class="mfa-step-num">3</div>
+        <div class="mfa-step-body">
+          <div class="mfa-step-title">Enter the 6-Digit Code</div>
+          <div class="mfa-step-text">Type the code shown in the app below to confirm setup.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qr-wrap">
+      <img src="{{ qr_uri }}" alt="TOTP QR Code">
+      <div class="secret-label">Or enter this key manually</div>
+      <div class="secret-box">{{ secret }}</div>
+    </div>
+
+    <form method="POST" action="{% url 'mfa_confirm' %}">
+      {% csrf_token %}
+      {% if error %}
+      <div class="error-msg">{{ error }}</div>
+      {% endif %}
+      <div class="form-group">
+        <label class="form-label" for="mfa-code">Verification Code</label>
+        <input type="text" id="mfa-code" name="code" class="form-input" placeholder="000000" maxlength="6" inputmode="numeric" autocomplete="one-time-code" autofocus required>
+      </div>
+      <button type="submit" class="btn-primary">Activate Two-Factor Authentication</button>
+    </form>
+    <a href="{% url 'dashboard' %}" class="btn-back">← Cancel and go back</a>
+  </div>
+</section>
+{% endblock %}

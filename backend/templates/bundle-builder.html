@@ -54,8 +54,7 @@
 
   /* ── SIDEBAR SUMMARY ── */
   .builder-sidebar { position: sticky; top: 112px; height: fit-content; }
-  .summary-card { background: var(--green-dark); color: white; border-radius: 16px; padding: 32px; box-shadow: var(--shadow-lg); overflow: hidden; position: relative; }
-  .summary-card::before { content: ''; position: absolute; top: 0; right: 0; width: 100px; height: 100px; background: rgba(201,168,76,0.1); border-radius: 0 0 0 100%; }
+  .summary-card { background: var(--green-dark); color: white; border-radius: 16px; padding: 32px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); overflow: hidden; position: relative; }
   .summary-title { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px; }
 
   .summary-items { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; min-height: 100px; }
@@ -100,25 +99,8 @@
     <div class="step-panel active" id="panel-1">
       <h2 class="step-title">1. Choose Your Safari</h2>
       <p class="step-subtitle">Start with one of our signature multi-day experiences.</p>
-      <div class="item-grid">
-        <div class="selectable-card" onclick="toggleItem('tour', 'Great Migration Safari', 9700, this)">
-          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=400&q=80') center/cover;"><div class="card-check">✓</div></div>
-          <div class="card-body">
-            <div class="card-tag">7 Days · Kenya</div>
-            <h3 class="card-name">Great Migration Safari</h3>
-            <p class="card-desc">Witness nature's greatest spectacle in the Masai Mara. Luxury tented camps and private guides included.</p>
-            <div class="card-footer"><div class="card-price">$9,700</div><button class="btn-select">Select</button></div>
-          </div>
-        </div>
-        <div class="selectable-card" onclick="toggleItem('tour', 'Serengeti Grand Safari', 7400, this)">
-          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=400&q=80') center/cover;"><div class="card-check">✓</div></div>
-          <div class="card-body">
-            <div class="card-tag">10 Days · Tanzania</div>
-            <h3 class="card-name">Serengeti Grand Safari</h3>
-            <p class="card-desc">Deep exploration of the Serengeti plains. Balloon flights and expert naturalist trackers.</p>
-            <div class="card-footer"><div class="card-price">$7,400</div><button class="btn-select">Select</button></div>
-          </div>
-        </div>
+      <div class="item-grid" id="grid-packages">
+        <!-- Dynamic Content -->
       </div>
     </div>
 
@@ -126,43 +108,8 @@
     <div class="step-panel" id="panel-2">
       <h2 class="step-title">2. Add Premium Gear</h2>
       <p class="step-subtitle">Essential equipment for the African bush. Save 15% on gear in this bundle.</p>
-      <div class="item-grid">
-        <div class="selectable-card" onclick="toggleItem('gear', 'Safari Field Jacket', 189, this)">
-          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=400&q=80') center/cover;"><div class="card-check">✓</div></div>
-          <div class="card-body">
-            <div class="card-tag">SUCCESSFUL LUXURY SAFARIS Gear</div>
-            <h3 class="card-name">Premium Field Jacket</h3>
-            <p class="card-desc">UPF 50+ protection, 8 utility pockets, and silent hardware for wildlife viewing.</p>
-            <div class="card-footer"><div class="card-price">$189</div><button class="btn-select">Add to Bundle</button></div>
-          </div>
-        </div>
-        <div class="selectable-card" onclick="toggleItem('gear', 'Swarovski Binoculars', 2450, this)">
-          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80') center/cover;"><div class="card-check">✓</div></div>
-          <div class="card-body">
-            <div class="card-tag">Optics · Professional</div>
-            <h3 class="card-name">Swarovski 10x42 EL</h3>
-            <p class="card-desc">Industry-leading clarity. Waterproof, field flattener lens system. The pro guide's choice.</p>
-            <div class="card-footer"><div class="card-price">$2,450</div><button class="btn-select">Add to Bundle</button></div>
-          </div>
-        </div>
-        <div class="selectable-card" onclick="toggleItem('gear', 'All-Terrain Boots', 245, this)">
-          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=400&q=80') center/cover;"><div class="card-check">✓</div></div>
-          <div class="card-body">
-            <div class="card-tag">Footwear · GORE-TEX</div>
-            <h3 class="card-name">All-Terrain Safari Boots</h3>
-            <p class="card-desc">Vibram sole, breathable mesh, and high ankle support for bush walks.</p>
-            <div class="card-footer"><div class="card-price">$245</div><button class="btn-select">Add to Bundle</button></div>
-          </div>
-        </div>
-        <div class="selectable-card" onclick="toggleItem('gear', 'Wide-Brim Sun Hat', 65, this)">
-          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=400&q=80') center/cover;"><div class="card-check">✓</div></div>
-          <div class="card-body">
-            <div class="card-tag">Headwear · UPF 80+</div>
-            <h3 class="card-name">Wide-Brim Sun Hat</h3>
-            <p class="card-desc">Packable, moisture-control band, adjustable fit for windy drives.</p>
-            <div class="card-footer"><div class="card-price">$65</div><button class="btn-select">Add to Bundle</button></div>
-          </div>
-        </div>
+      <div class="item-grid" id="grid-gear">
+        <!-- Dynamic Content -->
       </div>
     </div>
 
@@ -170,25 +117,8 @@
     <div class="step-panel" id="panel-3">
       <h2 class="step-title">3. Luxury Add-ons</h2>
       <p class="step-subtitle">Special experiences to make your journey unforgettable.</p>
-      <div class="item-grid">
-        <div class="selectable-card" onclick="toggleItem('addon', 'Balloon Flight (2pax)', 960, this)">
-          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1543874049-af2a0bbe3b1a?auto=format&fit=crop&w=400&q=80') center/cover;"><div class="card-check">✓</div></div>
-          <div class="card-body">
-            <div class="card-tag">Experience · Sunrise</div>
-            <h3 class="card-name">Balloon Flight (2pax)</h3>
-            <p class="card-desc">Float over the savanna at dawn followed by a champagne breakfast in the bush.</p>
-            <div class="card-footer"><div class="card-price">$960</div><button class="btn-select">Add to Bundle</button></div>
-          </div>
-        </div>
-        <div class="selectable-card" onclick="toggleItem('addon', 'Private Photo Guide', 350, this)">
-          <div class="card-img" style="background: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=400&q=80') center/cover;"><div class="card-check">✓</div></div>
-          <div class="card-body">
-            <div class="card-tag">Specialist · 1 Day</div>
-            <h3 class="card-name">Private Photo Guide</h3>
-            <div class="card-desc">Professional wildlife photographer to assist with settings and positioning.</div>
-            <div class="card-footer"><div class="card-price">$350</div><button class="btn-select">Add to Bundle</button></div>
-          </div>
-        </div>
+      <div class="item-grid" id="grid-addons">
+        <!-- Dynamic Content -->
       </div>
     </div>
 
@@ -207,9 +137,6 @@
         <div class="s-total-row final"><span class="s-total-label">Total</span><span class="s-total-value" id="s-total">$0</span></div>
       </div>
       <button class="btn-next" id="btn-next" onclick="nextStep()" disabled>Next: Premium Gear</button>
-      <div style="margin-top:16px; text-align:center;">
-        <a href="#" style="font-size:12px; color:rgba(255,255,255,0.4); text-decoration:underline;">Need help building?</a>
-      </div>
     </div>
   </aside>
 </main>
@@ -219,6 +146,35 @@
 <script>
   let currentStep = 1;
   const bundle = { tour: null, gear: [], addons: [] };
+
+  async function loadData() {
+    const response = await fetch('{% url "bundle_options_api" %}');
+    const data = await response.json();
+    
+    renderGrid('grid-packages', data.packages, 'tour');
+    renderGrid('grid-gear', data.gear, 'gear');
+    renderGrid('grid-addons', data.addons, 'addon');
+  }
+
+  function renderGrid(containerId, items, type) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = items.map(item => `
+      <div class="selectable-card" onclick="toggleItem('${type}', '${item.name || item.title}', ${item.price || item.base_price}, this)">
+        <div class="card-img" style="background: url('${item.image || item.featured_image || 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=400&q=80'}') center/cover;">
+          <div class="card-check">✓</div>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">${item.category_name || (item.duration_days + ' Days')}</div>
+          <h3 class="card-name">${item.name || item.title}</h3>
+          <p class="card-desc">${(item.description || '').substring(0, 100)}...</p>
+          <div class="card-footer">
+            <div class="card-price">$${(item.price || item.base_price).toLocaleString()}</div>
+            <button class="btn-select">${type === 'tour' ? 'Select' : 'Add to Bundle'}</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
 
   function toggleItem(type, name, price, el) {
     if (type === 'tour') {
@@ -281,12 +237,14 @@
       currentStep++;
       document.getElementById(`panel-${currentStep}`).classList.add('active');
       document.getElementById(`p-step-${currentStep}`).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       updateSummary();
     } else {
-      window.location.href = '/checkout/';
+      window.location.href = '{% url "checkout" %}';
     }
   }
 
+  loadData();
   updateSummary();
 </script>
 {% endblock %}

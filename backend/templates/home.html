@@ -238,7 +238,7 @@
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-pattern"></div>
-  <div class="hero-content">
+  <div class="hero-content animate-up">
     <div class="hero-overline">Est. 2008 · Luxury Safari Specialists</div>
     <h1 class="hero-title">
       Wild Luxury.<br>
@@ -294,56 +294,18 @@
     <div class="gold-divider"></div>
   </div>
   <div class="destinations-row">
-    <div class="dest-pill" onclick="window.location='/destinations/kenya/'">
-      <div class="dest-pill-img" style="background: url('https://images.unsplash.com/photo-1535941339077-2dd1c7963098?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
-        <div class="dest-pill-flag">🇰🇪</div>
+    {% for dest in top_destinations %}
+    <div class="dest-pill" onclick="window.location='{% url 'destinations' %}'">
+      <div class="dest-pill-img" style="background: url('{% if dest.hero_image %}{{ dest.hero_image.url }}{% else %}https://images.unsplash.com/photo-1535941339077-2dd1c7963098?auto=format&fit=crop&w=600&q=80{% endif %}') center/cover no-repeat;">
+        <div class="dest-pill-flag">{% if dest.name == 'Kenya' %}🇰🇪{% elif dest.name == 'Tanzania' %}🇹🇿{% elif dest.name == 'Rwanda' %}🇷🇼{% elif dest.name == 'Uganda' %}🇺🇬{% elif dest.name == 'Botswana' %}🇧🇼{% else %}🌍{% endif %}</div>
       </div>
       <div class="dest-pill-body">
-        <div class="dest-pill-country">Kenya</div>
-        <div class="dest-pill-name">Masai Mara & Beyond</div>
-        <div class="dest-pill-count">14 packages · From $2,800</div>
+        <div class="dest-pill-country">{{ dest.name }}</div>
+        <div class="dest-pill-name">{{ dest.featured_wildlife|default:"Breathtaking Landscapes" }}</div>
+        <div class="dest-pill-count">{{ dest.package_count }} packages · From ${{ dest.min_price|floatformat:0 }}</div>
       </div>
     </div>
-    <div class="dest-pill" onclick="window.location='/destinations/tanzania/'">
-      <div class="dest-pill-img" style="background: url('https://images.unsplash.com/photo-1547970810-dc1eac37d174?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
-        <div class="dest-pill-flag">🇹🇿</div>
-      </div>
-      <div class="dest-pill-body">
-        <div class="dest-pill-country">Tanzania</div>
-        <div class="dest-pill-name">Serengeti to Zanzibar</div>
-        <div class="dest-pill-count">18 packages · From $3,400</div>
-      </div>
-    </div>
-    <div class="dest-pill">
-      <div class="dest-pill-img" style="background: url('https://images.unsplash.com/photo-1530126483408-aa533e55bdb2?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
-        <div class="dest-pill-flag">🇷🇼</div>
-      </div>
-      <div class="dest-pill-body">
-        <div class="dest-pill-country">Rwanda</div>
-        <div class="dest-pill-name">Gorilla Trekking</div>
-        <div class="dest-pill-count">8 packages · From $4,200</div>
-      </div>
-    </div>
-    <div class="dest-pill">
-      <div class="dest-pill-img" style="background: url('https://images.unsplash.com/photo-1564760055775-d63b17a55c44?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
-        <div class="dest-pill-flag">🇺🇬</div>
-      </div>
-      <div class="dest-pill-body">
-        <div class="dest-pill-country">Uganda</div>
-        <div class="dest-pill-name">Bwindi & Queen Elizabeth</div>
-        <div class="dest-pill-count">10 packages · From $3,600</div>
-      </div>
-    </div>
-    <div class="dest-pill">
-      <div class="dest-pill-img" style="background: url('https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;">
-        <div class="dest-pill-flag">🇹🇿</div>
-      </div>
-      <div class="dest-pill-body">
-        <div class="dest-pill-country">Zanzibar</div>
-        <div class="dest-pill-name">Island Luxury & Reef</div>
-        <div class="dest-pill-count">6 packages · From $2,200</div>
-      </div>
-    </div>
+    {% endfor %}
   </div>
 </section>
 
@@ -357,78 +319,33 @@
   </div>
   <div class="packages-grid">
 
+    {% for pkg in featured_packages %}
     <div class="package-card" onclick="window.location='/packages/detail/'">
-      <div class="package-img" style="background: url('https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;">
+      <div class="package-img" style="background: url('{% if pkg.featured_image %}{{ pkg.featured_image.url }}{% else %}https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80{% endif %}') center/cover no-repeat;">
         <div class="package-img-overlay"></div>
-        <div class="package-duration">7 Nights</div>
-        <div class="package-badge">✦ Bestseller</div>
+        <div class="package-duration">{{ pkg.duration_days }} Nights</div>
+        {% if forloop.first %}<div class="package-badge">✦ Bestseller</div>{% endif %}
       </div>
       <div class="package-body">
-        <div class="package-tag">Kenya · Private Game Reserve</div>
-        <h3 class="package-name">Masai Mara Great Migration</h3>
-        <p class="package-desc">Witness nature's greatest spectacle. Private game drives, fly-camping under the stars, champagne sundowners on the Mara River bank.</p>
+        <div class="package-tag">
+          {% for loc in pkg.locations.all|slice:":1" %}{{ loc.destination.name }}{% endfor %} · Exclusive Safari
+        </div>
+        <h3 class="package-name">{{ pkg.title }}</h3>
+        <p class="package-desc">{{ pkg.description|truncatewords:25 }}</p>
         <div class="package-features">
           <span class="pkg-feat">Private Guide</span>
           <span class="pkg-feat">All Inclusive</span>
-          <span class="pkg-feat">Air Charter</span>
-          <span class="pkg-feat">Luxury Tent</span>
+          <span class="pkg-feat">Luxury Stay</span>
         </div>
       </div>
       <div class="package-footer">
         <div class="package-price-block">
-          <div class="package-price">$4,850</div>
+          <div class="package-price">${{ pkg.base_price|floatformat:0 }}</div>
         </div>
-        <a href="/booking/" class="pkg-btn">Book Now</a>
+        <a href="{% url 'booking' %}" class="pkg-btn">Book Now</a>
       </div>
     </div>
-
-    <div class="package-card">
-      <div class="package-img" style="background: url('https://images.unsplash.com/photo-1543874049-af2a0bbe3b1a?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;">
-        <div class="package-img-overlay"></div>
-        <div class="package-duration">10 Nights</div>
-        <div class="package-badge">✦ Luxury</div>
-      </div>
-      <div class="package-body">
-        <div class="package-tag">Tanzania · Serengeti Plains</div>
-        <h3 class="package-name">Serengeti Grand Safari</h3>
-        <p class="package-desc">Hot air balloon at dawn, exclusive tented camp, expertly guided game drives across the endless Serengeti. Includes Ngorongoro Crater.</p>
-        <div class="package-features">
-          <span class="pkg-feat">Balloon Safari</span>
-          <span class="pkg-feat">Crater Tour</span>
-          <span class="pkg-feat">Private Villa</span>
-        </div>
-      </div>
-      <div class="package-footer">
-        <div class="package-price-block">
-          <div class="package-price">$7,400</div>
-        </div>
-        <a href="/booking/" class="pkg-btn">Book Now</a>
-      </div>
-    </div>
-
-    <div class="package-card">
-      <div class="package-img" style="background: url('https://images.unsplash.com/photo-1530126483408-aa533e55bdb2?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;">
-        <div class="package-img-overlay"></div>
-        <div class="package-duration">5 Nights</div>
-        <div class="package-badge">✦ Exclusive</div>
-      </div>
-      <div class="package-body">
-        <div class="package-tag">Rwanda · Volcanoes NP</div>
-        <h3 class="package-name">Rwanda Gorilla Encounter</h3>
-        <p class="package-desc">Trek through ancient rainforest to spend a precious hour with a family of mountain gorillas. A truly life-altering experience.</p>
-        <div class="package-features">
-          <span class="pkg-feat">Gorilla Permit</span>
-          <span class="pkg-feat">Expert Ranger</span>
-          <span class="pkg-feat">Luxury Lodge</span>
-        </div>
-      </div>
-      <div class="package-footer">
-        <div class="package-price-block">
-          <div class="package-price">$6,200</div>
-        </div>
-        <a href="/booking/" class="pkg-btn">Book Now</a>
-      </div>
-    </div>
+    {% endfor %}
 
   </div>
 </section>
@@ -485,3 +402,4 @@
   <a href="/booking/" class="cta-btn-dark">Plan My Safari</a>
 </div>
 {% endblock %}
+ck %}

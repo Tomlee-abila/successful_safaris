@@ -35,32 +35,40 @@
 
 <div class="blog-container">
   <main class="blog-feed">
-    <!-- Post 1 -->
-    <article class="post-card">
-      <div class="post-img"><img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1200&q=80" alt="Serengeti"></div>
-      <div class="post-meta"><span>May 10, 2026</span><span>Wildlife & Conservation</span></div>
-      <h2 class="post-title">Watching a Thousand Wildebeest Cross the Mara River</h2>
-      <p class="post-excerpt">The air was thick with dust and the thundering sound of hooves. We stood in silence, witnessing one of nature's most intense dramas unfold just yards from our position...</p>
-      <a href="#" class="btn-read">Read the Story →</a>
-    </article>
+    {% if request.user.is_staff %}
+    <div style="margin-bottom:40px; padding:20px; border:2px dashed var(--gold); border-radius:12px; text-align:center;">
+       <p style="font-size:14px; font-weight:700; color:var(--green-dark); margin-bottom:12px;">Content Manager Active</p>
+       <a href="/admin/blog/blogpost/add/" style="background:var(--gold); color:var(--green-dark); padding:10px 24px; border-radius:6px; font-weight:700; font-size:12px; text-transform:uppercase;">+ Write New Story</a>
+    </div>
+    {% endif %}
 
-    <!-- Post 2 -->
+    {% for post in posts %}
     <article class="post-card">
-      <div class="post-img"><img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80" alt="Guide"></div>
-      <div class="post-meta"><span>May 4, 2026</span><span>Inside Successful Safaris</span></div>
-      <h2 class="post-title">Meet the Team: 20 Years in the Field with David Ochieng</h2>
-      <p class="post-excerpt">From tracking leopards in the dead of night to founding one of Kenya's most respected luxury safari operators, David's journey is as wild as the land he loves...</p>
+      <div class="post-img">
+        <img src="{% if post.featured_image %}{{ post.featured_image.url }}{% else %}https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1200&q=80{% endif %}" alt="{{ post.title }}">
+        {% if not post.is_published %}
+        <div style="position:absolute; top:20px; right:20px; background:var(--error); color:white; font-size:10px; font-weight:800; padding:4px 12px; border-radius:4px; text-transform:uppercase;">Draft</div>
+        {% endif %}
+      </div>
+      <div class="post-meta">
+        <span>{{ post.created_at|date:"d M Y" }}</span>
+        <span>{{ post.category.name }}</span>
+      </div>
+      <h2 class="post-title">{{ post.title }}</h2>
+      <p class="post-excerpt">{{ post.content|truncatewords:40 }}</p>
       <a href="#" class="btn-read">Read the Story →</a>
     </article>
+    {% empty %}
+    <p>The wild is currently quiet. Check back soon for new stories.</p>
+    {% endfor %}
   </main>
 
   <aside class="blog-sidebar">
     <div class="sidebar-section">
       <h3 class="sidebar-h">Categories</h3>
-      <a href="#" class="cat-link"><span>Wildlife Stories</span><span>24</span></a>
-      <a href="#" class="cat-link"><span>Conservation News</span><span>12</span></a>
-      <a href="#" class="cat-link"><span>Travel Tips</span><span>18</span></a>
-      <a href="#" class="cat-link"><span>Photography</span><span>9</span></a>
+      {% for cat in categories %}
+      <a href="#" class="cat-link"><span>{{ cat.name }}</span><span>{{ cat.posts.count }}</span></a>
+      {% endfor %}
     </div>
 
     <div class="sidebar-section">

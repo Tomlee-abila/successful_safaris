@@ -1,1308 +1,2265 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Account — SUCCESSFUL LUXURY SAFARIS</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --gold: #C9A84C; --gold-light: #E8C96A; --gold-pale: #F5E9C8; --gold-dark: #A07830;
-    --green-dark: #1A3A2A; --green-mid: #2D5A3D; --green-light: #4A8C5C;
-    --charcoal: #1A1A1A; --gray-mid: #555; --gray-light: #AAA;
-    --cream: #FAF7F0; --cream-mid: #F0EAD6; --white: #FFF;
-    --sidebar-w: 280px;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); }
-  a { text-decoration: none; color: inherit; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Account — SUCCESSFUL LUXURY SAFARIS</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8C96A;
+      --gold-pale: #F5E9C8;
+      --gold-dark: #A07830;
+      --green-dark: #1A3A2A;
+      --green-mid: #2D5A3D;
+      --green-light: #4A8C5C;
+      --charcoal: #1A1A1A;
+      --gray-mid: #555;
+      --gray-light: #AAA;
+      --cream: #FAF7F0;
+      --cream-mid: #F0EAD6;
+      --white: #FFF;
+      --sidebar-w: 280px;
+    }
 
-  /* ── TOP BAR ── */
-  .top-bar {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(26,58,42,0.97); backdrop-filter: blur(12px);
-    height: 64px; padding: 0 32px;
-    display: flex; align-items: center; gap: 20px;
-    border-bottom: 1px solid rgba(201,168,76,0.2);
-  }
-  .tb-logo { display: flex; align-items: center; gap: 10px; margin-right: auto; }
-  .tb-logo-mark {
-    width: 34px; height: 34px; background: var(--gold); border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Playfair Display', serif; font-size: 14px; color: var(--green-dark); font-weight: 700;
-  }
-  .tb-logo-name { font-family: 'Playfair Display', serif; color: white; font-size: 17px; font-weight: 600; }
-  .tb-logo-sub { font-size: 9px; color: var(--gold); letter-spacing: 2.5px; text-transform: uppercase; }
-  .tb-pill {
-    font-size: 10px; color: var(--gold-light);
-    background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.25);
-    padding: 4px 12px; border-radius: 20px; letter-spacing: 0.5px;
-  }
-  .tb-right { display: flex; align-items: center; gap: 16px; }
-  .tb-back { font-size: 12px; color: rgba(255,255,255,0.6); cursor: pointer; transition: color 0.2s; display: flex; align-items: center; gap: 5px; }
-  .tb-back:hover { color: var(--gold-light); }
-  .tb-notif {
-    position: relative; width: 36px; height: 36px; border-radius: 50%;
-    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px; cursor: pointer; transition: all 0.2s;
-  }
-  .tb-notif:hover { background: rgba(255,255,255,0.14); }
-  .notif-dot {
-    position: absolute; top: 6px; right: 6px;
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--gold); border: 1.5px solid var(--green-dark);
-  }
-  .tb-avatar {
-    width: 36px; height: 36px; border-radius: 50%;
-    background: url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80') center/cover;
-    border: 2px solid var(--gold); cursor: pointer;
-  }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  /* ── SHELL ── */
-  .dash-shell {
-    display: grid;
-    grid-template-columns: var(--sidebar-w) 1fr;
-    min-height: calc(100vh - 64px);
-  }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+    }
 
-  /* ── SIDEBAR ── */
-  .dash-sidebar {
-    background: var(--green-dark);
-    border-right: 1px solid rgba(201,168,76,0.12);
-    position: sticky; top: 64px; height: calc(100vh - 64px);
-    overflow-y: auto; display: flex; flex-direction: column;
-  }
-  .sidebar-user {
-    padding: 28px 24px 20px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
-  .sidebar-avatar {
-    width: 60px; height: 60px; border-radius: 50%;
-    background: url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80') center/cover;
-    border: 2.5px solid var(--gold); margin-bottom: 12px;
-  }
-  .sidebar-user-name { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; color: white; margin-bottom: 2px; }
-  .sidebar-user-email { font-size: 11px; color: rgba(255,255,255,0.45); margin-bottom: 12px; }
-  .sidebar-tier {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3);
-    padding: 4px 10px; border-radius: 20px;
-    font-size: 10px; color: var(--gold-light); font-weight: 600; letter-spacing: 0.5px;
-  }
-  .sidebar-points-mini { margin-top: 10px; font-size: 12px; color: rgba(255,255,255,0.55); }
-  .sidebar-points-mini strong { color: var(--gold-light); font-size: 14px; }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-  /* Sidebar nav */
-  .sidebar-nav { flex: 1; padding: 12px 0; }
-  .sidebar-nav-section { padding: 16px 24px 6px; font-size: 9px; color: rgba(255,255,255,0.3); letter-spacing: 2.5px; text-transform: uppercase; font-weight: 600; }
-  .sidebar-nav-item {
-    display: flex; align-items: center; gap: 12px;
-    padding: 11px 24px; cursor: pointer; transition: all 0.2s;
-    font-size: 13px; color: rgba(255,255,255,0.65); font-weight: 500;
-    position: relative;
-  }
-  .sidebar-nav-item:hover { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.9); }
-  .sidebar-nav-item.active {
-    background: rgba(201,168,76,0.1);
-    color: var(--gold-light);
-    border-right: 2px solid var(--gold);
-  }
-  .nav-item-icon { font-size: 16px; width: 20px; text-align: center; flex-shrink: 0; }
-  .nav-badge {
-    margin-left: auto; background: var(--gold); color: var(--green-dark);
-    width: 18px; height: 18px; border-radius: 50%;
-    font-size: 9px; font-weight: 700;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .sidebar-footer {
-    padding: 16px 24px 24px; border-top: 1px solid rgba(255,255,255,0.07);
-  }
-  .sidebar-footer-link {
-    display: flex; align-items: center; gap: 10px;
-    font-size: 12px; color: rgba(255,255,255,0.4); cursor: pointer;
-    padding: 7px 0; transition: color 0.2s;
-  }
-  .sidebar-footer-link:hover { color: rgba(255,255,255,0.7); }
-  .sidebar-book-btn {
-    display: block; width: 100%; text-align: center;
-    background: var(--gold); color: var(--green-dark);
-    padding: 11px 16px; border-radius: 4px;
-    font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-    transition: all 0.2s; margin-bottom: 12px;
-  }
-  .sidebar-book-btn:hover { background: var(--gold-light); }
+    /* ── TOP BAR ── */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(26, 58, 42, 0.97);
+      backdrop-filter: blur(12px);
+      height: 64px;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+    }
 
-  /* ── MAIN CONTENT ── */
-  .dash-main { padding: 40px 48px; min-height: calc(100vh - 64px); }
-  .tab-panel { display: none; }
-  .tab-panel.active { display: block; }
+    .tb-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-right: auto;
+    }
 
-  /* ── SHARED COMPONENTS ── */
-  .page-header { margin-bottom: 36px; }
-  .page-overline { font-size: 10px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; font-weight: 600; margin-bottom: 8px; }
-  .page-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: var(--green-dark); line-height: 1.15; margin-bottom: 6px; }
-  .page-subtitle { font-size: 14px; color: var(--gray-mid); }
-  .card { background: white; border: 1px solid var(--cream-mid); border-radius: 12px; }
-  .section-label { font-size: 11px; color: var(--gray-light); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 16px; }
-  .empty-state { text-align: center; padding: 64px 24px; }
-  .empty-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.5; }
-  .empty-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: var(--green-dark); margin-bottom: 8px; }
-  .empty-text { font-size: 14px; color: var(--gray-mid); line-height: 1.65; max-width: 320px; margin: 0 auto 24px; }
+    .tb-logo-mark {
+      width: 34px;
+      height: 34px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      color: var(--green-dark);
+      font-weight: 700;
+    }
 
-  /* ── U01: MY TRIPS ── */
-  .trips-sub-tabs { display: flex; gap: 0; margin-bottom: 28px; border-bottom: 2px solid var(--cream-mid); }
-  .trips-sub-tab { padding: 10px 24px; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--gray-mid); border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.2s; }
-  .trips-sub-tab.active { color: var(--green-dark); border-bottom-color: var(--gold); }
-  .trips-sub-tab:hover:not(.active) { color: var(--green-dark); }
-  .trip-cards { display: flex; flex-direction: column; gap: 20px; }
-  .trip-card {
-    background: white; border: 1px solid var(--cream-mid); border-radius: 12px;
-    display: grid; grid-template-columns: 200px 1fr auto;
-    overflow: hidden; transition: all 0.3s;
-  }
-  .trip-card:hover { border-color: var(--gold); box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-  .trip-img {
-    background-size: cover; background-position: center;
-    position: relative; min-height: 160px;
-  }
-  .trip-status-badge {
-    position: absolute; top: 12px; left: 12px;
-    padding: 4px 10px; border-radius: 2px;
-    font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-  }
-  .status-confirmed { background: rgba(39,174,96,0.9); color: white; }
-  .status-pending { background: rgba(230,126,34,0.9); color: white; }
-  .status-completed { background: rgba(26,58,42,0.8); color: var(--gold); }
-  .trip-body { padding: 20px 24px; }
-  .trip-tag { font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 5px; }
-  .trip-name { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; color: var(--green-dark); margin-bottom: 6px; line-height: 1.25; }
-  .trip-meta { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 14px; }
-  .trip-meta-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--gray-mid); }
-  .trip-meta-icon { font-size: 13px; }
-  .trip-chips { display: flex; flex-wrap: wrap; gap: 6px; }
-  .trip-chip { font-size: 10px; color: var(--gray-mid); background: var(--cream); border: 1px solid var(--cream-mid); padding: 3px 10px; border-radius: 20px; }
-  .trip-actions-col { padding: 20px; display: flex; flex-direction: column; gap: 8px; align-items: flex-end; justify-content: flex-start; border-left: 1px solid var(--cream-mid); min-width: 180px; }
-  .trip-countdown {
-    text-align: right; margin-bottom: 8px;
-  }
-  .trip-countdown-num { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 700; color: var(--green-dark); line-height: 1; }
-  .trip-countdown-label { font-size: 10px; color: var(--gray-light); letter-spacing: 1.5px; text-transform: uppercase; }
-  .trip-action-btn {
-    display: block; width: 100%; text-align: center;
-    padding: 9px 14px; border-radius: 4px;
-    font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
-    cursor: pointer; transition: all 0.2s;
-  }
-  .trip-btn-primary { background: var(--green-dark); color: white; }
-  .trip-btn-primary:hover { background: var(--green-mid); }
-  .trip-btn-outline { border: 1.5px solid var(--cream-mid); color: var(--gray-mid); background: white; }
-  .trip-btn-outline:hover { border-color: var(--green-dark); color: var(--green-dark); }
-  .trip-past-rating { display: flex; gap: 2px; font-size: 14px; color: var(--gold); margin-top: 8px; }
+    .tb-logo-name {
+      font-family: 'Playfair Display', serif;
+      color: white;
+      font-size: 17px;
+      font-weight: 600;
+    }
 
-  /* ── U02: WISHLIST ── */
-  .wishlist-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
-  .wishlist-count { font-size: 13px; color: var(--gray-mid); }
-  .wishlist-count strong { color: var(--green-dark); font-size: 15px; }
-  .wl-actions { display: flex; gap: 10px; }
-  .wl-btn { padding: 9px 18px; border-radius: 4px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
-  .wl-btn-outline { border: 1.5px solid var(--cream-mid); color: var(--gray-mid); background: white; }
-  .wl-btn-outline:hover { border-color: var(--green-dark); color: var(--green-dark); }
-  .wl-btn-solid { background: var(--gold); color: var(--green-dark); border: none; }
-  .wl-btn-solid:hover { background: var(--gold-light); }
-  .wishlist-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .wl-card { background: white; border: 1px solid var(--cream-mid); border-radius: 12px; overflow: hidden; transition: all 0.3s; }
-  .wl-card:hover { border-color: var(--gold); box-shadow: 0 6px 24px rgba(0,0,0,0.08); }
-  .wl-img { height: 180px; background-size: cover; background-position: center; position: relative; }
-  .wl-remove { position: absolute; top: 10px; right: 10px; width: 28px; height: 28px; border-radius: 50%; background: rgba(0,0,0,0.4); border: none; cursor: pointer; font-size: 12px; color: white; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
-  .wl-remove:hover { background: rgba(192,57,43,0.8); }
-  .wl-duration-badge { position: absolute; bottom: 10px; left: 10px; background: var(--gold); color: var(--green-dark); padding: 3px 10px; border-radius: 2px; font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
-  .wl-body { padding: 16px 18px; }
-  .wl-tag { font-size: 9px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
-  .wl-name { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 600; color: var(--green-dark); margin-bottom: 8px; line-height: 1.25; }
-  .wl-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1px solid var(--cream-mid); margin-top: 10px; }
-  .wl-price { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 700; color: var(--green-dark); }
-  .wl-price-pp { font-size: 10px; color: var(--gray-light); }
-  .wl-view { font-size: 11px; font-weight: 700; letter-spacing: 0.5px; color: var(--green-dark); border-bottom: 1px solid var(--green-dark); cursor: pointer; transition: all 0.2s; }
-  .wl-view:hover { color: var(--gold-dark); border-color: var(--gold-dark); }
+    .tb-logo-sub {
+      font-size: 9px;
+      color: var(--gold);
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
 
-  /* ── U03: DOCUMENTS ── */
-  .docs-trip-group { margin-bottom: 36px; }
-  .docs-trip-header { display: flex; align-items: center; gap: 14px; padding: 14px 20px; background: var(--green-dark); border-radius: 8px 8px 0 0; }
-  .docs-trip-flag { font-size: 20px; }
-  .docs-trip-name { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 600; color: white; }
-  .docs-trip-dates { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 1px; }
-  .docs-list { background: white; border: 1px solid var(--cream-mid); border-top: none; border-radius: 0 0 8px 8px; overflow: hidden; }
-  .doc-row { display: flex; align-items: center; gap: 16px; padding: 14px 20px; border-bottom: 1px solid var(--cream-mid); transition: background 0.2s; }
-  .doc-row:last-child { border-bottom: none; }
-  .doc-row:hover { background: var(--cream); }
-  .doc-icon { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-  .doc-icon-pdf { background: rgba(192,57,43,0.1); }
-  .doc-icon-img { background: rgba(52,152,219,0.1); }
-  .doc-icon-txt { background: rgba(39,174,96,0.1); }
-  .doc-info { flex: 1; }
-  .doc-name { font-size: 14px; font-weight: 600; color: var(--green-dark); margin-bottom: 2px; }
-  .doc-meta { font-size: 11px; color: var(--gray-light); }
-  .doc-status { font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-right: 8px; }
-  .doc-status-ready { background: rgba(39,174,96,0.1); color: var(--green-light); }
-  .doc-status-pending { background: rgba(230,126,34,0.1); color: #E67E22; }
-  .doc-actions { display: flex; gap: 6px; }
-  .doc-btn { width: 32px; height: 32px; border-radius: 6px; border: 1.5px solid var(--cream-mid); background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; transition: all 0.2s; }
-  .doc-btn:hover { border-color: var(--green-dark); background: var(--cream); }
+    .tb-pill {
+      font-size: 10px;
+      color: var(--gold-light);
+      background: rgba(201, 168, 76, 0.12);
+      border: 1px solid rgba(201, 168, 76, 0.25);
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
 
-  /* ── U04: PROFILE ── */
-  .profile-grid { display: grid; grid-template-columns: 1fr 320px; gap: 32px; }
-  .profile-section { margin-bottom: 32px; }
-  .profile-section-title {
-    font-size: 14px; font-weight: 700; color: var(--green-dark);
-    margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--cream-mid);
-    display: flex; align-items: center; gap: 8px;
-  }
-  .profile-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-  .profile-field { margin-bottom: 16px; }
-  .profile-field label { display: block; font-size: 11px; font-weight: 700; color: var(--green-dark); letter-spacing: 0.5px; margin-bottom: 7px; }
-  .profile-field input, .profile-field select, .profile-field textarea {
-    width: 100%; padding: 11px 14px; font-size: 13px; font-family: 'Inter', sans-serif;
-    border: 1.5px solid var(--cream-mid); border-radius: 6px; background: var(--cream);
-    color: var(--charcoal); transition: all 0.2s; outline: none; appearance: none; resize: vertical;
-  }
-  .profile-field input:focus, .profile-field select:focus, .profile-field textarea:focus { border-color: var(--gold); background: white; box-shadow: 0 0 0 3px rgba(201,168,76,0.1); }
-  .pref-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .pref-chip {
-    padding: 7px 16px; border-radius: 24px; font-size: 12px; font-weight: 600;
-    cursor: pointer; transition: all 0.2s;
-    border: 1.5px solid var(--cream-mid); color: var(--gray-mid); background: white;
-  }
-  .pref-chip:hover { border-color: var(--gold); color: var(--green-dark); }
-  .pref-chip.active { background: var(--green-dark); color: white; border-color: var(--green-dark); }
-  .save-btn { background: var(--green-dark); color: white; padding: 12px 32px; border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; border: none; cursor: pointer; transition: all 0.25s; margin-top: 8px; }
-  .save-btn:hover { background: var(--green-mid); transform: translateY(-1px); }
-  .profile-sidebar-card { background: white; border: 1px solid var(--cream-mid); border-radius: 12px; overflow: hidden; }
-  .psb-header { background: var(--green-dark); padding: 24px; text-align: center; }
-  .psb-avatar { width: 72px; height: 72px; border-radius: 50%; background: url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80') center/cover; border: 3px solid var(--gold); margin: 0 auto 12px; }
-  .psb-name { font-family: 'Playfair Display', serif; font-size: 18px; color: white; font-weight: 600; margin-bottom: 4px; }
-  .psb-email { font-size: 11px; color: rgba(255,255,255,0.5); }
-  .psb-body { padding: 20px; }
-  .psb-stat-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--cream-mid); font-size: 13px; }
-  .psb-stat-row:last-child { border-bottom: none; }
-  .psb-stat-key { color: var(--gray-mid); }
-  .psb-stat-val { font-weight: 600; color: var(--green-dark); }
-  .change-photo-btn { display: block; width: 100%; text-align: center; margin-top: 12px; padding: 9px; border: 1.5px solid var(--cream-mid); border-radius: 4px; font-size: 11px; font-weight: 600; color: var(--gray-mid); cursor: pointer; transition: all 0.2s; }
-  .change-photo-btn:hover { border-color: var(--green-dark); color: var(--green-dark); }
-  .danger-zone { background: rgba(192,57,43,0.05); border: 1px solid rgba(192,57,43,0.2); border-radius: 8px; padding: 20px; }
-  .danger-zone-title { font-size: 13px; font-weight: 700; color: #C0392B; margin-bottom: 8px; }
-  .danger-zone-text { font-size: 12px; color: var(--gray-mid); margin-bottom: 14px; line-height: 1.6; }
-  .danger-btn { background: transparent; border: 1.5px solid rgba(192,57,43,0.4); color: #C0392B; padding: 9px 20px; border-radius: 4px; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
-  .danger-btn:hover { background: rgba(192,57,43,0.08); border-color: #C0392B; }
+    .tb-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
 
-  /* ── U05: NOTIFICATIONS ── */
-  .notif-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 10px; }
-  .notif-mark-all { font-size: 12px; color: var(--green-dark); font-weight: 600; cursor: pointer; border-bottom: 1px solid var(--green-dark); transition: color 0.2s; }
-  .notif-mark-all:hover { color: var(--gold-dark); border-color: var(--gold-dark); }
-  .notif-filter-tabs { display: flex; gap: 6px; }
-  .notif-filter { padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 600; cursor: pointer; border: 1.5px solid var(--cream-mid); color: var(--gray-mid); background: white; transition: all 0.2s; }
-  .notif-filter.active { background: var(--green-dark); color: white; border-color: var(--green-dark); }
-  .notif-feed { display: flex; flex-direction: column; gap: 0; background: white; border: 1px solid var(--cream-mid); border-radius: 12px; overflow: hidden; }
-  .notif-item {
-    display: flex; align-items: flex-start; gap: 16px;
-    padding: 18px 20px; border-bottom: 1px solid var(--cream-mid);
-    transition: background 0.2s; position: relative;
-  }
-  .notif-item:last-child { border-bottom: none; }
-  .notif-item:hover { background: var(--cream); }
-  .notif-item.unread { background: rgba(201,168,76,0.04); }
-  .notif-unread-dot { position: absolute; left: 10px; top: 22px; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
-  .notif-icon-wrap { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-  .ni-booking { background: rgba(39,174,96,0.1); }
-  .ni-doc { background: rgba(52,152,219,0.1); }
-  .ni-promo { background: rgba(201,168,76,0.15); }
-  .ni-alert { background: rgba(192,57,43,0.1); }
-  .ni-system { background: rgba(100,100,100,0.1); }
-  .notif-body { flex: 1; }
-  .notif-title { font-size: 14px; font-weight: 600; color: var(--green-dark); margin-bottom: 3px; }
-  .notif-text { font-size: 12px; color: var(--gray-mid); line-height: 1.55; margin-bottom: 5px; }
-  .notif-time { font-size: 10px; color: var(--gray-light); letter-spacing: 0.5px; }
-  .notif-action { font-size: 11px; font-weight: 600; color: var(--green-dark); border-bottom: 1px solid var(--green-dark); cursor: pointer; margin-left: 12px; white-space: nowrap; transition: color 0.2s; }
-  .notif-action:hover { color: var(--gold-dark); border-color: var(--gold-dark); }
+    .tb-back {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
 
-  /* ── U06: LOYALTY / PAWS POINTS ── */
-  .loyalty-hero {
-    background: linear-gradient(135deg, var(--green-dark) 0%, #0D2318 100%);
-    border-radius: 16px; padding: 36px 40px; margin-bottom: 36px;
-    display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center;
-    position: relative; overflow: hidden;
-  }
-  .loyalty-hero::before {
-    content: ''; position: absolute; inset: 0;
-    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 600 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3CradialGradient id='a' cx='80%25' cy='50%25'%3E%3Cstop offset='0' stop-color='%23C9A84C' stop-opacity='.1'/%3E%3Cstop offset='1' stop-color='transparent'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='600' height='300'/%3E%3C/svg%3E") center/cover;
-  }
-  .loyalty-hero-content { position: relative; z-index: 1; }
-  .loyalty-tier-badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(201,168,76,0.2); border: 1px solid rgba(201,168,76,0.4);
-    padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;
-    font-size: 11px; color: var(--gold-light); font-weight: 600; letter-spacing: 1px;
-  }
-  .loyalty-balance-label { font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
-  .loyalty-balance { font-family: 'Playfair Display', serif; font-size: 64px; font-weight: 700; color: var(--gold-light); line-height: 1; margin-bottom: 4px; }
-  .loyalty-balance-sub { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
-  .loyalty-progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
-  .loyalty-progress-track { flex: 1; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
-  .loyalty-progress-fill { height: 100%; background: linear-gradient(to right, var(--gold), var(--gold-light)); border-radius: 3px; width: 62%; }
-  .loyalty-progress-label { font-size: 11px; color: rgba(255,255,255,0.5); }
-  .loyalty-next-tier { font-size: 12px; color: rgba(255,255,255,0.6); }
-  .loyalty-next-tier strong { color: var(--gold-light); }
-  .loyalty-hero-right { position: relative; z-index: 1; text-align: center; }
-  .loyalty-card {
-    width: 180px; background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(201,168,76,0.3); border-radius: 12px; padding: 20px 16px;
-  }
-  .loyalty-card-icon { font-size: 36px; margin-bottom: 10px; }
-  .loyalty-card-title { font-family: 'Playfair Display', serif; font-size: 16px; color: white; font-weight: 600; margin-bottom: 4px; }
-  .loyalty-card-sub { font-size: 10px; color: var(--gold-light); letter-spacing: 1px; }
-  .loyalty-stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 36px; }
-  .loyalty-stat-card { background: white; border: 1px solid var(--cream-mid); border-radius: 10px; padding: 20px; text-align: center; }
-  .ls-num { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--green-dark); line-height: 1; margin-bottom: 4px; }
-  .ls-label { font-size: 10px; color: var(--gray-light); letter-spacing: 1.5px; text-transform: uppercase; }
-  .loyalty-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 36px; }
-  .loyalty-history { background: white; border: 1px solid var(--cream-mid); border-radius: 12px; overflow: hidden; }
-  .loyalty-history-header { padding: 16px 20px; border-bottom: 1px solid var(--cream-mid); font-size: 13px; font-weight: 700; color: var(--green-dark); }
-  .points-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid var(--cream-mid); font-size: 13px; }
-  .points-row:last-child { border-bottom: none; }
-  .pr-desc { color: var(--charcoal); }
-  .pr-date { font-size: 11px; color: var(--gray-light); margin-top: 2px; }
-  .pr-points { font-weight: 700; }
-  .pr-points.earn { color: var(--green-light); }
-  .pr-points.spend { color: #C0392B; }
-  .rewards-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
-  .reward-card { background: white; border: 1px solid var(--cream-mid); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; gap: 14px; transition: all 0.2s; }
-  .reward-card:hover { border-color: var(--gold); }
-  .reward-icon { font-size: 24px; width: 44px; text-align: center; flex-shrink: 0; }
-  .reward-info { flex: 1; }
-  .reward-name { font-size: 13px; font-weight: 700; color: var(--green-dark); margin-bottom: 2px; }
-  .reward-desc { font-size: 11px; color: var(--gray-mid); }
-  .reward-cost { font-size: 13px; font-weight: 700; color: var(--gold-dark); white-space: nowrap; }
-  .reward-btn { padding: 7px 14px; border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; border: 1.5px solid var(--green-dark); color: var(--green-dark); background: white; transition: all 0.2s; white-space: nowrap; }
-  .reward-btn:hover { background: var(--green-dark); color: white; }
-  .reward-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .tb-back:hover {
+      color: var(--gold-light);
+    }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 1100px) {
-    :root { --sidebar-w: 240px; }
-    .dash-main { padding: 32px 28px; }
-    .wishlist-grid { grid-template-columns: 1fr 1fr; }
-    .loyalty-stats-row { grid-template-columns: repeat(2, 1fr); }
-    .loyalty-two-col { grid-template-columns: 1fr; }
-    .profile-grid { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 800px) {
-    .dash-shell { grid-template-columns: 1fr; }
-    .dash-sidebar { position: static; height: auto; flex-direction: row; overflow-x: auto; }
-    .sidebar-user { display: none; }
-    .sidebar-nav { display: flex; flex-direction: row; padding: 0; }
-    .sidebar-nav-section { display: none; }
-    .sidebar-nav-item { flex-direction: column; gap: 4px; padding: 12px 14px; font-size: 10px; white-space: nowrap; }
-    .sidebar-nav-item.active { border-right: none; border-bottom: 2px solid var(--gold); }
-    .sidebar-footer { display: none; }
-    .trip-card { grid-template-columns: 1fr; }
-    .trip-img { height: 120px; }
-    .trip-actions-col { border-left: none; border-top: 1px solid var(--cream-mid); flex-direction: row; align-items: center; min-width: auto; }
-    .wishlist-grid { grid-template-columns: 1fr; }
-    .loyalty-hero { grid-template-columns: 1fr; }
-    .loyalty-hero-right { display: none; }
-    .loyalty-stats-row { grid-template-columns: repeat(2, 1fr); }
-    .profile-field-row { grid-template-columns: 1fr; }
-  }
-</style>
+    .tb-notif {
+      position: relative;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tb-notif:hover {
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    .notif-dot {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 1.5px solid var(--green-dark);
+    }
+
+    .tb-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80') center/cover;
+      border: 2px solid var(--gold);
+      cursor: pointer;
+    }
+
+    /* ── SHELL ── */
+    .dash-shell {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: calc(100vh - 64px);
+    }
+
+    /* ── SIDEBAR ── */
+    .dash-sidebar {
+      background: var(--green-dark);
+      border-right: 1px solid rgba(201, 168, 76, 0.12);
+      position: sticky;
+      top: 64px;
+      height: calc(100vh - 64px);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-user {
+      padding: 28px 24px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .sidebar-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80') center/cover;
+      border: 2.5px solid var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .sidebar-user-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 2px;
+    }
+
+    .sidebar-user-email {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.45);
+      margin-bottom: 12px;
+    }
+
+    .sidebar-tier {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(201, 168, 76, 0.15);
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 10px;
+      color: var(--gold-light);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .sidebar-points-mini {
+      margin-top: 10px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .sidebar-points-mini strong {
+      color: var(--gold-light);
+      font-size: 14px;
+    }
+
+    /* Sidebar nav */
+    .sidebar-nav {
+      flex: 1;
+      padding: 12px 0;
+    }
+
+    .sidebar-nav-section {
+      padding: 16px 24px 6px;
+      font-size: 9px;
+      color: rgba(255, 255, 255, 0.3);
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .sidebar-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 24px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.65);
+      font-weight: 500;
+      position: relative;
+    }
+
+    .sidebar-nav-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .sidebar-nav-item.active {
+      background: rgba(201, 168, 76, 0.1);
+      color: var(--gold-light);
+      border-right: 2px solid var(--gold);
+    }
+
+    .nav-item-icon {
+      font-size: 16px;
+      width: 20px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .nav-badge {
+      margin-left: auto;
+      background: var(--gold);
+      color: var(--green-dark);
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      font-size: 9px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sidebar-footer {
+      padding: 16px 24px 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .sidebar-footer-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      padding: 7px 0;
+      transition: color 0.2s;
+    }
+
+    .sidebar-footer-link:hover {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .sidebar-book-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: var(--gold);
+      color: var(--green-dark);
+      padding: 11px 16px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: all 0.2s;
+      margin-bottom: 12px;
+    }
+
+    .sidebar-book-btn:hover {
+      background: var(--gold-light);
+    }
+
+    /* ── MAIN CONTENT ── */
+    .dash-main {
+      padding: 40px 48px;
+      min-height: calc(100vh - 64px);
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    /* ── SHARED COMPONENTS ── */
+    .page-header {
+      margin-bottom: 36px;
+    }
+
+    .page-overline {
+      font-size: 10px;
+      color: var(--gold);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--green-dark);
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+
+    .page-subtitle {
+      font-size: 14px;
+      color: var(--gray-mid);
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--cream-mid);
+      border-radius: 12px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      color: var(--gray-light);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 64px 24px;
+    }
+
+    .empty-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    .empty-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--green-dark);
+      margin-bottom: 8px;
+    }
+
+    .empty-text {
+      font-size: 14px;
+      color: var(--gray-mid);
+      line-height: 1.65;
+      max-width: 320px;
+      margin: 0 auto 24px;
+    }
+
+    /* ── U01: MY TRIPS ── */
+    .trips-sub-tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 28px;
+      border-bottom: 2px solid var(--cream-mid);
+    }
+
+    .trips-sub-tab {
+      padding: 10px 24px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--gray-mid);
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.2s;
+    }
+
+    .trips-sub-tab.active {
+      color: var(--green-dark);
+      border-bottom-color: var(--gold);
+    }
+
+    .trips-sub-tab:hover:not(.active) {
+      color: var(--green-dark);
+    }
+
+    .trip-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .trip-card {
+      background: white;
+      border: 1px solid var(--cream-mid);
+      border-radius: 12px;
+      display: grid;
+      grid-template-columns: 200px 1fr auto;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .trip-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .trip-img {
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      min-height: 160px;
+    }
+
+    .trip-status-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 4px 10px;
+      border-radius: 2px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .status-confirmed {
+      background: rgba(39, 174, 96, 0.9);
+      color: white;
+    }
+
+    .status-pending {
+      background: rgba(230, 126, 34, 0.9);
+      color: white;
+    }
+
+    .status-completed {
+      background: rgba(26, 58, 42, 0.8);
+      color: var(--gold);
+    }
+
+    .trip-body {
+      padding: 20px 24px;
+    }
+
+    .trip-tag {
+      font-size: 10px;
+      color: var(--gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .trip-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--green-dark);
+      margin-bottom: 6px;
+      line-height: 1.25;
+    }
+
+    .trip-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .trip-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--gray-mid);
+    }
+
+    .trip-meta-icon {
+      font-size: 13px;
+    }
+
+    .trip-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .trip-chip {
+      font-size: 10px;
+      color: var(--gray-mid);
+      background: var(--cream);
+      border: 1px solid var(--cream-mid);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .trip-actions-col {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-end;
+      justify-content: flex-start;
+      border-left: 1px solid var(--cream-mid);
+      min-width: 180px;
+    }
+
+    .trip-countdown {
+      text-align: right;
+      margin-bottom: 8px;
+    }
+
+    .trip-countdown-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--green-dark);
+      line-height: 1;
+    }
+
+    .trip-countdown-label {
+      font-size: 10px;
+      color: var(--gray-light);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .trip-action-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 9px 14px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .trip-btn-primary {
+      background: var(--green-dark);
+      color: white;
+    }
+
+    .trip-btn-primary:hover {
+      background: var(--green-mid);
+    }
+
+    .trip-btn-outline {
+      border: 1.5px solid var(--cream-mid);
+      color: var(--gray-mid);
+      background: white;
+    }
+
+    .trip-btn-outline:hover {
+      border-color: var(--green-dark);
+      color: var(--green-dark);
+    }
+
+    .trip-past-rating {
+      display: flex;
+      gap: 2px;
+      font-size: 14px;
+      color: var(--gold);
+      margin-top: 8px;
+    }
+
+    /* ── U02: WISHLIST ── */
+    .wishlist-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .wishlist-count {
+      font-size: 13px;
+      color: var(--gray-mid);
+    }
+
+    .wishlist-count strong {
+      color: var(--green-dark);
+      font-size: 15px;
+    }
+
+    .wl-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .wl-btn {
+      padding: 9px 18px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .wl-btn-outline {
+      border: 1.5px solid var(--cream-mid);
+      color: var(--gray-mid);
+      background: white;
+    }
+
+    .wl-btn-outline:hover {
+      border-color: var(--green-dark);
+      color: var(--green-dark);
+    }
+
+    .wl-btn-solid {
+      background: var(--gold);
+      color: var(--green-dark);
+      border: none;
+    }
+
+    .wl-btn-solid:hover {
+      background: var(--gold-light);
+    }
+
+    .wishlist-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .wl-card {
+      background: white;
+      border: 1px solid var(--cream-mid);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .wl-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .wl-img {
+      height: 180px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .wl-remove {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.4);
+      border: none;
+      cursor: pointer;
+      font-size: 12px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .wl-remove:hover {
+      background: rgba(192, 57, 43, 0.8);
+    }
+
+    .wl-duration-badge {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: var(--gold);
+      color: var(--green-dark);
+      padding: 3px 10px;
+      border-radius: 2px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .wl-body {
+      padding: 16px 18px;
+    }
+
+    .wl-tag {
+      font-size: 9px;
+      color: var(--gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .wl-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--green-dark);
+      margin-bottom: 8px;
+      line-height: 1.25;
+    }
+
+    .wl-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 12px;
+      border-top: 1px solid var(--cream-mid);
+      margin-top: 10px;
+    }
+
+    .wl-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--green-dark);
+    }
+
+    .wl-price-pp {
+      font-size: 10px;
+      color: var(--gray-light);
+    }
+
+    .wl-view {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--green-dark);
+      border-bottom: 1px solid var(--green-dark);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .wl-view:hover {
+      color: var(--gold-dark);
+      border-color: var(--gold-dark);
+    }
+
+    /* ── U03: DOCUMENTS ── */
+    .docs-trip-group {
+      margin-bottom: 36px;
+    }
+
+    .docs-trip-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 20px;
+      background: var(--green-dark);
+      border-radius: 8px 8px 0 0;
+    }
+
+    .docs-trip-flag {
+      font-size: 20px;
+    }
+
+    .docs-trip-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: white;
+    }
+
+    .docs-trip-dates {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 1px;
+    }
+
+    .docs-list {
+      background: white;
+      border: 1px solid var(--cream-mid);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
+    }
+
+    .doc-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--cream-mid);
+      transition: background 0.2s;
+    }
+
+    .doc-row:last-child {
+      border-bottom: none;
+    }
+
+    .doc-row:hover {
+      background: var(--cream);
+    }
+
+    .doc-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .doc-icon-pdf {
+      background: rgba(192, 57, 43, 0.1);
+    }
+
+    .doc-icon-img {
+      background: rgba(52, 152, 219, 0.1);
+    }
+
+    .doc-icon-txt {
+      background: rgba(39, 174, 96, 0.1);
+    }
+
+    .doc-info {
+      flex: 1;
+    }
+
+    .doc-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--green-dark);
+      margin-bottom: 2px;
+    }
+
+    .doc-meta {
+      font-size: 11px;
+      color: var(--gray-light);
+    }
+
+    .doc-status {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-right: 8px;
+    }
+
+    .doc-status-ready {
+      background: rgba(39, 174, 96, 0.1);
+      color: var(--green-light);
+    }
+
+    .doc-status-pending {
+      background: rgba(230, 126, 34, 0.1);
+      color: #E67E22;
+    }
+
+    .doc-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .doc-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1.5px solid var(--cream-mid);
+      background: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .doc-btn:hover {
+      border-color: var(--green-dark);
+      background: var(--cream);
+    }
+
+    /* ── U04: PROFILE ── */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 32px;
+    }
+
+    .profile-section {
+      margin-bottom: 32px;
+    }
+
+    .profile-section-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--cream-mid);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .profile-field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .profile-field {
+      margin-bottom: 16px;
+    }
+
+    .profile-field label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--green-dark);
+      letter-spacing: 0.5px;
+      margin-bottom: 7px;
+    }
+
+    .profile-field input,
+    .profile-field select,
+    .profile-field textarea {
+      width: 100%;
+      padding: 11px 14px;
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      border: 1.5px solid var(--cream-mid);
+      border-radius: 6px;
+      background: var(--cream);
+      color: var(--charcoal);
+      transition: all 0.2s;
+      outline: none;
+      appearance: none;
+      resize: vertical;
+    }
+
+    .profile-field input:focus,
+    .profile-field select:focus,
+    .profile-field textarea:focus {
+      border-color: var(--gold);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1);
+    }
+
+    .pref-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pref-chip {
+      padding: 7px 16px;
+      border-radius: 24px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1.5px solid var(--cream-mid);
+      color: var(--gray-mid);
+      background: white;
+    }
+
+    .pref-chip:hover {
+      border-color: var(--gold);
+      color: var(--green-dark);
+    }
+
+    .pref-chip.active {
+      background: var(--green-dark);
+      color: white;
+      border-color: var(--green-dark);
+    }
+
+    .save-btn {
+      background: var(--green-dark);
+      color: white;
+      padding: 12px 32px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s;
+      margin-top: 8px;
+    }
+
+    .save-btn:hover {
+      background: var(--green-mid);
+      transform: translateY(-1px);
+    }
+
+    .profile-sidebar-card {
+      background: white;
+      border: 1px solid var(--cream-mid);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .psb-header {
+      background: var(--green-dark);
+      padding: 24px;
+      text-align: center;
+    }
+
+    .psb-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80') center/cover;
+      border: 3px solid var(--gold);
+      margin: 0 auto 12px;
+    }
+
+    .psb-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: white;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .psb-email {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .psb-body {
+      padding: 20px;
+    }
+
+    .psb-stat-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--cream-mid);
+      font-size: 13px;
+    }
+
+    .psb-stat-row:last-child {
+      border-bottom: none;
+    }
+
+    .psb-stat-key {
+      color: var(--gray-mid);
+    }
+
+    .psb-stat-val {
+      font-weight: 600;
+      color: var(--green-dark);
+    }
+
+    .change-photo-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin-top: 12px;
+      padding: 9px;
+      border: 1.5px solid var(--cream-mid);
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gray-mid);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .change-photo-btn:hover {
+      border-color: var(--green-dark);
+      color: var(--green-dark);
+    }
+
+    .danger-zone {
+      background: rgba(192, 57, 43, 0.05);
+      border: 1px solid rgba(192, 57, 43, 0.2);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .danger-zone-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #C0392B;
+      margin-bottom: 8px;
+    }
+
+    .danger-zone-text {
+      font-size: 12px;
+      color: var(--gray-mid);
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .danger-btn {
+      background: transparent;
+      border: 1.5px solid rgba(192, 57, 43, 0.4);
+      color: #C0392B;
+      padding: 9px 20px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .danger-btn:hover {
+      background: rgba(192, 57, 43, 0.08);
+      border-color: #C0392B;
+    }
+
+    /* ── U05: NOTIFICATIONS ── */
+    .notif-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .notif-mark-all {
+      font-size: 12px;
+      color: var(--green-dark);
+      font-weight: 600;
+      cursor: pointer;
+      border-bottom: 1px solid var(--green-dark);
+      transition: color 0.2s;
+    }
+
+    .notif-mark-all:hover {
+      color: var(--gold-dark);
+      border-color: var(--gold-dark);
+    }
+
+    .notif-filter-tabs {
+      display: flex;
+      gap: 6px;
+    }
+
+    .notif-filter {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1.5px solid var(--cream-mid);
+      color: var(--gray-mid);
+      background: white;
+      transition: all 0.2s;
+    }
+
+    .notif-filter.active {
+      background: var(--green-dark);
+      color: white;
+      border-color: var(--green-dark);
+    }
+
+    .notif-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      background: white;
+      border: 1px solid var(--cream-mid);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .notif-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--cream-mid);
+      transition: background 0.2s;
+      position: relative;
+    }
+
+    .notif-item:last-child {
+      border-bottom: none;
+    }
+
+    .notif-item:hover {
+      background: var(--cream);
+    }
+
+    .notif-item.unread {
+      background: rgba(201, 168, 76, 0.04);
+    }
+
+    .notif-unread-dot {
+      position: absolute;
+      left: 10px;
+      top: 22px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .notif-icon-wrap {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .ni-booking {
+      background: rgba(39, 174, 96, 0.1);
+    }
+
+    .ni-doc {
+      background: rgba(52, 152, 219, 0.1);
+    }
+
+    .ni-promo {
+      background: rgba(201, 168, 76, 0.15);
+    }
+
+    .ni-alert {
+      background: rgba(192, 57, 43, 0.1);
+    }
+
+    .ni-system {
+      background: rgba(100, 100, 100, 0.1);
+    }
+
+    .notif-body {
+      flex: 1;
+    }
+
+    .notif-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--green-dark);
+      margin-bottom: 3px;
+    }
+
+    .notif-text {
+      font-size: 12px;
+      color: var(--gray-mid);
+      line-height: 1.55;
+      margin-bottom: 5px;
+    }
+
+    .notif-time {
+      font-size: 10px;
+      color: var(--gray-light);
+      letter-spacing: 0.5px;
+    }
+
+    .notif-action {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--green-dark);
+      border-bottom: 1px solid var(--green-dark);
+      cursor: pointer;
+      margin-left: 12px;
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+
+    .notif-action:hover {
+      color: var(--gold-dark);
+      border-color: var(--gold-dark);
+    }
+
+    /* ── U06: LOYALTY / PAWS POINTS ── */
+    .loyalty-hero {
+      background: linear-gradient(135deg, var(--green-dark) 0%, #0D2318 100%);
+      border-radius: 16px;
+      padding: 36px 40px;
+      margin-bottom: 36px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 32px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .loyalty-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 600 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3CradialGradient id='a' cx='80%25' cy='50%25'%3E%3Cstop offset='0' stop-color='%23C9A84C' stop-opacity='.1'/%3E%3Cstop offset='1' stop-color='transparent'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='600' height='300'/%3E%3C/svg%3E") center/cover;
+    }
+
+    .loyalty-hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .loyalty-tier-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(201, 168, 76, 0.2);
+      border: 1px solid rgba(201, 168, 76, 0.4);
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+      font-size: 11px;
+      color: var(--gold-light);
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .loyalty-balance-label {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.5);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .loyalty-balance {
+      font-family: 'Playfair Display', serif;
+      font-size: 64px;
+      font-weight: 700;
+      color: var(--gold-light);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .loyalty-balance-sub {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 20px;
+    }
+
+    .loyalty-progress-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .loyalty-progress-track {
+      flex: 1;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .loyalty-progress-fill {
+      height: 100%;
+      background: linear-gradient(to right, var(--gold), var(--gold-light));
+      border-radius: 3px;
+      width: 62%;
+    }
+
+    .loyalty-progress-label {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .loyalty-next-tier {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .loyalty-next-tier strong {
+      color: var(--gold-light);
+    }
+
+    .loyalty-hero-right {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .loyalty-card {
+      width: 180px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      border-radius: 12px;
+      padding: 20px 16px;
+    }
+
+    .loyalty-card-icon {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .loyalty-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      color: white;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .loyalty-card-sub {
+      font-size: 10px;
+      color: var(--gold-light);
+      letter-spacing: 1px;
+    }
+
+    .loyalty-stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .loyalty-stat-card {
+      background: white;
+      border: 1px solid var(--cream-mid);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .ls-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--green-dark);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .ls-label {
+      font-size: 10px;
+      color: var(--gray-light);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .loyalty-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-bottom: 36px;
+    }
+
+    .loyalty-history {
+      background: white;
+      border: 1px solid var(--cream-mid);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .loyalty-history-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--cream-mid);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--green-dark);
+    }
+
+    .points-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--cream-mid);
+      font-size: 13px;
+    }
+
+    .points-row:last-child {
+      border-bottom: none;
+    }
+
+    .pr-desc {
+      color: var(--charcoal);
+    }
+
+    .pr-date {
+      font-size: 11px;
+      color: var(--gray-light);
+      margin-top: 2px;
+    }
+
+    .pr-points {
+      font-weight: 700;
+    }
+
+    .pr-points.earn {
+      color: var(--green-light);
+    }
+
+    .pr-points.spend {
+      color: #C0392B;
+    }
+
+    .rewards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .reward-card {
+      background: white;
+      border: 1px solid var(--cream-mid);
+      border-radius: 10px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: all 0.2s;
+    }
+
+    .reward-card:hover {
+      border-color: var(--gold);
+    }
+
+    .reward-icon {
+      font-size: 24px;
+      width: 44px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .reward-info {
+      flex: 1;
+    }
+
+    .reward-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin-bottom: 2px;
+    }
+
+    .reward-desc {
+      font-size: 11px;
+      color: var(--gray-mid);
+    }
+
+    .reward-cost {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gold-dark);
+      white-space: nowrap;
+    }
+
+    .reward-btn {
+      padding: 7px 14px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 1.5px solid var(--green-dark);
+      color: var(--green-dark);
+      background: white;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .reward-btn:hover {
+      background: var(--green-dark);
+      color: white;
+    }
+
+    .reward-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      :root {
+        --sidebar-w: 240px;
+      }
+
+      .dash-main {
+        padding: 32px 28px;
+      }
+
+      .wishlist-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .loyalty-stats-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .loyalty-two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .dash-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .dash-sidebar {
+        position: static;
+        height: auto;
+        flex-direction: row;
+        overflow-x: auto;
+      }
+
+      .sidebar-user {
+        display: none;
+      }
+
+      .sidebar-nav {
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+      }
+
+      .sidebar-nav-section {
+        display: none;
+      }
+
+      .sidebar-nav-item {
+        flex-direction: column;
+        gap: 4px;
+        padding: 12px 14px;
+        font-size: 10px;
+        white-space: nowrap;
+      }
+
+      .sidebar-nav-item.active {
+        border-right: none;
+        border-bottom: 2px solid var(--gold);
+      }
+
+      .sidebar-footer {
+        display: none;
+      }
+
+      .trip-card {
+        grid-template-columns: 1fr;
+      }
+
+      .trip-img {
+        height: 120px;
+      }
+
+      .trip-actions-col {
+        border-left: none;
+        border-top: 1px solid var(--cream-mid);
+        flex-direction: row;
+        align-items: center;
+        min-width: auto;
+      }
+
+      .wishlist-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .loyalty-hero {
+        grid-template-columns: 1fr;
+      }
+
+      .loyalty-hero-right {
+        display: none;
+      }
+
+      .loyalty-stats-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .profile-field-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- TOP BAR -->
-<div class="top-bar">
-  <a href="/" class="tb-logo">
-    <div class="tb-logo-mark">S</div>
-    <div>
-      <div class="tb-logo-name">SUCCESSFUL LUXURY SAFARIS</div>
-      <div class="tb-logo-sub">Member Portal</div>
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <a href="/" class="tb-logo">
+      <img src="{% static 'images/logo.png' %}" alt="Logo" style="height:32px; border-radius:50%; margin-right:10px;">
+      <div>
+        <div class="tb-logo-name">SUCCESSFUL LUXURY SAFARIS</div>
+        <div class="tb-logo-sub">Member Portal</div>
+      </div>
+    </a>
+    <div class="tb-pill">🐾 {{ profile.loyalty_tier|title }} Tier · {{ profile.loyalty_points }} Paws Points</div>
+    <div class="tb-right">
+      <a href="/" class="tb-back">← Back to site</a>
+      <div class="tb-notif" onclick="switchTab('notifications')">
+        🔔<div class="notif-dot"></div>
+      </div>
+      <div class="tb-avatar" onclick="switchTab('profile')"
+        style="background-image: url('{% if profile.avatar %}{{ profile.avatar.url }}{% else %}https://i.pravatar.cc/150?u={{ request.user.username }}{% endif %}')">
+      </div>
     </div>
-  </a>
-  <div class="tb-pill">🐾 Gold Tier · 2,340 Paws Points</div>
-  <div class="tb-right">
-    <a href="/" class="tb-back">← Back to site</a>
-    <div class="tb-notif" onclick="switchTab('notifications')">
-      🔔<div class="notif-dot"></div>
-    </div>
-    <div class="tb-avatar" onclick="switchTab('profile')"></div>
   </div>
-</div>
 
-<!-- SHELL -->
-<div class="dash-shell">
+  <!-- SHELL -->
+  <div class="dash-shell">
 
-  <!-- SIDEBAR -->
-  <aside class="dash-sidebar">
-    <div class="sidebar-user">
-      <div class="sidebar-avatar"></div>
-      <div class="sidebar-user-name">Marcus Webb</div>
-      <div class="sidebar-user-email">marcus.webb@email.com</div>
-      <div class="sidebar-tier">🥇 Gold Member</div>
-      <div class="sidebar-points-mini">Paws Points: <strong>2,340</strong></div>
-    </div>
-
-    <nav class="sidebar-nav">
-      <div class="sidebar-nav-section">My Safari</div>
-      <div class="sidebar-nav-item active" onclick="switchTab('trips')">
-        <span class="nav-item-icon">🗓️</span> My Trips
-        <span class="nav-badge">2</span>
-      </div>
-      <div class="sidebar-nav-item" onclick="switchTab('wishlist')">
-        <span class="nav-item-icon">❤️</span> Wishlist
-        <span class="nav-badge">5</span>
-      </div>
-      <div class="sidebar-nav-item" onclick="switchTab('documents')">
-        <span class="nav-item-icon">📄</span> Documents
+    <!-- SIDEBAR -->
+    <aside class="dash-sidebar">
+      <div class="sidebar-user">
+        <div class="sidebar-avatar"
+          style="background-image: url('{% if profile.avatar %}{{ profile.avatar.url }}{% else %}https://i.pravatar.cc/150?u={{ request.user.username }}{% endif %}')">
+        </div>
+        <div class="sidebar-user-name">{{ request.user.first_name }} {{ request.user.last_name }}</div>
+        <div class="sidebar-user-email">{{ request.user.email }}</div>
+        <div class="sidebar-tier">🥇 {{ profile.loyalty_tier|title }} Member</div>
+        <div class="sidebar-points-mini">Paws Points: <strong>{{ profile.loyalty_points }}</strong></div>
       </div>
 
-      <div class="sidebar-nav-section">Account</div>
-      <div class="sidebar-nav-item" onclick="switchTab('profile')">
-        <span class="nav-item-icon">👤</span> Profile & Preferences
-      </div>
-      <div class="sidebar-nav-item" onclick="switchTab('notifications')">
-        <span class="nav-item-icon">🔔</span> Notifications
-        <span class="nav-badge">3</span>
-      </div>
-      <div class="sidebar-nav-item" onclick="switchTab('loyalty')">
-        <span class="nav-item-icon">⭐</span> Paws Points
-      </div>
-    </nav>
-
-    <div class="sidebar-footer">
-      <a href="/booking/" class="sidebar-book-btn">+ Book a New Safari</a>
-      <div class="sidebar-footer-link" onclick="window.location='/contact/'">
-        <span>💬</span> Contact Your Consultant
-      </div>
-      <div class="sidebar-footer-link" onclick="window.location='/auth/'">
-        <span>🚪</span> Sign Out
-      </div>
-    </div>
-  </aside>
-
-  <!-- MAIN -->
-  <main class="dash-main">
-
-    <!-- ── U01: MY TRIPS ── -->
-    <div class="tab-panel active" id="tab-trips">
-      <div class="page-header">
-        <div class="page-overline">My Account</div>
-        <h1 class="page-title">My Trips</h1>
-        <p class="page-subtitle">All your upcoming and past safari journeys in one place.</p>
-      </div>
-
-      <div class="trips-sub-tabs">
-        <div class="trips-sub-tab active" onclick="switchTripsTab('upcoming', this)">Upcoming (2)</div>
-        <div class="trips-sub-tab" onclick="switchTripsTab('past', this)">Past Trips (4)</div>
-      </div>
-
-      <!-- Upcoming -->
-      <div id="trips-upcoming" class="trip-cards">
-        <div class="trip-card">
-          <div class="trip-img" style="background-image:url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=600&q=80')">
-            <div class="trip-status-badge status-confirmed">Confirmed</div>
-          </div>
-          <div class="trip-body">
-            <div class="trip-tag">Kenya · Masai Mara</div>
-            <div class="trip-name">Great Migration Safari</div>
-            <div class="trip-meta">
-              <div class="trip-meta-item"><span class="trip-meta-icon">📅</span> 12 Jul – 19 Jul 2026</div>
-              <div class="trip-meta-item"><span class="trip-meta-icon">🌙</span> 7 Nights</div>
-              <div class="trip-meta-item"><span class="trip-meta-icon">👥</span> 2 Guests</div>
-              <div class="trip-meta-item"><span class="trip-meta-icon">🏕️</span> Angama Mara</div>
-            </div>
-            <div class="trip-chips">
-              <span class="trip-chip">All-Inclusive</span>
-              <span class="trip-chip">Charter Flight Included</span>
-              <span class="trip-chip">Private Vehicle</span>
-            </div>
-          </div>
-          <div class="trip-actions-col">
-            <div class="trip-countdown">
-              <div class="trip-countdown-num" id="days-countdown">63</div>
-              <div class="trip-countdown-label">Days to go</div>
-            </div>
-            <a onclick="switchTab('documents')" class="trip-action-btn trip-btn-primary" style="cursor:pointer">View Documents</a>
-            <a href="/contact/" class="trip-action-btn trip-btn-outline">Contact Guide</a>
-            <a href="/packages/detail/" class="trip-action-btn trip-btn-outline">View Itinerary</a>
-          </div>
+      <nav class="sidebar-nav">
+        <div class="sidebar-nav-section">My Safari</div>
+        <div class="sidebar-nav-item active" onclick="switchTab('trips')">
+          <span class="nav-item-icon">🗓️</span> My Trips
+          <span class="nav-badge">{{ upcoming_count|add:past_count }}</span>
+        </div>
+        <div class="sidebar-nav-item" onclick="switchTab('wishlist')">
+          <span class="nav-item-icon">❤️</span> Wishlist
+          <span class="nav-badge">0</span>
+        </div>
+        <div class="sidebar-nav-item" onclick="switchTab('orders')">
+          <span class="nav-item-icon">🛍️</span> My Orders
+          {% if order_count %}<span class="nav-badge">{{ order_count }}</span>{% endif %}
+        </div>
+        <div class="sidebar-nav-item" onclick="switchTab('documents')">
+          <span class="nav-item-icon">📄</span> Documents
+          {% if doc_count %}<span class="nav-badge">{{ doc_count }}</span>{% endif %}
         </div>
 
-        <div class="trip-card">
-          <div class="trip-img" style="background-image:url('https://images.unsplash.com/photo-1549366021-119489353986?auto=format&fit=crop&w=600&q=80')">
-            <div class="trip-status-badge status-pending">Awaiting Deposit</div>
+        <div class="sidebar-nav-section">Account</div>
+        <div class="sidebar-nav-item" onclick="switchTab('profile')">
+          <span class="nav-item-icon">👤</span> Profile & Preferences
+        </div>
+        <div class="sidebar-nav-item" onclick="switchTab('notifications')">
+          <span class="nav-item-icon">🔔</span> Notifications
+          {% if unread_notifs %}<span class="nav-badge">{{ unread_notifs }}</span>{% endif %}
+        </div>
+        <div class="sidebar-nav-item" onclick="switchTab('loyalty')">
+          <span class="nav-item-icon">⭐</span> Paws Points
+        </div>
+        <div class="sidebar-nav-item" onclick="switchTab('security')">
+          <span class="nav-item-icon">🔐</span> Security
+          {% if not profile.mfa_enabled %}<span class="nav-badge" style="background:var(--gold-dark);">!</span>{% endif %}
+        </div>
+
+        {% if role == 'Sub Admin' or role == 'Super Admin' or role == 'Content Manager' %}
+        <div class="sidebar-nav-section">Management</div>
+        <a href="/admin-dashboard/" class="sidebar-nav-item">
+          <span class="nav-item-icon">📊</span> Admin Console
+        </a>
+        {% for perm in permissions %}
+        {% if perm.can_view and perm.module.name != 'Dashboard' %}
+        <div class="sidebar-nav-item">
+          <span class="nav-item-icon">⚙️</span> {{ perm.module.name }}
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="/booking/" class="sidebar-book-btn">+ Book a New Safari</a>
+        <div class="sidebar-footer-link" onclick="window.location='/contact/'">
+          <span>💬</span> Contact Your Consultant
+        </div>
+        <a href="{% url 'logout' %}" class="sidebar-footer-link">
+          <span>🚪</span> Sign Out
+        </a>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="dash-main">
+
+      <!-- ── U01: MY TRIPS ── -->
+      <div class="tab-panel active" id="tab-trips">
+        <div class="page-header">
+          <div class="page-overline">My Account</div>
+          <h1 class="page-title">My Trips</h1>
+          <p class="page-subtitle">All your upcoming and past safari journeys in one place.</p>
+        </div>
+
+        <div class="trips-sub-tabs">
+          <div class="trips-sub-tab active" onclick="switchTripsTab('upcoming', this)">Upcoming ({{ upcoming_count }})
           </div>
-          <div class="trip-body">
-            <div class="trip-tag">Rwanda · Volcanoes NP</div>
-            <div class="trip-name">Gorilla Trekking & Kigali</div>
-            <div class="trip-meta">
-              <div class="trip-meta-item"><span class="trip-meta-icon">📅</span> 03 Nov – 08 Nov 2026</div>
-              <div class="trip-meta-item"><span class="trip-meta-icon">🌙</span> 5 Nights</div>
-              <div class="trip-meta-item"><span class="trip-meta-icon">👥</span> 2 Guests</div>
-              <div class="trip-meta-item"><span class="trip-meta-icon">🏕️</span> Bisate Lodge</div>
+          <div class="trips-sub-tab" onclick="switchTripsTab('past', this)">Past Trips ({{ past_count }})</div>
+        </div>
+
+        <!-- Upcoming -->
+        <div id="trips-upcoming" class="trip-cards">
+          {% for booking in upcoming_bookings %}
+          <div class="trip-card">
+            <div class="trip-img"
+              style="background-image:url('{% if booking.package.featured_image %}{{ booking.package.featured_image.url }}{% else %}https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=600&q=80{% endif %}')">
+              <div
+                class="trip-status-badge status-{% if booking.status == 'CONFIRMED' %}confirmed{% else %}pending{% endif %}">
+                {{ booking.status|title }}</div>
             </div>
-            <div class="trip-chips">
-              <span class="trip-chip">Gorilla Permits Included</span>
-              <span class="trip-chip">Full Board</span>
+            <div class="trip-body">
+              <div class="trip-tag">{% for loc in booking.package.locations.all|slice:":1" %}{{ loc.destination.name }}
+                · {{ loc.name }}{% endfor %}</div>
+              <div class="trip-name">{{ booking.package.title }}</div>
+              <div class="trip-meta">
+                <div class="trip-meta-item"><span class="trip-meta-icon">📅</span> {{ booking.start_date|date:"d M" }} –
+                  {{ booking.start_date|add:"7 days"|date:"d M Y" }}</div>
+                <div class="trip-meta-item"><span class="trip-meta-icon">🌙</span> {{ booking.package.duration_days }}
+                  Nights</div>
+                <div class="trip-meta-item"><span class="trip-meta-icon">👥</span> {{ booking.travelers.count }} Guests
+                </div>
+                <div class="trip-meta-item"><span class="trip-meta-icon">🏕️</span> Booking #{{ booking.booking_number
+                  }}</div>
+              </div>
+              <div class="trip-chips">
+                <span class="trip-chip">All-Inclusive</span>
+                <span class="trip-chip">Private Vehicle</span>
+              </div>
+            </div>
+            <div class="trip-actions-col">
+              <div class="trip-countdown">
+                <div class="trip-countdown-num">{{ booking.start_date|timeuntil }}</div>
+                <div class="trip-countdown-label">to go</div>
+              </div>
+              <a onclick="switchTab('documents')" class="trip-action-btn trip-btn-primary" style="cursor:pointer">View
+                Documents</a>
+              <a href="/contact/" class="trip-action-btn trip-btn-outline">Contact Guide</a>
             </div>
           </div>
-          <div class="trip-actions-col">
-            <div class="trip-countdown">
-              <div class="trip-countdown-num">176</div>
-              <div class="trip-countdown-label">Days to go</div>
-            </div>
-            <a href="/booking/" class="trip-action-btn trip-btn-primary">Pay Deposit</a>
-            <a href="/contact/" class="trip-action-btn trip-btn-outline">Amend Booking</a>
-            <a href="/packages/detail/" class="trip-action-btn trip-btn-outline">View Itinerary</a>
+          {% empty %}
+          <div class="empty-state">
+            <div class="empty-icon">🌍</div>
+            <div class="empty-title">No Upcoming Adventures</div>
+            <div class="empty-text">Your next extraordinary journey is just a click away. Explore our signatures
+              packages and start planning today.</div>
+            <a href="/packages/" class="sidebar-book-btn" style="max-width:240px; margin: 0 auto;">Explore Packages</a>
           </div>
+          {% endfor %}
+        </div>
+
+        <!-- Past (hidden by default) -->
+        <div id="trips-past" class="trip-cards" style="display:none">
+          {% for booking in past_bookings %}
+          <div class="trip-card">
+            <div class="trip-img"
+              style="background-image:url('{% if booking.package.featured_image %}{{ booking.package.featured_image.url }}{% else %}https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=600&q=80{% endif %}')">
+              <div class="trip-status-badge status-completed">Completed</div>
+            </div>
+            <div class="trip-body">
+              <div class="trip-tag">{% for loc in booking.package.locations.all|slice:":1" %}{{ loc.destination.name
+                }}{% endfor %}</div>
+              <div class="trip-name">{{ booking.package.title }}</div>
+              <div class="trip-meta">
+                <div class="trip-meta-item"><span class="trip-meta-icon">📅</span> {{ booking.start_date|date:"M Y" }}
+                </div>
+                <div class="trip-meta-item"><span class="trip-meta-icon">🌙</span> {{ booking.package.duration_days }}
+                  Nights</div>
+              </div>
+            </div>
+            <div class="trip-actions-col">
+              <div class="trip-past-rating">★★★★★</div>
+              <form method="POST" action="{% url 'submit_review' %}"
+                onsubmit="return promptReview(this, '{{ booking.package.id }}')">
+                {% csrf_token %}
+                <input type="hidden" name="package_id" value="{{ booking.package.id }}">
+                <input type="hidden" name="comment" id="review-comment-{{ booking.id }}">
+                <button type="submit" class="trip-action-btn trip-btn-primary" style="margin-top:8px">Leave
+                  Review</button>
+              </form>
+              <a onclick="switchTab('documents')" class="trip-action-btn trip-btn-outline"
+                style="cursor:pointer">Documents</a>
+            </div>
+          </div>
+          {% empty %}
+          <div class="empty-state">
+            <p class="empty-text">No past trips found.</p>
+          </div>
+          {% endfor %}
         </div>
       </div>
 
-      <!-- Past (hidden by default) -->
-      <div id="trips-past" class="trip-cards" style="display:none">
-        <div class="trip-card">
-          <div class="trip-img" style="background-image:url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=600&q=80')">
-            <div class="trip-status-badge status-completed">Completed</div>
-          </div>
-          <div class="trip-body">
-            <div class="trip-tag">Kenya · Masai Mara</div>
-            <div class="trip-name">Great Migration Safari</div>
-            <div class="trip-meta">
-              <div class="trip-meta-item"><span class="trip-meta-icon">📅</span> 5 Aug – 12 Aug 2025</div>
-              <div class="trip-meta-item"><span class="trip-meta-icon">🌙</span> 7 Nights</div>
-              <div class="trip-meta-item"><span class="trip-meta-icon">👥</span> 2 Guests</div>
-            </div>
-            <div class="trip-chips"><span class="trip-chip">Migration Season</span><span class="trip-chip">River Crossings</span></div>
-          </div>
-          <div class="trip-actions-col">
-            <div class="trip-past-rating">★★★★★</div>
-            <a href="#" class="trip-action-btn trip-btn-primary" style="margin-top:8px">Leave Review</a>
-            <a onclick="switchTab('documents')" class="trip-action-btn trip-btn-outline" style="cursor:pointer">Documents</a>
-            <a href="/packages/detail/" class="trip-action-btn trip-btn-outline">Book Again</a>
+      <!-- ── U02: WISHLIST ── -->
+      <div class="tab-panel" id="tab-wishlist">
+        <div class="page-header">
+          <div class="page-overline">My Account</div>
+          <h1 class="page-title">Wishlist</h1>
+          <p class="page-subtitle">Packages and destinations you've saved for future adventures.</p>
+        </div>
+        <div class="wishlist-toolbar">
+          <div class="wishlist-count"><strong>0</strong> saved packages</div>
+          <div class="wl-actions">
+            <a href="/packages/" class="wl-btn wl-btn-solid">Browse More Packages</a>
           </div>
         </div>
-        <div class="trip-card">
-          <div class="trip-img" style="background-image:url('https://images.unsplash.com/photo-1474440692490-2e83ae13ba29?auto=format&fit=crop&w=600&q=80')">
-            <div class="trip-status-badge status-completed">Completed</div>
-          </div>
-          <div class="trip-body">
-            <div class="trip-tag">Kenya · Amboseli</div>
-            <div class="trip-name">Amboseli Elephant Classic</div>
-            <div class="trip-meta">
-              <div class="trip-meta-item"><span class="trip-meta-icon">📅</span> 2 Feb – 7 Feb 2025</div>
-              <div class="trip-meta-item"><span class="trip-meta-icon">🌙</span> 5 Nights</div>
-              <div class="trip-meta-item"><span class="trip-meta-icon">👥</span> 2 Guests</div>
-            </div>
-            <div class="trip-chips"><span class="trip-chip">Elephant Herds</span><span class="trip-chip">Kilimanjaro Views</span></div>
-          </div>
-          <div class="trip-actions-col">
-            <div class="trip-past-rating">★★★★★</div>
-            <a href="#" class="trip-action-btn trip-btn-primary" style="margin-top:8px">Leave Review</a>
-            <a onclick="switchTab('documents')" class="trip-action-btn trip-btn-outline" style="cursor:pointer">Documents</a>
-            <a href="/packages/" class="trip-action-btn trip-btn-outline">Book Again</a>
-          </div>
+        <div class="empty-state">
+          <div class="empty-icon">❤️</div>
+          <div class="empty-title">Your Wishlist is Empty</div>
+          <p class="empty-text">Discover your next destination and save it here.</p>
         </div>
-      </div>
-    </div>
-
-    <!-- ── U02: WISHLIST ── -->
-    <div class="tab-panel" id="tab-wishlist">
-      <div class="page-header">
-        <div class="page-overline">My Account</div>
-        <h1 class="page-title">Wishlist</h1>
-        <p class="page-subtitle">Packages and destinations you've saved for future adventures.</p>
-      </div>
-      <div class="wishlist-toolbar">
-        <div class="wishlist-count"><strong>5</strong> saved packages</div>
-        <div class="wl-actions">
-          <button class="wl-btn wl-btn-outline">Compare Selected</button>
-          <a href="/packages/" class="wl-btn wl-btn-solid">Browse More Packages</a>
-        </div>
-      </div>
-      <div class="wishlist-grid">
-        <div class="wl-card">
-          <div class="wl-img" style="background-image:url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=600&q=80')">
-            <button class="wl-remove" onclick="removeWishlist(this)" title="Remove">✕</button>
-            <div class="wl-duration-badge">7 Nights</div>
-          </div>
-          <div class="wl-body">
-            <div class="wl-tag">Kenya · Masai Mara</div>
-            <div class="wl-name">Great Migration Safari</div>
-            <div class="wl-footer">
-              <div><div class="wl-price">$4,600</div><div class="wl-price-pp">per person</div></div>
-              <a href="/packages/detail/" class="wl-view">View Details</a>
-            </div>
-          </div>
-        </div>
-        <div class="wl-card">
-          <div class="wl-img" style="background-image:url('https://images.unsplash.com/photo-1543874049-af2a0bbe3b1a?auto=format&fit=crop&w=600&q=80')">
-            <button class="wl-remove" onclick="removeWishlist(this)" title="Remove">✕</button>
-            <div class="wl-duration-badge">10 Nights</div>
-          </div>
-          <div class="wl-body">
-            <div class="wl-tag">Tanzania · Serengeti</div>
-            <div class="wl-name">Serengeti Grand Safari</div>
-            <div class="wl-footer">
-              <div><div class="wl-price">$6,400</div><div class="wl-price-pp">per person</div></div>
-              <a href="/packages/" class="wl-view">View Details</a>
-            </div>
-          </div>
-        </div>
-        <div class="wl-card">
-          <div class="wl-img" style="background-image:url('https://images.unsplash.com/photo-1585249096062-3c19f6e0a6d1?auto=format&fit=crop&w=600&q=80')">
-            <button class="wl-remove" onclick="removeWishlist(this)" title="Remove">✕</button>
-            <div class="wl-duration-badge">5 Nights</div>
-          </div>
-          <div class="wl-body">
-            <div class="wl-tag">Kenya · Laikipia</div>
-            <div class="wl-name">Laikipia Rhino &amp; Predator</div>
-            <div class="wl-footer">
-              <div><div class="wl-price">$3,200</div><div class="wl-price-pp">per person</div></div>
-              <a href="/packages/" class="wl-view">View Details</a>
-            </div>
-          </div>
-        </div>
-        <div class="wl-card">
-          <div class="wl-img" style="background-image:url('https://images.unsplash.com/photo-1549366021-119489353986?auto=format&fit=crop&w=600&q=80')">
-            <button class="wl-remove" onclick="removeWishlist(this)" title="Remove">✕</button>
-            <div class="wl-duration-badge">4 Nights</div>
-          </div>
-          <div class="wl-body">
-            <div class="wl-tag">Rwanda · Volcanoes NP</div>
-            <div class="wl-name">Gorilla Trekking Encounter</div>
-            <div class="wl-footer">
-              <div><div class="wl-price">$4,100</div><div class="wl-price-pp">per person</div></div>
-              <a href="/packages/" class="wl-view">View Details</a>
-            </div>
-          </div>
-        </div>
-        <div class="wl-card">
-          <div class="wl-img" style="background-image:url('https://images.unsplash.com/photo-1559827291-72ee739d0d9a?auto=format&fit=crop&w=600&q=80')">
-            <button class="wl-remove" onclick="removeWishlist(this)" title="Remove">✕</button>
-            <div class="wl-duration-badge">12 Nights</div>
-          </div>
-          <div class="wl-body">
-            <div class="wl-tag">Kenya + Tanzania</div>
-            <div class="wl-name">Migration — Both Sides</div>
-            <div class="wl-footer">
-              <div><div class="wl-price">$8,900</div><div class="wl-price-pp">per person</div></div>
-              <a href="/packages/" class="wl-view">View Details</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── U03: DOCUMENTS ── -->
-    <div class="tab-panel" id="tab-documents">
-      <div class="page-header">
-        <div class="page-overline">My Account</div>
-        <h1 class="page-title">My Documents</h1>
-        <p class="page-subtitle">Booking confirmations, itineraries, visas, and travel documents — all in one secure place.</p>
       </div>
 
-      <div class="docs-trip-group">
-        <div class="docs-trip-header">
-          <span class="docs-trip-flag">🇰🇪</span>
+      <!-- ── U03: ORDERS ── -->
+      <div class="tab-panel" id="tab-orders">
+        <div class="page-header">
+          <div class="page-overline">My Account</div>
+          <h1 class="page-title">My Orders</h1>
+          <p class="page-subtitle">Track your luxury gear and safari apparel purchases.</p>
+        </div>
+
+        <div class="order-list">
+          {% for order in orders %}
+          <div class="card"
+            style="margin-bottom:16px; padding:20px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <div style="font-weight:700; color:var(--green-dark);">Order #{{ order.id }}</div>
+              <div style="font-size:12px; color:var(--gray-mid);">{{ order.created_at|date:"d M Y" }} · {{
+                order.items.count }} items</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-weight:700; color:var(--gold-dark);">${{ order.total_amount }}</div>
+              <div
+                style="font-size:10px; text-transform:uppercase; letter-spacing:1px; background:var(--cream); padding:2px 8px; border-radius:4px; display:inline-block; margin-top:4px;">
+                {{ order.status }}</div>
+            </div>
+          </div>
+          {% empty %}
+          <div class="empty-state">
+            <div class="empty-icon">🛍️</div>
+            <p class="empty-text">No orders found.</p>
+            <a href="/shop/" class="sidebar-book-btn" style="max-width:200px; margin: 0 auto;">Visit the Shop</a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- ── U03: DOCUMENTS ── -->
+      <div class="tab-panel" id="tab-documents">
+        <div class="page-header">
+          <div class="page-overline">My Account</div>
+          <h1 class="page-title">My Documents</h1>
+          <p class="page-subtitle">Booking confirmations, itineraries, visas, and travel documents — all in one secure
+            place.</p>
+        </div>
+        <div class="empty-state">
+          <div class="empty-icon">📄</div>
+          <p class="empty-text">No documents available yet. Documents will appear here once your booking is processed.
+          </p>
+        </div>
+      </div>
+
+      <!-- ── U04: PROFILE ── -->
+      <div class="tab-panel" id="tab-profile">
+        <div class="page-header">
+          <div class="page-overline">My Account</div>
+          <h1 class="page-title">Profile & Preferences</h1>
+          <p class="page-subtitle">Keep your details up to date for a smoother booking experience.</p>
+        </div>
+        <div class="profile-grid">
           <div>
-            <div class="docs-trip-name">Great Migration Safari</div>
-            <div class="docs-trip-dates">12 Jul – 19 Jul 2026 · Masai Mara, Kenya</div>
-          </div>
-        </div>
-        <div class="docs-list">
-          <div class="doc-row">
-            <div class="doc-icon doc-icon-pdf">📋</div>
-            <div class="doc-info">
-              <div class="doc-name">Booking Confirmation</div>
-              <div class="doc-meta">SS-2026-0847 · PDF · 245 KB · Added 14 Jan 2026</div>
+            <!-- Personal Info -->
+            <div class="profile-section">
+              <div class="profile-section-title">👤 Personal Information</div>
+              <form method="POST" action="{% url 'profile_update' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="profile-field-row">
+                  <div class="profile-field"><label>First Name</label><input type="text" name="first_name"
+                      value="{{ request.user.first_name }}"></div>
+                  <div class="profile-field"><label>Last Name</label><input type="text" name="last_name"
+                      value="{{ request.user.last_name }}"></div>
+                </div>
+                <div class="profile-field"><label>Email Address</label><input type="email" name="email"
+                    value="{{ request.user.email }}"></div>
+                <div class="profile-field-row">
+                  <div class="profile-field"><label>Phone Number</label><input type="tel" name="phone"
+                      value="{{ profile.phone|default:'' }}"></div>
+                  <div class="profile-field"><label>Nationality</label><input type="text" name="nationality"
+                      value="{{ profile.nationality|default:'' }}"></div>
+                </div>
+                <div class="profile-field-row">
+                  <div class="profile-field"><label>Passport Number</label><input type="text" name="passport_number"
+                      value="{{ profile.passport_number|default:'' }}" placeholder="Stored securely"></div>
+                </div>
+                <div class="profile-field">
+                  <label>Update Avatar</label>
+                  <input type="file" name="avatar" accept="image/*">
+                </div>
+                <button type="submit" class="save-btn">Save Personal Details</button>
+              </form>
             </div>
-            <span class="doc-status doc-status-ready">Ready</span>
-            <div class="doc-actions">
-              <button class="doc-btn" title="Preview">👁</button>
-              <button class="doc-btn" title="Download">⇩</button>
-            </div>
-          </div>
-          <div class="doc-row">
-            <div class="doc-icon doc-icon-pdf">🗺️</div>
-            <div class="doc-info">
-              <div class="doc-name">Detailed Itinerary</div>
-              <div class="doc-meta">7-day day-by-day · PDF · 1.2 MB · Added 14 Jan 2026</div>
-            </div>
-            <span class="doc-status doc-status-ready">Ready</span>
-            <div class="doc-actions">
-              <button class="doc-btn" title="Preview">👁</button>
-              <button class="doc-btn" title="Download">⇩</button>
-            </div>
-          </div>
-          <div class="doc-row">
-            <div class="doc-icon doc-icon-pdf">✈️</div>
-            <div class="doc-info">
-              <div class="doc-name">Charter Flight Voucher</div>
-              <div class="doc-meta">Wilson → Mara Serena Airstrip · PDF · 180 KB</div>
-            </div>
-            <span class="doc-status doc-status-ready">Ready</span>
-            <div class="doc-actions">
-              <button class="doc-btn" title="Preview">👁</button>
-              <button class="doc-btn" title="Download">⇩</button>
-            </div>
-          </div>
-          <div class="doc-row">
-            <div class="doc-icon doc-icon-img">💉</div>
-            <div class="doc-info">
-              <div class="doc-name">Health & Vaccination Guide</div>
-              <div class="doc-meta">Kenya requirements 2026 · PDF · 420 KB</div>
-            </div>
-            <span class="doc-status doc-status-ready">Ready</span>
-            <div class="doc-actions">
-              <button class="doc-btn" title="Preview">👁</button>
-              <button class="doc-btn" title="Download">⇩</button>
-            </div>
-          </div>
-          <div class="doc-row">
-            <div class="doc-icon doc-icon-txt">📦</div>
-            <div class="doc-info">
-              <div class="doc-name">Packing List — Safari</div>
-              <div class="doc-meta">Recommended gear for Masai Mara · PDF · 310 KB</div>
-            </div>
-            <span class="doc-status doc-status-ready">Ready</span>
-            <div class="doc-actions">
-              <button class="doc-btn" title="Preview">👁</button>
-              <button class="doc-btn" title="Download">⇩</button>
-            </div>
-          </div>
-          <div class="doc-row">
-            <div class="doc-icon doc-icon-pdf">🛂</div>
-            <div class="doc-info">
-              <div class="doc-name">Kenya eTA Application Guide</div>
-              <div class="doc-meta">Step-by-step visa guide · PDF · Released 60 days before travel</div>
-            </div>
-            <span class="doc-status doc-status-pending">Due Jun 2026</span>
-            <div class="doc-actions">
-              <button class="doc-btn" title="Preview" disabled style="opacity:0.3;cursor:default">👁</button>
-              <button class="doc-btn" title="Download" disabled style="opacity:0.3;cursor:default">⇩</button>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="docs-trip-group">
-        <div class="docs-trip-header">
-          <span class="docs-trip-flag">🇷🇼</span>
+            <!--Travel Preferences Placeholder -->
+            <div class="profile-section">
+              <div class="profile-section-title">🌍 Travel Preferences</div>
+              <p style="font-size:13px; color:var(--gray-mid);">Preferences management coming soon.</p>
+            </div>
+          </div>
+
+          <!-- Sidebar card -->
           <div>
-            <div class="docs-trip-name">Gorilla Trekking & Kigali</div>
-            <div class="docs-trip-dates">3 Nov – 8 Nov 2026 · Rwanda</div>
-          </div>
-        </div>
-        <div class="docs-list">
-          <div class="doc-row">
-            <div class="doc-icon doc-icon-pdf">📋</div>
-            <div class="doc-info">
-              <div class="doc-name">Provisional Booking Summary</div>
-              <div class="doc-meta">SS-2026-1102 · Deposit required to confirm · PDF · 190 KB</div>
-            </div>
-            <span class="doc-status doc-status-pending">Deposit Req.</span>
-            <div class="doc-actions">
-              <button class="doc-btn" title="Preview">👁</button>
-              <button class="doc-btn" title="Download">⇩</button>
-            </div>
-          </div>
-          <div class="doc-row">
-            <div class="doc-icon doc-icon-pdf">🦍</div>
-            <div class="doc-info">
-              <div class="doc-name">Gorilla Permit Confirmation</div>
-              <div class="doc-meta">Two permits · Rwanda Development Board · Released on deposit</div>
-            </div>
-            <span class="doc-status doc-status-pending">Pending Deposit</span>
-            <div class="doc-actions">
-              <button class="doc-btn" disabled style="opacity:0.3;cursor:default">👁</button>
-              <button class="doc-btn" disabled style="opacity:0.3;cursor:default">⇩</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── U04: PROFILE ── -->
-    <div class="tab-panel" id="tab-profile">
-      <div class="page-header">
-        <div class="page-overline">My Account</div>
-        <h1 class="page-title">Profile & Preferences</h1>
-        <p class="page-subtitle">Keep your details up to date for a smoother booking experience.</p>
-      </div>
-      <div class="profile-grid">
-        <div>
-          <!-- Personal Info -->
-          <div class="profile-section">
-            <div class="profile-section-title">👤 Personal Information</div>
-            <div class="profile-field-row">
-              <div class="profile-field"><label>First Name</label><input type="text" value="Marcus"></div>
-              <div class="profile-field"><label>Last Name</label><input type="text" value="Webb"></div>
-            </div>
-            <div class="profile-field"><label>Email Address</label><input type="email" value="marcus.webb@email.com"></div>
-            <div class="profile-field-row">
-              <div class="profile-field"><label>Phone Number</label><input type="tel" value="+44 7700 900123"></div>
-              <div class="profile-field"><label>Country of Residence</label>
-                <select><option selected>United Kingdom</option><option>United States</option><option>Canada</option><option>Australia</option><option>Other</option></select>
+            <div class="profile-sidebar-card">
+              <div class="psb-header">
+                <div class="psb-avatar"
+                  style="background-image: url('{% if profile.avatar %}{{ profile.avatar.url }}{% else %}https://i.pravatar.cc/150?u={{ request.user.username }}{% endif %}')">
+                </div>
+                <div class="psb-name">{{ request.user.first_name }} {{ request.user.last_name }}</div>
+                <div class="psb-email">{{ request.user.email }}</div>
               </div>
-            </div>
-            <div class="profile-field-row">
-              <div class="profile-field"><label>Passport Number</label><input type="text" value="GR•••••7" placeholder="Stored securely"></div>
-              <div class="profile-field"><label>Passport Expiry</label><input type="date" value="2031-09-14"></div>
-            </div>
-            <div class="profile-field"><label>Nationality</label>
-              <select><option selected>British</option><option>American</option><option>Canadian</option><option>Australian</option><option>Other</option></select>
-            </div>
-            <button class="save-btn" onclick="saveProfile()">Save Personal Details</button>
-          </div>
-
-          <!-- Travel Preferences -->
-          <div class="profile-section">
-            <div class="profile-section-title">🌍 Safari Preferences</div>
-            <div class="profile-field" style="margin-bottom:20px">
-              <label>Interests</label>
-              <div class="pref-chips">
-                <div class="pref-chip active" onclick="this.classList.toggle('active')">Big Cats</div>
-                <div class="pref-chip active" onclick="this.classList.toggle('active')">Migration</div>
-                <div class="pref-chip active" onclick="this.classList.toggle('active')">Photography</div>
-                <div class="pref-chip" onclick="this.classList.toggle('active')">Gorillas</div>
-                <div class="pref-chip" onclick="this.classList.toggle('active')">Birds</div>
-                <div class="pref-chip" onclick="this.classList.toggle('active')">Walking Safaris</div>
-                <div class="pref-chip active" onclick="this.classList.toggle('active')">Luxury Lodges</div>
-                <div class="pref-chip" onclick="this.classList.toggle('active')">Conservation</div>
-                <div class="pref-chip" onclick="this.classList.toggle('active')">Family Safari</div>
-                <div class="pref-chip" onclick="this.classList.toggle('active')">Honeymoon</div>
-              </div>
-            </div>
-            <div class="profile-field" style="margin-bottom:20px">
-              <label>Preferred Destinations</label>
-              <div class="pref-chips">
-                <div class="pref-chip active" onclick="this.classList.toggle('active')">🇰🇪 Kenya</div>
-                <div class="pref-chip" onclick="this.classList.toggle('active')">🇹🇿 Tanzania</div>
-                <div class="pref-chip active" onclick="this.classList.toggle('active')">🦍 Rwanda</div>
-                <div class="pref-chip" onclick="this.classList.toggle('active')">🇺🇬 Uganda</div>
-                <div class="pref-chip" onclick="this.classList.toggle('active')">🏖️ Zanzibar</div>
-              </div>
-            </div>
-            <div class="profile-field-row">
-              <div class="profile-field"><label>Typical Budget</label>
-                <select><option>$3,000 – $5,000pp</option><option selected>$5,000 – $8,000pp</option><option>$8,000 – $12,000pp</option><option>$12,000+pp</option></select>
-              </div>
-              <div class="profile-field"><label>Preferred Trip Length</label>
-                <select><option>5–7 nights</option><option selected>7–10 nights</option><option>10–14 nights</option><option>14+ nights</option></select>
-              </div>
-            </div>
-            <div class="profile-field"><label>Dietary Requirements / Special Requests</label>
-              <textarea rows="3" placeholder="e.g. vegetarian, nut allergy, mobility considerations…"></textarea>
-            </div>
-            <button class="save-btn" onclick="saveProfile()">Save Preferences</button>
-          </div>
-
-          <!-- Security -->
-          <div class="profile-section">
-            <div class="profile-section-title">🔒 Security</div>
-            <div class="profile-field-row">
-              <div class="profile-field"><label>Current Password</label><input type="password" placeholder="Enter current password"></div>
-              <div class="profile-field"><label>New Password</label><input type="password" placeholder="Enter new password"></div>
-            </div>
-            <button class="save-btn" onclick="saveProfile()">Update Password</button>
-          </div>
-
-          <!-- Danger Zone -->
-          <div class="profile-section">
-            <div class="profile-section-title">⚠️ Account Actions</div>
-            <div class="danger-zone">
-              <div class="danger-zone-title">Delete Account</div>
-              <div class="danger-zone-text">Permanently delete your account and all associated data. This action cannot be undone. Any upcoming bookings must be cancelled before deleting.</div>
-              <button class="danger-btn">Delete My Account</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Sidebar card -->
-        <div>
-          <div class="profile-sidebar-card">
-            <div class="psb-header">
-              <div class="psb-avatar"></div>
-              <div class="psb-name">Marcus Webb</div>
-              <div class="psb-email">marcus.webb@email.com</div>
-            </div>
-            <div class="psb-body">
-              <div class="psb-stat-row"><span class="psb-stat-key">Member Since</span><span class="psb-stat-val">January 2024</span></div>
-              <div class="psb-stat-row"><span class="psb-stat-key">Loyalty Tier</span><span class="psb-stat-val">🥇 Gold</span></div>
-              <div class="psb-stat-row"><span class="psb-stat-key">Paws Points</span><span class="psb-stat-val">2,340</span></div>
-              <div class="psb-stat-row"><span class="psb-stat-key">Trips Taken</span><span class="psb-stat-val">4</span></div>
-              <div class="psb-stat-row"><span class="psb-stat-key">Nights on Safari</span><span class="psb-stat-val">27</span></div>
-              <div class="psb-stat-row"><span class="psb-stat-key">Total Spent</span><span class="psb-stat-val">$24,800</span></div>
-            </div>
-            <div style="padding:0 20px 20px"><button class="change-photo-btn">Change Profile Photo</button></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── U05: NOTIFICATIONS ── -->
-    <div class="tab-panel" id="tab-notifications">
-      <div class="page-header">
-        <div class="page-overline">My Account</div>
-        <h1 class="page-title">Notifications</h1>
-        <p class="page-subtitle">Updates, reminders, and messages from your safari team.</p>
-      </div>
-      <div class="notif-toolbar">
-        <div class="notif-filter-tabs">
-          <div class="notif-filter active" onclick="filterNotifs('all', this)">All</div>
-          <div class="notif-filter" onclick="filterNotifs('booking', this)">Bookings</div>
-          <div class="notif-filter" onclick="filterNotifs('docs', this)">Documents</div>
-          <div class="notif-filter" onclick="filterNotifs('promo', this)">Offers</div>
-        </div>
-        <span class="notif-mark-all" onclick="markAllRead()">Mark all as read</span>
-      </div>
-      <div class="notif-feed" id="notif-feed">
-        <div class="notif-item unread" data-type="booking">
-          <div class="notif-unread-dot"></div>
-          <div class="notif-icon-wrap ni-booking">✅</div>
-          <div class="notif-body">
-            <div class="notif-title">Booking Confirmed — Great Migration Safari</div>
-            <div class="notif-text">Your booking SS-2026-0847 for 12–19 July 2026 has been fully confirmed. Accommodation at Angama Mara is reserved.</div>
-            <div class="notif-time">Today, 09:14</div>
-          </div>
-          <span class="notif-action" onclick="switchTab('documents')">View Docs</span>
-        </div>
-        <div class="notif-item unread" data-type="docs">
-          <div class="notif-unread-dot"></div>
-          <div class="notif-icon-wrap ni-doc">📄</div>
-          <div class="notif-body">
-            <div class="notif-title">Your Itinerary is Ready</div>
-            <div class="notif-text">The detailed 7-day itinerary for your Great Migration Safari has been uploaded to your Documents.</div>
-            <div class="notif-time">Today, 09:12</div>
-          </div>
-          <span class="notif-action" onclick="switchTab('documents')">Download</span>
-        </div>
-        <div class="notif-item unread" data-type="booking">
-          <div class="notif-unread-dot"></div>
-          <div class="notif-icon-wrap ni-alert">💰</div>
-          <div class="notif-body">
-            <div class="notif-title">Deposit Required — Rwanda Gorilla Trek</div>
-            <div class="notif-text">A 30% deposit of $2,460 is required to confirm your Rwanda booking (SS-2026-1102). Gorilla permits are subject to availability.</div>
-            <div class="notif-time">2 days ago</div>
-          </div>
-          <a href="/booking/" class="notif-action">Pay Now</a>
-        </div>
-        <div class="notif-item" data-type="promo">
-          <div class="notif-icon-wrap ni-promo">🏷️</div>
-          <div class="notif-body">
-            <div class="notif-title">Exclusive Offer: 15% Off Kenya Packages</div>
-            <div class="notif-text">As a Gold member, you qualify for an additional 15% off all Kenya packages booked before 30 June 2026.</div>
-            <div class="notif-time">5 days ago</div>
-          </div>
-          <a href="/packages/" class="notif-action">Browse</a>
-        </div>
-        <div class="notif-item" data-type="booking">
-          <div class="notif-icon-wrap ni-system">⭐</div>
-          <div class="notif-body">
-            <div class="notif-title">500 Paws Points Awarded</div>
-            <div class="notif-text">You've earned 500 Paws Points for completing your Amboseli Elephant Classic. Your new balance is 2,340 points.</div>
-            <div class="notif-time">3 weeks ago</div>
-          </div>
-          <span class="notif-action" onclick="switchTab('loyalty')">View Points</span>
-        </div>
-        <div class="notif-item" data-type="docs">
-          <div class="notif-icon-wrap ni-doc">📄</div>
-          <div class="notif-body">
-            <div class="notif-title">Trip Review Request</div>
-            <div class="notif-text">How was your Amboseli Elephant Classic in February? Share your experience to help future travellers and earn 50 bonus Paws Points.</div>
-            <div class="notif-time">1 month ago</div>
-          </div>
-          <span class="notif-action">Leave Review</span>
-        </div>
-        <div class="notif-item" data-type="promo">
-          <div class="notif-icon-wrap ni-promo">🌍</div>
-          <div class="notif-body">
-            <div class="notif-title">New Destination: Northern Tanzania Circuit</div>
-            <div class="notif-text">We've added a new 14-night circuit covering Serengeti, Ngorongoro, Lake Manyara, and Tarangire. Early-access pricing available.</div>
-            <div class="notif-time">1 month ago</div>
-          </div>
-          <a href="/packages/" class="notif-action">Explore</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── U06: LOYALTY / PAWS POINTS ── -->
-    <div class="tab-panel" id="tab-loyalty">
-      <div class="page-header">
-        <div class="page-overline">My Account</div>
-        <h1 class="page-title">Paws Points</h1>
-        <p class="page-subtitle">Earn on every booking, redeem for upgrades and exclusive rewards.</p>
-      </div>
-
-      <div class="loyalty-hero">
-        <div class="loyalty-hero-content">
-          <div class="loyalty-tier-badge">🥇 Gold Member</div>
-          <div class="loyalty-balance-label">Available Balance</div>
-          <div class="loyalty-balance">2,340</div>
-          <div class="loyalty-balance-sub">Paws Points · Worth approx. $117 in rewards</div>
-          <div class="loyalty-progress-row">
-            <div class="loyalty-progress-track">
-              <div class="loyalty-progress-fill"></div>
-            </div>
-            <div class="loyalty-progress-label">62% to Platinum</div>
-          </div>
-          <div class="loyalty-next-tier">Earn <strong>1,410 more points</strong> to reach Platinum tier and unlock priority booking & free night upgrades.</div>
-        </div>
-        <div class="loyalty-hero-right">
-          <div class="loyalty-card">
-            <div class="loyalty-card-icon">🐾</div>
-            <div class="loyalty-card-title">Gold Member</div>
-            <div class="loyalty-card-sub">since Jan 2024</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="loyalty-stats-row">
-        <div class="loyalty-stat-card"><div class="ls-num">2,340</div><div class="ls-label">Current Balance</div></div>
-        <div class="loyalty-stat-card"><div class="ls-num">4,840</div><div class="ls-label">Total Earned</div></div>
-        <div class="loyalty-stat-card"><div class="ls-num">2,500</div><div class="ls-label">Total Redeemed</div></div>
-        <div class="loyalty-stat-card"><div class="ls-num">3,750</div><div class="ls-label">To Platinum</div></div>
-      </div>
-
-      <div class="loyalty-two-col">
-        <!-- Points History -->
-        <div>
-          <div class="section-label">Points History</div>
-          <div class="loyalty-history">
-            <div class="loyalty-history-header">Recent Activity</div>
-            <div class="points-row">
-              <div><div class="pr-desc">Great Migration Safari — Booking</div><div class="pr-date">14 Jan 2026</div></div>
-              <div class="pr-points earn">+1,840</div>
-            </div>
-            <div class="points-row">
-              <div><div class="pr-desc">Loyalty Tier Bonus — Gold Upgrade</div><div class="pr-date">14 Jan 2026</div></div>
-              <div class="pr-points earn">+250</div>
-            </div>
-            <div class="points-row">
-              <div><div class="pr-desc">Amboseli Classic — Booking</div><div class="pr-date">2 Feb 2025</div></div>
-              <div class="pr-points earn">+560</div>
-            </div>
-            <div class="points-row">
-              <div><div class="pr-desc">Lodge Upgrade Redemption</div><div class="pr-date">12 Aug 2025</div></div>
-              <div class="pr-points spend">−500</div>
-            </div>
-            <div class="points-row">
-              <div><div class="pr-desc">Trip Review Bonus</div><div class="pr-date">25 Aug 2025</div></div>
-              <div class="pr-points earn">+50</div>
-            </div>
-            <div class="points-row">
-              <div><div class="pr-desc">Welcome Bonus</div><div class="pr-date">10 Jan 2024</div></div>
-              <div class="pr-points earn">+500</div>
-            </div>
-            <div class="points-row">
-              <div><div class="pr-desc">Masai Mara Safari — First Booking</div><div class="pr-date">10 Jan 2024</div></div>
-              <div class="pr-points earn">+1,640</div>
-            </div>
-            <div class="points-row">
-              <div><div class="pr-desc">Gift Voucher Redemption</div><div class="pr-date">5 Aug 2024</div></div>
-              <div class="pr-points spend">−2,000</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Rewards -->
-        <div>
-          <div class="section-label">Redeem Points</div>
-          <div class="rewards-grid">
-            <div class="reward-card">
-              <div class="reward-icon">🏕️</div>
-              <div class="reward-info">
-                <div class="reward-name">Free Night Upgrade</div>
-                <div class="reward-desc">Upgrade one night to the next lodge tier on any booking</div>
-              </div>
-              <div>
-                <div class="reward-cost">500 pts</div>
-                <button class="reward-btn" onclick="redeemReward(this, 500)">Redeem</button>
-              </div>
-            </div>
-            <div class="reward-card">
-              <div class="reward-icon">🎈</div>
-              <div class="reward-info">
-                <div class="reward-name">Hot Air Balloon Safari</div>
-                <div class="reward-desc">Complimentary balloon flight at dawn in the Masai Mara</div>
-              </div>
-              <div>
-                <div class="reward-cost">1,000 pts</div>
-                <button class="reward-btn" onclick="redeemReward(this, 1000)">Redeem</button>
-              </div>
-            </div>
-            <div class="reward-card">
-              <div class="reward-icon">🛍️</div>
-              <div class="reward-info">
-                <div class="reward-name">Shop Voucher — $25</div>
-                <div class="reward-desc">$25 credit towards any item in our Safari Shop</div>
-              </div>
-              <div>
-                <div class="reward-cost">500 pts</div>
-                <button class="reward-btn" onclick="redeemReward(this, 500)">Redeem</button>
-              </div>
-            </div>
-            <div class="reward-card">
-              <div class="reward-icon">💆</div>
-              <div class="reward-info">
-                <div class="reward-name">Spa Treatment at Lodge</div>
-                <div class="reward-desc">60-minute bush spa treatment at your camp</div>
-              </div>
-              <div>
-                <div class="reward-cost">750 pts</div>
-                <button class="reward-btn" onclick="redeemReward(this, 750)">Redeem</button>
-              </div>
-            </div>
-            <div class="reward-card">
-              <div class="reward-icon">🍾</div>
-              <div class="reward-info">
-                <div class="reward-name">Bush Dinner Experience</div>
-                <div class="reward-desc">Private star-lit dinner for two under the African sky</div>
-              </div>
-              <div>
-                <div class="reward-cost">1,500 pts</div>
-                <button class="reward-btn" onclick="redeemReward(this, 1500)" disabled>Locked</button>
+              <div class="psb-body">
+                <div class="psb-stat-row"><span class="psb-stat-key">Member Since</span><span class="psb-stat-val">{{
+                    request.user.date_joined|date:"F Y" }}</span></div>
+                <div class="psb-stat-row"><span class="psb-stat-key">Loyalty Tier</span><span class="psb-stat-val">🥇 {{
+                    profile.loyalty_tier|title }}</span></div>
+                <div class="psb-stat-row"><span class="psb-stat-key">Paws Points</span><span class="psb-stat-val">{{
+                    profile.loyalty_points }}</span></div>
+                <div class="psb-stat-row"><span class="psb-stat-key">Trips Taken</span><span class="psb-stat-val">{{
+                    past_count }}</span></div>
+                <div class="psb-stat-row"><span class="psb-stat-key">Total Spent</span><span class="psb-stat-val">${{
+                    total_spent|floatformat:0 }}</span></div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Tier Guide -->
-      <div class="section-label">Loyalty Tiers</div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
-        <div style="background:white;border:1px solid var(--cream-mid);border-radius:10px;padding:20px;text-align:center">
-          <div style="font-size:28px;margin-bottom:8px">🐾</div>
-          <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:600;color:var(--green-dark);margin-bottom:4px">Explorer</div>
-          <div style="font-size:11px;color:var(--gray-light);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px">0 – 999 pts</div>
-          <div style="font-size:12px;color:var(--gray-mid);line-height:1.6">5 pts per $100 spent · Welcome bonus · Member discounts</div>
+      <!-- ── U05: NOTIFICATIONS ── -->
+      <div class="tab-panel" id="tab-notifications">
+        <div class="page-header">
+          <div class="page-overline">My Account</div>
+          <h1 class="page-title">Notifications</h1>
+          <p class="page-subtitle">Updates, reminders, and messages from your safari team.</p>
         </div>
-        <div style="background:white;border:1px solid var(--cream-mid);border-radius:10px;padding:20px;text-align:center">
-          <div style="font-size:28px;margin-bottom:8px">🥈</div>
-          <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:600;color:var(--green-dark);margin-bottom:4px">Silver</div>
-          <div style="font-size:11px;color:var(--gray-light);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px">1,000 – 2,499 pts</div>
-          <div style="font-size:12px;color:var(--gray-mid);line-height:1.6">7 pts per $100 · Priority support · Early-access pricing</div>
-        </div>
-        <div style="background:rgba(201,168,76,0.06);border:2px solid var(--gold);border-radius:10px;padding:20px;text-align:center">
-          <div style="font-size:28px;margin-bottom:8px">🥇</div>
-          <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:600;color:var(--green-dark);margin-bottom:4px">Gold <span style="font-size:10px;background:var(--gold);color:var(--green-dark);padding:2px 8px;border-radius:10px;font-family:Inter,sans-serif;font-weight:700;letter-spacing:1px">YOU</span></div>
-          <div style="font-size:11px;color:var(--gold-dark);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px">2,500 – 3,749 pts</div>
-          <div style="font-size:12px;color:var(--gray-mid);line-height:1.6">10 pts per $100 · Complimentary transfers · Room upgrades</div>
-        </div>
-        <div style="background:white;border:1px solid var(--cream-mid);border-radius:10px;padding:20px;text-align:center;opacity:0.7">
-          <div style="font-size:28px;margin-bottom:8px">💎</div>
-          <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:600;color:var(--green-dark);margin-bottom:4px">Platinum</div>
-          <div style="font-size:11px;color:var(--gray-light);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px">3,750+ pts</div>
-          <div style="font-size:12px;color:var(--gray-mid);line-height:1.6">15 pts per $100 · Priority booking · Free night on arrival · Dedicated consultant</div>
+        <div class="empty-state">
+          <div class="empty-icon">🔔</div>
+          <p class="empty-text">No new notifications.</p>
         </div>
       </div>
-    </div>
 
-  </main>
-</div>
+      <!-- ── U06: LOYALTY / PAWS POINTS ── -->
+      <div class="tab-panel" id="tab-loyalty">
+        <div class="page-header">
+          <div class="page-overline">My Account</div>
+          <h1 class="page-title">Paws Points</h1>
+          <p class="page-subtitle">Earn on every booking, redeem for upgrades and exclusive rewards.</p>
+        </div>
 
-<script>
-  // ── TAB SWITCHING ──
-  function switchTab(tab) {
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.sidebar-nav-item').forEach(i => i.classList.remove('active'));
-    document.getElementById('tab-' + tab).classList.add('active');
-    const navItems = document.querySelectorAll('.sidebar-nav-item');
-    navItems.forEach(item => {
-      if (item.getAttribute('onclick') && item.getAttribute('onclick').includes("'" + tab + "'")) {
-        item.classList.add('active');
+        <div class="loyalty-hero">
+          <div class="loyalty-hero-content">
+            <div class="loyalty-tier-badge">🥇 {{ profile.loyalty_tier|title }} Member</div>
+            <div class="loyalty-balance-label">Available Balance</div>
+            <div class="loyalty-balance">{{ profile.loyalty_points }}</div>
+            <div class="loyalty-balance-sub">Paws Points · Worth approx. ${{ reward_value }} in rewards</div>
+            <div class="loyalty-progress-row">
+              <div class="loyalty-progress-track">
+                <div class="loyalty-progress-fill" style="width: 45%;"></div>
+              </div>
+              <div class="loyalty-progress-label">Next tier awaits</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SECURITY / MFA ── -->
+      <div class="tab-panel" id="tab-security">
+        <div class="page-header">
+          <div class="page-overline">My Account</div>
+          <h1 class="page-title">Security</h1>
+          <p class="page-subtitle">Manage your account security settings, including two-factor authentication.</p>
+        </div>
+
+        <div class="profile-grid">
+          <div>
+            <!-- MFA Card -->
+            <div class="card" style="padding:28px; margin-bottom:24px;">
+              <div style="display:flex; align-items:flex-start; gap:20px;">
+                <div style="font-size:36px; line-height:1;">🔐</div>
+                <div style="flex:1;">
+                  <div style="font-size:16px; font-weight:700; color:var(--green-dark); margin-bottom:6px;">Two-Factor
+                    Authentication (2FA)</div>
+                  <p style="font-size:13px; color:var(--gray-mid); line-height:1.65; margin-bottom:16px;">Add a second
+                    layer of protection to your account. Each sign-in will require a one-time code from your
+                    authenticator app.</p>
+                  {% if profile.mfa_enabled %}
+                  <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+                    <span
+                      style="display:inline-flex; align-items:center; gap:6px; background:rgba(39,174,96,0.1); border:1px solid rgba(39,174,96,0.3); color:#27AE60; padding:6px 14px; border-radius:20px; font-size:12px; font-weight:700;">✓
+                      2FA Enabled</span>
+                  </div>
+                  <form method="POST" action="{% url 'mfa_disable' %}"
+                    onsubmit="return confirm('Are you sure you want to disable two-factor authentication? This will make your account less secure.');">
+                    {% csrf_token %}
+                    <button type="submit" class="danger-btn" style="font-size:12px;">Disable 2FA</button>
+                  </form>
+                  {% else %}
+                  <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+                    <span
+                      style="display:inline-flex; align-items:center; gap:6px; background:rgba(192,57,43,0.08); border:1px solid rgba(192,57,43,0.2); color:#C0392B; padding:6px 14px; border-radius:20px; font-size:12px; font-weight:700;">✗
+                      Not Enabled</span>
+                    <span style="font-size:12px; color:var(--gray-mid);">We recommend enabling 2FA for all
+                      accounts.</span>
+                  </div>
+                  <a href="{% url 'mfa_setup' %}" class="save-btn"
+                    style="display:inline-block; padding:11px 28px; text-decoration:none;">Enable Two-Factor
+                    Authentication</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+
+            <!-- Password Change -->
+            <div class="card" style="padding:28px;">
+              <div style="display:flex; align-items:flex-start; gap:20px;">
+                <div style="font-size:36px; line-height:1;">🔑</div>
+                <div style="flex:1;">
+                  <div style="font-size:16px; font-weight:700; color:var(--green-dark); margin-bottom:6px;">Password
+                  </div>
+                  <p style="font-size:13px; color:var(--gray-mid); line-height:1.65; margin-bottom:16px;">Change your
+                    password or recover access if you've forgotten it.</p>
+                  <a href="{% url 'password_reset' %}" class="trip-action-btn trip-btn-outline"
+                    style="display:inline-block; text-decoration:none;">Change Password</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sidebar info -->
+          <div>
+            <div class="card" style="padding:24px;">
+              <div
+                style="font-size:13px; font-weight:700; color:var(--green-dark); margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid var(--cream-mid);">
+                🛡️ Security Score</div>
+              <div class="psb-stat-row"><span class="psb-stat-key">Password</span><span class="psb-stat-val"
+                  style="color:var(--green-light)">✓ Set</span></div>
+              <div class="psb-stat-row"><span class="psb-stat-key">Two-Factor Auth</span>
+                <span class="psb-stat-val"
+                  style="color:{% if profile.mfa_enabled %}var(--green-light){% else %}#C0392B{% endif %}">
+                  {% if profile.mfa_enabled %}✓ Active{% else %}✗ Off{% endif %}
+                </span>
+              </div>
+              <div class="psb-stat-row"><span class="psb-stat-key">Last Sign-in</span><span class="psb-stat-val">{{
+                  request.user.last_login|date:"d M Y" }}</span></div>
+              <div class="psb-stat-row" style="border-bottom:none;"><span class="psb-stat-key">Member Since</span><span
+                  class="psb-stat-val">{{ request.user.date_joined|date:"M Y" }}</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.sidebar-nav-item').forEach(i => i.classList.remove('active'));
+      document.getElementById('tab-' + tab).classList.add('active');
+      const navItems = document.querySelectorAll('.sidebar-nav-item');
+      navItems.forEach(item => {
+        if (item.getAttribute('onclick') && item.getAttribute('onclick').includes("'" + tab + "'")) {
+          item.classList.add('active');
+        }
+      });
+      document.title = {
+        trips: 'My Trips — SUCCESSFUL LUXURY SAFARIS',
+        wishlist: 'Wishlist — SUCCESSFUL LUXURY SAFARIS',
+        orders: 'My Orders — SUCCESSFUL LUXURY SAFARIS',
+        documents: 'Documents — SUCCESSFUL LUXURY SAFARIS',
+        profile: 'Profile — SUCCESSFUL LUXURY SAFARIS',
+        notifications: 'Notifications — SUCCESSFUL LUXURY SAFARIS',
+        loyalty: 'Paws Points — SUCCESSFUL LUXURY SAFARIS',
+      }[tab] || 'Dashboard — SUCCESSFUL LUXURY SAFARIS';
+    }
+
+    function switchTripsTab(tab, el) {
+      document.querySelectorAll('.trips-sub-tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      document.getElementById('trips-upcoming').style.display = tab === 'upcoming' ? 'flex' : 'none';
+      document.getElementById('trips-past').style.display = tab === 'past' ? 'flex' : 'none';
+    }
+
+    function promptReview(form, pkgId) {
+      const comment = prompt("Tell us about your experience:");
+      if (comment) {
+        form.querySelector('input[name="comment"]').value = comment;
+        return true;
       }
-    });
-    document.title = {
-      trips: 'My Trips — SUCCESSFUL LUXURY SAFARIS',
-      wishlist: 'Wishlist — SUCCESSFUL LUXURY SAFARIS',
-      documents: 'Documents — SUCCESSFUL LUXURY SAFARIS',
-      profile: 'Profile — SUCCESSFUL LUXURY SAFARIS',
-      notifications: 'Notifications — SUCCESSFUL LUXURY SAFARIS',
-      loyalty: 'Paws Points — SUCCESSFUL LUXURY SAFARIS',
-    }[tab] || 'Dashboard — SUCCESSFUL LUXURY SAFARIS';
-  }
-
-  // ── TRIPS SUB-TABS ──
-  function switchTripsTab(tab, el) {
-    document.querySelectorAll('.trips-sub-tab').forEach(t => t.classList.remove('active'));
-    el.classList.add('active');
-    document.getElementById('trips-upcoming').style.display = tab === 'upcoming' ? 'flex' : 'none';
-    document.getElementById('trips-past').style.display = tab === 'past' ? 'flex' : 'none';
-  }
-
-  // ── WISHLIST REMOVE ──
-  function removeWishlist(btn) {
-    const card = btn.closest('.wl-card');
-    card.style.transition = 'opacity 0.3s, transform 0.3s';
-    card.style.opacity = '0'; card.style.transform = 'scale(0.95)';
-    setTimeout(() => card.remove(), 300);
-  }
-
-  // ── PROFILE SAVE ──
-  function saveProfile() {
-    const btn = event.target;
-    const orig = btn.textContent;
-    btn.textContent = '✓ Saved';
-    btn.style.background = 'var(--green-light)';
-    setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 2000);
-  }
-
-  // ── NOTIFICATIONS ──
-  function markAllRead() {
-    document.querySelectorAll('.notif-item.unread').forEach(n => {
-      n.classList.remove('unread');
-      const dot = n.querySelector('.notif-unread-dot');
-      if (dot) dot.remove();
-    });
-    document.querySelectorAll('.nav-badge').forEach(b => {
-      if (b.closest('.sidebar-nav-item') && b.closest('.sidebar-nav-item').getAttribute('onclick').includes('notifications')) {
-        b.remove();
-      }
-    });
-  }
-
-  function filterNotifs(type, el) {
-    document.querySelectorAll('.notif-filter').forEach(f => f.classList.remove('active'));
-    el.classList.add('active');
-    document.querySelectorAll('.notif-item').forEach(n => {
-      n.style.display = (type === 'all' || n.dataset.type === type) ? 'flex' : 'none';
-    });
-  }
-
-  // ── LOYALTY REDEEM ──
-  function redeemReward(btn, cost) {
-    const balance = parseInt(document.querySelector('.loyalty-balance').textContent.replace(/,/g, ''));
-    if (balance < cost) { alert('Insufficient Paws Points.'); return; }
-    if (!confirm('Redeem ' + cost + ' Paws Points for this reward?')) return;
-    const newBal = (balance - cost).toLocaleString();
-    document.querySelector('.loyalty-balance').textContent = newBal;
-    btn.textContent = '✓ Redeemed';
-    btn.disabled = true;
-    btn.style.background = 'var(--green-light)';
-    btn.style.color = 'white';
-    btn.style.borderColor = 'var(--green-light)';
-  }
-
-  // ── COUNTDOWN ──
-  (function() {
-    const departure = new Date('2026-07-12');
-    const today = new Date();
-    const diff = Math.ceil((departure - today) / (1000*60*60*24));
-    const el = document.getElementById('days-countdown');
-    if (el && diff > 0) el.textContent = diff;
-  })();
-
-  // ── URL PARAM ──
-  const p = new URLSearchParams(window.location.search);
-  if (p.get('tab')) switchTab(p.get('tab'));
-</script>
+      return false;
+    }
+  </script>
 </body>
+
 </html>

@@ -56,7 +56,7 @@
 
 <nav>
   <div class="nav-logo">
-    <div class="nav-logo-mark">SS</div>
+    <a href="/"><img src="/static/images/logo.png" alt="SS" style="height:40px; border-radius:50%; margin-right: 12px;"></a>
     <div class="nav-logo-text">
       <h2>SUCCESSFUL LUXURY SAFARIS</h2>
       <p>Luxury African Experiences</p>
@@ -73,29 +73,25 @@
   </div>
 
   <div class="doc-section">
-    <h2 class="section-title">🎫 Essential Vouchers</h2>
+    <h2 class="section-title">🎫 Your Safari Documents</h2>
     <div class="doc-grid">
-      <div class="doc-card">
-        <div class="doc-icon">✈️</div>
+      {% for doc in documents %}
+      <div class="doc-card" onclick="window.location.href='{{ doc.file.url }}'">
+        <div class="doc-icon">📄</div>
         <div class="doc-info">
-          <div class="doc-name">Flight Itinerary & E-Tickets</div>
-          <div class="doc-meta">PDF · 2.4 MB · Updated 2 days ago</div>
+          <div class="doc-name">{{ doc.title }}</div>
+          <div class="doc-meta">{{ doc.document_type }} · {{ doc.uploaded_at|date:"d M Y" }}</div>
         </div>
         <div class="doc-download">📥</div>
       </div>
-      <div class="doc-card">
-        <div class="doc-icon">🏕️</div>
-        <div class="doc-info">
-          <div class="doc-name">Lodge & Camp Vouchers</div>
-          <div class="doc-meta">PDF · 1.1 MB · Valid for 15-22 Aug</div>
-        </div>
-        <div class="doc-download">📥</div>
-      </div>
+      {% empty %}
+      <p style="color: var(--gray-light);">No documents available yet. Your vouchers will appear here once your booking is confirmed.</p>
+      {% endfor %}
     </div>
   </div>
 
   <div class="doc-section">
-    <h2 class="section-title">📖 Preparation Guides</h2>
+    <h2 class="section-title">📖 Preparation Guides (Sample)</h2>
     <div class="doc-grid">
       <div class="doc-card">
         <div class="doc-icon">🎒</div>

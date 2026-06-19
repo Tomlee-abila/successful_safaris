@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Create Your Account — SUCCESSFUL LUXURY SAFARIS{% endblock %}
+
+{% block extra_style %}
+  .auth-section { padding: 80px 48px; background: var(--cream); min-height: 80vh; display: flex; align-items: center; justify-content: center; }
+  .auth-card { background: white; border-radius: 16px; padding: 48px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); border: 1px solid var(--cream-mid); width: 100%; max-width: 500px; }
+  .auth-h { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--green-dark); margin-bottom: 8px; text-align: center; }
+  .auth-p { font-size: 14px; color: var(--gray-mid); text-align: center; margin-bottom: 32px; }
+  
+  .form-group { margin-bottom: 20px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--gray-mid); margin-bottom: 8px; }
+  .form-input { width: 100%; padding: 14px; border: 1.5px solid var(--cream-mid); border-radius: 6px; font-size: 14px; outline: none; transition: 0.2s; }
+  .form-input:focus { border-color: var(--gold); }
+  
+  .btn-auth { background: var(--green-dark); color: white; padding: 16px; border-radius: 6px; font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; width: 100%; margin-top: 10px; border: none; cursor: pointer; }
+  .btn-auth:hover { background: var(--green-mid); transform: translateY(-1px); }
+  
+  .auth-links { display: flex; justify-content: center; margin-top: 24px; font-size: 13px; color: var(--gray-mid); font-weight: 600; }
+  .auth-links a { color: var(--green-dark); margin-left: 8px; }
+{% endblock %}
+
+{% block content %}
+<section class="auth-section">
+  <div class="auth-card">
+    <h1 class="auth-h">Join the Wild</h1>
+    <p class="auth-p">Create an account to start planning your bespoke luxury safari experience.</p>
+    
+    <form method="POST">
+      {% csrf_token %}
+      {% if errors %}
+      <div style="color: #C0392B; font-size: 13px; margin-bottom: 20px; background: #FDEDEC; padding: 12px; border-radius: 6px;">
+        {% for field, error_list in errors.items %}
+          {% for error in error_list %}<li>{{ error }}</li>{% endfor %}
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="first_name" class="form-label">First Name</label>
+          <input type="text" id="first_name" name="first_name" class="form-input" placeholder="Jane" required>
+        </div>
+        <div class="form-group">
+          <label for="last_name" class="form-label">Last Name</label>
+          <input type="text" id="last_name" name="last_name" class="form-input" placeholder="Doe" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" id="username" name="username" class="form-input" placeholder="janedoe" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="form-label">Email Address</label>
+        <input type="email" id="email" name="email" class="form-input" placeholder="jane@example.com" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" id="password" name="password" class="form-input" placeholder="••••••••" required>
+      </div>
+
+      <button type="submit" class="btn-auth">Create Account</button>
+    </form>
+
+    <div class="auth-links">
+      Already have an account? <a href="{% url 'auth' %}">Sign In</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

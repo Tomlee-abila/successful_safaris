@@ -5,6 +5,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{% block title %}Successful Luxury Safaris{% endblock %}</title>
+<link rel="manifest" href="{% static 'manifest.json' %}">
+<meta name="theme-color" content="#1A3A2A">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -71,9 +73,24 @@
   }
   
   {% block extra_style %}{% endblock %}
+  /* ── LUXURY ANIMATIONS ── */
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .animate-up { animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+  .animate-fade { animation: fadeIn 1s ease forwards; }
+
+  /* ── RESPONSIVE FIXES ── */
+  @media (max-width: 1024px) {
+    .nav-links { gap: 20px; }
+    .nav-links a { font-size: 11px; }
+  }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .header { padding: 0 24px; }
+  }
 </style>
 </head>
-<body>
+<body class="animate-fade">
 
 <div class="nav-wrapper">
   <nav>
@@ -85,17 +102,17 @@
       </div>
     </a>
     <ul class="nav-links">
-      <li><a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
-      <li><a href="/destinations/" class="{% if '/destinations/' in request.path %}active{% endif %}">Destinations</a></li>
-      <li><a href="/packages/" class="{% if '/packages/' in request.path %}active{% endif %}">Packages</a></li>
-      <li><a href="/shop/" class="{% if '/shop/' in request.path %}active{% endif %}">Shop</a></li>
-      <li><a href="/about/" class="{% if '/about/' in request.path %}active{% endif %}">About</a></li>
-      <li><a href="/contact/" class="{% if '/contact/' in request.path %}active{% endif %}">Contact</a></li>
+      <li><a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a></li>
+      <li><a href="{% url 'destinations' %}" class="{% if 'destinations' in request.path %}active{% endif %}">Destinations</a></li>
+      <li><a href="{% url 'packages' %}" class="{% if 'packages' in request.path %}active{% endif %}">Packages</a></li>
+      <li><a href="{% url 'shop' %}" class="{% if 'shop' in request.path %}active{% endif %}">Shop</a></li>
+      <li><a href="{% url 'about' %}" class="{% if 'about' in request.path %}active{% endif %}">About</a></li>
+      <li><a href="{% url 'contact' %}" class="{% if 'contact' in request.path %}active{% endif %}">Contact</a></li>
     </ul>
     <div class="nav-right">
       <div class="nav-cart" onclick="openCart()" style="cursor:pointer;">🛒<span class="cart-badge" id="base-cart-badge">0</span></div>
-      <a href="/auth/" class="nav-user" style="color: white; font-size: 13px;">👤 Sign In</a>
-      <a href="/booking/" class="nav-cta">Book Now</a>
+      <a href="{% url 'auth' %}" class="nav-user" style="color: white; font-size: 13px;">👤 Sign In</a>
+      <a href="{% url 'booking' %}" class="nav-cta">Book Now</a>
     </div>
   </nav>
 </div>
@@ -115,12 +132,21 @@
     <div style="display: flex; justify-content: space-between; margin-bottom: 16px; font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--green-dark);">
       <span>Total</span><span id="cart-total-val">$0</span>
     </div>
-    <a href="/checkout/"><button style="background: var(--gold); color: var(--green-dark); padding: 16px; width: 100%; border-radius: 6px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; border: none; cursor: pointer;">Proceed to Checkout →</button></a>
+    <a href="{% url 'checkout' %}"><button style="background: var(--gold); color: var(--green-dark); padding: 16px; width: 100%; border-radius: 6px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; border: none; cursor: pointer;">Proceed to Checkout →</button></a>
   </div>
 </div>
-
 <script>
+  // ── PWA REGISTRATION ──
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('{% static "service-worker.js" %}')
+        .then(reg => console.log('Service Worker Registered'))
+        .catch(err => console.log('Service Worker Failed', err));
+    });
+  }
+
   function openCart() {
+...
     document.getElementById('cart-drawer').style.right = '0';
     document.getElementById('cart-overlay').style.display = 'block';
     setTimeout(() => document.getElementById('cart-overlay').style.opacity = '1', 10);

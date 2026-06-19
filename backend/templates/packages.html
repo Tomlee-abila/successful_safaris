@@ -14,7 +14,7 @@
   .pkg-hero p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 20px; color: var(--gold-light); margin-top: 12px; }
 
   /* ── FILTER BAR ── */
-  .filter-bar { background: white; border-bottom: 1px solid var(--cream-mid); padding: 20px 48px; sticky; top: 80px; z-index: 100; display: flex; align-items: center; gap: 32px; }
+  .filter-bar { background: white; border-bottom: 1px solid var(--cream-mid); padding: 20px 48px; position: sticky; top: 80px; z-index: 100; display: flex; align-items: center; gap: 32px; }
   .filter-group { display: flex; align-items: center; gap: 12px; }
   .filter-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--gray-mid); }
   .filter-select { padding: 8px 16px; border: 1.5px solid var(--cream-mid); border-radius: 4px; font-size: 13px; color: var(--green-dark); outline: none; }
@@ -38,7 +38,7 @@
   .card-title { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--green-dark); margin-bottom: 12px; }
   .card-desc { font-size: 14px; color: var(--gray-mid); line-height: 1.6; margin-bottom: 24px; height: 68px; overflow: hidden; }
   .card-features { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-  .feature-tag { font-size: 11px; background: var(--green-pale); color: var(--green-dark); padding: 4px 10px; border-radius: 4px; border: 1px solid rgba(45,90,61,0.1); }
+  .feature-tag { font-size: 11px; background: #e9f2ee; color: var(--green-dark); padding: 4px 10px; border-radius: 4px; border: 1px solid rgba(45,90,61,0.1); }
   
   .card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--cream-mid); padding-top: 24px; }
   .price-label { font-size: 11px; color: var(--gray-light); text-transform: uppercase; }
@@ -82,71 +82,33 @@
 <section class="packages-section">
   <div class="packages-grid">
     
-    <!-- Package 1 -->
-    <div class="package-card" onclick="window.location='/packages/detail/'">
+    {% for pkg in packages %}
+    <div class="package-card" onclick="window.location='{% url 'package_detail' pkg.id %}'">
       <div class="card-img-wrapper">
-        <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80" alt="Masai Mara">
-        <span class="card-badge">Bestseller</span>
+        <img src="{% if pkg.featured_image %}{{ pkg.featured_image.url }}{% else %}https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80{% endif %}" alt="{{ pkg.title }}">
+        {% if pkg.package_code == 'SS-PKG-001' %}<span class="card-badge">Bestseller</span>{% endif %}
       </div>
       <div class="card-body">
-        <div class="card-tag">7 Days · Kenya</div>
-        <h2 class="card-title">Great Migration Safari</h2>
-        <p class="card-desc">Witness nature's greatest spectacle in the heart of the Masai Mara. Private guides and luxury tented camps included.</p>
+        <div class="card-tag">{{ pkg.duration_days }} Days · {% for loc in pkg.locations.all|slice:":1" %}{{ loc.destination.name }}{% endfor %}</div>
+        <h2 class="card-title">{{ pkg.title }}</h2>
+        <p class="card-desc">{{ pkg.description|truncatewords:20 }}</p>
         <div class="card-features">
           <span class="feature-tag">Private Guide</span>
           <span class="feature-tag">All Inclusive</span>
-          <span class="feature-tag">Air Transfers</span>
+          <span class="feature-tag">Luxury Accommodation</span>
         </div>
         <div class="card-footer">
-          <div><div class="price-label">from</div><div class="price-val">$4,850</div></div>
-          <span class="btn-view">View Detail</span>
+          <div>
+            <div class="price-label">Per Person</div>
+            <div class="price-val">${{ pkg.base_price|floatformat:0 }}</div>
+          </div>
+          <span class="btn-view">Details →</span>
         </div>
       </div>
     </div>
-
-    <!-- Package 2 -->
-    <div class="package-card">
-      <div class="card-img-wrapper">
-        <img src="https://images.unsplash.com/photo-1543874049-af2a0bbe3b1a?auto=format&fit=crop&w=800&q=80" alt="Serengeti">
-        <span class="card-badge">Limited</span>
-      </div>
-      <div class="card-body">
-        <div class="card-tag">10 Days · Tanzania</div>
-        <h2 class="card-title">Serengeti Grand Safari</h2>
-        <p class="card-desc">Explore the endless plains of the Serengeti and the magnificent Ngorongoro Crater in unparalleled style.</p>
-        <div class="card-features">
-          <span class="feature-tag">Balloon Flight</span>
-          <span class="feature-tag">Crater Tour</span>
-          <span class="feature-tag">Luxury Villa</span>
-        </div>
-        <div class="card-footer">
-          <div><div class="price-label">from</div><div class="price-val">$7,400</div></div>
-          <span class="btn-view">View Detail</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Package 3 -->
-    <div class="package-card">
-      <div class="card-img-wrapper">
-        <img src="https://images.unsplash.com/photo-1530126483408-aa533e55bdb2?auto=format&fit=crop&w=800&q=80" alt="Rwanda">
-        <span class="card-badge">Exclusive</span>
-      </div>
-      <div class="card-body">
-        <div class="card-tag">5 Days · Rwanda</div>
-        <h2 class="card-title">Gorilla Trekking</h2>
-        <p class="card-desc">An intimate encounter with the mountain gorillas of the Volcanoes National Park. A life-altering journey.</p>
-        <div class="card-features">
-          <span class="feature-tag">Permits Incl.</span>
-          <span class="feature-tag">Private Ranger</span>
-          <span class="feature-tag">Eco-Lodge</span>
-        </div>
-        <div class="card-footer">
-          <div><div class="price-label">from</div><div class="price-val">$6,200</div></div>
-          <span class="btn-view">View Detail</span>
-        </div>
-      </div>
-    </div>
+    {% empty %}
+    <p>We are currently scouting new exclusive routes. Please check back soon.</p>
+    {% endfor %}
 
   </div>
 </section>

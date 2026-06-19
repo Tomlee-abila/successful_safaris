@@ -19,7 +19,6 @@
   .summary-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 15px; }
   .summary-row:last-child { border-bottom: none; font-weight: 700; font-size: 18px; color: var(--green-dark); }
 {% endblock %}
-
 {% block content %}
 <div class="conf-hero">
   <div class="conf-icon">✓</div>
@@ -29,20 +28,36 @@
 
 <div class="conf-container">
   <div class="conf-card">
+    {% if booking or order %}
     <div style="text-align: center;">
-      <p style="color:var(--gray-mid);">Order Reference</p>
-      <div class="order-ref">#SLS-2026-0842</div>
+      <p style="color:var(--gray-mid);">Reference</p>
+      <div class="order-ref">
+        {% if booking %}#{{ booking.booking_number }}{% endif %}
+        {% if booking and order %} & {% endif %}
+        {% if order %}#ORD-{{ order.id }}{% endif %}
+      </div>
     </div>
 
     <div class="conf-section">
-      <h2 class="section-h">Your Selected Experience</h2>
-      <div class="summary-row"><span>Masai Mara 7-Day Luxury Safari</span><span>$9,700</span></div>
-      <div class="summary-row"><span>Safari Field Jacket</span><span>$189</span></div>
-      <div class="summary-row"><span>Serengeti Balloon Flight</span><span>$960</span></div>
-      <div class="summary-row"><span>Total Paid</span><span>$10,849</span></div>
+      <h2 class="section-h">Journey & Gear Summary</h2>
+      {% if booking %}
+      <div class="summary-row"><span>{{ booking.package.title }}</span><span>${{ booking.package.base_price|floatformat:0 }}</span></div>
+      {% endif %}
+      {% if order %}
+        {% for item in order.items.all %}
+        <div class="summary-row"><span>{{ item.quantity }} x {{ item.product.name }}</span><span>${{ item.price_at_purchase|floatformat:0 }}</span></div>
+        {% endfor %}
+      {% endif %}
+      <div class="summary-row"><span>Total Paid</span><span>${% if booking %}{{ booking.total_amount|floatformat:0 }}{% else %}{{ order.total_amount|floatformat:0 }}{% endif %}</span></div>
     </div>
+    {% else %}
+    <div style="text-align: center;">
+       <p>No recent booking found. Please check your dashboard.</p>
+    </div>
+    {% endif %}
 
     <div class="conf-section">
+...
       <h2 class="section-h">Next Steps</h2>
       <ul style="list-style: none; padding: 0;">
         <li style="margin-bottom: 20px; display: flex; gap: 20px;">

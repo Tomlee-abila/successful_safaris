@@ -37,24 +37,28 @@
 
 <div class="contact-container">
   <main class="contact-card">
-    <form>
+    {% if success %}
+    <div style="background:var(--green-pale); color:var(--green-dark); padding:24px; border-radius:8px; text-align:center; margin-bottom:32px; border:1px solid var(--green-light);">
+      <h3 style="font-family:'Playfair Display',serif; margin-bottom:8px;">Message Received</h3>
+      <p style="font-size:14px;">Your inquiry has been sent to our expert consultants. We will be in touch within 24 hours.</p>
+    </div>
+    {% endif %}
+
+    <form method="POST">
+      {% csrf_token %}
       <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
         <div class="form-group">
-          <label class="form-label">First Name</label>
-          <input type="text" class="form-input" placeholder="Jane">
+          <label for="name" class="form-label">Full Name</label>
+          <input type="text" id="name" name="name" class="form-input" placeholder="Jane Doe" value="{{ request.user.get_full_name }}" required>
         </div>
         <div class="form-group">
-          <label class="form-label">Last Name</label>
-          <input type="text" class="form-input" placeholder="Doe">
+          <label for="email" class="form-label">Email Address</label>
+          <input type="email" id="email" name="email" class="form-input" placeholder="jane.doe@example.com" value="{{ request.user.email }}" required>
         </div>
       </div>
       <div class="form-group">
-        <label class="form-label">Email Address</label>
-        <input type="email" class="form-input" placeholder="jane.doe@example.com">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Subject</label>
-        <select class="form-input">
+        <label for="subject" class="form-label">Subject</label>
+        <select id="subject" name="subject" class="form-input">
           <option>Custom Safari Inquiry</option>
           <option>Shop & Gear Support</option>
           <option>Press & Media</option>
@@ -62,8 +66,8 @@
         </select>
       </div>
       <div class="form-group">
-        <label class="form-label">Your Message</label>
-        <textarea class="form-textarea" placeholder="Tell us about your dream adventure..."></textarea>
+        <label for="message" class="form-label">Your Message</label>
+        <textarea id="message" name="message" class="form-textarea" placeholder="Tell us about your dream adventure..." required></textarea>
       </div>
       <button type="submit" class="btn-submit">Send Message →</button>
     </form>
