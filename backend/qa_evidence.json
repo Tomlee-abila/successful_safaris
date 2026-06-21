@@ -73,6 +73,14 @@
   },
   {
     "Category": "Route",
+    "Name": "dashboard",
+    "URL": "/users/dashboard/",
+    "Status": "Working",
+    "Code": 200,
+    "Issues": []
+  },
+  {
+    "Category": "Route",
     "Name": "admin_dashboard",
     "URL": "/inventory/dashboard/",
     "Status": "Working",
