@@ -19,9 +19,12 @@ The project follows a Domain-Driven Multi-App architecture:
 
 ## Setup & Running the Application
 
-### 1. Environment Setup
-Ensure you have Python 3.12+ installed.
+### 1. Database & Environment Setup
+Ensure you have Python 3.12+ and a PostgreSQL server running (or start the containerized Postgres database in the background):
 ```bash
+# Start containerized PostgreSQL database
+docker-compose up -d db
+
 # Navigate to backend
 cd backend
 
@@ -63,3 +66,7 @@ The project includes a deep functional QA script:
 python deep_qa.py
 ```
 This script verifies routes, API endpoints, and basic workflow integrity.
+
+## Deployment & Operations
+For detailed instructions on how to configure and deploy this application in both development and production (using Docker), refer to the [Deployment & Operations Guide](file:///home/tomlee/Desktop/dev/Successful%20Safaris/docs/DEPLOYMENT.md).
+
