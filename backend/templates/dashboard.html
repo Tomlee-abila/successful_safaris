@@ -1835,8 +1835,8 @@
       </nav>
 
       <div class="sidebar-footer">
-        <a href="/booking/" class="sidebar-book-btn">+ Book a New Safari</a>
-        <div class="sidebar-footer-link" onclick="window.location='/contact/'">
+        <a href="{% url 'booking' %}" class="sidebar-book-btn">+ Book a New Safari</a>
+        <div class="sidebar-footer-link" onclick="window.location='{% url 'contact' %}'">
           <span>💬</span> Contact Your Consultant
         </div>
         <a href="{% url 'logout' %}" class="sidebar-footer-link">
@@ -1898,7 +1898,7 @@
               </div>
               <a onclick="switchTab('documents')" class="trip-action-btn trip-btn-primary" style="cursor:pointer">View
                 Documents</a>
-              <a href="/contact/" class="trip-action-btn trip-btn-outline">Contact Guide</a>
+              <a href="{% url 'contact' %}" class="trip-action-btn trip-btn-outline">Contact Guide</a>
             </div>
           </div>
           {% empty %}

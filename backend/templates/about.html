@@ -225,7 +225,7 @@
     </p>
     <div class="hero-actions">
       <a href="#story" class="btn-hero-primary">Our Story</a>
-      <a href="/contact/" class="btn-hero-secondary">Meet the Team</a>
+      <a href="{% url 'contact' %}" class="btn-hero-secondary">Meet the Team</a>
     </div>
   </div>
   <div class="hero-scroll">
@@ -513,8 +513,8 @@
     <p class="cta-strip-sub">Talk to a specialist — no pressure, just genuine African expertise.</p>
   </div>
   <div class="cta-strip-actions">
-    <a href="/booking/" class="cta-btn-dark">Plan My Safari</a>
-    <a href="/contact/" class="cta-btn-outline">💬 Get in Touch</a>
+    <a href="{% url 'booking' %}" class="cta-btn-dark">Plan My Safari</a>
+    <a href="{% url 'contact' %}" class="cta-btn-outline">💬 Get in Touch</a>
   </div>
 </div>
 {% endblock %}

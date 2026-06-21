@@ -1065,7 +1065,7 @@
     </a>
 
     <!-- Booking -->
-    <a href="/booking/" class="deliverable-card">
+    <a href="{% url 'booking' %}" class="deliverable-card">
       <div class="card-preview preview-booking">
         <div class="card-preview-pattern"></div>
         <span class="card-preview-icon">📅</span>
@@ -1301,7 +1301,7 @@
     <div class="quicklinks-links">
       <a href="/" class="ql-btn featured">🏠 Homepage</a>
       <a href="/shop/" class="ql-btn">🛒 Shop</a>
-      <a href="/booking/" class="ql-btn">📅 Booking</a>
+      <a href="{% url 'booking' %}" class="ql-btn">📅 Booking</a>
       <a href="/checkout/" class="ql-btn">💳 Checkout</a>
       <a href="admin-/dashboard/" class="ql-btn">⚙️ Admin</a>
       <a href="/sitemap/" class="ql-btn">🗺️ Sitemap</a>

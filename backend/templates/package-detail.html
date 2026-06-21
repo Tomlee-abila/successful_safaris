@@ -97,7 +97,7 @@
         <li style="margin-bottom:12px; display:flex; justify-content:space-between;"><span>Availability</span><span>June 2026 — Dec 2026</span></li>
       </ul>
 
-      <form action="/booking/" method="POST">
+      <form action="{% url 'booking' %}" method="POST">
         {% csrf_token %}
         <input type="hidden" name="package" value="{{ package.id }}">
         <input type="hidden" name="step" value="1">

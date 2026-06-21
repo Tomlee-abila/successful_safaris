@@ -730,7 +730,7 @@
         <p class="hero-subtitle">Where sweeping plains meet the greatest wildlife spectacle on Earth. Fourteen national parks. Five distinct ecosystems. One unmistakable soul.</p>
         <div class="hero-actions">
           <a href="/packages/" class="btn-hero-primary">View Kenya Packages ›</a>
-          <a href="/booking/" class="btn-hero-ghost">Plan My Safari</a>
+          <a href="{% url 'booking' %}" class="btn-hero-ghost">Plan My Safari</a>
         </div>
       </div>
       <div class="hero-right">
@@ -855,7 +855,7 @@
       </div>
       <div class="intro-actions">
         <a href="/packages/" class="btn-solid-gold">Browse Kenya Packages ›</a>
-        <a href="/contact/" class="btn-outline-dark">Speak to an Expert</a>
+        <a href="{% url 'contact' %}" class="btn-outline-dark">Speak to an Expert</a>
       </div>
     </div>
   </div>
@@ -1264,8 +1264,8 @@
             <div class="sidebar-amount">$6,200</div>
             <div class="sidebar-pp">per person, fully inclusive</div>
           </div>
-          <a href="/booking/" class="sidebar-btn">Book This Itinerary</a>
-          <a href="/contact/" class="sidebar-btn-ghost">Customise This Trip</a>
+          <a href="{% url 'booking' %}" class="sidebar-btn">Book This Itinerary</a>
+          <a href="{% url 'contact' %}" class="sidebar-btn-ghost">Customise This Trip</a>
         </div>
       </div>
     </div>
@@ -1414,7 +1414,7 @@
             <div class="package-price">$2,800</div>
             <div class="package-pp">per person</div>
           </div>
-          <a href="/booking/" class="pkg-btn">Book Now</a>
+          <a href="{% url 'booking' %}" class="pkg-btn">Book Now</a>
         </div>
       </div>
     </div>
@@ -1442,7 +1442,7 @@
             <div class="package-price">$6,200</div>
             <div class="package-pp">per person</div>
           </div>
-          <a href="/booking/" class="pkg-btn">Book Now</a>
+          <a href="{% url 'booking' %}" class="pkg-btn">Book Now</a>
         </div>
       </div>
     </div>
@@ -1578,8 +1578,8 @@
     <h2 class="cta-title">Ready to witness<br>the <em>Migration</em>?</h2>
     <p class="cta-subtitle">Tell us your dates, your dreams, and your number of travellers — we'll design the rest.</p>
     <div class="cta-actions">
-      <a href="/booking/" class="btn-cta-primary">Start Planning Your Kenya Safari</a>
-      <a href="/contact/" class="btn-cta-ghost">Speak to a Kenya Expert</a>
+      <a href="{% url 'booking' %}" class="btn-cta-primary">Start Planning Your Kenya Safari</a>
+      <a href="{% url 'contact' %}" class="btn-cta-ghost">Speak to a Kenya Expert</a>
     </div>
   </div>
 </section>
