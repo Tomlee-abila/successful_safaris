@@ -1,0 +1,194 @@
+[
+  {
+    "Category": "Route",
+    "Name": "home",
+    "URL": "/",
+    "Status": "Working",
+    "Code": 200,
+    "Issues": []
+  },
+  {
+    "Category": "Route",
+    "Name": "about",
+    "URL": "/about/",
+    "Status": "Working",
+    "Code": 200,
+    "Issues": []
+  },
+  {
+    "Category": "Route",
+    "Name": "destinations",
+    "URL": "/destinations/",
+    "Status": "Working",
+    "Code": 200,
+    "Issues": []
+  },
+  {
+    "Category": "Route",
+    "Name": "packages",
+    "URL": "/packages/",
+    "Status": "Working",
+    "Code": 200,
+    "Issues": []
+  },
+  {
+    "Category": "Route",
+    "Name": "shop",
+    "URL": "/shop/",
+    "Status": "Working",
+    "Code": 200,
+    "Issues": []
+  },
+  {
+    "Category": "Route",
+    "Name": "contact",
+    "URL": "/crm/contact/",
+    "Status": "Working",
+    "Code": 200,
+    "Issues": []
+  },
+  {
+    "Category": "Route",
+    "Name": "auth",
+    "URL": "/users/auth/",
+    "Status": "Failed",
+    "Code": 302,
+    "Issues": []
+  },
+  {
+    "Category": "Route",
+    "Name": "booking",
+    "URL": "/bookings/booking/",
+    "Status": "Working",
+    "Code": 200,
+    "Issues": []
+  },
+  {
+    "Category": "Route",
+    "Name": "checkout",
+    "URL": "/bookings/checkout/",
+    "Status": "Failed",
+    "Code": 302,
+    "Issues": []
+  },
+  {
+    "Category": "Route",
+    "Name": "dashboard",
+    "URL": "/users/dashboard/",
+    "Status": "Working",
+    "Code": 200,
+    "Issues": []
+  },
+  {
+    "Category": "Route",
+    "Name": "admin_dashboard",
+    "URL": "/inventory/dashboard/",
+    "Status": "Working",
+    "Code": 302,
+    "Issues": []
+  },
+  {
+    "Category": "Route",
+    "Name": "sitemap",
+    "URL": "/sitemap/",
+    "Status": "Working",
+    "Code": 200,
+    "Issues": []
+  },
+  {
+    "Category": "Route",
+    "Name": "trip_documents",
+    "URL": "/crm/trip-documents/",
+    "Status": "Working",
+    "Code": 200,
+    "Issues": []
+  },
+  {
+    "Category": "Route",
+    "Name": "shopping_cart",
+    "URL": "/shop/cart/",
+    "Status": "Working",
+    "Code": 200,
+    "Issues": []
+  },
+  {
+    "Category": "Route",
+    "Name": "destination_detail",
+    "URL": "/destinations/33/",
+    "Status": "Working",
+    "Code": 200,
+    "Issues": []
+  },
+  {
+    "Category": "Route",
+    "Name": "package_detail",
+    "URL": "/packages/121/",
+    "Status": "Working",
+    "Code": 200,
+    "Issues": []
+  },
+  {
+    "Category": "Route",
+    "Name": "product_detail",
+    "URL": "/shop/product/321/",
+    "Status": "Working",
+    "Code": 200,
+    "Issues": []
+  },
+  {
+    "Category": "Workflow",
+    "Name": "Login",
+    "URL": "/users/auth/",
+    "Status": "Working",
+    "Code": 302,
+    "Issues": []
+  },
+  {
+    "Category": "Workflow",
+    "Name": "Booking",
+    "URL": "/bookings/booking/",
+    "Status": "Working",
+    "Code": 201,
+    "Issues": []
+  },
+  {
+    "Category": "Workflow",
+    "Name": "Contact",
+    "URL": "/crm/contact/",
+    "Status": "Working",
+    "Code": 302,
+    "Issues": []
+  },
+  {
+    "Category": "API",
+    "Name": "/inventory/api/pages/",
+    "URL": "/inventory/api/pages/",
+    "Status": "Working",
+    "Code": 200,
+    "Issues": []
+  },
+  {
+    "Category": "API",
+    "Name": "/inventory/api/modules/",
+    "URL": "/inventory/api/modules/",
+    "Status": "Working",
+    "Code": 200,
+    "Issues": []
+  },
+  {
+    "Category": "API",
+    "Name": "/inventory/api/permissions/",
+    "URL": "/inventory/api/permissions/",
+    "Status": "Working",
+    "Code": 200,
+    "Issues": []
+  },
+  {
+    "Category": "API",
+    "Name": "/api/schema/",
+    "URL": "/api/schema/",
+    "Status": "Working",
+    "Code": 200,
+    "Issues": []
+  }
+]
