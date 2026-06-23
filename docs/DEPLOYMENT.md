@@ -6,63 +6,70 @@ This guide details how to configure, run, and deploy the Successful Luxury Safar
 
 ## 1. Local Development Setup
 
-To run the application locally, follow these instructions:
+To run the application locally, follow these instructions. 
 
 ### Prerequisites
 - Python 3.12+
-- PostgreSQL database server (running locally or via Docker Compose)
+- Optional: PostgreSQL (if you want to test with a Postgres database; otherwise, the app defaults to SQLite automatically)
 
 ### Step-by-Step Setup
-1. **Start the PostgreSQL Service (via Docker Compose):**
-   To easily run PostgreSQL locally in the background without configuring a manual database server:
-   ```bash
-   docker-compose up -d db
-   ```
-   This spins up the database container on port `5432` matching the default project configuration.
-
-2. **Navigate to the Backend:**
+1. **Navigate to the Backend:**
    ```bash
    cd backend
    ```
 
-3. **Activate the Virtual Environment:**
+2. **Activate the Virtual Environment:**
    ```bash
    source venv/bin/activate
    ```
 
-4. **Install Dependencies:**
+3. **Install Dependencies:**
    ```bash
    pip install -r requirements.txt
    ```
 
-5. **Initialize the Database:**
-   Apply Django database migrations to the PostgreSQL database:
+4. **Initialize Environment Variables (`.env`):**
+   We provide a helper script to copy `.env.example` and automatically generate a secure `DJANGO_SECRET_KEY`:
+   ```bash
+   python setup_env.py
+   ```
+   By default, the `.env` file is set up to connect to PostgreSQL. If you want to use **SQLite** locally, simply open `.env` and comment out the lines starting with `DB_*`.
+
+5. **Start PostgreSQL Service (Optional):**
+   If you chose to use PostgreSQL in step 4, start the database service via Docker:
+   ```bash
+   docker-compose up -d db
+   ```
+
+6. **Initialize the Database:**
+   Apply database migrations:
    ```bash
    python manage.py migrate
    ```
 
-5. **Seed Initial Data:**
+7. **Seed Initial Data:**
    Seed the site sitemap and RBAC permissions first:
    ```bash
    python manage.py seed_sitemap
    ```
-   Then, seed the full business demo data (destinations, packages, products, etc.):
+   Then, seed the full business demo data:
    ```bash
-   # Use --clear to ensure a clean state
    python manage.py seed_business --clear
    ```
 
-6. **Create a Superuser (Optional):**
-   To log in to `/admin/`:
+8. **Create a Superuser:**
+   Run our helper script to quickly set up an administrative user:
    ```bash
-   python manage.py createsuperuser
+   python create_admin.py
    ```
+   *(This script will prompt you for credentials or read them from your `.env` variables if specified).*
 
-7. **Run the Development Server:**
+9. **Run the Development Server:**
    ```bash
    python manage.py runserver
    ```
    The site will be available locally at `http://127.0.0.1:8000/`.
+
 
 ---
 
@@ -131,3 +138,13 @@ docker-compose exec web python manage.py check --deploy
   - `SESSION_COOKIE_SECURE = True` / `CSRF_COOKIE_SECURE = True` (Flags cookies to only be transmitted over secure HTTPS connections)
   - `SECURE_HSTS_SECONDS = 31536000` (Enforces HTTP Strict Transport Security)
 - **Static Assets:** Static files are compressed and cached dynamically via **WhiteNoise** directly out of Gunicorn, eliminating the need to set up external storage buckets for static resources.
+
+---
+
+## 4. cPanel Deployment (Phusion Passenger)
+
+For shared hosting environments running cPanel, Phusion Passenger is utilized as the WSGI server. We have customized the codebase to support database, media, and static folder isolation out of the box in cPanel to ensure that codebase updates/redeployments do not delete user data or uploads.
+
+Detailed step-by-step instructions for cPanel setup are located in:
+👉 [cPanel Deployment Guide (docs/CPANEL_DEPLOYMENT.md)](file:///home/tomlee/Desktop/dev/Successful%20Safaris/docs/CPANEL_DEPLOYMENT.md)
+
