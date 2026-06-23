@@ -18,12 +18,27 @@ def create_superuser():
     
     # 2. If not set, prompt the user (or fall back to defaults)
     if not username:
-        username = input("Enter superuser username (default: admin): ").strip() or "admin"
+        try:
+            username = input("Enter superuser username (default: admin): ").strip() or "admin"
+        except (EOFError, OSError):
+            username = "admin"
+            print("Non-interactive environment. Using default username: 'admin'")
+            
     if not email:
-        email = input("Enter superuser email (default: admin@example.com): ").strip() or "admin@example.com"
+        try:
+            email = input("Enter superuser email (default: admin@example.com): ").strip() or "admin@example.com"
+        except (EOFError, OSError):
+            email = "admin@example.com"
+            print("Non-interactive environment. Using default email: 'admin@example.com'")
+            
     if not password:
-        import getpass
-        password = getpass.getpass("Enter superuser password (default: adminpass123): ").strip() or "adminpass123"
+        try:
+            import getpass
+            password = getpass.getpass("Enter superuser password (default: adminpass123): ").strip() or "adminpass123"
+        except (EOFError, OSError):
+            password = "adminpass123"
+            print("Non-interactive environment. Using default password: 'adminpass123'")
+
         
     if User.objects.filter(username=username).exists():
         print(f"User '{username}' already exists. Updating password and ensuring superuser privileges...")
