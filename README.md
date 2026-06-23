@@ -68,5 +68,8 @@ python deep_qa.py
 This script verifies routes, API endpoints, and basic workflow integrity.
 
 ## Deployment & Operations
-For detailed instructions on how to configure and deploy this application in both development and production (using Docker), refer to the [Deployment & Operations Guide](file:///home/tomlee/Desktop/dev/Successful%20Safaris/docs/DEPLOYMENT.md).
+For detailed instructions on how to configure and deploy this application, refer to the respective guides:
+* **Docker & General Production**: [Deployment & Operations Guide (docs/DEPLOYMENT.md)](file:///home/tomlee/Desktop/dev/Successful%20Safaris/docs/DEPLOYMENT.md)
+* **cPanel Shared Hosting (Phusion Passenger)**: [cPanel Deployment Guide (docs/CPANEL_DEPLOYMENT.md)](file:///home/tomlee/Desktop/dev/Successful%20Safaris/docs/CPANEL_DEPLOYMENT.md)
+
 
