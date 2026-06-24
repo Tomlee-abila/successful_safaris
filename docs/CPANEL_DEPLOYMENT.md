@@ -76,20 +76,20 @@ DJANGO_ALLOWED_HOSTS=successfulluxurysafaris.co.ke,www.successfulluxurysafaris.c
 # ── Database Configurations ───────────────────────────────────────────
 # To use SQLite (e.g. for local development), comment out the DB_* lines below.
 DB_ENGINE=django.db.backends.postgresql
-DB_NAME=slnkhczw_safari_db
-DB_USER=slnkhczw_safari_user
-DB_PASSWORD=bisT@2#7C#&8p(=S
+DB_NAME=your_database_name
+DB_USER=your_database_user
+DB_PASSWORD=your_database_password
 DB_HOST=localhost
 DB_PORT=5432
 
 # ── Directory Configurations (Safe Outside-Backend Storage) ──────────
-DJANGO_MEDIA_ROOT=/home/slnkhczw/successful_safaris/media
-DJANGO_STATIC_ROOT=/home/slnkhczw/successful_safaris/staticfiles
+DJANGO_MEDIA_ROOT=/home/your_cpanel_username/successful_safaris/media
+DJANGO_STATIC_ROOT=/home/your_cpanel_username/successful_safaris/staticfiles
 
 # ── Administrative Credentials (Optional helper vars) ─────────────────
 SUPERUSER_USERNAME=admin
-SUPERUSER_EMAIL=admin@successfulluxurysafaris.co.ke
-SUPERUSER_PASSWORD=ChangeThisPassword123!
+SUPERUSER_EMAIL=admin@yourdomain.com
+SUPERUSER_PASSWORD=ChooseAGoodPasswordHere123!
 ```
 
 > [!NOTE]
