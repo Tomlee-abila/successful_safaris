@@ -80,14 +80,28 @@
   .animate-fade { animation: fadeIn 1s ease forwards; }
 
   /* ── RESPONSIVE FIXES ── */
+  .nav-mobile-toggle { display: none; }
   @media (max-width: 1024px) {
     .nav-links { gap: 20px; }
     .nav-links a { font-size: 11px; }
   }
   @media (max-width: 768px) {
+    nav { padding: 0 16px; height: 75px; }
+    .nav-logo-img { height: 44px; }
+    .nav-logo-text p { display: none; }
+    .nav-logo-text h2 { font-size: 15px; }
+    
     .nav-links { display: none; }
-    .header { padding: 0 24px; }
+    .nav-right .nav-user, .nav-right .nav-cta { display: none; }
+    .nav-mobile-toggle { display: block; }
+    
+    footer { padding: 48px 24px 32px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-newsletter .newsletter-form { flex-direction: column; }
+    .footer-newsletter .newsletter-btn { width: 100%; text-align: center; }
+    .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
   }
+
 </style>
 </head>
 <body class="animate-fade">
@@ -113,6 +127,7 @@
       <div class="nav-cart" onclick="openCart()" style="cursor:pointer;">🛒<span class="cart-badge" id="base-cart-badge">0</span></div>
       <a href="{% url 'auth' %}" class="nav-user" style="color: white; font-size: 13px;">👤 Sign In</a>
       <a href="{% url 'booking' %}" class="nav-cta">Book Now</a>
+      <div class="nav-mobile-toggle" onclick="openMobileMenu()" style="cursor:pointer; color:white; font-size:24px; margin-left:16px;">☰</div>
     </div>
   </nav>
 </div>
@@ -120,6 +135,26 @@
 <!-- CART COMPONENTS -->
 <div class="cart-overlay" id="cart-overlay" onclick="closeCart()" style="position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 2000; display: none; opacity: 0; transition: 0.3s;"></div>
 <div class="cart-drawer" id="cart-drawer" style="position: fixed; top: 0; right: -420px; width: 400px; height: 100vh; background: white; z-index: 2001; box-shadow: -10px 0 40px rgba(0,0,0,0.15); transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column;">
+
+<!-- MOBILE MENU COMPONENTS -->
+<div class="mobile-menu-overlay" id="mobile-menu-overlay" onclick="closeMobileMenu()" style="position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 2000; display: none; opacity: 0; transition: 0.3s;"></div>
+<div class="mobile-menu-drawer" id="mobile-menu-drawer" style="position: fixed; top: 0; left: -320px; width: 300px; height: 100vh; background: var(--green-dark); z-index: 2001; box-shadow: 10px 0 40px rgba(0,0,0,0.2); transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; border-right: 1px solid rgba(201,168,76,0.25);">
+  <div class="mobile-menu-header" style="padding: 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1);">
+    <div style="font-family: 'Playfair Display', serif; font-size: 18px; color: white; font-weight: 600;">Menu</div>
+    <button onclick="closeMobileMenu()" style="background: none; color: white; font-size: 28px; border: none; cursor: pointer;">×</button>
+  </div>
+  <div class="mobile-menu-links" style="flex: 1; overflow-y: auto; padding: 32px 24px; display: flex; flex-direction: column; gap: 24px;">
+    <a href="{% url 'home' %}" onclick="closeMobileMenu()" style="color: white; font-size: 16px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Home</a>
+    <a href="{% url 'destinations' %}" onclick="closeMobileMenu()" style="color: white; font-size: 16px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Destinations</a>
+    <a href="{% url 'packages' %}" onclick="closeMobileMenu()" style="color: white; font-size: 16px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Packages</a>
+    <a href="{% url 'shop' %}" onclick="closeMobileMenu()" style="color: white; font-size: 16px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Shop</a>
+    <a href="{% url 'about' %}" onclick="closeMobileMenu()" style="color: white; font-size: 16px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">About</a>
+    <a href="{% url 'contact' %}" onclick="closeMobileMenu()" style="color: white; font-size: 16px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Contact</a>
+    <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 12px 0;">
+    <a href="{% url 'auth' %}" onclick="closeMobileMenu()" style="color: var(--gold-light); font-size: 15px; font-weight: 500; display: flex; align-items: center; gap: 8px;">👤 Sign In</a>
+    <a href="{% url 'booking' %}" onclick="closeMobileMenu()" style="background: var(--gold); color: var(--green-dark); padding: 14px; text-align: center; border-radius: 4px; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 12px;">Book Now</a>
+  </div>
+</div>
   <div class="cart-header" style="background: var(--green-dark); padding: 24px; display: flex; justify-content: space-between; align-items: center; color: white;">
     <div class="cart-title" style="font-family: 'Playfair Display', serif; font-size: 20px;">Your Safari Cart</div>
     <button class="cart-close" onclick="closeCart()" style="background: none; color: white; font-size: 24px; border: none; cursor: pointer;">×</button>
@@ -156,6 +191,18 @@
     document.getElementById('cart-drawer').style.right = '-420px';
     document.getElementById('cart-overlay').style.opacity = '0';
     setTimeout(() => document.getElementById('cart-overlay').style.display = 'none', 300);
+    document.body.style.overflow = '';
+  }
+  function openMobileMenu() {
+    document.getElementById('mobile-menu-drawer').style.left = '0';
+    document.getElementById('mobile-menu-overlay').style.display = 'block';
+    setTimeout(() => document.getElementById('mobile-menu-overlay').style.opacity = '1', 10);
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileMenu() {
+    document.getElementById('mobile-menu-drawer').style.left = '-320px';
+    document.getElementById('mobile-menu-overlay').style.opacity = '0';
+    setTimeout(() => document.getElementById('mobile-menu-overlay').style.display = 'none', 300);
     document.body.style.overflow = '';
   }
 </script>
