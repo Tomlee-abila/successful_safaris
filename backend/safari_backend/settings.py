@@ -205,8 +205,27 @@ if not DEBUG:
     SECURE_CONTENT_TYPE_NOSNIFF = True
 
 # ── LOGGING ───────────────────────────────────────────────────────────────────
-LOGS_DIR = BASE_DIR / 'logs'
-LOGS_DIR.mkdir(exist_ok=True)
+_LOGS_DIR = BASE_DIR / 'logs'
+try:
+    _LOGS_DIR.mkdir(exist_ok=True)
+    _LOG_FILE = str(_LOGS_DIR / 'django.log')
+    _log_handlers = ['console', 'file']
+except OSError:
+    _LOG_FILE = None
+    _log_handlers = ['console']
+
+_handlers = {
+    'console': {
+        'class': 'logging.StreamHandler',
+        'formatter': 'verbose',
+    },
+}
+if _LOG_FILE:
+    _handlers['file'] = {
+        'class': 'logging.FileHandler',
+        'filename': _LOG_FILE,
+        'formatter': 'verbose',
+    }
 
 LOGGING = {
     'version': 1,
@@ -217,25 +236,15 @@ LOGGING = {
             'style': '{',
         },
     },
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
-        },
-        'file': {
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'logs' / 'django.log',
-            'formatter': 'verbose',
-        },
-    },
+    'handlers': _handlers,
     'loggers': {
         'django': {
-            'handlers': ['console', 'file'],
+            'handlers': _log_handlers,
             'level': 'ERROR',
             'propagate': True,
         },
         'django.request': {
-            'handlers': ['console', 'file'],
+            'handlers': _log_handlers,
             'level': 'ERROR',
             'propagate': False,
         },
