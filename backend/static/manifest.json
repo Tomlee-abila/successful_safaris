@@ -1,0 +1,10 @@
+{
+  "name": "Successful Luxury Safaris",
+  "short_name": "Safaris",
+  "description": "Luxury safari booking and experiences",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#8B6914",
+  "icons": []
+}
