@@ -11,6 +11,7 @@ class SafariPackage(models.Model):
     included_services = models.TextField(blank=True, null=True)
     excluded_services = models.TextField(blank=True, null=True)
     is_active = models.BooleanField(default=True)
+    is_featured = models.BooleanField(default=False)
     featured_image = models.ImageField(upload_to='packages/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

@@ -11,7 +11,7 @@ import qrcode.image.svg
 import base64
 import io
 
-from .models import UserProfile
+from .models import UserProfile, Wishlist
 from inventory.models import Permission
 from bookings.models import Booking
 from shop.models import Order
@@ -107,6 +107,8 @@ def dashboard(request):
         status='COMPLETED'
     ).aggregate(Sum('total_amount'))['total_amount__sum'] or 0
 
+    wishlist_items = Wishlist.objects.filter(user=request.user).select_related('package').order_by('-created_at')
+
     context = {
         'profile': profile,
         'role': primary_group,
@@ -122,6 +124,8 @@ def dashboard(request):
         'doc_count': documents.count(),
         'total_spent': total_spent,
         'reward_value': profile.loyalty_points // 20,
+        'wishlist_items': wishlist_items,
+        'wishlist_count': wishlist_items.count(),
         'cart': get_cart(request),
     }
     return render(request, 'dashboard.html', context)
@@ -236,3 +240,23 @@ def mfa_verify(request):
             })
 
     return render(request, 'mfa_verify.html', {'cart': get_cart(request)})
+
+
+# ── WISHLIST ────────────────────────────────────────────────────────────
+
+@login_required
+@require_POST
+def wishlist_toggle(request):
+    from packages.models import SafariPackage
+    from django.http import JsonResponse
+    pkg_id = request.POST.get('package_id')
+    package = SafariPackage.objects.get(pk=pkg_id)
+    item, created = Wishlist.objects.get_or_create(user=request.user, package=package)
+    if not created:
+        item.delete()
+        return JsonResponse({'status': 'removed', 'count': request.user.wishlist_items.count()})
+    return JsonResponse({'status': 'added', 'count': request.user.wishlist_items.count()})
+
+
+# Update dashboard to include wishlist data
+# (wishlist_items are fetched in the existing dashboard view via context addition below)

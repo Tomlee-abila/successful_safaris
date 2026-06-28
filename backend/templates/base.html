@@ -124,8 +124,15 @@
       <li><a href="{% url 'contact' %}" class="{% if 'contact' in request.path %}active{% endif %}">Contact</a></li>
     </ul>
     <div class="nav-right">
-      <div class="nav-cart" onclick="openCart()" style="cursor:pointer;">🛒<span class="cart-badge" id="base-cart-badge">0</span></div>
+      <div class="nav-cart" onclick="openCart()" style="cursor:pointer;">🛒<span class="cart-badge" id="base-cart-badge" style="display:none;">0</span></div>
+      {% if request.user.is_authenticated %}
+      <a href="{% url 'dashboard' %}" class="nav-user" style="color: white; font-size: 13px; display:flex; align-items:center; gap:8px;">
+        <span style="width:30px;height:30px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--green-dark);">{{ request.user.first_name|first|upper }}{{ request.user.last_name|first|upper }}</span>
+        <span>{{ request.user.first_name|default:request.user.username }}</span>
+      </a>
+      {% else %}
       <a href="{% url 'auth' %}" class="nav-user" style="color: white; font-size: 13px;">👤 Sign In</a>
+      {% endif %}
       <a href="{% url 'booking' %}" class="nav-cta">Book Now</a>
       <div class="nav-mobile-toggle" onclick="openMobileMenu()" style="cursor:pointer; color:white; font-size:24px; margin-left:16px;">☰</div>
     </div>
@@ -135,6 +142,21 @@
 <!-- CART COMPONENTS -->
 <div class="cart-overlay" id="cart-overlay" onclick="closeCart()" style="position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 2000; display: none; opacity: 0; transition: 0.3s;"></div>
 <div class="cart-drawer" id="cart-drawer" style="position: fixed; top: 0; right: -420px; width: 400px; height: 100vh; background: white; z-index: 2001; box-shadow: -10px 0 40px rgba(0,0,0,0.15); transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column;">
+  <div class="cart-header" style="background: var(--green-dark); padding: 24px; display: flex; justify-content: space-between; align-items: center; color: white;">
+    <div class="cart-title" style="font-family: 'Playfair Display', serif; font-size: 20px;">Your Safari Cart</div>
+    <button class="cart-close" onclick="closeCart()" style="background: none; color: white; font-size: 24px; border: none; cursor: pointer;">×</button>
+  </div>
+  <div class="cart-items" style="flex: 1; overflow-y: auto; padding: 24px; color: var(--charcoal);">
+    <div id="cart-empty-msg" style="text-align: center; color: var(--gray-mid); margin-top: 40px; font-style: italic;">Your cart is empty</div>
+    <div id="cart-items-container"></div>
+  </div>
+  <div class="cart-footer" style="padding: 24px; background: var(--cream); border-top: 1px solid var(--cream-mid);">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 16px; font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--green-dark);">
+      <span>Total</span><span id="cart-total-val">$0</span>
+    </div>
+    <a href="{% url 'checkout' %}"><button style="background: var(--gold); color: var(--green-dark); padding: 16px; width: 100%; border-radius: 6px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; border: none; cursor: pointer;">Proceed to Checkout →</button></a>
+  </div>
+</div>
 
 <!-- MOBILE MENU COMPONENTS -->
 <div class="mobile-menu-overlay" id="mobile-menu-overlay" onclick="closeMobileMenu()" style="position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 2000; display: none; opacity: 0; transition: 0.3s;"></div>
@@ -151,23 +173,13 @@
     <a href="{% url 'about' %}" onclick="closeMobileMenu()" style="color: white; font-size: 16px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">About</a>
     <a href="{% url 'contact' %}" onclick="closeMobileMenu()" style="color: white; font-size: 16px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Contact</a>
     <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 12px 0;">
+    {% if request.user.is_authenticated %}
+    <a href="{% url 'dashboard' %}" onclick="closeMobileMenu()" style="color: var(--gold-light); font-size: 15px; font-weight: 500; display: flex; align-items: center; gap: 8px;">👤 {{ request.user.first_name|default:request.user.username }}</a>
+    <a href="{% url 'logout' %}" onclick="closeMobileMenu()" style="color: rgba(255,255,255,0.5); font-size: 13px; margin-top: 4px;">Sign Out</a>
+    {% else %}
     <a href="{% url 'auth' %}" onclick="closeMobileMenu()" style="color: var(--gold-light); font-size: 15px; font-weight: 500; display: flex; align-items: center; gap: 8px;">👤 Sign In</a>
+    {% endif %}
     <a href="{% url 'booking' %}" onclick="closeMobileMenu()" style="background: var(--gold); color: var(--green-dark); padding: 14px; text-align: center; border-radius: 4px; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 12px;">Book Now</a>
-  </div>
-</div>
-  <div class="cart-header" style="background: var(--green-dark); padding: 24px; display: flex; justify-content: space-between; align-items: center; color: white;">
-    <div class="cart-title" style="font-family: 'Playfair Display', serif; font-size: 20px;">Your Safari Cart</div>
-    <button class="cart-close" onclick="closeCart()" style="background: none; color: white; font-size: 24px; border: none; cursor: pointer;">×</button>
-  </div>
-  <div class="cart-items" style="flex: 1; overflow-y: auto; padding: 24px; color: var(--charcoal);">
-    <div id="cart-empty-msg" style="text-align: center; color: var(--gray-mid); margin-top: 40px; font-style: italic;">Your cart is empty</div>
-    <div id="cart-items-container"></div>
-  </div>
-  <div class="cart-footer" style="padding: 24px; background: var(--cream); border-top: 1px solid var(--cream-mid);">
-    <div style="display: flex; justify-content: space-between; margin-bottom: 16px; font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--green-dark);">
-      <span>Total</span><span id="cart-total-val">$0</span>
-    </div>
-    <a href="{% url 'checkout' %}"><button style="background: var(--gold); color: var(--green-dark); padding: 16px; width: 100%; border-radius: 6px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; border: none; cursor: pointer;">Proceed to Checkout →</button></a>
   </div>
 </div>
 <script>
@@ -181,11 +193,11 @@
   }
 
   function openCart() {
-...
     document.getElementById('cart-drawer').style.right = '0';
     document.getElementById('cart-overlay').style.display = 'block';
     setTimeout(() => document.getElementById('cart-overlay').style.opacity = '1', 10);
     document.body.style.overflow = 'hidden';
+    loadCartDrawer();
   }
   function closeCart() {
     document.getElementById('cart-drawer').style.right = '-420px';
@@ -193,6 +205,41 @@
     setTimeout(() => document.getElementById('cart-overlay').style.display = 'none', 300);
     document.body.style.overflow = '';
   }
+  function updateCartBadge(count) {
+    const badge = document.getElementById('base-cart-badge');
+    if (badge) {
+      badge.textContent = count;
+      badge.style.display = count > 0 ? 'flex' : 'none';
+    }
+  }
+  function loadCartDrawer() {
+    fetch('/shop/cart/data/')
+      .then(r => r.json())
+      .then(data => {
+        updateCartBadge(data.count);
+        const container = document.getElementById('cart-items-container');
+        const emptyMsg = document.getElementById('cart-empty-msg');
+        const totalEl = document.getElementById('cart-total-val');
+        if (data.count === 0) {
+          emptyMsg.style.display = 'block';
+          container.innerHTML = '';
+        } else {
+          emptyMsg.style.display = 'none';
+          container.innerHTML = data.items.map(item => `
+            <div style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--cream-mid);align-items:center;">
+              <div style="width:56px;height:56px;border-radius:6px;background:${item.image ? 'url('+item.image+') center/cover' : 'var(--cream)'};flex-shrink:0;"></div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:13px;font-weight:600;color:var(--green-dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.name}</div>
+                <div style="font-size:12px;color:var(--gray-mid);margin-top:2px;">Qty: ${item.quantity} · $${item.subtotal.toFixed(2)}</div>
+              </div>
+            </div>`).join('');
+        }
+        if (totalEl) totalEl.textContent = '$' + data.total.toFixed(2);
+      })
+      .catch(() => {});
+  }
+  // Initialise badge on page load
+  fetch('/shop/cart/data/').then(r => r.json()).then(d => updateCartBadge(d.count)).catch(() => {});
   function openMobileMenu() {
     document.getElementById('mobile-menu-drawer').style.left = '0';
     document.getElementById('mobile-menu-overlay').style.display = 'block';
@@ -220,8 +267,8 @@
       <ul>
         <li><a href="/destinations/kenya/">Kenya Expeditions</a></li>
         <li><a href="/destinations/tanzania/">Tanzania Heritage</a></li>
-        <li><a href="#">Rwanda Gorillas</a></li>
-        <li><a href="#">Botswana Delta</a></li>
+        <li><a href="{% url 'destinations' %}">Rwanda Gorillas</a></li>
+        <li><a href="{% url 'destinations' %}">Botswana Delta</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -236,10 +283,11 @@
     <div class="footer-newsletter">
       <h4>Join The Pride</h4>
       <p>Exclusive safari offers and wildlife conservation updates.</p>
-      <div class="newsletter-form">
-        <input type="email" class="newsletter-input" placeholder="Your Email">
-        <button class="newsletter-btn">Join</button>
+      <div class="newsletter-form" id="newsletter-form">
+        <input type="email" class="newsletter-input" id="newsletter-email" placeholder="Your Email">
+        <button class="newsletter-btn" onclick="subscribeNewsletter()">Join</button>
       </div>
+      <p id="newsletter-msg" style="font-size:13px;color:var(--gold-light);margin-top:10px;display:none;"></p>
     </div>
   </div>
   <div class="footer-bottom">
@@ -252,6 +300,52 @@
 </footer>
 
 {% block extra_script %}{% endblock %}
+
+<!-- TOAST NOTIFICATION -->
+<div id="toast-container" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:10px;align-items:center;pointer-events:none;"></div>
+<style>
+  .toast {
+    background: var(--green-dark); color: white;
+    padding: 12px 24px; border-radius: 6px;
+    font-size: 13px; font-weight: 500;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    border-left: 3px solid var(--gold);
+    opacity: 0; transform: translateY(12px);
+    transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+    white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .toast.error { border-left-color: var(--error); background: #3a1a1a; }
+</style>
+<script>
+  function subscribeNewsletter() {
+    const email = document.getElementById('newsletter-email').value.trim();
+    const msg = document.getElementById('newsletter-msg');
+    if (!email) return;
+    fetch('/newsletter/subscribe/', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded', 'X-CSRFToken': '{% csrf_token %}'},
+      body: 'email=' + encodeURIComponent(email)
+    }).then(r => r.json()).then(d => {
+      msg.textContent = d.message;
+      msg.style.display = 'block';
+      if (d.status === 'success') document.getElementById('newsletter-email').value = '';
+    }).catch(() => { msg.textContent = 'Something went wrong. Please try again.'; msg.style.display = 'block'; });
+  }
+
+  function showToast(message, type) {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = 'toast' + (type === 'error' ? ' error' : '');
+    toast.textContent = (type === 'error' ? '✕ ' : '✓ ') + message;
+    container.appendChild(toast);
+    requestAnimationFrame(() => { requestAnimationFrame(() => toast.classList.add('show')); });
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => toast.remove(), 350);
+    }, 3000);
+  }
+</script>
 
 </body>
 </html>

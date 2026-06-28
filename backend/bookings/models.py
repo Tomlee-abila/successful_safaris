@@ -1,3 +1,4 @@
+from datetime import timedelta
 from django.db import models
 from django.contrib.auth.models import User
 from packages.models import SafariPackage
@@ -18,6 +19,10 @@ class Booking(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='PENDING')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    @property
+    def end_date(self):
+        return self.start_date + timedelta(days=self.package.duration_days)
 
     def __str__(self):
         return self.booking_number

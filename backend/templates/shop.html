@@ -14,7 +14,7 @@
   .shop-hero p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 20px; color: rgba(255,255,255,0.7); max-width: 600px; }
 
   /* ── CATEGORY TABS ── */
-  .category-tabs { background: white; border-bottom: 1px solid var(--cream-mid); padding: 0 80px; display: flex; overflow-x: auto; sticky; top: 80px; z-index: 90; }
+  .category-tabs { background: white; border-bottom: 1px solid var(--cream-mid); padding: 0 80px; display: flex; overflow-x: auto; position: sticky; top: 80px; z-index: 90; }
   .cat-tab { padding: 18px 24px; font-size: 13px; font-weight: 500; color: var(--gray-mid); cursor: pointer; border-bottom: 2.5px solid transparent; white-space: nowrap; }
   .cat-tab.active { color: var(--green-dark); border-bottom-color: var(--gold); font-weight: 600; }
 
@@ -36,6 +36,16 @@
   .btn-add { background: var(--gold); color: var(--green-dark); padding: 8px 16px; border-radius: 4px; font-size: 11px; font-weight: 700; border: none; cursor: pointer; }
 
   @media (max-width: 1100px) { .product-grid { grid-template-columns: 1fr 1fr; } .shop-container { grid-template-columns: 1fr; } }
+  @media (max-width: 768px) {
+    .shop-hero { padding: 48px 20px; }
+    .shop-hero h1 { font-size: clamp(32px, 8vw, 52px); }
+    .category-tabs { padding: 0 16px; }
+    .shop-container { padding: 24px 16px; }
+    .product-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+  }
+  @media (max-width: 500px) {
+    .product-grid { grid-template-columns: 1fr; }
+  }
 {% endblock %}
 
 {% block content %}
@@ -45,9 +55,9 @@
 </div>
 
 <div class="category-tabs">
-  <div class="cat-tab active">All Products</div>
+  <div class="cat-tab active" onclick="filterByCategory('', this)">All Products</div>
   {% for cat in categories %}
-  <div class="cat-tab">{{ cat.name }}</div>
+  <div class="cat-tab" onclick="filterByCategory('{{ cat.name|escapejs }}', this)">{{ cat.name }}</div>
   {% endfor %}
   <div class="cat-tab" onclick="window.location='{% url 'bundle_builder' %}'">🎁 Bundle Builder <span style="font-size:10px; background:var(--gold-pale); padding:2px 6px; border-radius:10px; color:var(--gold-dark);">New</span></div>
 </div>
@@ -63,7 +73,8 @@
 
   <main class="product-grid">
     {% for prod in products %}
-    <div class="product-card" onclick="window.location='/shop/product/'">
+    <div class="product-card" onclick="window.location='{% url 'product_detail' prod.id %}'"
+      data-category="{{ prod.category.name }}">
       <div class="product-img" style="background: url('{% if prod.image %}{{ prod.image.url }}{% else %}https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80{% endif %}') center/cover no-repeat; font-size: 0;"></div>
       <div class="product-body">
         <div class="product-cat">{{ prod.category.name }}</div>
@@ -84,6 +95,14 @@
 
 {% block extra_script %}
 <script>
+  function filterByCategory(category, el) {
+    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    document.querySelectorAll('.product-card').forEach(card => {
+      card.style.display = (!category || card.dataset.category === category) ? '' : 'none';
+    });
+  }
+
   function addToCart(productId) {
     fetch('{% url "add_to_cart" %}', {
       method: 'POST',
@@ -96,9 +115,10 @@
     .then(response => response.json())
     .then(data => {
       if (data.status === 'success') {
-        alert('Product added to your selection');
+        if (typeof updateCartBadge === 'function') updateCartBadge(data.cart_count);
+        if (typeof showToast === 'function') showToast('Added to cart');
       } else {
-        alert('Failed to add product');
+        if (typeof showToast === 'function') showToast('Failed to add item', 'error');
       }
     });
   }

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from packages.models import SafariPackage
 
 class UserProfile(models.Model):
     LOYALTY_TIERS = [
@@ -21,3 +22,14 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s Profile"
+
+class Wishlist(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='wishlist_items')
+    package = models.ForeignKey(SafariPackage, on_delete=models.CASCADE, related_name='wishlisted_by')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'package')
+
+    def __str__(self):
+        return f"{self.user.username} → {self.package.title}"

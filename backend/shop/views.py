@@ -87,3 +87,18 @@ def remove_from_cart(request):
         cart_item = get_object_or_404(CartItem, id=item_id, cart=get_cart(request))
         cart_item.delete()
     return redirect('shopping_cart')
+
+def cart_data(request):
+    cart = get_cart(request)
+    items = []
+    for item in cart.items.select_related('product'):
+        items.append({
+            'id': item.id,
+            'name': item.product.name,
+            'price': float(item.product.price),
+            'quantity': item.quantity,
+            'subtotal': float(item.product.price * item.quantity),
+            'image': item.product.image.url if item.product.image else None,
+        })
+    total = sum(i['subtotal'] for i in items)
+    return JsonResponse({'items': items, 'count': len(items), 'total': total})

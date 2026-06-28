@@ -14,6 +14,9 @@ urlpatterns = [
     path('mfa/verify/', views.mfa_verify, name='mfa_verify'),
     path('mfa/disable/', views.mfa_disable, name='mfa_disable'),
 
+    # Wishlist
+    path('wishlist/toggle/', views.wishlist_toggle, name='wishlist_toggle'),
+
     # Password reset (Django built-in)
     path('password-reset/', auth_views.PasswordResetView.as_view(template_name='password_reset.html'), name='password_reset'),
     path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='password_reset_done.html'), name='password_reset_done'),

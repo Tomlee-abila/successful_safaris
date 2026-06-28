@@ -47,7 +47,14 @@
   .package-card:hover .btn-view { background: var(--gold); color: var(--green-dark); }
 
   @media (max-width: 1100px) { .packages-grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 768px) { .packages-grid { grid-template-columns: 1fr; } .packages-section { padding: 40px 24px; } }
+  @media (max-width: 768px) {
+    .pkg-hero { height: 40vh; min-height: 280px; }
+    .pkg-hero h1 { font-size: clamp(28px, 7vw, 48px); }
+    .packages-grid { grid-template-columns: 1fr; }
+    .packages-section { padding: 32px 16px; }
+    .filter-bar { padding: 14px 16px; gap: 16px; overflow-x: auto; flex-wrap: nowrap; }
+    .filter-group { flex-shrink: 0; }
+  }
 {% endblock %}
 
 {% block content %}
@@ -61,41 +68,52 @@
 <div class="filter-bar">
   <div class="filter-group">
     <span class="filter-label">Destination:</span>
-    <select class="filter-select">
-      <option>All Countries</option>
-      <option>Kenya</option>
-      <option>Tanzania</option>
-      <option>Rwanda</option>
+    <select class="filter-select" id="filter-destination" onchange="filterPackages()">
+      <option value="">All Countries</option>
+      <option value="Kenya">Kenya</option>
+      <option value="Tanzania">Tanzania</option>
+      <option value="Rwanda">Rwanda</option>
+      <option value="Uganda">Uganda</option>
+      <option value="Botswana">Botswana</option>
     </select>
   </div>
   <div class="filter-group">
-    <span class="filter-label">Style:</span>
-    <select class="filter-select">
-      <option>All Styles</option>
-      <option>Classic Safari</option>
-      <option>Family Adventure</option>
-      <option>Honeymoon Luxury</option>
+    <span class="filter-label">Duration:</span>
+    <select class="filter-select" id="filter-duration" onchange="filterPackages()">
+      <option value="">Any Length</option>
+      <option value="short">1–5 Days</option>
+      <option value="medium">6–10 Days</option>
+      <option value="long">11+ Days</option>
     </select>
   </div>
+  <span id="filter-count" style="font-size:12px;color:var(--gray-mid);margin-left:auto;"></span>
 </div>
 
 <section class="packages-section">
   <div class="packages-grid">
     
     {% for pkg in packages %}
-    <div class="package-card" onclick="window.location='{% url 'package_detail' pkg.id %}'">
+    <div class="package-card" onclick="window.location='{% url 'package_detail' pkg.id %}'"
+      data-destination="{% for loc in pkg.locations.all|slice:':1' %}{{ loc.destination.name }}{% endfor %}"
+      data-days="{{ pkg.duration_days }}">
       <div class="card-img-wrapper">
         <img src="{% if pkg.featured_image %}{{ pkg.featured_image.url }}{% else %}https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80{% endif %}" alt="{{ pkg.title }}">
-        {% if pkg.package_code == 'SS-PKG-001' %}<span class="card-badge">Bestseller</span>{% endif %}
+        {% if pkg.is_featured %}<span class="card-badge">Bestseller</span>{% endif %}
       </div>
       <div class="card-body">
         <div class="card-tag">{{ pkg.duration_days }} Days · {% for loc in pkg.locations.all|slice:":1" %}{{ loc.destination.name }}{% endfor %}</div>
         <h2 class="card-title">{{ pkg.title }}</h2>
         <p class="card-desc">{{ pkg.description|truncatewords:20 }}</p>
         <div class="card-features">
-          <span class="feature-tag">Private Guide</span>
-          <span class="feature-tag">All Inclusive</span>
-          <span class="feature-tag">Luxury Accommodation</span>
+          {% if pkg.included_services %}
+            {% for feat in pkg.included_services.splitlines|slice:":3" %}
+              {% if feat.strip %}<span class="feature-tag">{{ feat.strip }}</span>{% endif %}
+            {% endfor %}
+          {% else %}
+            <span class="feature-tag">Private Guide</span>
+            <span class="feature-tag">All Inclusive</span>
+            <span class="feature-tag">Luxury Accommodation</span>
+          {% endif %}
         </div>
         <div class="card-footer">
           <div>
@@ -112,4 +130,30 @@
 
   </div>
 </section>
+{% endblock %}
+
+{% block extra_script %}
+<script>
+  function filterPackages() {
+    const dest = document.getElementById('filter-destination').value;
+    const dur = document.getElementById('filter-duration').value;
+    const cards = document.querySelectorAll('.package-card');
+    let visible = 0;
+    cards.forEach(card => {
+      const cardDest = card.dataset.destination || '';
+      const days = parseInt(card.dataset.days) || 0;
+      const destMatch = !dest || cardDest === dest;
+      const durMatch = !dur ||
+        (dur === 'short' && days <= 5) ||
+        (dur === 'medium' && days >= 6 && days <= 10) ||
+        (dur === 'long' && days >= 11);
+      const show = destMatch && durMatch;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    const countEl = document.getElementById('filter-count');
+    if (countEl) countEl.textContent = visible + ' package' + (visible !== 1 ? 's' : '') + ' found';
+  }
+  filterPackages();
+</script>
 {% endblock %}

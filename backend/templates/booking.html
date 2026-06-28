@@ -29,6 +29,14 @@
   .summary-box { background: var(--cream); padding: 24px; border-radius: 8px; border: 1px solid var(--cream-mid); margin-bottom: 32px; }
   .summary-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
   .summary-total { border-top: 1px solid var(--gray-light); padding-top: 12px; margin-top: 12px; font-weight: 700; font-size: 18px; color: var(--green-dark); }
+
+  @media (max-width: 640px) {
+    .booking-container { margin: 32px auto; }
+    .booking-card { padding: 28px 20px; }
+    .grid-2 { grid-template-columns: 1fr; gap: 0; }
+    .step-header { gap: 16px; }
+    .step { font-size: 11px; gap: 6px; }
+  }
 {% endblock %}
 
 {% block content %}

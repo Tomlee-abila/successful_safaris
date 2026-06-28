@@ -7,4 +7,5 @@ urlpatterns = [
     path('sitemap/', views.sitemap, name='sitemap'),
     path('style-guide/', views.style_guide, name='style_guide'),
     path('wireframes/', views.wireframes, name='wireframes'),
+    path('newsletter/subscribe/', views.newsletter_subscribe, name='newsletter_subscribe'),
 ]

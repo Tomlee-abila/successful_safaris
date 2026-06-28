@@ -221,9 +221,28 @@
     .stats-strip { padding: 0 24px; }
     .hero-content { padding: 0 24px 0 40px; }
     .cta-strip { padding: 48px 24px; flex-direction: column; text-align: center; }
-    .packages-grid { grid-template-columns: 1fr; }
+    .packages-grid { grid-template-columns: 1fr 1fr; }
     .destinations-row { grid-template-columns: repeat(3, 1fr); }
+    .testimonials-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    .hero-content { padding: 0 20px; }
+    .hero-title { font-size: clamp(38px, 9vw, 64px); }
+    .hero-subtitle { font-size: 18px; }
+    .hero-actions { flex-direction: column; align-items: flex-start; }
+    .btn-hero-primary, .btn-hero-secondary { width: 100%; justify-content: center; padding: 14px 24px; }
+    .stats-inner { flex-wrap: wrap; }
+    .stat-item { flex: 0 0 50%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .stat-item:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.08); }
+    .packages-grid { grid-template-columns: 1fr; }
+    .destinations-row { grid-template-columns: repeat(2, 1fr); }
     .testimonials-grid { grid-template-columns: 1fr; }
+    .cta-strip-title { font-size: clamp(22px, 6vw, 38px); }
+    .cta-btn-dark { width: 100%; text-align: center; }
+    .section-title { font-size: clamp(28px, 6vw, 42px); }
+  }
+  @media (max-width: 400px) {
+    .destinations-row { grid-template-columns: 1fr; }
   }
 {% endblock %}
 
@@ -249,7 +268,7 @@
       From the golden plains of the Masai Mara to the mist-shrouded gorilla forests of Rwanda — we craft journeys that become lifelong stories.
     </p>
     <div class="hero-actions">
-      <a href="{% url 'booking' %}" class="btn-hero-primary">🗺️ Explore Packages</a>
+      <a href="{% url 'packages' %}" class="btn-hero-primary">🗺️ Explore Packages</a>
       <a href="#" class="btn-hero-secondary">▶ Watch Film</a>
     </div>
   </div>
@@ -295,7 +314,7 @@
   </div>
   <div class="destinations-row">
     {% for dest in top_destinations %}
-    <div class="dest-pill" onclick="window.location='{% url 'destinations' %}'">
+    <div class="dest-pill" onclick="window.location='{% url 'destination_detail' dest.pk %}'">
       <div class="dest-pill-img" style="background: url('{% if dest.hero_image %}{{ dest.hero_image.url }}{% else %}https://images.unsplash.com/photo-1535941339077-2dd1c7963098?auto=format&fit=crop&w=600&q=80{% endif %}') center/cover no-repeat;">
         <div class="dest-pill-flag">{% if dest.name == 'Kenya' %}🇰🇪{% elif dest.name == 'Tanzania' %}🇹🇿{% elif dest.name == 'Rwanda' %}🇷🇼{% elif dest.name == 'Uganda' %}🇺🇬{% elif dest.name == 'Botswana' %}🇧🇼{% else %}🌍{% endif %}</div>
       </div>
@@ -320,11 +339,11 @@
   <div class="packages-grid">
 
     {% for pkg in featured_packages %}
-    <div class="package-card" onclick="window.location='/packages/detail/'">
+    <div class="package-card" onclick="window.location='{% url 'package_detail' pkg.id %}'">
       <div class="package-img" style="background: url('{% if pkg.featured_image %}{{ pkg.featured_image.url }}{% else %}https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80{% endif %}') center/cover no-repeat;">
         <div class="package-img-overlay"></div>
         <div class="package-duration">{{ pkg.duration_days }} Nights</div>
-        {% if forloop.first %}<div class="package-badge">✦ Bestseller</div>{% endif %}
+        {% if pkg.is_featured %}<div class="package-badge">✦ Bestseller</div>{% endif %}
       </div>
       <div class="package-body">
         <div class="package-tag">
@@ -333,9 +352,15 @@
         <h3 class="package-name">{{ pkg.title }}</h3>
         <p class="package-desc">{{ pkg.description|truncatewords:25 }}</p>
         <div class="package-features">
-          <span class="pkg-feat">Private Guide</span>
-          <span class="pkg-feat">All Inclusive</span>
-          <span class="pkg-feat">Luxury Stay</span>
+          {% if pkg.included_services %}
+            {% for feat in pkg.included_services.splitlines|slice:":3" %}
+              {% if feat.strip %}<span class="pkg-feat">{{ feat.strip }}</span>{% endif %}
+            {% endfor %}
+          {% else %}
+            <span class="pkg-feat">Private Guide</span>
+            <span class="pkg-feat">All Inclusive</span>
+            <span class="pkg-feat">Luxury Stay</span>
+          {% endif %}
         </div>
       </div>
       <div class="package-footer">
@@ -358,6 +383,21 @@
     <div class="gold-divider"></div>
   </div>
   <div class="testimonials-grid">
+    {% if testimonials %}
+      {% for review in testimonials %}
+      <div class="testimonial-card">
+        <div class="testimonial-stars">{% for i in "12345" %}{% if forloop.counter <= review.rating %}★{% else %}☆{% endif %}{% endfor %}</div>
+        <p class="testimonial-text">"{{ review.comment }}"</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar"><img src="https://i.pravatar.cc/88?u={{ review.user.username }}" alt="{{ review.user.get_full_name|default:review.user.username }}"></div>
+          <div>
+            <div class="testimonial-name">{{ review.user.get_full_name|default:review.user.username }}</div>
+            <div class="testimonial-trip">Safari Guest · {{ review.id }}</div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    {% else %}
     <div class="testimonial-card">
       <div class="testimonial-stars">★★★★★</div>
       <p class="testimonial-text">"Witnessing the wildebeest crossing the Mara River at dawn, with our guide's hushed commentary and a flask of coffee — that moment is permanently etched in our hearts."</p>
@@ -391,6 +431,7 @@
         </div>
       </div>
     </div>
+    {% endif %}
   </div>
 </section>
 
@@ -402,4 +443,3 @@
   <a href="{% url 'booking' %}" class="cta-btn-dark">Plan My Safari</a>
 </div>
 {% endblock %}
-ck %}

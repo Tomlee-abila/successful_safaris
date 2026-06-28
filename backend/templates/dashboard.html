@@ -1707,6 +1707,10 @@
         display: none;
       }
 
+      #mobile-signout-nav {
+        display: flex !important;
+      }
+
       .trip-card {
         grid-template-columns: 1fr;
       }
@@ -1747,6 +1751,37 @@
 </head>
 
 <body>
+
+  <!-- REVIEW MODAL -->
+  <div id="review-modal-overlay" onclick="closeReviewModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);z-index:3000;align-items:center;justify-content:center;"></div>
+  <div id="review-modal" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3001;background:white;border-radius:16px;padding:40px;width:min(480px,90vw);box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+    <h3 style="font-family:'Playfair Display',serif;font-size:22px;color:var(--green-dark);margin-bottom:6px;">Share Your Experience</h3>
+    <p id="review-modal-pkg" style="font-size:13px;color:var(--gray-mid);margin-bottom:24px;"></p>
+    <div style="margin-bottom:20px;">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gray-mid);margin-bottom:8px;">Rating</div>
+      <div id="star-row" style="display:flex;gap:8px;font-size:28px;cursor:pointer;">
+        <span class="star" data-val="1" onclick="setRating(1)">☆</span>
+        <span class="star" data-val="2" onclick="setRating(2)">☆</span>
+        <span class="star" data-val="3" onclick="setRating(3)">☆</span>
+        <span class="star" data-val="4" onclick="setRating(4)">☆</span>
+        <span class="star" data-val="5" onclick="setRating(5)">☆</span>
+      </div>
+    </div>
+    <div style="margin-bottom:24px;">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gray-mid);margin-bottom:8px;">Your Review</div>
+      <textarea id="review-comment-input" rows="4" placeholder="Tell us about your safari experience..." style="width:100%;padding:12px;border:1.5px solid var(--cream-mid);border-radius:6px;font-size:13px;font-family:'Inter',sans-serif;resize:vertical;outline:none;"></textarea>
+    </div>
+    <form id="review-form" method="POST" action="{% url 'submit_review' %}">
+      {% csrf_token %}
+      <input type="hidden" name="package_id" id="review-pkg-id">
+      <input type="hidden" name="comment" id="review-comment-hidden">
+      <input type="hidden" name="rating" id="review-rating-hidden" value="5">
+    </form>
+    <div style="display:flex;gap:12px;justify-content:flex-end;">
+      <button onclick="closeReviewModal()" style="padding:10px 20px;border:1.5px solid var(--cream-mid);border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;background:white;color:var(--gray-mid);">Cancel</button>
+      <button onclick="submitReview()" style="padding:10px 24px;background:var(--green-dark);color:white;border:none;border-radius:4px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;">Submit Review</button>
+    </div>
+  </div>
 
   <!-- TOP BAR -->
   <div class="top-bar">
@@ -1792,7 +1827,7 @@
         </div>
         <div class="sidebar-nav-item" onclick="switchTab('wishlist')">
           <span class="nav-item-icon">❤️</span> Wishlist
-          <span class="nav-badge">0</span>
+          {% if wishlist_count %}<span class="nav-badge">{{ wishlist_count }}</span>{% endif %}
         </div>
         <div class="sidebar-nav-item" onclick="switchTab('orders')">
           <span class="nav-item-icon">🛍️</span> My Orders
@@ -1832,6 +1867,10 @@
         {% endif %}
         {% endfor %}
         {% endif %}
+        <!-- Mobile-only sign-out at end of nav (hidden on desktop via sidebar-footer) -->
+        <a href="{% url 'logout' %}" class="sidebar-nav-item" id="mobile-signout-nav" style="display:none; color:rgba(255,255,255,0.5);">
+          <span class="nav-item-icon">🚪</span> Sign Out
+        </a>
       </nav>
 
       <div class="sidebar-footer">
@@ -1878,7 +1917,7 @@
               <div class="trip-name">{{ booking.package.title }}</div>
               <div class="trip-meta">
                 <div class="trip-meta-item"><span class="trip-meta-icon">📅</span> {{ booking.start_date|date:"d M" }} –
-                  {{ booking.start_date|add:"7 days"|date:"d M Y" }}</div>
+                  {{ booking.end_date|date:"d M Y" }}</div>
                 <div class="trip-meta-item"><span class="trip-meta-icon">🌙</span> {{ booking.package.duration_days }}
                   Nights</div>
                 <div class="trip-meta-item"><span class="trip-meta-icon">👥</span> {{ booking.travelers.count }} Guests
@@ -1933,14 +1972,10 @@
             </div>
             <div class="trip-actions-col">
               <div class="trip-past-rating">★★★★★</div>
-              <form method="POST" action="{% url 'submit_review' %}"
-                onsubmit="return promptReview(this, '{{ booking.package.id }}')">
-                {% csrf_token %}
-                <input type="hidden" name="package_id" value="{{ booking.package.id }}">
-                <input type="hidden" name="comment" id="review-comment-{{ booking.id }}">
-                <button type="submit" class="trip-action-btn trip-btn-primary" style="margin-top:8px">Leave
-                  Review</button>
-              </form>
+              <button type="button" class="trip-action-btn trip-btn-primary" style="margin-top:8px"
+                onclick="openReviewModal('{{ booking.package.id }}', '{{ booking.package.title|escapejs }}')">
+                Leave Review
+              </button>
               <a onclick="switchTab('documents')" class="trip-action-btn trip-btn-outline"
                 style="cursor:pointer">Documents</a>
             </div>
@@ -1961,16 +1996,44 @@
           <p class="page-subtitle">Packages and destinations you've saved for future adventures.</p>
         </div>
         <div class="wishlist-toolbar">
-          <div class="wishlist-count"><strong>0</strong> saved packages</div>
+          <div class="wishlist-count"><strong>{{ wishlist_count }}</strong> saved package{{ wishlist_count|pluralize }}</div>
           <div class="wl-actions">
             <a href="/packages/" class="wl-btn wl-btn-solid">Browse More Packages</a>
           </div>
         </div>
+        {% if wishlist_items %}
+        <div class="wishlist-grid">
+          {% for item in wishlist_items %}
+          <div class="wl-card">
+            <div class="wl-img" style="background-image:url('{% if item.package.featured_image %}{{ item.package.featured_image.url }}{% else %}https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=600&q=80{% endif %}')">
+              <form method="POST" action="{% url 'wishlist_toggle' %}" style="display:inline;">
+                {% csrf_token %}
+                <input type="hidden" name="package_id" value="{{ item.package.id }}">
+                <button type="submit" class="wl-remove" title="Remove from wishlist">✕</button>
+              </form>
+              <span class="wl-duration-badge">{{ item.package.duration_days }} Days</span>
+            </div>
+            <div class="wl-body">
+              <div class="wl-tag">{% for loc in item.package.locations.all|slice:":1" %}{{ loc.destination.name }}{% endfor %}</div>
+              <div class="wl-name">{{ item.package.title }}</div>
+              <div class="wl-footer">
+                <div>
+                  <div class="wl-price">${{ item.package.base_price|floatformat:0 }}</div>
+                  <div class="wl-price-pp">per person</div>
+                </div>
+                <a href="{% url 'package_detail' item.package.id %}" class="wl-view">View →</a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
         <div class="empty-state">
           <div class="empty-icon">❤️</div>
           <div class="empty-title">Your Wishlist is Empty</div>
-          <p class="empty-text">Discover your next destination and save it here.</p>
+          <p class="empty-text">Browse our packages and click the heart icon to save ones you love.</p>
         </div>
+        {% endif %}
       </div>
 
       <!-- ── U03: ORDERS ── -->
@@ -2251,13 +2314,34 @@
       document.getElementById('trips-past').style.display = tab === 'past' ? 'flex' : 'none';
     }
 
-    function promptReview(form, pkgId) {
-      const comment = prompt("Tell us about your experience:");
-      if (comment) {
-        form.querySelector('input[name="comment"]').value = comment;
-        return true;
-      }
-      return false;
+    let _currentRating = 5;
+    function openReviewModal(pkgId, pkgTitle) {
+      document.getElementById('review-pkg-id').value = pkgId;
+      document.getElementById('review-modal-pkg').textContent = pkgTitle;
+      document.getElementById('review-comment-input').value = '';
+      setRating(5);
+      document.getElementById('review-modal-overlay').style.display = 'block';
+      document.getElementById('review-modal').style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeReviewModal() {
+      document.getElementById('review-modal-overlay').style.display = 'none';
+      document.getElementById('review-modal').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    function setRating(val) {
+      _currentRating = val;
+      document.getElementById('review-rating-hidden').value = val;
+      document.querySelectorAll('.star').forEach(s => {
+        s.textContent = parseInt(s.dataset.val) <= val ? '★' : '☆';
+        s.style.color = parseInt(s.dataset.val) <= val ? '#C9A84C' : '#ccc';
+      });
+    }
+    function submitReview() {
+      const comment = document.getElementById('review-comment-input').value.trim();
+      if (!comment) { document.getElementById('review-comment-input').focus(); return; }
+      document.getElementById('review-comment-hidden').value = comment;
+      document.getElementById('review-form').submit();
     }
   </script>
 </body>
