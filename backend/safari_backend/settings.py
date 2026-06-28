@@ -1,8 +1,10 @@
 import os
 from pathlib import Path
 import dj_database_url
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / '.env')
 IS_DOCKER = os.path.exists('/.dockerenv') or os.environ.get('IS_DOCKER', 'False').lower() in ('true', '1', 't')
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-your-secret-key-here')
