@@ -48,6 +48,9 @@
   .cart-badge { position: absolute; top: -8px; right: -8px; background: var(--gold); color: var(--green-dark); width: 18px; height: 18px; border-radius: 50%; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
   .nav-cta { background: var(--gold); color: var(--green-dark); padding: 12px 24px; border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
   .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .nav-cta-outline { color: var(--gold-light); padding: 11px 20px; border: 1.5px solid rgba(201,168,76,0.5); border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; transition: all 0.2s; }
+  .nav-cta-outline:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
+  @media (max-width: 900px) { .nav-cta-outline { display: none; } }
 
   /* ── FOOTER ── */
   footer { background: var(--charcoal); color: white; padding: 80px 80px 40px; }
@@ -133,6 +136,7 @@
       {% else %}
       <a href="{% url 'auth' %}" class="nav-user" style="color: white; font-size: 13px;">👤 Sign In</a>
       {% endif %}
+      <a href="{% url 'bundle_builder' %}" class="nav-cta-outline">Bundle Builder</a>
       <a href="{% url 'booking' %}" class="nav-cta">Book Now</a>
       <div class="nav-mobile-toggle" onclick="openMobileMenu()" style="cursor:pointer; color:white; font-size:24px; margin-left:16px;">☰</div>
     </div>
@@ -179,7 +183,8 @@
     {% else %}
     <a href="{% url 'auth' %}" onclick="closeMobileMenu()" style="color: var(--gold-light); font-size: 15px; font-weight: 500; display: flex; align-items: center; gap: 8px;">👤 Sign In</a>
     {% endif %}
-    <a href="{% url 'booking' %}" onclick="closeMobileMenu()" style="background: var(--gold); color: var(--green-dark); padding: 14px; text-align: center; border-radius: 4px; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 12px;">Book Now</a>
+    <a href="{% url 'bundle_builder' %}" onclick="closeMobileMenu()" style="color: var(--gold-light); border: 1.5px solid rgba(201,168,76,0.5); padding: 14px; text-align: center; border-radius: 4px; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 12px;">Bundle Builder</a>
+    <a href="{% url 'booking' %}" onclick="closeMobileMenu()" style="background: var(--gold); color: var(--green-dark); padding: 14px; text-align: center; border-radius: 4px; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;">Book Now</a>
   </div>
 </div>
 <script>

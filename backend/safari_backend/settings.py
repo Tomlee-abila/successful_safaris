@@ -124,6 +124,12 @@ STORAGES = {
     },
 }
 
+# If a static file is referenced but missing from the collectstatic manifest
+# (e.g. a worker process holding a stale manifest right after a deploy),
+# fall back to serving the plain unhashed filename instead of raising a
+# ValueError that 500s the whole page or silently breaks an <img> tag.
+WHITENOISE_MANIFEST_STRICT = False
+
 MEDIA_URL = '/media/'
 if IS_DOCKER:
     MEDIA_ROOT = Path(os.environ.get('DJANGO_MEDIA_ROOT', BASE_DIR / 'media'))
