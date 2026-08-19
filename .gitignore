@@ -18,3 +18,7 @@ backend/media/
 backend/staticfiles/
 media/
 staticfiles/
+
+# Logs
+logs/
+backend/logs/
