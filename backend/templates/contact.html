@@ -78,15 +78,15 @@
       <h3 class="widget-h">Headquarters</h3>
       <div class="info-item">
         <span class="info-icon">📍</span>
-        <div>Donholm, Nairobi</div>
+        <div>{{ site_settings.address }}</div>
       </div>
       <div class="info-item">
         <span class="info-icon">📞</span>
-        <div><a href="tel:+254141707878">+254 141 707 878</a></div>
+        <div><a href="tel:{{ site_settings.phone }}">{{ site_settings.phone }}</a></div>
       </div>
       <div class="info-item">
         <span class="info-icon">✉️</span>
-        <div><a href="mailto:info@successfulluxurysafaris.co.ke">info@successfulluxurysafaris.co.ke</a></div>
+        <div><a href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a></div>
       </div>
     </div>
 

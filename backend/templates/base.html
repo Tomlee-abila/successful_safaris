@@ -265,11 +265,11 @@
   <div class="footer-grid">
     <div class="footer-col">
       <div class="footer-logo">SUCCESSFUL <span>LUXURY SAFARIS</span></div>
-      <p class="footer-desc">Crafting legendary African adventures since 2008. From the plains of the Serengeti to the jungles of Rwanda, we provide luxury experiences that respect the wild.</p>
+      <p class="footer-desc">{{ site_settings.footer_tagline }}</p>
       <p class="footer-desc" style="margin-top:16px;">
-        Donholm, Nairobi<br>
-        <a href="tel:+254141707878">+254 141 707 878</a><br>
-        <a href="mailto:info@successfulluxurysafaris.co.ke">info@successfulluxurysafaris.co.ke</a>
+        {{ site_settings.address }}<br>
+        <a href="tel:{{ site_settings.phone }}">{{ site_settings.phone }}</a><br>
+        <a href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a>
       </p>
     </div>
     <div class="footer-col">
@@ -301,7 +301,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 SUCCESSFUL LUXURY SAFARIS Ltd. · ATOL Protected · IATA Accredited</p>
+    <p>{{ site_settings.footer_note }}</p>
     <div style="display:flex; gap:20px;">
       <a href="#">Privacy</a>
       <a href="#">Terms</a>
