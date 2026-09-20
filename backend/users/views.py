@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from django.utils import timezone
@@ -48,6 +48,11 @@ def auth(request):
         else:
             return render(request, 'auth.html', {'error': 'Invalid credentials', 'cart': get_cart(request)})
     return render(request, 'auth.html', {'cart': get_cart(request)})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 
 def register(request):

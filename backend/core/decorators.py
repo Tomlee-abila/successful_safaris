@@ -44,6 +44,9 @@ def permission_required(module_name, action='view'):
                 if not request.user.is_authenticated:
                     return redirect('auth')
                 messages.error(request, f"Access Denied: You do not have '{action}' permission for {module_name}.")
-                return redirect('dashboard')
+                # Redirect to 'home', not 'dashboard': if the denied view IS the
+                # dashboard (e.g. the permission matrix is empty/misconfigured),
+                # redirecting back to it would loop forever (ERR_TOO_MANY_REDIRECTS).
+                return redirect('home')
         return _wrapped_view
     return decorator
