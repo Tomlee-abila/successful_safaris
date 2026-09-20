@@ -62,6 +62,7 @@ class Command(BaseCommand):
             # Module Name, Visitor (v,c,e,d,note), User, SubAdmin, SuperAdmin
             ('Browse Destinations & Packages', (True,False,False,False,''), (True,False,False,False,''), (True,False,False,False,''), (True,False,False,False,'')),
             ('Browse Shop / Products', (True,False,False,False,''), (True,False,False,False,''), (True,False,False,False,''), (True,False,False,False,'')),
+            ('Browse Blog & Content', (True,False,False,False,''), (True,False,False,False,''), (True,False,False,False,''), (True,False,False,False,'')),
             ('Checkout / Purchase', (False,False,False,False,'→ Auth'), (True,True,False,False,''), (True,True,False,False,''), (True,True,True,True,'')),
             ('Book a Safari Package', (False,False,False,False,'→ Auth'), (True,True,False,False,''), (True,True,True,False,''), (True,True,True,True,'')),
             ('View My Bookings', (False,False,False,False,''), (True,False,True,False,'Modify'), (True,False,True,False,''), (True,True,True,True,'')),
