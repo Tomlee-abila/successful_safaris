@@ -16,7 +16,6 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('crm/', include('crm.urls')),
     path('users/', include('users.urls')),
-    path('social/', include('social_django.urls', namespace='social')),
     path('bookings/', include('bookings.urls')),
     
     # Core (Home, About, etc.)
