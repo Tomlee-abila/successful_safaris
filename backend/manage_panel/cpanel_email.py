@@ -33,7 +33,10 @@ def _run(func, **params):
         raise CpanelUnavailable("Email account management is only available on the live server.")
     args = ['uapi', '--output=json', 'Email', func] + [f'{k}={v}' for k, v in params.items()]
     try:
-        result = subprocess.run(args, capture_output=True, text=True, timeout=20)
+        result = subprocess.run(
+            args, capture_output=True, text=True, timeout=20,
+            encoding='utf-8', errors='replace',
+        )
     except FileNotFoundError:
         raise CpanelUnavailable("Email account management is only available on the live server.")
     import json
