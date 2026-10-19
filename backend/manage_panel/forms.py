@@ -34,7 +34,8 @@ class StyledForm(forms.ModelForm):
 class SiteSettingsForm(StyledForm):
     class Meta:
         model = SiteSettings
-        fields = ['business_name', 'footer_tagline', 'address', 'phone', 'email', 'footer_note']
+        fields = ['business_name', 'footer_tagline', 'address', 'phone', 'email', 'footer_note', 'shop_enabled']
+        labels = {'shop_enabled': 'Shop is open'}
 
 
 class DestinationForm(StyledForm):

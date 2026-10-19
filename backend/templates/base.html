@@ -122,12 +122,12 @@
       <li><a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a></li>
       <li><a href="{% url 'destinations' %}" class="{% if 'destinations' in request.path %}active{% endif %}">Destinations</a></li>
       <li><a href="{% url 'packages' %}" class="{% if 'packages' in request.path %}active{% endif %}">Packages</a></li>
-      <li><a href="{% url 'shop' %}" class="{% if 'shop' in request.path %}active{% endif %}">Shop</a></li>
+      {% if site_settings.shop_enabled %}<li><a href="{% url 'shop' %}" class="{% if 'shop' in request.path %}active{% endif %}">Shop</a></li>{% endif %}
       <li><a href="{% url 'about' %}" class="{% if 'about' in request.path %}active{% endif %}">About</a></li>
       <li><a href="{% url 'contact' %}" class="{% if 'contact' in request.path %}active{% endif %}">Contact</a></li>
     </ul>
     <div class="nav-right">
-      <div class="nav-cart" onclick="openCart()" style="cursor:pointer;">🛒<span class="cart-badge" id="base-cart-badge" style="display:none;">0</span></div>
+      {% if site_settings.shop_enabled %}<div class="nav-cart" onclick="openCart()" style="cursor:pointer;">🛒<span class="cart-badge" id="base-cart-badge" style="display:none;">0</span></div>{% endif %}
       {% if request.user.is_authenticated %}
       <a href="{% url 'dashboard' %}" class="nav-user" style="color: white; font-size: 13px; display:flex; align-items:center; gap:8px;">
         <span style="width:30px;height:30px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--green-dark);">{{ request.user.first_name|first|upper }}{{ request.user.last_name|first|upper }}</span>
@@ -136,7 +136,7 @@
       {% else %}
       <a href="{% url 'auth' %}" class="nav-user" style="color: white; font-size: 13px;">👤 Sign In</a>
       {% endif %}
-      <a href="{% url 'bundle_builder' %}" class="nav-cta-outline">Bundle Builder</a>
+      {% if site_settings.shop_enabled %}<a href="{% url 'bundle_builder' %}" class="nav-cta-outline">Bundle Builder</a>{% endif %}
       <a href="{% url 'booking' %}" class="nav-cta">Book Now</a>
       <div class="nav-mobile-toggle" onclick="openMobileMenu()" style="cursor:pointer; color:white; font-size:24px; margin-left:16px;">☰</div>
     </div>
@@ -173,7 +173,7 @@
     <a href="{% url 'home' %}" onclick="closeMobileMenu()" style="color: white; font-size: 16px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Home</a>
     <a href="{% url 'destinations' %}" onclick="closeMobileMenu()" style="color: white; font-size: 16px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Destinations</a>
     <a href="{% url 'packages' %}" onclick="closeMobileMenu()" style="color: white; font-size: 16px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Packages</a>
-    <a href="{% url 'shop' %}" onclick="closeMobileMenu()" style="color: white; font-size: 16px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Shop</a>
+    {% if site_settings.shop_enabled %}<a href="{% url 'shop' %}" onclick="closeMobileMenu()" style="color: white; font-size: 16px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Shop</a>{% endif %}
     <a href="{% url 'about' %}" onclick="closeMobileMenu()" style="color: white; font-size: 16px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">About</a>
     <a href="{% url 'contact' %}" onclick="closeMobileMenu()" style="color: white; font-size: 16px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Contact</a>
     <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 12px 0;">
@@ -183,7 +183,7 @@
     {% else %}
     <a href="{% url 'auth' %}" onclick="closeMobileMenu()" style="color: var(--gold-light); font-size: 15px; font-weight: 500; display: flex; align-items: center; gap: 8px;">👤 Sign In</a>
     {% endif %}
-    <a href="{% url 'bundle_builder' %}" onclick="closeMobileMenu()" style="color: var(--gold-light); border: 1.5px solid rgba(201,168,76,0.5); padding: 14px; text-align: center; border-radius: 4px; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 12px;">Bundle Builder</a>
+    {% if site_settings.shop_enabled %}<a href="{% url 'bundle_builder' %}" onclick="closeMobileMenu()" style="color: var(--gold-light); border: 1.5px solid rgba(201,168,76,0.5); padding: 14px; text-align: center; border-radius: 4px; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 12px;">Bundle Builder</a>{% endif %}
     <a href="{% url 'booking' %}" onclick="closeMobileMenu()" style="background: var(--gold); color: var(--green-dark); padding: 14px; text-align: center; border-radius: 4px; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;">Book Now</a>
   </div>
 </div>
@@ -244,7 +244,9 @@
       .catch(() => {});
   }
   // Initialise badge on page load
+  {% if site_settings.shop_enabled %}
   fetch('/shop/cart/data/').then(r => r.json()).then(d => updateCartBadge(d.count)).catch(() => {});
+  {% endif %}
   function openMobileMenu() {
     document.getElementById('mobile-menu-drawer').style.left = '0';
     document.getElementById('mobile-menu-overlay').style.display = 'block';

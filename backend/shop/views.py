@@ -2,15 +2,18 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from .models import ProductCategory, Product, CartItem
 from .utils import get_cart
-from core.decorators import permission_required
+from core.decorators import permission_required, shop_enabled_required
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from packages.models import SafariPackage
 from .serializers import BundlePackageSerializer, BundleProductSerializer
+from core.models import SiteSettings
 
 class BundleOptionsAPIView(APIView):
     def get(self, request):
+        if not SiteSettings.get_solo().shop_enabled:
+            return Response({'packages': [], 'gear': [], 'addons': []})
         packages = SafariPackage.objects.filter(is_active=True)[:4]
         gear = Product.objects.filter(category__name__icontains='Gear', is_active=True)[:6]
         addons = Product.objects.filter(category__name__icontains='Add-on', is_active=True)[:6]
@@ -25,6 +28,7 @@ class BundleOptionsAPIView(APIView):
             'addons': BundleProductSerializer(addons, many=True).data,
         })
 
+@shop_enabled_required
 @permission_required('Browse Shop / Products')
 def shop(request):
     categories = ProductCategory.objects.all()
@@ -36,6 +40,7 @@ def shop(request):
     }
     return render(request, 'shop.html', context)
 
+@shop_enabled_required
 @permission_required('Browse Shop / Products')
 def product_detail(request, pk):
     product = get_object_or_404(Product.objects.select_related('category'), pk=pk)
@@ -46,11 +51,13 @@ def product_detail(request, pk):
         'cart': get_cart(request)
     })
 
+@shop_enabled_required
 def bundle_builder(request):
     return render(request, 'bundle-builder.html', {'cart': get_cart(request)})
 
 # ── CART ACTIONS ──
 
+@shop_enabled_required
 def add_to_cart(request):
     if request.method == 'POST':
         product_id = request.POST.get('product_id')
@@ -66,10 +73,12 @@ def add_to_cart(request):
         return JsonResponse({'status': 'success', 'cart_count': cart.items.count()})
     return JsonResponse({'status': 'error'}, status=400)
 
+@shop_enabled_required
 def shopping_cart(request):
     cart = get_cart(request)
     return render(request, 'shopping-cart.html', {'cart': cart})
 
+@shop_enabled_required
 def update_cart(request):
     if request.method == 'POST':
         item_id = request.POST.get('item_id')
@@ -81,6 +90,7 @@ def update_cart(request):
         return redirect('shopping_cart')
     return redirect('shopping_cart')
 
+@shop_enabled_required
 def remove_from_cart(request):
     if request.method == 'POST':
         item_id = request.POST.get('item_id')

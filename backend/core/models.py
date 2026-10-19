@@ -18,6 +18,11 @@ class SiteSettings(models.Model):
         max_length=255,
         default='© 2026 SUCCESSFUL LUXURY SAFARIS Ltd. · ATOL Protected · IATA Accredited'
     )
+    shop_enabled = models.BooleanField(
+        default=True,
+        help_text='Untick to temporarily close the online shop — hides the Shop link and cart, '
+                   'and takes shop pages offline, without deleting any products or orders.'
+    )
 
     class Meta:
         verbose_name = 'Site Settings'

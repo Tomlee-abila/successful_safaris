@@ -3,6 +3,20 @@ from django.contrib import messages
 from functools import wraps
 from inventory.models import Permission
 
+
+def shop_enabled_required(view_func):
+    """Takes a shop view offline entirely while the shop is switched off in
+    Site Settings — visiting the URL directly bounces to the homepage instead
+    of rendering the page."""
+    @wraps(view_func)
+    def _wrapped_view(request, *args, **kwargs):
+        from core.models import SiteSettings
+        if not SiteSettings.get_solo().shop_enabled:
+            messages.error(request, "Our shop is currently closed.")
+            return redirect('home')
+        return view_func(request, *args, **kwargs)
+    return _wrapped_view
+
 def permission_required(module_name, action='view'):
     """
     Decorator for views that checks whether a user has a particular permission 
