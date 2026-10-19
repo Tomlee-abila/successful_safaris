@@ -1,0 +1,17 @@
+{% extends 'manage/base.html' %}
+
+{% block content %}
+<div class="confirm-box">
+  <h1 style="font-family:'Playfair Display',serif; font-size:20px; color:var(--error); margin-bottom:12px;">Delete this mailbox?</h1>
+  <p style="font-size:14px; margin-bottom:20px;">
+    You're about to permanently delete <b>{{ email }}</b> and everything in it. This cannot be undone.
+  </p>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-actions" style="border-top:none; padding-top:0; margin-top:0;">
+      <button type="submit" class="btn btn-danger">Yes, Delete It</button>
+      <a href="{% url 'manage:staff_emails' %}" class="btn btn-secondary">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

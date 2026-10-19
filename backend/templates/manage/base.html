@@ -166,6 +166,11 @@
   <a href="{% url 'manage:site_settings' %}" class="sidebar-item {% if active_slug == 'site-settings' %}active{% endif %}">
     <span class="sidebar-icon">⚙️</span> Site Settings
   </a>
+  {% if request.user.is_superuser %}
+  <a href="{% url 'manage:staff_emails' %}" class="sidebar-item {% if active_slug == 'staff-emails' %}active{% endif %}">
+    <span class="sidebar-icon">📧</span> Staff Emails
+  </a>
+  {% endif %}
 
   <div class="sidebar-footer">
     <a href="/">🌐 View Live Site</a>

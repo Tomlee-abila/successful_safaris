@@ -1,0 +1,45 @@
+{% extends 'manage/base.html' %}
+
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>Staff Emails</h1>
+    <p class="sub">Real email mailboxes on @{{ domain }} — e.g. bookings@{{ domain }}.</p>
+  </div>
+  <div style="display:flex; gap:10px;">
+    <a href="https://{{ domain }}:2096/" target="_blank" rel="noopener" class="btn btn-secondary">📬 Open Webmail</a>
+    {% if not unavailable %}<a href="{% url 'manage:staff_email_add' %}" class="btn btn-primary">+ Add New</a>{% endif %}
+  </div>
+</div>
+
+{% if unavailable %}
+<div class="card" style="padding:24px;">
+  <p>{{ unavailable }}</p>
+  <p class="form-help" style="margin-top:8px;">This only works once the site is running on the live server — it isn't available from a local/dev copy.</p>
+</div>
+{% else %}
+<div class="card">
+  {% if mailboxes %}
+  <table>
+    <thead><tr><th>Email Address</th><th></th></tr></thead>
+    <tbody>
+      {% for m in mailboxes %}
+      <tr>
+        <td>{{ m.email }}</td>
+        <td>
+          <div class="row-actions">
+            <a href="https://{{ domain }}:2096/" target="_blank" rel="noopener">Open Webmail</a>
+            <a href="{% url 'manage:staff_email_reset_password' email=m.email %}">Reset Password</a>
+            <a href="{% url 'manage:staff_email_delete' email=m.email %}" class="danger">Delete</a>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="empty-state">No staff email accounts yet. Click "Add New" to create the first one.</div>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}

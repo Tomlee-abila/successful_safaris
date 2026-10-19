@@ -30,6 +30,20 @@ def staff_required(view_func):
     return wrapped
 
 
+def superuser_required(view_func):
+    """Stricter than staff_required — for actions that touch real hosting
+    infrastructure (creating/deleting actual mailboxes), not just website
+    content."""
+    @wraps(view_func)
+    @staff_required
+    def wrapped(request, *args, **kwargs):
+        if not request.user.is_superuser:
+            messages.error(request, "Only a super admin can manage staff email accounts.")
+            return redirect('manage:dashboard')
+        return view_func(request, *args, **kwargs)
+    return wrapped
+
+
 def _section_or_404(slug):
     section = SECTIONS.get(slug)
     if not section:
@@ -313,3 +327,81 @@ def newsletter_delete(request, pk):
     sub.delete()
     messages.success(request, "Subscriber removed.")
     return redirect('manage:newsletter')
+
+
+# ── STAFF EMAIL ACCOUNTS (real cPanel mailboxes, not a DB model) ───────
+
+@superuser_required
+def staff_email_list(request):
+    from . import cpanel_email
+    ctx = _base_context(request, active_slug='staff-emails')
+    try:
+        mailboxes = cpanel_email.list_mailboxes()
+        ctx['mailboxes'] = mailboxes
+        ctx['unavailable'] = None
+    except cpanel_email.CpanelUnavailable as e:
+        ctx['mailboxes'] = []
+        ctx['unavailable'] = str(e)
+    except cpanel_email.CpanelError as e:
+        ctx['mailboxes'] = []
+        messages.error(request, f"Couldn't load mailboxes: {e}")
+    ctx['domain'] = cpanel_email.COMPANY_EMAIL_DOMAIN
+    ctx['title'] = 'Staff Emails'
+    return render(request, 'manage/staff_email_list.html', ctx)
+
+
+@superuser_required
+def staff_email_add(request):
+    from . import cpanel_email
+    ctx = _base_context(request, active_slug='staff-emails')
+    ctx['domain'] = cpanel_email.COMPANY_EMAIL_DOMAIN
+    ctx['title'] = 'Add Staff Email'
+    if request.method == 'POST':
+        local_part = request.POST.get('local_part', '').strip().lower()
+        quota_mb = request.POST.get('quota_mb', '1024').strip() or '1024'
+        try:
+            password = cpanel_email.generate_password()
+            cpanel_email.create_mailbox(local_part, password, quota_mb=quota_mb)
+            ctx['created_email'] = f"{local_part}@{cpanel_email.COMPANY_EMAIL_DOMAIN}"
+            ctx['created_password'] = password
+            return render(request, 'manage/staff_email_created.html', ctx)
+        except cpanel_email.CpanelUnavailable as e:
+            messages.error(request, str(e))
+        except cpanel_email.CpanelError as e:
+            messages.error(request, f"Couldn't create mailbox: {e}")
+    return render(request, 'manage/staff_email_add.html', ctx)
+
+
+@superuser_required
+def staff_email_delete(request, email):
+    from . import cpanel_email
+    ctx = _base_context(request, active_slug='staff-emails')
+    ctx['email'] = email
+    ctx['title'] = 'Delete Staff Email'
+    if request.method == 'POST':
+        try:
+            cpanel_email.delete_mailbox(email)
+            messages.success(request, f'"{email}" was deleted.')
+        except (cpanel_email.CpanelUnavailable, cpanel_email.CpanelError) as e:
+            messages.error(request, f"Couldn't delete mailbox: {e}")
+        return redirect('manage:staff_emails')
+    return render(request, 'manage/staff_email_delete.html', ctx)
+
+
+@superuser_required
+def staff_email_reset_password(request, email):
+    from . import cpanel_email
+    ctx = _base_context(request, active_slug='staff-emails')
+    ctx['email'] = email
+    ctx['title'] = 'Reset Mailbox Password'
+    if request.method == 'POST':
+        try:
+            password = cpanel_email.generate_password()
+            cpanel_email.set_mailbox_password(email, password)
+            ctx['created_email'] = email
+            ctx['created_password'] = password
+            return render(request, 'manage/staff_email_created.html', ctx)
+        except (cpanel_email.CpanelUnavailable, cpanel_email.CpanelError) as e:
+            messages.error(request, f"Couldn't reset password: {e}")
+            return redirect('manage:staff_emails')
+    return render(request, 'manage/staff_email_reset_password.html', ctx)
