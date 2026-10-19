@@ -8,6 +8,14 @@ django.setup()
 
 from django.contrib.auth import get_user_model
 
+
+def _generate_password(length=16):
+    import secrets
+    import string
+    alphabet = string.ascii_letters + string.digits
+    return ''.join(secrets.choice(alphabet) for _ in range(length))
+
+
 def create_superuser():
     User = get_user_model()
     
@@ -34,10 +42,17 @@ def create_superuser():
     if not password:
         try:
             import getpass
-            password = getpass.getpass("Enter superuser password (default: adminpass123): ").strip() or "adminpass123"
+            entered = getpass.getpass("Enter superuser password (leave blank to generate one): ").strip()
+            password = entered or _generate_password()
+            if not entered:
+                print(f"Generated password: {password}")
         except (EOFError, OSError):
-            password = "adminpass123"
-            print("Non-interactive environment. Using default password: 'adminpass123'")
+            # Non-interactive run (e.g. a deploy script) with no SUPERUSER_PASSWORD set.
+            # Never fall back to a fixed/guessable password here — that's a real
+            # credential, not a placeholder, and this script's source is public.
+            password = _generate_password()
+            print(f"Non-interactive environment. Generated password: {password}")
+            print("Copy this down now — it will not be shown again.")
 
         
     if User.objects.filter(username=username).exists():
