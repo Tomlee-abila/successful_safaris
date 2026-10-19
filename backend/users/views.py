@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.contrib.auth.models import User, Group
 from django.utils import timezone
 from django.db.models import Sum
@@ -22,9 +23,18 @@ from core.decorators import permission_required
 
 # ── Auth ───────────────────────────────────────────────────────────────
 
+def _safe_next(request, next_url):
+    if next_url and url_has_allowed_host_and_scheme(
+        next_url, allowed_hosts={request.get_host()}, require_https=request.is_secure()
+    ):
+        return next_url
+    return None
+
+
 def auth(request):
+    next_url = _safe_next(request, request.POST.get('next') or request.GET.get('next'))
     if request.user.is_authenticated:
-        return redirect('dashboard')
+        return redirect(next_url or 'dashboard')
     if request.method == 'POST':
         email_or_username = request.POST.get('email')
         password = request.POST.get('password')
@@ -42,12 +52,14 @@ def auth(request):
             profile = getattr(user, 'profile', None)
             if profile and profile.mfa_enabled:
                 request.session['mfa_pending_user_id'] = user.pk
+                if next_url:
+                    request.session['mfa_pending_next'] = next_url
                 return redirect('mfa_verify')
             login(request, user)
-            return redirect('dashboard')
+            return redirect(next_url or 'dashboard')
         else:
-            return render(request, 'auth.html', {'error': 'Invalid credentials', 'cart': get_cart(request)})
-    return render(request, 'auth.html', {'cart': get_cart(request)})
+            return render(request, 'auth.html', {'error': 'Invalid credentials', 'cart': get_cart(request), 'next': next_url})
+    return render(request, 'auth.html', {'cart': get_cart(request), 'next': next_url})
 
 
 def logout_view(request):
@@ -236,8 +248,9 @@ def mfa_verify(request):
         totp = pyotp.TOTP(profile.mfa_secret)
         if totp.verify(code, valid_window=1):
             del request.session['mfa_pending_user_id']
+            next_url = request.session.pop('mfa_pending_next', None)
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-            return redirect('dashboard')
+            return redirect(next_url or 'dashboard')
         else:
             return render(request, 'mfa_verify.html', {
                 'error': 'Invalid code. Please try again.',

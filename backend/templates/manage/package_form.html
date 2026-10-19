@@ -1,0 +1,76 @@
+{% extends 'manage/base.html' %}
+
+{% block content %}
+<div class="page-head">
+  <div><h1>{{ title }}</h1></div>
+  <a href="{% url 'manage:list' slug='packages' %}" class="btn btn-secondary">&larr; Back to list</a>
+</div>
+
+<form method="post" enctype="multipart/form-data" class="form-card" style="max-width:860px;">
+  {% csrf_token %}
+
+  {% for field in form %}
+    {% if field.field.widget.input_type == 'checkbox' %}
+    <div class="form-group form-check-row">
+      {{ field }}
+      <label class="form-label" style="margin-bottom:0;">{{ field.label }}</label>
+    </div>
+    {% else %}
+    <div class="form-group">
+      <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+      {{ field }}
+      {% if field.name == 'locations' %}<p class="form-help">Hold Ctrl (or Cmd on Mac) to select more than one.</p>{% endif %}
+    </div>
+    {% endif %}
+    {% if field.errors %}<p class="field-errors">{{ field.errors|striptags }}</p>{% endif %}
+  {% endfor %}
+
+  {% if instance and instance.featured_image %}
+  <div class="form-group">
+    <label class="form-label">Current Image</label>
+    <img src="{{ instance.featured_image.url }}" style="max-width:220px; border-radius:8px; display:block;">
+  </div>
+  {% endif %}
+
+  <div class="form-group" style="margin-top:28px; border-top:1px solid var(--cream-mid); padding-top:20px;">
+    <label class="form-label" style="font-size:13px;">Day-by-Day Itinerary</label>
+    <p class="form-help" style="margin-bottom:14px;">Add one entry per day of the trip. Leave "Day Number" blank on an extra row to ignore it.</p>
+    {{ formset.management_form }}
+    {% for itin_form in formset %}
+    <div class="itin-day">
+      <div class="itin-day-label">Day</div>
+      {% for hidden in itin_form.hidden_fields %}{{ hidden }}{% endfor %}
+      <div style="display:grid; grid-template-columns: 100px 1fr; gap:12px; margin-bottom:10px;">
+        <div>
+          <label class="form-label">Day #</label>
+          {{ itin_form.day_number }}
+        </div>
+        <div>
+          <label class="form-label">Title</label>
+          {{ itin_form.title }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Description</label>
+        {{ itin_form.description }}
+      </div>
+      <div class="form-group">
+        <label class="form-label">Location (optional)</label>
+        {{ itin_form.location }}
+      </div>
+      {% if itin_form.instance.pk %}
+      <div class="form-check-row">
+        {{ itin_form.DELETE }}
+        <label class="form-label" style="margin-bottom:0; color:var(--error);">Remove this day</label>
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Save Package</button>
+    <a href="{% url 'manage:list' slug='packages' %}" class="btn btn-secondary">Cancel</a>
+  </div>
+</form>
+{% endblock %}

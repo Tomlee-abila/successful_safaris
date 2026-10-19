@@ -1,0 +1,41 @@
+{% extends 'manage/base.html' %}
+
+{% block content %}
+<div class="page-head">
+  <div><h1>Bookings</h1><p class="sub">{{ page_obj.paginator.count }} total — view-only, financial records are never deleted here.</p></div>
+</div>
+
+<form class="search-form" method="get">
+  <input type="text" name="q" value="{{ query }}" placeholder="Search by booking number or customer...">
+  <button type="submit" class="btn btn-secondary btn-sm">Search</button>
+</form>
+
+<div class="card">
+  {% if page_obj.object_list %}
+  <table>
+    <thead><tr><th>Booking #</th><th>Customer</th><th>Package</th><th>Start Date</th><th>Amount</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+      {% for b in page_obj %}
+      <tr>
+        <td>{{ b.booking_number }}</td>
+        <td>{{ b.customer.username }}</td>
+        <td>{{ b.package.title }}</td>
+        <td>{{ b.start_date }}</td>
+        <td>{{ b.total_amount }}</td>
+        <td><span class="badge badge-on">{{ b.get_status_display }}</span></td>
+        <td><div class="row-actions"><a href="{% url 'manage:booking_detail' pk=b.pk %}">View</a></div></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}<div class="empty-state">No bookings yet.</div>{% endif %}
+</div>
+
+{% if page_obj.paginator.num_pages > 1 %}
+<div class="pagination">
+  {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}">&laquo; Prev</a>{% endif %}
+  <span class="current">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+  {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>{% endif %}
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'manage/base.html' %}
+
+{% block content %}
+<div class="page-head">
+  <div><h1>Customer Enquiries</h1><p class="sub">Messages submitted through the Contact form.</p></div>
+</div>
+
+<div class="card">
+  {% if page_obj.object_list %}
+  <table>
+    <thead><tr><th>From</th><th>Subject</th><th>Message</th><th>Date</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+      {% for i in page_obj %}
+      <tr>
+        <td>{{ i.name }}<br><span style="color:var(--gray-mid); font-size:11px;">{{ i.email }}</span></td>
+        <td>{{ i.subject }}</td>
+        <td style="max-width:260px;">{{ i.message|truncatewords:20 }}</td>
+        <td>{{ i.created_at|date:"d M Y" }}</td>
+        <td>{% if i.is_resolved %}<span class="badge badge-on">Resolved</span>{% else %}<span class="badge badge-off">Open</span>{% endif %}</td>
+        <td>
+          <form method="post" action="{% url 'manage:inquiry_toggle' pk=i.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-secondary btn-sm">{% if i.is_resolved %}Mark Open{% else %}Mark Resolved{% endif %}</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}<div class="empty-state">No enquiries yet.</div>{% endif %}
+</div>
+
+{% if page_obj.paginator.num_pages > 1 %}
+<div class="pagination">
+  {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}">&laquo; Prev</a>{% endif %}
+  <span class="current">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+  {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>{% endif %}
+</div>
+{% endif %}
+{% endblock %}

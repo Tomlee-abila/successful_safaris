@@ -17,6 +17,7 @@ urlpatterns = [
     path('crm/', include('crm.urls')),
     path('users/', include('users.urls')),
     path('bookings/', include('bookings.urls')),
+    path('manage/', include('manage_panel.urls')),
     
     # Core (Home, About, etc.)
     path('', include('core.urls')),

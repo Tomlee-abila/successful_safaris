@@ -1,0 +1,62 @@
+{% extends 'manage/base.html' %}
+{% load manage_extras %}
+
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>{{ section.label }}</h1>
+    <p class="sub">{{ page_obj.paginator.count }} total</p>
+  </div>
+  <a href="{% url 'manage:add' slug=slug %}" class="btn btn-primary">+ Add New</a>
+</div>
+
+<form class="search-form" method="get">
+  <input type="text" name="q" value="{{ query }}" placeholder="Search {{ section.label|lower }}...">
+  <button type="submit" class="btn btn-secondary btn-sm">Search</button>
+  {% if query %}<a href="{% url 'manage:list' slug=slug %}" class="btn btn-secondary btn-sm">Clear</a>{% endif %}
+</form>
+
+<div class="card">
+  {% if page_obj.object_list %}
+  <table>
+    <thead>
+      <tr>
+        {% for field, label in section.list_fields %}<th>{{ label }}</th>{% endfor %}
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for obj in page_obj %}
+      <tr>
+        {% for field, label in section.list_fields %}
+        <td>
+          {% with value=obj|getattr:field %}
+            {% if value == True %}<span class="badge badge-on">Yes</span>
+            {% elif value == False %}<span class="badge badge-off">No</span>
+            {% else %}{{ value|default:"—" }}{% endif %}
+          {% endwith %}
+        </td>
+        {% endfor %}
+        <td>
+          <div class="row-actions">
+            <a href="{% url 'manage:edit' slug=slug pk=obj.pk %}">Edit</a>
+            <a href="{% url 'manage:delete' slug=slug pk=obj.pk %}" class="danger">Delete</a>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="empty-state">Nothing here yet. Click "Add New" to create the first one.</div>
+  {% endif %}
+</div>
+
+{% if page_obj.paginator.num_pages > 1 %}
+<div class="pagination">
+  {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">&laquo; Prev</a>{% endif %}
+  <span class="current">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+  {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}">Next &raquo;</a>{% endif %}
+</div>
+{% endif %}
+{% endblock %}

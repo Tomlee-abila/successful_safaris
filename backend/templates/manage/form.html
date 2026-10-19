@@ -1,0 +1,49 @@
+{% extends 'manage/base.html' %}
+
+{% block content %}
+<div class="page-head">
+  <div><h1>{{ title }}</h1></div>
+  <a href="{% url 'manage:list' slug=slug %}" class="btn btn-secondary">&larr; Back to list</a>
+</div>
+
+<form method="post" enctype="multipart/form-data" class="form-card">
+  {% csrf_token %}
+  {% for field in form %}
+    {% if field.field.widget.input_type == 'checkbox' %}
+    <div class="form-group form-check-row">
+      {{ field }}
+      <label class="form-label" style="margin-bottom:0;">{{ field.label }}</label>
+    </div>
+    {% else %}
+    <div class="form-group">
+      <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+      {{ field }}
+      {% if field.help_text %}<p class="form-help">{{ field.help_text }}</p>{% endif %}
+    </div>
+    {% endif %}
+    {% if field.errors %}<p class="field-errors">{{ field.errors|striptags }}</p>{% endif %}
+  {% endfor %}
+
+  {% if instance and instance.featured_image %}
+  <div class="form-group">
+    <label class="form-label">Current Image</label>
+    <img src="{{ instance.featured_image.url }}" style="max-width:220px; border-radius:8px; display:block;">
+  </div>
+  {% elif instance and instance.image %}
+  <div class="form-group">
+    <label class="form-label">Current Image</label>
+    <img src="{{ instance.image.url }}" style="max-width:220px; border-radius:8px; display:block;">
+  </div>
+  {% elif instance and instance.hero_image %}
+  <div class="form-group">
+    <label class="form-label">Current Image</label>
+    <img src="{{ instance.hero_image.url }}" style="max-width:220px; border-radius:8px; display:block;">
+  </div>
+  {% endif %}
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="{% url 'manage:list' slug=slug %}" class="btn btn-secondary">Cancel</a>
+  </div>
+</form>
+{% endblock %}

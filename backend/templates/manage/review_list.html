@@ -1,0 +1,39 @@
+{% extends 'manage/base.html' %}
+
+{% block content %}
+<div class="page-head">
+  <div><h1>Customer Reviews</h1><p class="sub">Star ratings and comments left by customers.</p></div>
+</div>
+
+<div class="card">
+  {% if page_obj.object_list %}
+  <table>
+    <thead><tr><th>Customer</th><th>Rating</th><th>Comment</th><th>Date</th><th></th></tr></thead>
+    <tbody>
+      {% for r in page_obj %}
+      <tr>
+        <td>{{ r.user.username }}</td>
+        <td>{{ r.rating }} / 5</td>
+        <td style="max-width:320px;">{{ r.comment|truncatewords:20 }}</td>
+        <td>{{ r.created_at|date:"d M Y" }}</td>
+        <td>
+          <form method="post" action="{% url 'manage:review_delete' pk=r.pk %}" onsubmit="return confirm('Remove this review?');">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-secondary btn-sm" style="color:var(--error);">Remove</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}<div class="empty-state">No reviews yet.</div>{% endif %}
+</div>
+
+{% if page_obj.paginator.num_pages > 1 %}
+<div class="pagination">
+  {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}">&laquo; Prev</a>{% endif %}
+  <span class="current">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+  {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>{% endif %}
+</div>
+{% endif %}
+{% endblock %}

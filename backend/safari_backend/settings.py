@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'crm',
     'blog',
     'users',
+    'manage_panel',
 ]
 
 MIDDLEWARE = [

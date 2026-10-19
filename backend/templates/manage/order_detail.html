@@ -1,0 +1,39 @@
+{% extends 'manage/base.html' %}
+
+{% block content %}
+<div class="page-head">
+  <div><h1>Order #{{ order.id }}</h1></div>
+  <a href="{% url 'manage:orders' %}" class="btn btn-secondary">&larr; Back to list</a>
+</div>
+
+<div class="detail-grid">
+  <div class="detail-item"><div class="k">Customer</div><div class="v">{{ order.user.username }}</div></div>
+  <div class="detail-item"><div class="k">Total Amount</div><div class="v">{{ order.total_amount }}</div></div>
+  <div class="detail-item" style="grid-column: span 2;"><div class="k">Shipping Address</div><div class="v" style="font-weight:400; font-size:13px;">{{ order.shipping_address }}</div></div>
+</div>
+
+<div class="form-card" style="margin-bottom:20px;">
+  <label class="form-label">Update Status</label>
+  <form method="post" style="display:flex; gap:10px; align-items:center;">
+    {% csrf_token %}
+    <select name="status" class="form-select" style="max-width:220px;">
+      {% for value, label in order.ORDER_STATUS_CHOICES %}
+      <option value="{{ value }}" {% if order.status == value %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-primary btn-sm">Update</button>
+  </form>
+</div>
+
+<div class="card">
+  <div class="table-card-header" style="padding:14px 18px; background:var(--cream); font-family:'Playfair Display',serif; font-weight:600; border-bottom:1px solid var(--cream-mid);">Items</div>
+  <table>
+    <thead><tr><th>Product</th><th>Qty</th><th>Price Each</th></tr></thead>
+    <tbody>
+      {% for item in items %}
+      <tr><td>{{ item.product.name }}</td><td>{{ item.quantity }}</td><td>{{ item.price_at_purchase }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
