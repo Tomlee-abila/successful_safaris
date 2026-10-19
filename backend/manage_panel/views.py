@@ -1,7 +1,10 @@
 from functools import wraps
 
 from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import Http404
@@ -15,7 +18,8 @@ from shop.models import Order
 from crm.models import Inquiry, Review
 from core.models import NewsletterSubscriber, SiteSettings
 
-from .registry import SECTIONS
+from .models import ManagePermission
+from .registry import SECTIONS, ALL_SECTION_CHOICES, ALL_SECTION_SLUGS
 
 
 def staff_required(view_func):
@@ -33,7 +37,7 @@ def staff_required(view_func):
 def superuser_required(view_func):
     """Stricter than staff_required — for actions that touch real hosting
     infrastructure (creating/deleting actual mailboxes), not just website
-    content."""
+    content. Never delegable via section checkboxes."""
     @wraps(view_func)
     @staff_required
     def wrapped(request, *args, **kwargs):
@@ -44,6 +48,33 @@ def superuser_required(view_func):
     return wrapped
 
 
+def accessible_sections(user):
+    """Full set of section slugs this user can use. Superusers always get
+    everything; everyone else gets exactly what's been explicitly granted."""
+    if user.is_superuser:
+        return set(ALL_SECTION_SLUGS)
+    return set(ManagePermission.objects.filter(user=user).values_list('section', flat=True))
+
+
+def has_section_access(user, slug):
+    return user.is_superuser or slug in accessible_sections(user)
+
+
+def section_required(slug):
+    """Gates a fixed (non-registry) view behind one checkbox-grantable
+    section, e.g. @section_required('bookings')."""
+    def decorator(view_func):
+        @wraps(view_func)
+        @staff_required
+        def wrapped(request, *args, **kwargs):
+            if not has_section_access(request.user, slug):
+                messages.error(request, "You don't have access to that section.")
+                return redirect('manage:dashboard')
+            return view_func(request, *args, **kwargs)
+        return wrapped
+    return decorator
+
+
 def _section_or_404(slug):
     section = SECTIONS.get(slug)
     if not section:
@@ -51,16 +82,20 @@ def _section_or_404(slug):
     return section
 
 
-def _nav_groups():
+def _nav_groups(user):
+    allowed = accessible_sections(user)
     groups = {}
     for slug, section in SECTIONS.items():
-        groups.setdefault(section['group'], []).append((slug, section))
+        if slug in allowed:
+            groups.setdefault(section['group'], []).append((slug, section))
     return groups
 
 
 def _base_context(request, active_slug=None):
+    allowed = accessible_sections(request.user)
     return {
-        'nav_groups': _nav_groups(),
+        'nav_groups': _nav_groups(request.user),
+        'accessible_slugs': allowed,
         'active_slug': active_slug,
         'cart': None,
     }
@@ -80,7 +115,7 @@ def dashboard(request):
     return render(request, 'manage/dashboard.html', ctx)
 
 
-@staff_required
+@section_required('site-settings')
 def site_settings_edit(request):
     obj = SiteSettings.get_solo()
     from .forms import SiteSettingsForm
@@ -100,6 +135,9 @@ def site_settings_edit(request):
 @staff_required
 def list_view(request, slug):
     section = _section_or_404(slug)
+    if not has_section_access(request.user, slug):
+        messages.error(request, "You don't have access to that section.")
+        return redirect('manage:dashboard')
     qs = section['model'].objects.all()
     if section.get('order_by'):
         qs = qs.order_by(section['order_by'])
@@ -124,6 +162,9 @@ def list_view(request, slug):
 @staff_required
 def add_view(request, slug):
     section = _section_or_404(slug)
+    if not has_section_access(request.user, slug):
+        messages.error(request, "You don't have access to that section.")
+        return redirect('manage:dashboard')
     if slug == 'packages':
         return _package_form(request, package=None)
 
@@ -148,6 +189,9 @@ def add_view(request, slug):
 @staff_required
 def edit_view(request, slug, pk):
     section = _section_or_404(slug)
+    if not has_section_access(request.user, slug):
+        messages.error(request, "You don't have access to that section.")
+        return redirect('manage:dashboard')
     instance = get_object_or_404(section['model'], pk=pk)
     if slug == 'packages':
         return _package_form(request, package=instance)
@@ -170,6 +214,9 @@ def edit_view(request, slug, pk):
 @staff_required
 def delete_view(request, slug, pk):
     section = _section_or_404(slug)
+    if not has_section_access(request.user, slug):
+        messages.error(request, "You don't have access to that section.")
+        return redirect('manage:dashboard')
     instance = get_object_or_404(section['model'], pk=pk)
     if request.method == 'POST':
         label = str(instance)
@@ -208,7 +255,7 @@ def _package_form(request, package):
     return render(request, 'manage/package_form.html', ctx)
 
 
-@staff_required
+@section_required('bookings')
 def booking_list(request):
     qs = Booking.objects.select_related('customer', 'package').order_by('-created_at')
     query = request.GET.get('q', '').strip()
@@ -221,7 +268,7 @@ def booking_list(request):
     return render(request, 'manage/booking_list.html', ctx)
 
 
-@staff_required
+@section_required('bookings')
 def booking_detail(request, pk):
     booking = get_object_or_404(Booking.objects.select_related('customer', 'package'), pk=pk)
     if request.method == 'POST':
@@ -242,7 +289,7 @@ def booking_detail(request, pk):
     return render(request, 'manage/booking_detail.html', ctx)
 
 
-@staff_required
+@section_required('orders')
 def order_list(request):
     qs = Order.objects.select_related('user').order_by('-created_at')
     query = request.GET.get('q', '').strip()
@@ -255,7 +302,7 @@ def order_list(request):
     return render(request, 'manage/order_list.html', ctx)
 
 
-@staff_required
+@section_required('orders')
 def order_detail(request, pk):
     order = get_object_or_404(Order.objects.select_related('user'), pk=pk)
     if request.method == 'POST':
@@ -271,7 +318,7 @@ def order_detail(request, pk):
     return render(request, 'manage/order_detail.html', ctx)
 
 
-@staff_required
+@section_required('inquiries')
 def inquiry_list(request):
     qs = Inquiry.objects.order_by('is_resolved', '-created_at')
     paginator = Paginator(qs, 25)
@@ -281,7 +328,7 @@ def inquiry_list(request):
     return render(request, 'manage/inquiry_list.html', ctx)
 
 
-@staff_required
+@section_required('inquiries')
 @require_POST
 def inquiry_toggle_resolved(request, pk):
     inquiry = get_object_or_404(Inquiry, pk=pk)
@@ -291,7 +338,7 @@ def inquiry_toggle_resolved(request, pk):
     return redirect('manage:inquiries')
 
 
-@staff_required
+@section_required('reviews')
 def review_list(request):
     qs = Review.objects.select_related('user').order_by('-created_at')
     paginator = Paginator(qs, 25)
@@ -301,7 +348,7 @@ def review_list(request):
     return render(request, 'manage/review_list.html', ctx)
 
 
-@staff_required
+@section_required('reviews')
 @require_POST
 def review_delete(request, pk):
     review = get_object_or_404(Review, pk=pk)
@@ -310,7 +357,7 @@ def review_delete(request, pk):
     return redirect('manage:reviews')
 
 
-@staff_required
+@section_required('newsletter')
 def newsletter_list(request):
     qs = NewsletterSubscriber.objects.order_by('-subscribed_at')
     paginator = Paginator(qs, 50)
@@ -320,7 +367,7 @@ def newsletter_list(request):
     return render(request, 'manage/newsletter_list.html', ctx)
 
 
-@staff_required
+@section_required('newsletter')
 @require_POST
 def newsletter_delete(request, pk):
     sub = get_object_or_404(NewsletterSubscriber, pk=pk)
@@ -405,3 +452,129 @@ def staff_email_reset_password(request, email):
             messages.error(request, f"Couldn't reset password: {e}")
             return redirect('manage:staff_emails')
     return render(request, 'manage/staff_email_reset_password.html', ctx)
+
+
+# ── MY ACCOUNT (any staff — self-service password change) ──────────────
+
+@staff_required
+def my_account(request):
+    ctx = _base_context(request, active_slug='account')
+    ctx['title'] = 'My Account'
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # keep the user logged in
+            messages.success(request, "Your password was changed.")
+            return redirect('manage:account')
+    else:
+        form = PasswordChangeForm(request.user)
+    for field in form.fields.values():
+        field.widget.attrs['class'] = 'form-input'
+    ctx['form'] = form
+    return render(request, 'manage/account.html', ctx)
+
+
+# ── STAFF USERS & ROLES ─────────────────────────────────────────────────
+# Delegable like any other section (via 'staff-users'), but with hard
+# power-dynamics guardrails that apply even to a non-superuser holding it:
+# they can never touch a superuser's account, never edit themselves here,
+# and can never grant another user more access than they themselves have.
+
+@section_required('staff-users')
+def staff_user_list(request):
+    ctx = _base_context(request, active_slug='staff-users')
+    ctx['title'] = 'Staff Users'
+    rows = []
+    for u in User.objects.filter(is_staff=True).order_by('username'):
+        can_manage = u.pk != request.user.pk and (request.user.is_superuser or not u.is_superuser)
+        rows.append((u, can_manage))
+    ctx['staff_user_rows'] = rows
+    return render(request, 'manage/staff_user_list.html', ctx)
+
+
+def _can_manage_target(request, target):
+    if target.pk == request.user.pk:
+        messages.error(request, "Use My Account to manage your own password.")
+        return False
+    if target.is_superuser and not request.user.is_superuser:
+        messages.error(request, "Only a Super Admin can manage another Super Admin's account.")
+        return False
+    return True
+
+
+@section_required('staff-users')
+def staff_user_permissions(request, pk):
+    target = get_object_or_404(User, pk=pk, is_staff=True)
+    if not _can_manage_target(request, target):
+        return redirect('manage:staff_users')
+
+    actor_sections = accessible_sections(request.user)
+    editable_choices = (
+        ALL_SECTION_CHOICES if request.user.is_superuser
+        else [(slug, label) for slug, label in ALL_SECTION_CHOICES if slug in actor_sections]
+    )
+    current = accessible_sections(target)
+
+    if request.method == 'POST':
+        if request.user.is_superuser and 'is_superuser' in request.POST:
+            target.is_superuser = request.POST.get('is_superuser') == 'on'
+            target.save()
+        checked = set(request.POST.getlist('sections'))
+        for slug, _label in editable_choices:
+            should_have = slug in checked
+            exists = ManagePermission.objects.filter(user=target, section=slug).exists()
+            if should_have and not exists:
+                ManagePermission.objects.create(user=target, section=slug)
+            elif not should_have and exists:
+                ManagePermission.objects.filter(user=target, section=slug).delete()
+        messages.success(request, f"Updated access for {target.username}.")
+        return redirect('manage:staff_users')
+
+    ctx = _base_context(request, active_slug='staff-users')
+    ctx.update({
+        'target': target,
+        'editable_choices': editable_choices,
+        'current': current,
+        'limited': not request.user.is_superuser,
+        'title': f"Manage Access — {target.username}",
+    })
+    return render(request, 'manage/staff_user_permissions.html', ctx)
+
+
+@section_required('staff-users')
+@require_POST
+def staff_user_reset_password(request, pk):
+    from .cpanel_email import generate_password
+    target = get_object_or_404(User, pk=pk, is_staff=True)
+    if not _can_manage_target(request, target):
+        return redirect('manage:staff_users')
+
+    password = generate_password()
+    target.set_password(password)
+    target.save()
+
+    if target.email:
+        try:
+            send_mail(
+                subject='Your Successful Luxury Safaris admin password was reset',
+                message=(
+                    f"Hi {target.first_name or target.username},\n\n"
+                    "Your password for the website's Manage panel was just reset.\n\n"
+                    f"New password: {password}\n\n"
+                    "Please sign in and change it to something memorable from My Account."
+                ),
+                from_email=None,
+                recipient_list=[target.email],
+                fail_silently=False,
+            )
+            messages.success(request, f"New password emailed to {target.email}.")
+            return redirect('manage:staff_users')
+        except Exception as e:
+            messages.error(request, f"Couldn't send the email ({e}) — showing it here instead.")
+    else:
+        messages.error(request, f"{target.username} has no email on file — showing the new password here instead.")
+
+    ctx = _base_context(request, active_slug='staff-users')
+    ctx.update({'created_email': target.username, 'created_password': password, 'title': 'Password Reset'})
+    return render(request, 'manage/staff_user_password_reveal.html', ctx)

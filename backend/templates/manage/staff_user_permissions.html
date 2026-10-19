@@ -1,0 +1,40 @@
+{% extends 'manage/base.html' %}
+
+{% block content %}
+<div class="page-head">
+  <div><h1>Manage Access — {{ target.username }}</h1></div>
+  <a href="{% url 'manage:staff_users' %}" class="btn btn-secondary">&larr; Back to list</a>
+</div>
+
+<form method="post" class="form-card">
+  {% csrf_token %}
+
+  {% if request.user.is_superuser %}
+  <div class="form-group form-check-row" style="background:var(--cream); border-radius:8px; padding:12px 14px; margin-bottom:20px;">
+    <input type="checkbox" name="is_superuser" id="id_is_superuser" class="form-checkbox" {% if target.is_superuser %}checked{% endif %}>
+    <label class="form-label" style="margin-bottom:0;" for="id_is_superuser">Super Admin (full access to everything, including Staff Emails)</label>
+  </div>
+  {% endif %}
+
+  <p class="form-label" style="margin-bottom:10px;">Can access:</p>
+  {% for slug, label in editable_choices %}
+  <div class="form-group form-check-row">
+    <input type="checkbox" name="sections" value="{{ slug }}" id="id_section_{{ forloop.counter }}" class="form-checkbox"
+      {% if slug in current %}checked{% endif %}>
+    <label class="form-label" style="margin-bottom:0;" for="id_section_{{ forloop.counter }}">{{ label }}</label>
+  </div>
+  {% endfor %}
+
+  {% if limited %}
+  <p class="form-help" style="margin-top:10px;">
+    You can only grant sections you yourself have access to. Anything outside that list isn't shown here and
+    stays unchanged.
+  </p>
+  {% endif %}
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Save Access</button>
+    <a href="{% url 'manage:staff_users' %}" class="btn btn-secondary">Cancel</a>
+  </div>
+</form>
+{% endblock %}

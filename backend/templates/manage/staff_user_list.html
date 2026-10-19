@@ -1,0 +1,46 @@
+{% extends 'manage/base.html' %}
+
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>Staff Users</h1>
+    <p class="sub">Who can sign in to the Manage panel, and what each person can do.</p>
+  </div>
+</div>
+
+<div class="card">
+  <table>
+    <thead><tr><th>Username</th><th>Email</th><th>Role</th><th></th></tr></thead>
+    <tbody>
+      {% for u, can_manage in staff_user_rows %}
+      <tr>
+        <td>{{ u.username }}{% if u.pk == request.user.pk %} <span class="form-help">(you)</span>{% endif %}</td>
+        <td>{{ u.email|default:"—" }}</td>
+        <td>{% if u.is_superuser %}<span class="badge badge-on">Super Admin</span>{% else %}<span class="badge badge-off">Sub Admin</span>{% endif %}</td>
+        <td>
+          {% if can_manage %}
+          <div class="row-actions">
+            <a href="{% url 'manage:staff_user_permissions' pk=u.pk %}">Manage Access</a>
+            <form method="post" action="{% url 'manage:staff_user_reset_password' pk=u.pk %}" style="display:inline;" onsubmit="return confirm('Reset this user\'s password? A new one will be generated and emailed to them.');">
+              {% csrf_token %}
+              <button type="submit" class="btn-link-reset">Reset Password</button>
+            </form>
+          </div>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<p class="form-help" style="margin-top:14px;">
+  To add a brand-new staff member, ask your developer to create their account and tick "Staff status" under
+  <a href="/admin/auth/user/" target="_blank" rel="noopener">Advanced (Django Admin) → Users</a> — then come back
+  here to set what they can access.
+</p>
+
+<style>
+  .btn-link-reset { background:none; border:none; font-size:12px; font-weight:600; color: var(--gold-dark); cursor:pointer; padding:0; }
+</style>
+{% endblock %}

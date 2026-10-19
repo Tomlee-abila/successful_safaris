@@ -27,6 +27,12 @@ urlpatterns = [
     path('staff-emails/<str:email>/delete/', views.staff_email_delete, name='staff_email_delete'),
     path('staff-emails/<str:email>/reset-password/', views.staff_email_reset_password, name='staff_email_reset_password'),
 
+    path('account/', views.my_account, name='account'),
+
+    path('staff-users/', views.staff_user_list, name='staff_users'),
+    path('staff-users/<int:pk>/permissions/', views.staff_user_permissions, name='staff_user_permissions'),
+    path('staff-users/<int:pk>/reset-password/', views.staff_user_reset_password, name='staff_user_reset_password'),
+
     path('<slug:slug>/', views.list_view, name='list'),
     path('<slug:slug>/add/', views.add_view, name='add'),
     path('<slug:slug>/<int:pk>/edit/', views.edit_view, name='edit'),

@@ -132,9 +132,11 @@
   {% endfor %}
 
   <div class="sidebar-section">Bookings</div>
+  {% if 'bookings' in accessible_slugs %}
   <a href="{% url 'manage:bookings' %}" class="sidebar-item {% if active_slug == 'bookings' %}active{% endif %}">
     <span class="sidebar-icon">🧳</span> Bookings
   </a>
+  {% endif %}
   {% for slug, section in nav_groups.Bookings %}
   <a href="{% url 'manage:list' slug=slug %}" class="sidebar-item {% if active_slug == slug %}active{% endif %}">
     <span class="sidebar-icon">{{ section.icon }}</span> {{ section.label }}
@@ -147,30 +149,48 @@
     <span class="sidebar-icon">{{ section.icon }}</span> {{ section.label }}
   </a>
   {% endfor %}
+  {% if 'orders' in accessible_slugs %}
   <a href="{% url 'manage:orders' %}" class="sidebar-item {% if active_slug == 'orders' %}active{% endif %}">
     <span class="sidebar-icon">📦</span> Orders
   </a>
+  {% endif %}
 
   <div class="sidebar-section">Customers</div>
+  {% if 'inquiries' in accessible_slugs %}
   <a href="{% url 'manage:inquiries' %}" class="sidebar-item {% if active_slug == 'inquiries' %}active{% endif %}">
     <span class="sidebar-icon">✉️</span> Enquiries
   </a>
+  {% endif %}
+  {% if 'reviews' in accessible_slugs %}
   <a href="{% url 'manage:reviews' %}" class="sidebar-item {% if active_slug == 'reviews' %}active{% endif %}">
     <span class="sidebar-icon">⭐</span> Reviews
   </a>
+  {% endif %}
+  {% if 'newsletter' in accessible_slugs %}
   <a href="{% url 'manage:newsletter' %}" class="sidebar-item {% if active_slug == 'newsletter' %}active{% endif %}">
     <span class="sidebar-icon">📬</span> Newsletter
   </a>
+  {% endif %}
 
   <div class="sidebar-section">Site</div>
+  {% if 'site-settings' in accessible_slugs %}
   <a href="{% url 'manage:site_settings' %}" class="sidebar-item {% if active_slug == 'site-settings' %}active{% endif %}">
     <span class="sidebar-icon">⚙️</span> Site Settings
   </a>
+  {% endif %}
+  {% if 'staff-users' in accessible_slugs %}
+  <a href="{% url 'manage:staff_users' %}" class="sidebar-item {% if active_slug == 'staff-users' %}active{% endif %}">
+    <span class="sidebar-icon">🛡️</span> Staff Users
+  </a>
+  {% endif %}
   {% if request.user.is_superuser %}
   <a href="{% url 'manage:staff_emails' %}" class="sidebar-item {% if active_slug == 'staff-emails' %}active{% endif %}">
     <span class="sidebar-icon">📧</span> Staff Emails
   </a>
   {% endif %}
+  <a href="{% url 'manage:account' %}" class="sidebar-item {% if active_slug == 'account' %}active{% endif %}">
+    <span class="sidebar-icon">🔑</span> My Account
+  </a>
 
   <div class="sidebar-footer">
     <a href="/">🌐 View Live Site</a>

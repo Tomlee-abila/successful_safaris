@@ -69,3 +69,24 @@ SECTIONS = {
         'search_fields': ['title'], 'order_by': '-created_at', 'group': 'Bookings',
     },
 }
+
+# Custom (non-registry) sections, each backed by hand-written views rather
+# than the generic list/add/edit/delete engine above.
+CUSTOM_SECTIONS = {
+    'bookings': 'Bookings',
+    'orders': 'Orders',
+    'inquiries': 'Customer Enquiries',
+    'reviews': 'Customer Reviews',
+    'newsletter': 'Newsletter Subscribers',
+    'site-settings': 'Site Settings',
+    'staff-users': 'Manage Staff & Roles',
+}
+
+# Every section a staff user's access can be granted or denied for.
+# Staff Emails is deliberately excluded — it touches real hosting mailboxes
+# and stays Super Admin-only no matter what, never delegable.
+ALL_SECTION_CHOICES = (
+    [(slug, section['label']) for slug, section in SECTIONS.items()]
+    + list(CUSTOM_SECTIONS.items())
+)
+ALL_SECTION_SLUGS = {slug for slug, _ in ALL_SECTION_CHOICES}
